@@ -1,0 +1,41 @@
+<Alloy id="legs">
+			
+	<!-- Amount of legs -->
+	<View class="page" id="content">
+		
+		<View class="wrapper">
+		
+			<Label class="page__title">How many Legs?</Label>
+			
+			<Label class="page__description">Please chose however many legs you would like your sling to have by tapping a diagram below. Press 'Next' to proceed.</Label>
+			
+		</View>
+				
+		<View top="20dip" class="content--horizontal">
+	
+			<View onClick="chooseLegs" id="one" class="legs" backgroundColor="#FFF">
+				<ImageView touchEnabled="False" image="/images/slings/1-leg.png" height="100%" width="auto"></ImageView>
+			</View>
+			
+			<View onClick="chooseLegs" id="two" class="legs" backgroundColor="#FFF">
+				<ImageView touchEnabled="False" image="/images/slings/2-legs.png" height="100%" width="auto"></ImageView>
+			</View>
+		
+		</View>
+	
+		<View class="content--horizontal">
+		
+			<View onClick="chooseLegs" id="three" class="legs" backgroundColor="#FFF">
+				<ImageView touchEnabled="False" image="/images/slings/3-legs.png" height="90%" top="5%" width="auto"></ImageView>
+			</View>
+			
+			<View onClick="chooseLegs" id="four" class="legs" backgroundColor="#FFF">
+				<ImageView touchEnabled="False" image="/images/slings/4-legs.png" height="100%" width="auto"></ImageView>
+			</View>
+		
+		</View>
+			
+	<!-- Amount of legs -->
+	</View>
+	
+</Alloy>

@@ -1,0 +1,85 @@
+// iPad Styles
+'.page[platform=ios formFactor=tablet]': {
+	layout: 'vertical',
+	width: '60%',
+	height: Ti.UI.SIZE
+},
+'.ipadSideBorderLeft': {
+	left: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight': {
+	right: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderLeft[platform=ios formFactor=tablet]': {
+	left: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight[platform=ios formFactor=tablet]': {
+	right: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+
+// WRAPPER AND SCROLL VIEW
+'.wrapper': {
+	layout: 'vertical',
+	width: '90%',
+	height: Titanium.UI.SIZE
+},
+
+// PAGE ELEMENTS
+'.page__title': {
+	top: '20dip',
+	color: '#FFF',
+	font: {fontSize: 26},
+	textAlign: 'center'
+},
+'.page__description': {
+	top: '10dip',
+	color: '#FFF',
+	font: {fontSize: 14}
+},
+'.page':{
+	layout: 'vertical',
+	height: Ti.UI.SIZE
+},
+'.content--container': {
+	layout: 'vertical',
+	top: '10dip',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+'.input-holder': {
+	layout: 'horizontal',
+	width: Titanium.UI.SIZE,
+	height: Titanium.UI.SIZE
+},
+
+// INPUT
+'.digit-input': {
+	height: '50dip',
+	width: '60dip',
+	left: '5dip',
+	borderWidth: '1dip',
+	borderColor: '#fba688',
+	backgroundColor: '#FFF',
+	font: {fontSize: 30},
+	paddingLeft: '4dip',
+	maxLength: 2,
+	textAlign: 'center',
+	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD
+},
+'.fullStop': {
+	left: '5dip',
+	color: '#FFF',
+	font: {fontSize: 50}
+}

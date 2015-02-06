@@ -1,0 +1,67 @@
+<Alloy id="register">
+	<Window class="background">
+		
+		<View id="header" class="header">
+			<ImageView class="logo" image="/images/WHC--logo.png" />
+		</View>
+		
+		<View class="header__seperator"></View>
+		
+		<View class="wrapper--background">
+			
+			<ScrollView>
+			
+				<View class="wrapper">
+					
+					<View class="content--container">
+						<Button id="back" class="button--back" />
+					</View>
+				
+					<View class="content--container">
+						<Label>Your name*</Label>
+						<TextField id="name" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Company name*</Label>
+						<TextField id="companyName" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Phone number*</Label>
+						<TextField id="phoneNumber" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Email address*</Label>
+						<TextField id="emailAddress" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Password *</Label>
+						<TextField id="password" passwordMask="true" class="input--primary" />
+					</View>
+					
+					<View class="content--container">
+						
+						<View class="content--horizontal">
+							
+							<Button id="mailingList" class="checkBox" />
+							<Label class="content--horizontal__label">Yes please, add me to the mailing list</Label>
+						
+						</View>
+						
+					</View>
+					
+					<View class="content--container">
+						<Button id="submit" class="button--primary" onClick="registerUser" />
+					</View>
+					
+				</View>
+			
+			</ScrollView>
+			
+		</View>
+		
+	</Window>
+</Alloy>

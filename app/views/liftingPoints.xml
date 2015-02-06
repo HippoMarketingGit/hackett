@@ -1,0 +1,77 @@
+<Alloy id="liftingPoints">
+	
+	<Window class="wrapper--background" top="0" height="100%" left="0" width="100%" layout="vertical">
+		
+		<View class="content--container">
+						
+			<ImageView top="30dip" left="20dip" image="/images/WHC-close.png" height="24dip" width="24dip" onClick="closeModal"></ImageView>
+		
+		</View>
+		
+		<View top="20dip" height="1dip" width="100%" backgroundColor="#f7561e"></View>
+		
+		<ScrollView id="scrollView" top="0" left="0" width="100%">
+	
+			<!-- Lifting Points -->
+			<View class="page" id="content" top="0" height="Ti.UI.SIZE" backgroundColor="#2b3b94">
+				
+				<View class="wrapper">
+					
+					<View class="content--container">
+						<Label class="page__title">Distance between Lifting Points (m)</Label>
+						
+						<Label class="page__description">If you are unsure of where the lifting points will be on your load, please see the diagram below for reference.</Label>
+					</View>
+					
+					<View id="liftingPointsImage" class="content--container"></View>
+					
+					<View class="content--container">
+							
+						<View class="input-holder">
+					
+							<TextField id="liftingPointMeter" class="digit-input" value="00" clearOnEdit="true">
+								<!-- Sets the keyboardToolbar property -->
+					            <KeyboardToolbar>
+					                <Toolbar>
+					                    <Items>
+					                        <FlexSpace/>
+					                        <Button id="liftingPointDone" style="Ti.UI.iPhone.SystemButtonStyle.DONE">Done</Button>
+					                    </Items>
+					                </Toolbar>
+					            </KeyboardToolbar>
+							</TextField>
+							
+							<Label class="fullStop">.</Label>
+							
+							<TextField id="liftingPointFraction" class="digit-input" value="00" clearOnEdit="true">
+								<!-- Sets the keyboardToolbar property -->
+					            <KeyboardToolbar>
+					                <Toolbar>
+					                    <Items>
+					                        <FlexSpace/>
+					                        <Button id="liftingPointFractionDone" style="Ti.UI.iPhone.SystemButtonStyle.DONE">Done</Button>
+					                    </Items>
+					                </Toolbar>
+					            </KeyboardToolbar>
+							</TextField>
+						
+						</View>
+						
+					</View>
+					
+					<View class="content--container" bottom="20dip">
+						<Button onClick="setLength" title="Calculate" class="button--primary" />
+					</View>
+					
+				</View>
+				
+			<!-- Lifting Points -->
+			</View>
+			
+			<View height="1dip" width="100%" top="0" backgroundColor="#FFF"></View>
+		
+		</ScrollView>
+	
+	</Window>
+	
+</Alloy>

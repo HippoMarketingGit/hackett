@@ -1,0 +1,36 @@
+"Window[platform=ios]": {
+	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+},
+'Label': {
+	color: '#FFF',
+	height: Ti.UI.SIZE
+},
+'View': {
+	height: Ti.UI.SIZE
+},
+'.background': {
+	backgroundGradient:{
+		type:'linear',
+		colors:[{ color: '#021b4b', offset: 0.0}, {color: '#032d73', offset: 0.5}],
+		startPoint:{ x:'0%', y:'0%' },
+		endPoint:{ x:'0%', y:'100%' }
+	}
+},
+'.button--primary': {
+	width: '100%',
+	height: '26dip',
+	backgroundImage: '/images/WHC-button--primary.png',
+	title: 'LOG IN',
+	color: '#FFF',
+	textAlign: 'left',
+	font: {fontSize: 16}
+},
+'.button--secondary': {
+	top: '4dip',
+	width: '100%',
+	height: '26dip',
+	backgroundImage: '/images/WHC-button--secondary.png',
+	color: '#FFF',
+	textAlign: 'left',
+	font: {fontSize: 16}
+}

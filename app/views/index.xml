@@ -1,0 +1,54 @@
+<Alloy id="index">
+	
+	<Window class="background">
+		
+		<View id="header" class="header">
+			<ImageView class="logo" image="/images/WHC--logo.png" />
+		</View>
+		
+		<View class="header__seperator"></View>
+		
+		<View id="loaderContainer" class="wrapper--background">
+			
+			<ScrollView>
+			
+				<View class="wrapper">
+				
+					<View class="content--container">
+						<Label>Email</Label>
+						<TextField color="#000" autocapitalization="Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE" id="username" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Password</Label>
+						<TextField color="#000" id="password" class="input--primary" />
+					</View>
+					
+					<View class="content--container">
+						<Button onClick="openDashboard" id="login" class="button--primary" />
+					</View>
+					
+					<View class="content--container">
+						
+						<View class="content--horizontal">
+					
+							<Label class="content--horizontal__label">Recover my password</Label>
+							<ImageView class="arrow-right" image="/images/WHC--arrow-right.png" />
+						
+						</View>
+						
+					</View>
+					
+					<View class="content--container" bottom="20dip">
+						<Label class="account-label">Don't have an account?</Label>
+						<Button id="register" class="button--secondary" />
+					</View>
+					
+				</View>
+				
+			</ScrollView>
+			
+		</View>
+		
+	</Window>
+</Alloy>

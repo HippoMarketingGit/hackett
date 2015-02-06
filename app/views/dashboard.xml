@@ -1,0 +1,49 @@
+<Alloy>
+	
+	<Window id="dashboard" class="background">
+		
+		<View id="header" class="header">
+			<ImageView class="logo" image="/images/WHC--logo.png" />
+		</View>
+		
+		<View class="header__seperator"></View>
+		
+		<View class="wrapper--background">
+			
+			<View id="wrapper" class="wrapper">
+			
+				<View onClick="openConfigurator" id="newQuote" class="button--tertiary" backgroundColor="#2b3b94">
+					
+					<Label touchEnabled="False">Start a New Quote</Label>
+					
+					<ImageView touchEnabled="False" class="icon" image="/images/WHC-magnifying-glass.png" />
+					
+					<View touchEnabled="False" class="border--bottom"></View>
+					
+				</View>
+				
+				<View class="button--tertiary" backgroundColor="#2b3b94" onClick="openQuotes">
+					
+					<Label touchEnabled="False">Retrieve Existing Quote</Label>
+					
+					<ImageView touchEnabled="False" class="icon" image="/images/WHC-quote.png" />
+					
+					<View touchEnabled="False" class="border--bottom"></View>
+					
+				</View>
+				
+				<View class="button--tertiary" backgroundColor="#2b3b94" onClick="openAccountSettings">
+					
+					<Label touchEnabled="False">Account Settings</Label>
+					
+					<ImageView touchEnabled="False" class="icon" image="/images/WHC-cog.png" />
+					
+				</View>
+				
+			</View>
+			
+		</View>
+		
+	</Window>
+
+</Alloy>

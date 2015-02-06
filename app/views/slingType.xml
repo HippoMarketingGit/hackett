@@ -1,0 +1,106 @@
+<Alloy id="slingType">
+				
+	<!-- Sling Type -->
+	<View class="page" id="content">
+		
+		<View class="wrapper">
+	
+			<Label class="page__title">Product Selection</Label>
+			
+			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+			
+		</View>
+		
+		<View id="slings" class="content--container">
+			
+			<View onClick="setSlingType" id="chain" class="button--tertiary" backgroundColor="#2b3b94">
+			
+				<View class="border--top"></View>
+				
+				<View class="ipadSideBorderLeft"></View>
+				
+				<Label touchEnabled="False" class="button__label">Chain</Label>
+				
+				<ImageView touchEnabled="False" class="icon" image="/images/WHC-chain.png" right="10%"/>
+				
+				<View class="ipadSideBorderRight"></View>
+				
+				<View class="border--bottom"></View>
+				
+			</View>
+			
+			<View id="extra" class="extra" height="80dip">
+				
+				<View onClick="setGrade" id="eight" class="button--quartenary" backgroundColor="#2b3b94">
+					
+					<View class="ipadSideBorderLeft"></View>
+					
+					<View touchEnabled="False" class="multi-line">
+						
+						<View touchEnabled="False" class="multi-line__text" top="4dip">
+							<Label touchEnabled="False" class="label--small">Grade</Label>
+						</View>
+						
+						<View touchEnabled="False" class="multi-line__text" top="0">
+							<Label touchEnabled="False" class="label--large">8</Label>
+						</View>
+						
+					</View>
+				</View>
+				
+				<View onClick="setGrade" id="ten" class="button--quartenary" backgroundColor="#2b3b94">
+					<View touchEnabled="False" class="multi-line">
+						
+						<View touchEnabled="False" class="multi-line__text" top="4dip">
+							<Label touchEnabled="False" class="label--small">Grade</Label>
+						</View>
+						
+						<View touchEnabled="False" class="multi-line__text" top="0">
+							<Label touchEnabled="False" class="label--large">10</Label>
+						</View>
+						
+					</View>
+				</View>
+				
+				<View onClick="setGrade" id="auto" class="button--quartenary" backgroundColor="#2b3b94">
+					
+					<View touchEnabled="False" class="multi-line">
+						
+						<View touchEnabled="False" class="multi-line__text" top="4dip">
+							<Label touchEnabled="False" class="label--small">Grade</Label>
+						</View>
+						
+						<View touchEnabled="False" class="multi-line__text" top="0">
+							<Label touchEnabled="False" class="label--large">Auto</Label>
+						</View>
+						
+					</View>
+					
+					<View class="ipadSideBorderRight"></View>
+					
+				</View>
+				
+				<View class="border--bottom"></View>
+				
+			</View>
+			
+			<View onClick="setSlingType" id="wireRope" class="button--tertiary" backgroundColor="#2b3b94">
+				
+				<View class="ipadSideBorderLeft"></View>
+				
+				<Label touchEnabled="False" class="button__label">Wire Rope</Label>
+				
+				<ImageView touchEnabled="False" class="icon" image="/images/WHC-wire-rope.png" right="10%" />
+				
+				<View class="ipadSideBorderRight"></View>
+				
+				<View class="border--bottom"></View>
+				
+			</View>
+			
+		</View>
+	
+	<!-- Sling Type -->
+	</View>
+	
+</Alloy>

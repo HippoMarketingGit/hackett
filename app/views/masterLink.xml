@@ -1,0 +1,41 @@
+<Alloy id="masterLink">
+	<View class="page" id="content">
+		
+		<View class="wrapper">
+			<Label class="page__title">Master Link</Label>
+			
+			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+		</View>
+		
+		<View class="content--container" id="masterlinkView">
+			
+			<View class="content--container">
+				
+				<Label class="title" textAlign="center" color="#FFF">Standard or oversized master link?</Label>
+				
+			</View>
+			
+			<View class="content--container">
+			
+				<View id="" class="content--horizontal">
+			
+					<View onClick="setMasterlink" id="standard" class="halfWidth" backgroundColor="#2b3b94">
+						<View class="border--top"></View>
+							<Label touchEnabled="False" class="label--large">Standard</Label>
+						<View class="border--bottom"></View>
+					</View>
+					
+					<View onClick="setMasterlink" id="oversized" class="halfWidth" backgroundColor="#2b3b94">
+						<View class="border--top"></View>
+						<View class="border--left"></View>
+							<Label touchEnabled="False" class="label--large">Oversized</Label>
+						<View class="border--bottom"></View>
+					</View>
+				
+				</View>
+				
+			</View>
+			
+		</View>
+	</View>
+</Alloy>

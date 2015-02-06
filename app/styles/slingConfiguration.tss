@@ -1,0 +1,98 @@
+// iPad Styles
+'.logo[platform=ios formFactor=tablet]': {
+	height: '48dip',
+	width: 'auto'
+},
+
+// Fundamental Styles
+"Window[platform=ios]": {
+	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+},
+// ==================
+'.background': {
+	layout: 'vertical',
+	color: '#FFF',
+	backgroundColor: '#0d182f'
+},
+'.header': {
+	layout: 'vertical',
+	top: '26dip',
+	width: '100%',
+	height: '50dip'
+},
+'.footer': {
+	bottom: '0',
+	width: '100%',
+	height: '50dip'
+},
+
+// BORDERS AND SEPERATORS
+'.seperator': {
+	height: '1dip',
+	width: '100%',
+	backgroundColor: '#f7561e'
+},
+'.border--bottom': {
+	height: '1dip',
+	width: '100%',
+	bottom: '0',
+	backgroundColor: '#FFF'
+},
+'.border--top': {
+	height: '1dip',
+	width: '100%',
+	top: '0',
+	backgroundColor: '#FFF'
+},
+'.border--left': {
+	height: '100%',
+	width: '1dip',
+	left: 0,
+	backgroundColor: '#FFF'
+},
+
+// WRAPPER AND SCROLL VIEW
+'.wrapper': {
+	layout: 'vertical',
+	width: '90%',
+	height: Titanium.UI.SIZE
+},
+'.wrapper--background': {
+	backgroundGradient:{
+		type:'linear',
+		colors:[{ color: '#021b4b', offset: 0.0}, {color: '#032d73', offset: 0.5}],
+		startPoint:{ x:'0%', y:'0%' },
+		endPoint:{ x:'0%', y:'100%' }
+	}
+},
+
+'#scrollView': {
+	layout: 'vertical',
+	bottom: '51dip'
+},
+'.button--next': {
+	layout: 'vertical',
+	right: '5%',
+	width: '100dip',
+	height: '26dip',
+	backgroundImage: '/images/WHC-button--next.png',
+	title: 'NEXT',
+	color: '#FFF',
+	textAlign: 'left',
+	verticalAlign: 'bottom',
+	font: {fontSize: 16}
+},
+
+// IMAGES
+'.logo': {
+	bottom: '8dip',
+	width: '90%'
+},
+'.icon': {
+	right: '5dip',
+	height: '60dip',
+	width: 'auto',
+	className: 'icon'
+}
+
+

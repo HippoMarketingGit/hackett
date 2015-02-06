@@ -1,0 +1,105 @@
+// BORDERS AND SEPERATORS
+'.border--bottom': {
+	height: '1dip',
+	width: '100%',
+	bottom: '0',
+	backgroundColor: '#FFF'
+},
+'.border--top': {
+	height: '1dip',
+	width: '100%',
+	top: '0',
+	backgroundColor: '#FFF'
+},
+'.border--left': {
+	height: '100%',
+	width: '1dip',
+	left: 0,
+	backgroundColor: '#FFF'
+},
+
+// WRAPPER AND SCROLL VIEW
+'.wrapper': {
+	layout: 'vertical',
+	width: '90%',
+	height: Titanium.UI.SIZE
+},
+
+// IMAGES
+'.logo': {
+	bottom: '8dip',
+	width: '90%'
+},
+'.icon': {
+	right: '5dip',
+	height: '60dip',
+	width: 'auto',
+	className: 'icon'
+},
+
+// LABELS
+'.button__label': {
+	left: '10%',
+	color: '#FFF',
+	font: {fontSize: 20}
+},
+'.label--small': {
+	color: '#FFF',
+	font: {fontSize: 12}
+},
+'.label--large': {
+	color: '#FFF',
+	font: {fontSize: 22},
+	textAlign: 'center'
+},
+
+// PAGE ELEMENTS
+'.page__title': {
+	top: '20dip',
+	color: '#FFF',
+	font: {fontSize: 26},
+	textAlign: 'center'
+},
+'.page__description': {
+	top: '10dip',
+	color: '#FFF',
+	font: {fontSize: 14}
+},
+'.page':{
+	layout: 'vertical',
+	height: Ti.UI.SIZE
+},
+'.content--container': {
+	layout: 'vertical',
+	top: '10dip',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+'.content--horizontal': {
+	layout: 'horizontal',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+'.halfWidth': {
+	top: '10dip',
+	width: '50%',
+	height: '120dip',
+	className: 'halfWidth'
+},
+'.multi-line': {
+	layout: 'vertical',
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.SIZE
+},
+'.multi-line__text': {
+	top: '4dip',
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.SIZE
+},
+
+".title": {
+	font: {
+		fontSize: '20px'
+	}
+}
+

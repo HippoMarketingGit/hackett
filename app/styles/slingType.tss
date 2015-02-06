@@ -1,0 +1,198 @@
+// iPad Styles
+'.page[platform=ios formFactor=tablet]': {
+	layout: 'vertical',
+	width: '60%',
+	height: Ti.UI.SIZE
+},
+'.ipadSideBorderLeft': {
+	left: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight': {
+	right: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderLeft[platform=ios formFactor=tablet]': {
+	left: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight[platform=ios formFactor=tablet]': {
+	right: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+
+// Fundamental Styles
+"Window[platform=ios]": {
+	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+},
+// ==================
+'.background': {
+	layout: 'vertical',
+	color: '#FFF',
+	backgroundColor: '#0d182f'
+},
+'.header': {
+	layout: 'vertical',
+	top: '26dip',
+	width: '100%',
+	height: '50dip'
+},
+'.footer': {
+	bottom: '0',
+	width: '100%',
+	height: '50dip'
+},
+
+// BORDERS AND SEPERATORS
+'.seperator': {
+	height: '1dip',
+	width: '100%',
+	backgroundColor: '#f7561e'
+},
+'.border--bottom': {
+	height: '1dip',
+	width: '100%',
+	bottom: '0',
+	backgroundColor: '#FFF'
+},
+'.border--top': {
+	height: '1dip',
+	width: '100%',
+	top: '0',
+	backgroundColor: '#FFF'
+},
+'.border--left': {
+	height: '100%',
+	width: '1dip',
+	left: 0,
+	backgroundColor: '#FFF'
+},
+
+// WRAPPER AND SCROLL VIEW
+'.wrapper': {
+	layout: 'vertical',
+	width: '90%',
+	height: Titanium.UI.SIZE
+},
+'.wrapper--background': {
+	backgroundGradient:{type:'linear',
+	colors:['#021b4b','#032d73'],
+	startPoint:{x:0,y:0},
+	endPoint:{x:0,y:960},
+	backFillStart:false}
+},
+
+'#scrollView': {
+	layout: 'vertical',
+	bottom: '51dip'
+},
+
+//BUTTONS
+'.button--tertiary': {
+	top: 0,
+	height: '120dip',
+	width: '100%',
+	className: 'button--tertiary'
+},
+'.button--quartenary': {
+	width: '33.2%',
+	className: 'button--quartenary',
+	height: '80dip'
+},
+'.button--back': {
+	layout: 'vertical',
+	left: '5%',
+	width: '100dip',
+	height: '26dip',
+	backgroundImage: '/images/WHC-button--back.png',
+	title: 'BACK',
+	color: '#FFF',
+	textAlign: 'right',
+	verticalAlign: 'bottom',
+	font: {fontSize: 16}
+},
+'.button--next': {
+	layout: 'vertical',
+	right: '5%',
+	width: '100dip',
+	height: '26dip',
+	backgroundImage: '/images/WHC-button--next.png',
+	title: 'NEXT',
+	color: '#FFF',
+	textAlign: 'left',
+	verticalAlign: 'bottom',
+	font: {fontSize: 16}
+},
+
+// IMAGES
+'.logo': {
+	bottom: '8dip',
+	width: '90%'
+},
+'.icon': {
+	right: '5dip',
+	height: '60dip',
+	width: 'auto',
+	className: 'icon'
+},
+// LABELS
+'.button__label': {
+	left: '10%',
+	color: '#FFF',
+	font: {fontSize: 20}
+},
+'.label--small': {
+	color: '#FFF',
+	font: {fontSize: 12}
+},
+'.label--large': {
+	color: '#FFF',
+	font: {fontSize: 22},
+	textAlign: 'center'
+},
+
+// PAGE ELEMENTS
+'.extra': {
+	layout: 'horizontal'
+},
+'.page__title': {
+	top: '20dip',
+	color: '#FFF',
+	font: {fontSize: 26},
+	textAlign: 'center'
+},
+'.page__description': {
+	top: '10dip',
+	color: '#FFF',
+	font: {fontSize: 14}
+},
+'.page':{
+	layout: 'vertical',
+	height: Ti.UI.SIZE
+},
+'.content--container': {
+	layout: 'vertical',
+	top: '10dip',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+'#chain': {
+	top: '20dip'
+},
+'.multi-line': {
+	layout: 'vertical',
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.SIZE
+},
+'.multi-line__text': {
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.SIZE
+}

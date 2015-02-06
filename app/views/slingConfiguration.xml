@@ -1,0 +1,47 @@
+<Alloy id="slingConfiguration">
+	
+	<Window class="background">
+		
+		<View id="header" class="header">
+			<ImageView class="logo" image="/images/WHC--logo.png" />
+		</View>
+		
+		<View class="seperator"></View>
+		
+		<View class="wrapper--background" id="wrapper">
+			
+			<ScrollView id="scrollView">
+				
+				<!--<Require type="view" src="slingType" id="slingTypeRequire"/>
+				
+				<Require type="view" src="legs" id="legsRequire"/>
+				
+				<Require type="view" src="load" id="loadRequire"/>
+				
+				<Require type="view" src="headroom" id="headroomRequire"/>
+				
+				<Require type="view" src="nominalLength" id="nominalLengthRequire"/>
+				
+				<Require type="view" src="liftingPoints" id="liftingPointsRequire"/>
+				
+				<Require type="view" src="terminations" id="terminationsRequire"/>
+				
+				<Require type="view" src="specifications" id="specificationsRequire"/>-->
+				
+			</ScrollView>
+			
+			<View id="footer" class="footer">
+				<View class="border--top"></View>
+				
+				<View left="5%" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" id="back">
+					<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
+				</View>
+				
+				<Button id="next" class="button--next" />
+			</View>
+			
+		</View>
+		
+	</Window>
+	
+</Alloy>

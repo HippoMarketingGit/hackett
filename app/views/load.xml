@@ -1,0 +1,57 @@
+<Alloy id="load">
+	
+	<!-- load -->
+	<View class="page" id="content">
+		
+		<View class="wrapper">
+		
+			<Label class="page__title">Working Load</Label>
+			
+			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+			
+			<View class="content--container">
+				
+				<Label class="page__title">Load in Tonnes (t)</Label>
+			
+			</View>
+			
+			<View class="content--container">
+				
+				<View class="input-holder">
+				
+					<TextField id="tonne" class="digit-input" value="00" clearOnEdit="true" returnKeyType="Titanium.UI.RETURNKEY_DONE">
+						<!-- Sets the keyboardToolbar property -->
+			            <KeyboardToolbar platform="ios">
+			                <Toolbar>
+			                    <Items>
+			                        <FlexSpace/>
+			                        <Button id="tonneDone" >Done</Button>
+			                    </Items>
+			                </Toolbar>
+			         </KeyboardToolbar>
+					</TextField>
+					
+					<Label class="fullStop">.</Label>
+					
+					<TextField id="fraction" class="digit-input" value="00" clearOnEdit="true">
+						<!-- Sets the keyboardToolbar property -->
+			            <KeyboardToolbar platform="ios">
+			                <Toolbar>
+			                    <Items>
+			                        <FlexSpace/>
+			                        <Button id="fractionDone" >Done</Button>
+			                    </Items>
+			                </Toolbar>
+			         </KeyboardToolbar>
+					</TextField>
+				
+				</View>
+			
+			</View>
+	
+		</View>
+		
+	<!-- load -->	
+	</View>
+	
+</Alloy>

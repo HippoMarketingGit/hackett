@@ -1,0 +1,550 @@
+/* 
+ *  Example Chain Sling Part code
+ * 
+ *  A08.202.7G
+ *  123.456.78
+ * 
+ * 	1 = Chain Type 										A = Grade 8	X = Grade 10
+ * 	2 & 3 = Chain Size 									8mm/10mm/13mm+
+ * 	4 = Number of Legs
+ * 	5 & 6 = Leg Lengths a.k.a Nominal Length
+ * 	7 = End Fittings									Grab Hooks/Foundry Hooks/Plain Ends
+ *  8 = Type of Shortener								Clutch
+ * 
+ * 
+ *  Example Wire Rope Sling Part code
+ * 
+ *  RS016.404.31
+ * 	12345.678.90
+ * 
+ *  1 & 2 = Rope Sling
+ * 	3, 4, 5 = Rope Size
+ * 	6 = Number of Legs
+ * 	7 & 8 = Leg Lengths a.k.a Nominal Length
+ * 	9 = End Fittings									Grab Hooks/Foundry Hooks/Plain Ends
+ * 	0 = End Fittings || ONLY AVAILABLE ON 1 LEG ||		Grab Hooks/Foundry Hooks/Plain Ends
+ */
+
+(function(){
+	
+	// Hide the back to dash button so that it cannot be clicked
+	// until the quote has been sent
+	$.backToDash.hide();
+	$.backToDash.height = 0;
+	
+	var Database = require('databaseObj'),
+		database = new Database('SlingDB.sqlite'),
+		db = database.openDb(),
+		legLength = Math.ceil(Alloy.Globals.sling.nominalLength),
+		angle,
+		grade,
+		shortener,
+		end,
+		upper;
+	
+	// Find a part code form the phone database
+	if( Alloy.Globals.sling.type === 'Chain' ){
+		
+		var angle,
+			grade,
+			shortener,
+			end,
+			upper;
+			
+		// Perform all query string changes here
+		// Query changes to "IS NULL" if no termination is selected
+		// The checks below allow for this
+		if( Alloy.Globals.sling.angle === 45 ){
+			angle = 'wll.limit45';
+		}else{	
+			angle = 'wll.limit60';
+		}
+		
+		if( Alloy.Globals.sling.shorteningDeviceCode === "NONE"){
+			shortener = 'AND s.shortener LIKE ""';
+		}else{
+			shortener = 'AND s.shortener LIKE "' + Alloy.Globals.sling.shorteningDeviceCode + '"';
+		}
+		
+		if( Alloy.Globals.sling.lowerTerminationCode === 'NONE'){
+			end = 'AND end = ""';
+		}else{
+			end = 'AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '"';
+		}
+		
+		if( Alloy.Globals.sling.upperTerminationCode === 'NONE'){
+			upper = 'AND end = ""';
+		}else{
+			upper = 'AND end = "' + Alloy.Globals.sling.upperTerminationCode + '"';
+		}
+		
+		// If grade is equal to 8 or 10 perform the query below
+		// the query changes vastly for auto
+		if( Alloy.Globals.sling.grade === 8 || Alloy.Globals.sling.grade === 10 ){
+			
+			grade = Alloy.Globals.sling.grade;
+			
+			var row = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = ' + grade + ') AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = "' + legLength + '") group by wll.id ORDER BY ' + angle +' LIMIT 1');
+			
+			if( row.isValidRow() ){
+				
+				//Ti.API.info('part code: ' + row.fieldByName('code') );
+				
+				Alloy.Globals.sling.partCode = row.fieldByName('code');
+				Alloy.Globals.sling.quotedPrice = row.fieldByName('price');
+				Alloy.Globals.sling.slingDescription = row.fieldByName('description');
+				
+			}else{
+				
+				Ti.API.info('row 10 create part code');
+				createPartcode();
+			}
+		
+		// If the grade is "auto" we have to perform two querys and find
+		// the best sling for the job out of the two
+		//
+		// If the price is the same for a grade 8 adn grade 10 sling
+		// then always pick the grade 10 as it is better value for money
+		}else if( Alloy.Globals.sling.grade === 'Auto' ){
+			
+			var price8,
+				code8,
+				description8,
+				price10,
+				code10,
+				description10,
+				angle,
+				grade,
+				shortener,
+				end,
+				upper;
+			
+			// Perform all query string changes here
+			// Query changes to "IS NULL" if no termination is selected
+			// The checks below allow for this
+			if( Alloy.Globals.sling.angle === 45 ){
+				angle = 'wll.limit45';
+			}else{	
+				angle = 'wll.limit60';
+			}
+			
+			if( Alloy.Globals.sling.shorteningDeviceCode === "NONE"){
+				shortener = 'AND s.shortener IS NULL';
+			}else{
+				shortener = 'AND s.shortener LIKE "' + Alloy.Globals.sling.shorteningDeviceCode + '"';
+			}
+			
+			if( Alloy.Globals.sling.lowerTerminationCode === 'NONE'){
+				end = 'AND s.end IS NULL';
+			}else{
+				end = 'AND s.end = "' + Alloy.Globals.sling.lowerTerminationCode + '"';
+			}
+			
+			if( Alloy.Globals.sling.upperTerminationCode === 'NONE'){
+				upper = 'AND s.end IS NULL';
+			}else{
+				upper = 'AND s.end = "' + Alloy.Globals.sling.upperTerminationCode + '"';
+			}
+			
+			// Perform the query for a grade 8 sling
+			var row8 = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' +  Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs = wll.legs AND (wll.grade = "8" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') group by wll.id ORDER BY ' + angle +' ASC');
+			
+			// Check to see if a chain was found
+			if( row8.isValidRow() ){
+
+				price8 = row8.fieldByName('price');
+				code8 = row8.fieldByName('code');
+				description8 = row8.fieldByName('description');
+			
+			}else{
+				
+				// This else is purely for dev purposes, can be removed
+				// before final build	
+				Ti.API.info('Row 8 not valid');
+			}
+			
+			var row10 = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = "10" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') group by wll.id ORDER BY ' + angle +' ASC');
+
+			if( row10.isValidRow() ){
+
+				price10 = row10.fieldByName('price');
+				code10 = row10.fieldByName('code');
+				description10 = row10.fieldByName('description');
+			
+			}else{
+				
+				// This else is purely for dev purposes, can be removed
+				// before final build
+				Ti.API.info('Row 10 not valid');
+			}
+			
+			// If price is undefined for both grade 8 and grade 10
+			// build a part code.
+			if( (price8 === undefined || price8 === null) && (price10 === undefined || price10 === null) ){
+				Alloy.Globals.sling.quotedPrice = null;
+				Alloy.Globals.sling.slingDescription = null;
+				
+				createPartcode();
+			
+			}else if( price10 === undefined || price10 === null ){
+				
+				Alloy.Globals.sling.partCode = code8;
+				Alloy.Globals.sling.quotedPrice = price8;
+				Alloy.Globals.sling.slingDescription = description8;
+			
+			}else if( price8 === undefined || price8 === null ){
+				
+				Alloy.Globals.sling.partCode = code10;
+				Alloy.Globals.sling.quotedPrice = price10;
+				Alloy.Globals.sling.slingDescription = description10;
+			
+			}else if( parseInt(price8) < parseInt(price10) ){
+				
+				Alloy.Globals.sling.partCode = code8;
+				Alloy.Globals.sling.quotedPrice = price8;
+				Alloy.Globals.sling.slingDescription = description8;
+				Alloy.Globals.sling.gradeCode = 8;
+			
+			}else if( parseInt(price8) > parseInt(price10) ){
+				
+				Alloy.Globals.sling.partCode = code10;
+				Alloy.Globals.sling.quotedPrice = price10;
+				Alloy.Globals.sling.slingDescription = description10;
+				Alloy.Globals.sling.gradeCode = 10;	
+			
+			}else if( parseInt(price8) === parseInt(price10) ){
+				
+				Alloy.Globals.sling.partCode = code10;
+				Alloy.Globals.sling.quotedPrice = price10;
+				Alloy.Globals.sling.slingDescription = description10;
+				Alloy.Globals.sling.gradeCode = 10;
+			}
+		}
+	
+	// Currently William Hackett have no part code prices for Wire
+	// Rope slings.
+	}else if( Alloy.Globals.sling.type === 'Wire Rope' ){
+		
+		Alloy.Globals.sling.grade = null;
+		Alloy.Globals.sling.quotedPrice = null;
+		Alloy.Globals.sling.slingDescription = null;
+		
+		Ti.API.info('Wire Rope create part code');
+		createPartcode();
+		
+		outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+	}
+	
+	outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+	
+	database.closeDb(db);
+	
+})();
+
+function createPartcode(){
+	
+	var Database = require('databaseObj'),
+		database = new Database('SlingDB.sqlite'),
+		db = database.openDb(),
+		gradeCode,
+		limit,
+		type,
+		slingSize,
+		slingSizeAuto8,
+		slingSizeAuto10,
+		legLength = Math.ceil(parseFloat(Alloy.Globals.sling.nominalLength));
+	
+	// sort Angle
+	if( Alloy.Globals.sling.angle === 45 ){
+		limit = 'limit45';
+	}else{	
+		limit = 'limit60';
+	}
+	
+	if( Alloy.Globals.sling.type === 'Chain'){
+	// Configure a part code for a Chain Sling
+		
+		// sort Code	
+		if( Alloy.Globals.sling.grade === 8 ){
+			
+			// 'A' represents Grade 8 in the finished part code
+			gradeCode = 'A';
+			
+			var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + ' >= ' + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' +  limit + ' ASC LIMIT 1');
+			
+			// Store Sling size
+			if( newRow.isValidRow() ){	
+				slingSize = newRow.fieldByName('size');
+			
+			}else{
+				
+				Ti.API.info('Limited Exceeded');
+				
+				Alloy.Globals.sling.limitExceeded = true;
+			}
+			
+		}else if( Alloy.Globals.sling.grade === 10){
+			
+			// 'X' represents Grade 10 in the finished part code
+			gradeCode = 'X';
+			
+			var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + ' >= ' + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' +  limit + ' ASC LIMIT 1');
+			
+			// Store Sling size
+			if( newRow.isValidRow() ){	
+				slingSize = newRow.fieldByName('size');
+			
+			}else{
+				
+				Ti.API.info('Limited Exceeded');
+				
+				Alloy.Globals.sling.limitExceeded = true;
+			}
+			
+		}else if( Alloy.Globals.sling.grade === 'Auto'){
+			// Query DB with known info to get sling size
+			var row8 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + ' >= ' + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' +  limit + ' ASC LIMIT 1');
+			
+			// Store Sling size
+			if( row8.isValidRow() ){	
+				slingSizeAuto8 = row8.fieldByName('size');
+				
+				////Ti.API.info('sling size 8: ' + slingSizeAuto8 );
+			}else{
+				
+				Ti.API.info('Limited Exceeded');
+				
+				Alloy.Globals.sling.limitExceeded = true;
+			}
+			
+			var row10 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + ' >= ' + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' +  limit + ' ASC LIMIT 1');
+			
+			// Store Sling size
+			if( row10.isValidRow() ){	
+				slingSizeAuto10 = row10.fieldByName('size');
+				
+				////Ti.API.info('sling size 10: ' + slingSizeAuto10 );
+			}else{
+				
+				Ti.API.info('Limited Exceeded');
+				
+				Alloy.Globals.sling.limitExceeded = true;
+			}
+		}
+		
+	}else{
+	// Configure a part code for a Wire Rope Sling
+		
+		type = 'r';
+		
+		// Query DB with known info to get sling size
+		var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND ' + limit + ' >= ' + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' +  limit + ' ASC LIMIT 1');
+		
+		// Store Sling size
+		if( newRow.isValidRow() ){	
+			
+			slingSize = newRow.fieldByName('size');
+		
+		}else{
+				
+				Ti.API.info('Limited Exceeded');
+				
+				Alloy.Globals.sling.limitExceeded = true;
+			}
+	}
+	
+	if( Alloy.Globals.sling.shorteningDeviceCode === 'NONE' ){
+		Alloy.Globals.sling.shorteningDeviceCode = 0;
+	}
+	if( Alloy.Globals.sling.lowerTerminationCode === 'NONE' ){
+		Alloy.Globals.sling.lowerTerminationCode = 0;
+	}
+	if( Alloy.Globals.sling.upperTerminationCode === 'NONE' ){
+		Alloy.Globals.sling.upperTerminationCode = 0;
+	}
+	
+	// If the sling load limit has not been exceeded
+	// Continue to format the sling size
+	if( !Alloy.Globals.sling.limitExceeded ){
+		// Pad sling size if neccessary
+		if( slingSize < 10 ){
+			slingSize = '0' + slingSize;
+		}
+		
+		if( slingSizeAuto8 < 10 ){
+			slingSizeAuto8 = '0' + slingSizeAuto8;
+		}
+		
+		if( slingSizeAuto10 < 10 ){
+			slingSizeAuto10 = '0' + slingSizeAuto10;
+		}
+		
+		// Pad nominal length if neccessary
+		if( legLength < 10 ){
+			legLength = '0' + legLength;
+		}
+	}
+	
+	// Create a Chain Sling part code
+	if( Alloy.Globals.sling.type === 'Chain' ){
+		
+		if( Alloy.Globals.sling.grade !== 'Auto'){
+			
+			Alloy.Globals.sling.partCode = gradeCode + slingSize + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode;
+			
+		}else{
+			
+			Alloy.Globals.sling.partCode = 'A' + slingSizeAuto8 + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode
+											+ ' or ' +
+											'X' + slingSizeAuto10 + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode;
+		}
+	
+	
+	// Create a Wire Rope sling part code	
+	}else{
+		
+		// If legs === 1 add upper temination
+		if( Alloy.Globals.sling.legs === 1){
+
+			if(Alloy.Globals.sling.upperTerminationCode === 'NONE'){
+				
+				Alloy.Globals.sling.partCode = 'RS0' + slingSize + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode;
+			}else{
+				
+				Alloy.Globals.sling.partCode = 'RS0' + slingSize + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.upperTerminationCode;
+			}
+		}else{
+			
+			Alloy.Globals.sling.partCode = 'RS0' + slingSize + '.' + Alloy.Globals.sling.legs + legLength + '.' + Alloy.Globals.sling.lowerTerminationCode;
+		}
+	}
+	
+	database.closeDb(db);
+	
+	return Alloy.Globals.sling.partCode;
+}
+
+function outputDetails( type, grade, legs, load, nominalLength, description, partCode, quote ){
+	
+	$.slingType.text = type;
+	$.grade.text = grade;
+	$.legs.text = legs;
+	$.load.text = load;
+	$.length.text = nominalLength;
+	$.description.text = description;
+	
+	if( type === 'Wire Rope'){
+		
+		$.gradeContainer.height = 0;
+		$.gradeContainer.hide();
+	}
+	
+	if( description === null ){
+		$.descriptionContainer.hide();
+		$.descriptionContainer.height = 0;
+		
+	}else{
+		
+		$.description.text = 'Description: ' + description;
+	}
+	
+	//Ti.API.info('price: ' + Alloy.Globals.sling.quotedPrice + ' grade: ' + Alloy.Globals.sling.grade );
+	
+	if( !Alloy.Globals.sling.limitExceeded ){
+		
+		if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade === 'Auto'){
+			
+			$.specPartcode.text = 'Based on your requirements, we have identified two possible sling configurations: ' + partCode;
+			$.quotedPrice.text = "We cannot quote you a price for your configured slings. Please contact William Hackett Chains and reference your part code.";
+		
+		}else if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade !== 'Auto'){
+			
+			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			$.quotedPrice.text = "We cannot quote you a price for your configured sling. Please contact William Hackett Chains and reference your part code.";
+		
+		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade !== 'Auto' ){
+			
+			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
+			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			
+		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade === 'Auto' ){
+			
+			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
+			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			
+		}
+	
+	}else{
+		alert('The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.');
+		
+		$.quotedPrice.text = "We cannot quote you a price for your configured sling.";
+	}
+}
+
+function closeModal(){
+	$.specifications.close({modal: true});
+}
+
+function sendQuote(){
+	
+	var Common = require('common'),
+		common = new Common(),
+		Connection = require('connections'),
+		connection = new Connection(),
+		Database = require('databaseObj'),
+		database = new Database('SlingDB.sqlite'),
+		user = database.getCurrentUser(),
+		online = connection.onlineCheck(function(data){
+			
+			// perform an ajax call within the connection object
+			// if a value is returned, there is an internet connection
+			// Online will now equal "true"
+			var online;
+		
+			if(data === 1){
+				online = true;
+			}else{
+				online = false;
+			}
+			
+			return online;
+		});
+		
+	// perform a check to see if we are connected
+	if( online ){
+		
+		// If we are the quote must be stored locally as well as
+		// on the online database
+		database.insertQuoteOnline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user, 1);
+		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);		
+	}else{
+		
+		// If there isn't a connection make sure that 
+		// the quote is stored offline for later
+		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);
+	}
+
+	// Hide the close button and the request a quote button.
+	// This means a user can't make multiple requests for a quote
+	// and so the only way back for the user is to the dashboard
+	$.close.hide();
+	$.close.height = 0;
+	$.requestQuote.hide();
+	$.requestQuote.height = 0;
+	
+	$.backToDash.show();
+	$.backToDash.height = '26dip';
+}
+
+function openDash(){
+	
+	$.specifications.close({modal: true});
+	
+	// Because this page is a modal and a child of the slingconfiguration page,
+	// we must get the slingConfiguration view again and close it.
+	var slingConfig = Alloy.createController('slingConfiguration').getView(),
+		dash = Alloy.createController('dashboard').getView();
+		slingConfig.close();
+		dash.open();
+}
+

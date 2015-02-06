@@ -1,0 +1,75 @@
+<Alloy id="headroom">
+			
+	<!-- Headroom -->
+	<View class="page" id="content">
+		
+		<View class="wrapper">
+		
+			<Label class="page__title">Headroom</Label>
+			
+			<Label class="page__description">Is headroom restricted? Any slings that have 1 leg automatically default to "No" as the lifting angle is not taken in to consideration.</Label>
+		
+		</View>
+		
+		<View class="content--container" id="headroomView">
+					
+			<Label class="title" textAlign="center" color="#FFF">Is headrooom restricted?</Label>
+			
+			<View class="content--container">
+			
+				<View id="liftingAngle" class="content--horizontal">
+			
+					<View id="no" onClick="setAngle" class="halfWidth" backgroundColor="#2b3b94">
+						
+						<View class="ipadSideBorderLeft"></View>
+						
+						<View class="border--top"></View>
+						
+						<View touchEnabled="False" class="multi-line">
+						
+							<View class="multi-line__text">
+								<Label class="label--large">No</Label>
+							</View>
+							
+							<View class="multi-line__text">
+								<Label class="label--small">45 degree Lifting Angle</Label>
+							</View>
+							
+						</View>
+						
+						<View class="border--bottom"></View>
+						
+					</View>
+					
+					<View id="yes" onClick="setAngle" class="halfWidth" backgroundColor="#2b3b94">
+						
+						<View class="border--top"></View>
+						<View class="border--left"></View>
+
+						<View touchEnabled="False" class="multi-line">
+						
+							<View class="multi-line__text">
+								<Label class="label--large">Yes</Label>
+							</View>
+							
+							<View class="multi-line__text">
+								<Label class="label--small">60 degree Lifting Angle</Label>
+							</View>
+							
+						</View>
+						
+						<View class="border--bottom"></View>
+						<View class="ipadSideBorderRight"></View>
+						
+					</View>
+				
+				</View>
+				
+			</View>
+		
+		</View>
+	
+	<!-- Headroom -->
+	</View>
+	
+</Alloy>

@@ -1,0 +1,22 @@
+<Alloy id="requirements">
+	
+	<Window class="background">
+		
+		<View id="header" class="header">
+			<ImageView class="logo" image="images/WHC--logo.png" />
+		</View>
+		
+		<View class="seperator"></View>
+		
+		<View class="wrapper--background">
+			
+			<ScrollView id="scrollView">
+				
+			</ScrollView>
+			
+		</View>
+		
+	</Window>
+
+</Alloy>
+				

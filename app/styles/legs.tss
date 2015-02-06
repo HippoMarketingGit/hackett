@@ -1,0 +1,126 @@
+// iPad Styles
+'.page[platform=ios formFactor=tablet]': {
+	layout: 'vertical',
+	width: '60%',
+	height: Ti.UI.SIZE
+},
+'.ipadSideBorderLeft': {
+	left: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight': {
+	right: 0,
+	height: 0,
+	width: 0,
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderLeft[platform=ios formFactor=tablet]': {
+	left: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+'.ipadSideBorderRight[platform=ios formFactor=tablet]': {
+	right: 0,
+	height: '100%',
+	width: '1dip',
+	backgroundColor: '#FFF'
+},
+
+// ==================
+'.background': {
+	layout: 'vertical',
+	color: '#FFF',
+	backgroundColor: '#0d182f'
+},
+'.header': {
+	layout: 'vertical',
+	top: '26dip',
+	width: '100%',
+	height: '50dip'
+},
+'.footer': {
+	bottom: '0',
+	width: '100%',
+	height: '50dip'
+},
+
+// BORDERS AND SEPERATORS
+'.seperator': {
+	height: '1dip',
+	width: '100%',
+	backgroundColor: '#f7561e'
+},
+'.border--bottom': {
+	height: '1dip',
+	width: '100%',
+	bottom: '0',
+	backgroundColor: '#FFF'
+},
+'.border--top': {
+	height: '1dip',
+	width: '100%',
+	top: '0',
+	backgroundColor: '#FFF'
+},
+'.border--left': {
+	height: '100%',
+	width: '1dip',
+	left: 0,
+	backgroundColor: '#FFF'
+},
+
+// WRAPPER AND SCROLL VIEW
+'.wrapper': {
+	layout: 'vertical',
+	width: '90%',
+	height: Titanium.UI.SIZE
+},
+
+// IMAGES
+'.logo': {
+	bottom: '8dip',
+	width: '90%'
+},
+
+// PAGE ELEMENTS
+'.page__title': {
+	top: '20dip',
+	color: '#FFF',
+	font: {fontSize: 26},
+	textAlign: 'center'
+},
+'.page__description': {
+	top: '10dip',
+	color: '#FFF',
+	font: {fontSize: 14}
+},
+'.page':{
+	layout: 'vertical',
+	height: Ti.UI.SIZE
+},
+'.content--container': {
+	layout: 'vertical',
+	top: '10dip',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+'.content--horizontal': {
+	layout: 'horizontal',
+	width: '100%',
+	height: Titanium.UI.SIZE
+},
+
+// LEGS
+'.legs': {
+	width: '50%',
+	height: '120dip',
+	className: 'legs',
+	borderWidth: '1px',
+	borderColor: '#2b3b94'
+},
+'.legs[platform=ios formFactor=tablet]': {
+	width: '49%',
+}

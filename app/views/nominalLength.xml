@@ -1,0 +1,79 @@
+<Alloy id="nominalLength">
+	
+	<Window class="background" top="0" height="100%" left="0" width="100%" layout="vertical">
+		
+		<View class="content--container">
+						
+			<ImageView top="30dip" left="20dip" image="/images/WHC-close.png" height="24dip" width="24dip" onClick="closeModal"></ImageView>
+		
+		</View>
+		
+		<View top="20dip" height="1dip" width="100%" backgroundColor="#f7561e"></View>
+		
+		<ScrollView id="scrollView" top="0" left="0" width="100%">
+			
+			<!-- Nominal Length -->
+			<View class="page" id="content" top="0" height="Ti.UI.SIZE" backgroundColor="#2b3b94">
+				
+				<View class="wrapper">
+				
+					<Label class="page__title">Product Selection</Label>
+					
+					<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+					
+					<View class="content--container">
+						
+						<Label class="page__title">Nominal Length (m)</Label>
+					
+					</View>
+					
+					<View class="content--container">
+						
+						<View class="input-holder">
+						
+							<TextField id="legMeter" class="digit-input" value="00" clearOnEdit="true">
+								<!-- Sets the keyboardToolbar property -->
+					            <KeyboardToolbar>
+					                <Toolbar>
+					                    <Items>
+					                        <FlexSpace/>
+					                        <Button id="legMeterDone" style="Ti.UI.iPhone.SystemButtonStyle.DONE">Done</Button>
+					                    </Items>
+					                </Toolbar>
+					            </KeyboardToolbar>
+							</TextField>
+							
+							<Label class="fullStop">.</Label>
+							
+							<TextField id="legFraction" class="digit-input" value="00" clearOnEdit="true">
+								<!-- Sets the keyboardToolbar property -->
+					            <KeyboardToolbar>
+					                <Toolbar>
+					                    <Items>
+					                        <FlexSpace/>
+					                        <Button id="legFractionDone" style="Ti.UI.iPhone.SystemButtonStyle.DONE">Done</Button>
+					                    </Items>
+					                </Toolbar>
+					            </KeyboardToolbar>
+							</TextField>
+						
+						</View>
+					
+					</View>
+					
+					<View class="content--container" bottom="20dip">
+						<Button onClick="setLength" title="Set Nominal Length" class="button--primary" />
+					</View>
+			
+				</View>
+				
+			<!-- Nominal Length -->	
+			</View>
+			
+			<View height="1dip" width="100%" top="0" backgroundColor="#FFF"></View>
+		
+		</ScrollView>
+	
+	</Window>
+	
+</Alloy>

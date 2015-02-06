@@ -1,0 +1,68 @@
+<Alloy>
+	
+	<Window id="quotesDetail" class="background" layout="vertical">
+		
+		<View class="content--container" left="5%" top="30dip">	
+			<ImageView id="close" top="0" left="0" image="/images/WHC-close.png" height="24dip" width="24dip" onClick="closeModal"></ImageView>
+		</View>
+		
+		<View top="20dip" height="1dip" width="100%" backgroundColor="#f7561e"></View>
+		
+		<ScrollView id="scrollView" top="4dip" left="0" width="100%" layout="vertical">
+	
+			<!-- Lifting Points -->
+			<View class="page" id="content" top="10dip" height="Ti.UI.SIZE">
+				
+				<View id="slingSpec" class="wrapper" layout="vertical" top="4dip" width="90%" left="5%">
+				
+					<Label>Your requirements:</Label>
+					
+					<View top="4dip" layout="horizontal">
+						<Label left="0">Type: </Label><Label left="71dip" id="slingType"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal">
+						<Label left="0">Grade: </Label><Label left="60dip" id="grade"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal">
+						<Label left="0">Legs: </Label><Label left="74dip" id="legs"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal">
+						<Label left="0">Load (t): </Label><Label left="53dip" id="load"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal">
+						<Label left="0">Length (m): </Label><Label left="30dip" id="length"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal" id="descriptionContainer">
+						<Label left="0" id="description"></Label>
+					</View>
+					
+					<View id="slingPartcode" layout="vertical" top="10dip">
+						
+						<Label left="0" id="specPartcode"></Label>
+						
+					</View>
+								
+					<View top="10dip" layout="horizontal" id="priceContainer">
+						<Label left="0">Price (RRP): £</Label><Label left="0" id="quotedPrice"></Label>
+					</View>
+					
+					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="8dip"/>
+					
+					<Button id="deleteQuote" onClick="deleteQuote" title="Delete Quote" class="button--secondary" top="8dip"/>
+					
+				</View>
+				
+			</View>
+			
+			<View height="1dip" width="100%" top="20dip" backgroundColor="#FFF"></View>
+		
+		</ScrollView>
+	
+	</Window>
+	
+</Alloy>
