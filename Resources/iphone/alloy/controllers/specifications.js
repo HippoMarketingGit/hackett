@@ -16,25 +16,33 @@ function Controller() {
                 gradeCode = "A";
                 var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
                 if (newRow.isValidRow()) slingSize = newRow.fieldByName("size"); else {
-                    Ti.API.info("Limited Exceeded");
+                    Ti.API.info("Grade 8 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
             } else if (10 === Alloy.Globals.sling.grade) {
                 gradeCode = "X";
                 var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
                 if (newRow.isValidRow()) slingSize = newRow.fieldByName("size"); else {
-                    Ti.API.info("Limited Exceeded");
+                    Ti.API.info("Grade 10 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
             } else if ("Auto" === Alloy.Globals.sling.grade) {
-                var row8 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
-                if (row8.isValidRow()) slingSizeAuto8 = row8.fieldByName("size"); else {
-                    Ti.API.info("Limited Exceeded");
+                var row8 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
+                Ti.API.info('Query: SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
+                if (row8.isValidRow()) {
+                    slingSizeAuto8 = row8.fieldByName("size");
+                    Ti.API.info("sling size 8: " + slingSizeAuto8);
+                } else {
+                    Ti.API.info("Auto 8 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
-                var row10 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
-                if (row10.isValidRow()) slingSizeAuto10 = row10.fieldByName("size"); else {
-                    Ti.API.info("Limited Exceeded");
+                var row10 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
+                Ti.API.info('Query: SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
+                if (row10.isValidRow()) {
+                    slingSizeAuto10 = row10.fieldByName("size");
+                    Ti.API.info("sling size 10: " + slingSizeAuto10);
+                } else {
+                    Ti.API.info("Auto 10 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
             }

@@ -197,7 +197,7 @@ function Controller() {
         font: {
             fontSize: 26
         },
-        text: "Product Selection",
+        text: "Select Fittings",
         id: "__alloyId257"
     });
     $.__views.__alloyId256.add($.__views.__alloyId257);
@@ -207,7 +207,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        text: "Please select lower termination fittings and shortening device, if any.",
         id: "__alloyId258"
     });
     $.__views.__alloyId256.add($.__views.__alloyId258);

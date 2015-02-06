@@ -1,4 +1,11 @@
+/*
+ * If the user has a 1 leg chain then we do not need to worry about a lifting angle
+ * 
+ * This means we can just open the nominal length page and
+ * prompt the user to enter a nominal length
+ */
 if( Alloy.Globals.sling.legs === 1 ){
+	
 	var modal = Alloy.createController('nominalLength').getView();
 		modal.open({modal: true});
 }
@@ -17,21 +24,28 @@ if( Alloy.Globals.sling.angle !== null){
 // The function that allows us to define the angle
 function setAngle(e){
 	
+	//Set both of the buttons to the default background image
 	$.yes.backgroundColor = '#2b3b94';
 	$.no.backgroundColor = '#2b3b94';
 	
 	var obj = e.source;
 	
+	// Set the background image of the active button
 	obj.backgroundColor = '#6b76d0';
 	
 	// If headroom is restricted, show the lifting points page
 	if(obj.id === 'yes'){
 		
+		// Headroom is restricted 
+		// angle is now 60
 		Alloy.Globals.sling.angle = 60;
 		
+		// Open the lifting points modal to calculate the headroom and leg room
 		var modal = Alloy.createController('liftingPoints').getView();
 			modal.open({modal: true});
 			
+		// When the modal is closed and no values are entered reset the buttons to their default state
+		// This will prompt the user to enter a value before moving on
 		modal.addEventListener('close', function(e){
 				
 			if( Alloy.Globals.sling.nominalLength === 00.00 || Alloy.Globals.sling.nominalLength === null){
@@ -78,17 +92,16 @@ function showAlert(){
 			modal.open({modal: true});
 		}
 		
+		// When the modal is closed and no values are entered reset the buttons to their default state
+		// This will prompt the user to enter a value before moving on
 		modal.addEventListener('close', function(e){
 				
 			if( Alloy.Globals.sling.nominalLength === 00.00 || Alloy.Globals.sling.nominalLength === null){
 				$.yes.backgroundColor = '#2b3b94';
 				$.no.backgroundColor = '#2b3b94';
 			}
-			
-			
 		});
 	});
 	
 	lengthKnown.show();
-	
 }

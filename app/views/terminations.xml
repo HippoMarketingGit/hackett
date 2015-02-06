@@ -5,9 +5,9 @@
 		
 		<View class="wrapper">
 	
-			<Label class="page__title">Product Selection</Label>
+			<Label class="page__title">Select Fittings</Label>
 			
-			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+			<Label class="page__description">Please select lower termination fittings and shortening device, if any.</Label>
 			
 		</View>
 		
