@@ -35,8 +35,15 @@ function createPicker(e) {
 		var row;
 
 		if( Alloy.Globals.sling.grade === 10 ){
-			row = db.execute('SELECT * FROM EndFittings WHERE type = "c" AND grade10 ="1"');
+			
+			row = db.execute('SELECT * FROM EndFittings WHERE type = "c" AND grade10_' + Alloy.Globals.sling.legs + ' ="1"');
+		
+		}else if( Alloy.Globals.sling.grade === 8 ){
+			
+			row = db.execute('SELECT * FROM EndFittings WHERE type = "c" AND grade8_' + Alloy.Globals.sling.legs + ' ="1"');
+			
 		}else{
+			
 			row = db.execute('SELECT * FROM EndFittings WHERE type = "c"');
 		}
 

@@ -13,7 +13,7 @@ function Controller() {
         var db = Ti.Database.open("SlingDB.sqlite");
         if ("Chain" === Alloy.Globals.sling.type) {
             var row;
-            row = db.execute(10 === Alloy.Globals.sling.grade ? 'SELECT * FROM EndFittings WHERE type = "c" AND grade10 ="1"' : 'SELECT * FROM EndFittings WHERE type = "c"');
+            row = db.execute(10 === Alloy.Globals.sling.grade ? 'SELECT * FROM EndFittings WHERE type = "c" AND grade10_' + Alloy.Globals.sling.legs + ' ="1"' : 8 === Alloy.Globals.sling.grade ? 'SELECT * FROM EndFittings WHERE type = "c" AND grade8_' + Alloy.Globals.sling.legs + ' ="1"' : 'SELECT * FROM EndFittings WHERE type = "c"');
             while (row.isValidRow()) {
                 var code = row.fieldByName("code"), name = row.fieldByName("name");
                 var obj = {

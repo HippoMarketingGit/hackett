@@ -281,8 +281,8 @@ Database.prototype.createTables = function(){
 	var db = this.openDb();
 		db.execute('CREATE TABLE IF NOT EXISTS VersionCheck(id INTEGER PRIMARY KEY, category TEXT, version INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS ChainType(id INTEGER PRIMARY KEY, code TEXT, name TEXT);');
-		db.execute('CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT);');
-		db.execute('CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
+		db.execute('CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, shortener TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);');
@@ -588,7 +588,7 @@ Database.prototype.getShorteners = function(){
 				
 				var json = responseArray.reply[i];
 				
-				db.execute('INSERT INTO Shorteners(code, name) VALUES (?, ?)', json.code, json.name);
+				db.execute('INSERT INTO Shorteners(code, name, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', json.code, json.name, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
 			}
 	         
 			that.ready++;
@@ -621,9 +621,6 @@ Database.prototype.getEndFittings = function(){
 			var responseArray = JSON.parse(this.responseText),
 				db = that.openDb(),
 				i;
-				
-			//Ti.API.info(db);
-			//Ti.API.info(responseArray);
 			
 			for( i = 0; i < responseArray.reply.length; i++){
 				
@@ -631,7 +628,7 @@ Database.prototype.getEndFittings = function(){
 				
 				Ti.API.info(json.code);
 				
-				db.execute('INSERT INTO EndFittings(code, name, type, grade10) VALUES (?, ?, ?, ?)', json.code, json.name, json.type, json.grade10);
+				db.execute('INSERT INTO EndFittings(code, name, type, grade10, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', json.code, json.name, json.type, json.grade10, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
 			}
 
 			that.ready++;
