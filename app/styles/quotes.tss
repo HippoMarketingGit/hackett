@@ -1,3 +1,9 @@
+// iPad Styles
+'.logo[platform=ios formFactor=tablet]': {
+	height: '48dip',
+	width: 'auto'
+},
+
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },

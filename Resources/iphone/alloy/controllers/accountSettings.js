@@ -58,12 +58,22 @@ function Controller() {
         id: "header"
     });
     $.__views.accountSettings.add($.__views.header);
-    $.__views.__alloyId0 = Ti.UI.createImageView({
-        bottom: "8dip",
-        width: "90%",
-        image: "/images/WHC--logo.png",
-        id: "__alloyId0"
-    });
+    $.__views.__alloyId0 = Ti.UI.createImageView(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: "8dip",
+            width: "90%"
+        });
+        Alloy.isTablet && _.extend(o, {
+            height: "48dip",
+            width: "auto"
+        });
+        _.extend(o, {
+            image: "/images/WHC--logo.png",
+            id: "__alloyId0"
+        });
+        return o;
+    }());
     $.__views.header.add($.__views.__alloyId0);
     $.__views.__alloyId1 = Ti.UI.createView({
         height: "1dip",
