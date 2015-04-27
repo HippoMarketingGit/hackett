@@ -21,7 +21,7 @@
 				
 				<Label touchEnabled="False" class="button__label">Chain</Label>
 				
-				<ImageView touchEnabled="False" class="icon" image="/images/WHC-chain.png" right="10%"/>
+				<ImageView touchEnabled="False" class="icon" image="/images/sling-type/chain.jpg" right="10%"/>
 				
 				<View class="ipadSideBorderRight"></View>
 				
@@ -90,7 +90,7 @@
 				
 				<Label touchEnabled="False" class="button__label">Wire Rope</Label>
 				
-				<ImageView touchEnabled="False" class="icon" image="/images/WHC-wire-rope.png" right="10%" />
+				<ImageView touchEnabled="False" class="icon" image="/images/sling-type/wire-rope.jpg" right="10%" />
 				
 				<View class="ipadSideBorderRight"></View>
 				

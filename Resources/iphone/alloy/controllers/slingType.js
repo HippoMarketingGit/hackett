@@ -155,7 +155,7 @@ function Controller() {
         width: "auto",
         className: "icon",
         touchEnabled: false,
-        image: "/images/WHC-chain.png",
+        image: "/images/sling-type/chain.jpg",
         id: "__alloyId216"
     });
     $.__views.chain.add($.__views.__alloyId216);
@@ -450,7 +450,7 @@ function Controller() {
         width: "auto",
         className: "icon",
         touchEnabled: false,
-        image: "/images/WHC-wire-rope.png",
+        image: "/images/sling-type/wire-rope.jpg",
         id: "__alloyId239"
     });
     $.__views.wireRope.add($.__views.__alloyId239);
