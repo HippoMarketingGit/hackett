@@ -339,7 +339,7 @@ function Controller() {
         $.load.text = args.load;
         $.length.text = args.length;
         $.description.text = args.description;
-        $.specPartcode.text = "Partcode: " + args.partCode;
+        $.specPartcode.text = "Part code: " + args.partCode;
         if (null !== args.price) $.quotedPrice.text = args.price; else {
             $.priceContainer.height = 0;
             $.priceContainer.hide();
