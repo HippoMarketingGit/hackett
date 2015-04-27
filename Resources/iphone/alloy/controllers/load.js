@@ -54,7 +54,7 @@ function Controller() {
             fontSize: 26
         },
         textAlign: "center",
-        text: "Working Load",
+        text: "Weight of load",
         id: "__alloyId108"
     });
     $.__views.__alloyId107.add($.__views.__alloyId108);
@@ -64,7 +64,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        text: "Please input the weight of the load to be lifted with the sling, then press Next.",
         id: "__alloyId109"
     });
     $.__views.__alloyId107.add($.__views.__alloyId109);

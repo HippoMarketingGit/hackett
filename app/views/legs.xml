@@ -7,7 +7,7 @@
 		
 			<Label class="page__title">How many Legs?</Label>
 			
-			<Label class="page__description">Please chose however many legs you would like your sling to have by tapping a diagram below. Press 'Next' to proceed.</Label>
+			<Label class="page__description">Please choose the number of legs you would like your sling to have by tapping a diagram below then pressing 'Next' to proceed.</Label>
 			
 		</View>
 				

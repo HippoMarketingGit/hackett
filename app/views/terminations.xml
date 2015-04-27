@@ -5,9 +5,9 @@
 		
 		<View class="wrapper">
 	
-			<Label class="page__title">Select Fittings</Label>
+			<Label class="page__title">Terminations</Label>
 			
-			<Label class="page__description">Please select lower termination fittings and shortening device, if any.</Label>
+			<Label class="page__description">Please select one of the lower terminations available and a shortening device if required.</Label>
 			
 		</View>
 		

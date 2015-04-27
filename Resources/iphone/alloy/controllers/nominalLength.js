@@ -117,7 +117,7 @@ function Controller() {
             fontSize: 26
         },
         textAlign: "center",
-        text: "Product Selection",
+        text: "Length of Sling",
         id: "__alloyId143"
     });
     $.__views.__alloyId142.add($.__views.__alloyId143);
@@ -127,7 +127,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        text: "Please input the length of the sling, bearing to bearing.",
         id: "__alloyId144"
     });
     $.__views.__alloyId142.add($.__views.__alloyId144);

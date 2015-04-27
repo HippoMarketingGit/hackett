@@ -10,7 +10,6 @@ function __processArg(obj, key) {
 function Controller() {
     function setLegLength() {
         var legLength, num = parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value);
-        Ti.API.info("num: " + num);
         if (60 === Alloy.Globals.sling.angle) {
             var distance;
             distance = 2 === Alloy.Globals.sling.legs || 4 === Alloy.Globals.sling.legs ? num / 2 : num;
@@ -23,17 +22,11 @@ function Controller() {
             legLength = n.toFixed(2);
         }
         Alloy.Globals.sling.nominalLength = legLength;
-        Ti.API.info("Leg Length: " + Alloy.Globals.sling.nominalLength);
     }
     function getHeadroom() {
         var distance;
         distance = 2 === Alloy.Globals.sling.legs || 4 === Alloy.Globals.sling.legs ? parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value) / 2 : parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value);
         var distanceSquared = distance * distance, nominalLengthSquared = Alloy.Globals.sling.nominalLength * Alloy.Globals.sling.nominalLength, minusNumber = nominalLengthSquared - distanceSquared, result = Math.sqrt(minusNumber);
-        Ti.API.info("distance: " + distance);
-        Ti.API.info("distance squared: " + distanceSquared);
-        Ti.API.info("Nominal Length squared: " + nominalLengthSquared);
-        Ti.API.info("minusNumber: " + minusNumber);
-        Ti.API.info("Result: " + result.toFixed(2));
         return result.toFixed(2);
     }
     function setLength() {
@@ -172,7 +165,7 @@ function Controller() {
             fontSize: 26
         },
         textAlign: "center",
-        text: "Distance between Lifting Points (m)",
+        text: "Distance between\nLifting Points (m)",
         id: "__alloyId89"
     });
     $.__views.__alloyId88.add($.__views.__alloyId89);

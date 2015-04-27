@@ -91,7 +91,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Please chose however many legs you would like your sling to have by tapping a diagram below. Press 'Next' to proceed.",
+        text: "Please choose the number of legs you would like your sling to have by tapping a diagram below then pressing 'Next' to proceed.",
         id: "__alloyId77"
     });
     $.__views.__alloyId75.add($.__views.__alloyId77);

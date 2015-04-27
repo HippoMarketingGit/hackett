@@ -238,7 +238,7 @@ function Controller() {
         font: {
             fontSize: 12
         },
-        text: "45 degree Lifting Angle",
+        text: "0 - 45° Angle",
         id: "__alloyId49"
     });
     $.__views.__alloyId48.add($.__views.__alloyId49);
@@ -322,7 +322,7 @@ function Controller() {
         font: {
             fontSize: 12
         },
-        text: "60 degree Lifting Angle",
+        text: "45 - 60° Angle",
         id: "__alloyId57"
     });
     $.__views.__alloyId56.add($.__views.__alloyId57);

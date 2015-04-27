@@ -88,7 +88,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.",
+        text: "Please select whether you require your sling to be chain or wire rope.",
         id: "__alloyId212"
     });
     $.__views.__alloyId210.add($.__views.__alloyId212);

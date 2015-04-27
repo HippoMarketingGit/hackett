@@ -8,7 +8,7 @@ var args = arguments[0] || {};
 	$.load.text = args.load;
 	$.length.text = args.length;
 	$.description.text = args.description;
-	$.specPartcode.text = 'Partcode: ' + args.partCode;
+	$.specPartcode.text = 'Part code: ' + args.partCode;
 	
 	if( args.price !== null ){
 		$.quotedPrice.text = args.price;

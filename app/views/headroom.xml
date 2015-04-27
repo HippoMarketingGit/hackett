@@ -32,7 +32,7 @@
 							</View>
 							
 							<View class="multi-line__text">
-								<Label class="label--small">45 degree Lifting Angle</Label>
+								<Label class="label--small">0 - 45&#176; Angle</Label>
 							</View>
 							
 						</View>
@@ -53,7 +53,7 @@
 							</View>
 							
 							<View class="multi-line__text">
-								<Label class="label--small">60 degree Lifting Angle</Label>
+								<Label class="label--small">45 - 60&#176; Angle</Label>
 							</View>
 							
 						</View>

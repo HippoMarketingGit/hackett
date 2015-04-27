@@ -197,7 +197,7 @@ function Controller() {
         font: {
             fontSize: 26
         },
-        text: "Select Fittings",
+        text: "Terminations",
         id: "__alloyId257"
     });
     $.__views.__alloyId256.add($.__views.__alloyId257);
@@ -207,7 +207,7 @@ function Controller() {
         font: {
             fontSize: 14
         },
-        text: "Please select lower termination fittings and shortening device, if any.",
+        text: "Please select one of the lower terminations available and a shortening device if required.",
         id: "__alloyId258"
     });
     $.__views.__alloyId256.add($.__views.__alloyId258);
