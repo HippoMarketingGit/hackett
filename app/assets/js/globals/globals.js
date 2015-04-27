@@ -30,7 +30,6 @@ if (Ti.Platform.name === 'iPhone OS'){
 	
 	style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
 }else{
-	
 	style = Ti.UI.ActivityIndicatorStyle.PLAIN;
 }
 
