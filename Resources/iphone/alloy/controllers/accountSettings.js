@@ -396,7 +396,7 @@ function Controller() {
     $.mailingList.addEventListener("click", function(e) {
         false == e.source.value ? e.source.on() : e.source.off();
     });
-    var row = db.execute("SELECT * FROM UserProfile"), userData = {};
+    var row = db.execute('SELECT * FROM UserProfile WHERE loggedIn = "1"'), userData = {};
     while (row.isValidRow()) {
         var name = row.fieldByName("name"), company = row.fieldByName("company"), phone = row.fieldByName("phone"), email = row.fieldByName("email"), optIn = row.fieldByName("optIn");
         $.name.value = name;
