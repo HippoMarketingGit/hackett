@@ -7,9 +7,14 @@ var Common = require('common'),
 	Sling = require('sling'),
 	sling = new Sling(),
 	pages = ['slingType', 'legs', 'load', 'headroom', 'terminations'];
-	
-	// Create a Global Object called sling
-	Alloy.Globals.sling = sling;
+
+// Create a Global Object called sling
+Alloy.Globals.sling = sling;
+
+// Events object to fire things on and listen to
+Alloy.Globals.goBack = function() {
+	navigation.previousPage( $.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
+};
 
 // Open the first page
 navigation.openFirstPage($.scrollView, pages);

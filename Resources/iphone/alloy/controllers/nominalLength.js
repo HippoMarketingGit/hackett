@@ -16,10 +16,12 @@ function Controller() {
             closeModal();
         }
     }
-    function closeModal() {
+    function closeModal(e) {
+        var isManual = null !== e && e && e["type"];
         $.nominalLength.close({
             modal: true
         });
+        isManual && args && args["closeAction"] && "back" === args.closeAction && Alloy.Globals.goBack();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "nominalLength";
@@ -290,7 +292,7 @@ function Controller() {
     $.__views.scrollView.add($.__views.__alloyId162);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var Common = require("common"), common = new Common();
+    var Common = require("common"), common = new Common(), args = arguments[0] || {};
     $.legMeterDone.addEventListener("click", function() {
         $.legMeter.blur();
         ("" === $.legMeter.value || null === $.legMeter.value) && $.legMeter.setValue("00");

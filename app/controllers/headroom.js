@@ -5,9 +5,8 @@
  * prompt the user to enter a nominal length
  */
 if( Alloy.Globals.sling.legs === 1 ){
-	
-	var modal = Alloy.createController('nominalLength').getView();
-		modal.open({modal: true});
+	var modal = Alloy.createController('nominalLength', { closeAction: 'back' }).getView();
+	modal.open({ modal: true });
 } else {
 	setHeadroomImg();
 }
@@ -15,7 +14,6 @@ if( Alloy.Globals.sling.legs === 1 ){
 // Check if anything has been set previously
 // If it has, highlight the correct buttons
 if( Alloy.Globals.sling.angle !== null){
-	
 	if( Alloy.Globals.sling.angle === 60){
 		$.yes.backgroundColor = '#6b76d0';
 	}else{

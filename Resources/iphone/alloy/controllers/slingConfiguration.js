@@ -146,6 +146,9 @@ function Controller() {
     _.extend($, $.__views);
     var Common = require("common"), Navigation = (new Common(), require("navigation")), navigation = new Navigation(), Sling = require("sling"), sling = new Sling(), pages = [ "slingType", "legs", "load", "headroom", "terminations" ];
     Alloy.Globals.sling = sling;
+    Alloy.Globals.goBack = function() {
+        navigation.previousPage($.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
+    };
     navigation.openFirstPage($.scrollView, pages);
     $.next.addEventListener("click", function() {
         navigation.nextPage($.scrollView, pages, Alloy.Globals.sling);

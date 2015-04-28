@@ -1,5 +1,6 @@
 var Common = require('common'),
-	common = new Common();
+	common = new Common(),
+	args = arguments[0] || {};
 
 $.legMeterDone.addEventListener('click', function(e){
 
@@ -44,6 +45,16 @@ function setLength(){
 	}
 }
 
-function closeModal(){
+function closeModal(e){
+	
+	var isManual = (e !== null && e && e['type']);
+	
 	$.nominalLength.close({modal: true});
+	
+	// Was the modal dialog closed manually, and do we have the closeAction passed of going back?
+	// This is used to go back to the "Load" page on single leg configs.
+	if (isManual && args && args['closeAction'] && args.closeAction === 'back') {
+		Alloy.Globals.goBack();
+	}
+	
 }
