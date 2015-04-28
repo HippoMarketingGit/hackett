@@ -42,7 +42,7 @@ function setLegLength(e){
 	// Set the nomindal length
 	Alloy.Globals.sling.nominalLength = legLength;
 	
-	//Ti.API.info('Leg Length: ' + Alloy.Globals.sling.nominalLength );
+	// Ti.API.info('Leg Length: ' + Alloy.Globals.sling.nominalLength );
 }
 
 function getHeadroom(){
@@ -84,11 +84,21 @@ function setLength(){
 }
 
 function showHeadroomAlert(){
+	
+	var message = null;
+	
+	if (Alloy.Globals.sling.angle === 45) {
+		// Unrestricted head room. Show the leg length message
+		message = 'The calculated leg length is ' + Alloy.Globals.sling.nominalLength + ' (m). Do you wish to continue?';
+	} else {
+		// Restricted headroom. Show the head room message
+		message = 'You will require a minimum headroom of ' + getHeadroom() + ' (m) to operate this sling. Do you wish to continue?';
+	}
 
 	// If Headroom isnt restricted check if user knows Leg Length
 	var headroom = Titanium.UI.createAlertDialog({
 	        title: 'Headroom',
-	        message: 'You will require a minimum headroom of ' + getHeadroom() + ' (m) to operate this sling. Do you wish to continue?',
+	        message: message,
 	        buttonNames: ['Yes', 'No'],
 	        cancel: 1
 		}),

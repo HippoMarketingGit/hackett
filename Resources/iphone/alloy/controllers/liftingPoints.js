@@ -22,6 +22,7 @@ function Controller() {
             legLength = n.toFixed(2);
         }
         Alloy.Globals.sling.nominalLength = legLength;
+        Ti.API.info("Leg Length: " + Alloy.Globals.sling.nominalLength);
     }
     function getHeadroom() {
         var distance;
@@ -34,9 +35,11 @@ function Controller() {
         "00" === $.liftingPointMeter.value && "00" === $.liftingPointFraction.value ? alert("Please enter the distance between lifting points") : showHeadroomAlert();
     }
     function showHeadroomAlert() {
+        var message = null;
+        message = 45 === Alloy.Globals.sling.angle ? "The calculated leg length is " + Alloy.Globals.sling.nominalLength + " (m). Do you wish to continue?" : "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?";
         var headroom = Titanium.UI.createAlertDialog({
             title: "Headroom",
-            message: "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?",
+            message: message,
             buttonNames: [ "Yes", "No" ],
             cancel: 1
         });

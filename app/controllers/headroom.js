@@ -100,13 +100,13 @@ function showAlert(){
 		var modal;
 		
         if (e.cancel === e.index || e.cancel === true) {
-			// Leg Length not known
+			// Leg Length not known (No)
 			
 			modal = Alloy.createController('liftingPoints').getView();
 			modal.open({modal: true});
 
         }else if (e.index === 0){
-			// Leg Length known
+			// Leg Length known (Yes)
 			
 			modal = Alloy.createController('nominalLength').getView();
 			modal.open({modal: true});
