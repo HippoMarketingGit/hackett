@@ -67,6 +67,9 @@
 	width: 'auto',
 	className: 'icon'
 },
+'#headroomImg': {
+	top: '10dip'
+},
 
 // LABELS
 '.button__label': {

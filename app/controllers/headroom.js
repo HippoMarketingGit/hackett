@@ -8,6 +8,8 @@ if( Alloy.Globals.sling.legs === 1 ){
 	
 	var modal = Alloy.createController('nominalLength').getView();
 		modal.open({modal: true});
+} else {
+	setHeadroomImg();
 }
 
 // Check if anything has been set previously
@@ -18,6 +20,26 @@ if( Alloy.Globals.sling.angle !== null){
 		$.yes.backgroundColor = '#6b76d0';
 	}else{
 		$.no.backgroundColor = '#6b76d0';
+	}
+}
+
+
+function setHeadroomImg() {
+	
+	var src ='';
+	
+	switch (Alloy.Globals.sling.legs) {
+		case 2:
+			src = '/images/headroom/double.jpg';
+		break;
+		case 3:
+		case 4:
+			src = '/images/headroom/3-4-leg.jpg';
+		break;
+	}
+	
+	if (src !== '') {
+		$.headroomImg.image = src;
 	}
 }
 

@@ -8,6 +8,19 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function setHeadroomImg() {
+        var src = "";
+        switch (Alloy.Globals.sling.legs) {
+          case 2:
+            src = "/images/headroom/double.jpg";
+            break;
+
+          case 3:
+          case 4:
+            src = "/images/headroom/3-4-leg.jpg";
+        }
+        "" !== src && ($.headroomImg.image = src);
+    }
     function setAngle(e) {
         $.yes.backgroundColor = "#2b3b94";
         $.no.backgroundColor = "#2b3b94";
@@ -121,6 +134,13 @@ function Controller() {
         id: "__alloyId40"
     });
     $.__views.__alloyId38.add($.__views.__alloyId40);
+    $.__views.headroomImg = Ti.UI.createImageView({
+        top: "10dip",
+        touchEnabled: false,
+        id: "headroomImg",
+        width: "auto"
+    });
+    $.__views.__alloyId38.add($.__views.headroomImg);
     $.__views.headroomView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -361,7 +381,7 @@ function Controller() {
         modal.open({
             modal: true
         });
-    }
+    } else setHeadroomImg();
     null !== Alloy.Globals.sling.angle && (60 === Alloy.Globals.sling.angle ? $.yes.backgroundColor = "#6b76d0" : $.no.backgroundColor = "#6b76d0");
     __defers["$.__views.no!click!setAngle"] && $.__views.no.addEventListener("click", setAngle);
     __defers["$.__views.yes!click!setAngle"] && $.__views.yes.addEventListener("click", setAngle);
