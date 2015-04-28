@@ -283,7 +283,7 @@ Database.prototype.createTables = function(){
 		db.execute('CREATE TABLE IF NOT EXISTS ChainType(id INTEGER PRIMARY KEY, code TEXT, name TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, shortener TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, end_b INTEGER, shortener TEXT, img TEXT, bom TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);');
@@ -547,7 +547,21 @@ Database.prototype.getSlings = function(){
 				
 				var json = responseArray.reply[i];
 				
-				db.execute('INSERT INTO Slings(code, description, price, grade, size, legs, length, end, shortener) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.shortener);
+				db.execute(
+					'INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+					json.code, 
+					json.description, 
+					padIntRight(json.price), 
+					json.grade,
+					json.size,
+					json.legs,
+					json.length,
+					json.end,
+					json.end_b,
+					json.shortener,
+					json.img,
+					json.bom
+				);
 			}
 
 			that.ready++;
