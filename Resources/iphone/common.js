@@ -44,6 +44,7 @@ Common.prototype.openApp = function() {
 
 Common.prototype.padIntRight = function(num) {
     var str = num.toString(), strArray = str.split(".");
+    if ("" === str || 1 === strArray.length) return "";
     strArray[1].length < 2 && (strArray[1] += "0");
     return strArray[0] + "." + strArray[1];
 };

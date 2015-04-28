@@ -60,6 +60,10 @@ function padIntRight(num){
     var str = num.toString(),
         strArray = str.split(".");
     
+    if (str === '' || strArray.length === 1) {
+    	return '';
+    }
+    
     if( strArray[1].length < 2){
         
         strArray[1] += '0';
