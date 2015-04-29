@@ -34,10 +34,16 @@ function Controller() {
         "00" === $.liftingPointMeter.value && "00" === $.liftingPointFraction.value ? alert("Please enter the distance between lifting points") : showHeadroomAlert();
     }
     function showHeadroomAlert() {
-        var message = null;
-        message = 45 === Alloy.Globals.sling.angle ? "The calculated leg length is " + Alloy.Globals.sling.nominalLength + " (m). Do you wish to continue?" : "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?";
+        var title = null, message = null;
+        if (45 === Alloy.Globals.sling.angle) {
+            title = "Leg length";
+            message = "The calculated leg length is " + Alloy.Globals.sling.nominalLength + " (m). Do you wish to continue?";
+        } else {
+            title = "Headroom";
+            message = "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?";
+        }
         var headroom = Titanium.UI.createAlertDialog({
-            title: "Headroom",
+            title: title,
             message: message,
             buttonNames: [ "Yes", "No" ],
             cancel: 1
