@@ -1,6 +1,8 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-var Common = require("common"), User = require("user"), Database = require("databaseObj"), Connection = require("connections"), common = new Common(), user = new User(), database = new Database("SlingDB.sqlite"), connection = new Connection();
+var Common = require("common"), User = require("user"), Database = require("databaseObj"), ImageSync = require("imagesync"), Connection = require("connections"), common = new Common(), user = new User(), database = new Database("SlingDB.sqlite"), imageSync = new ImageSync({
+    database: database
+}), connection = new Connection();
 
 var loader = Ti.UI.createWindow({
     backgroundColor: "#021b4b"
@@ -57,6 +59,7 @@ if (online) {
                 loader.close();
                 loader = null;
                 clearInterval(interval);
+                imageSync.checkAndDownload();
             }
         }, 500);
     } else {
@@ -71,6 +74,7 @@ if (online) {
         }
         loader.close();
         loader = null;
+        imageSync.checkAndDownload();
     }
 } else {
     Ti.API.info("offline");

@@ -22,7 +22,6 @@ function Controller() {
             legLength = n.toFixed(2);
         }
         Alloy.Globals.sling.nominalLength = legLength;
-        Ti.API.info("Leg Length: " + Alloy.Globals.sling.nominalLength);
     }
     function getHeadroom() {
         var distance;

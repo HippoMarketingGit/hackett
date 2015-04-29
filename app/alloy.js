@@ -16,10 +16,12 @@
 var Common = require('common'),
 	User = require('user'),
 	Database = require('databaseObj'),
+	ImageSync = require('imagesync'),
 	Connection = require('connections'),
 	common = new Common(),
 	user = new User(),
 	database = new Database('SlingDB.sqlite'),
+	imageSync = new ImageSync({ database: database }),
 	connection = new Connection();
 
 var loader = Ti.UI.createWindow({
@@ -105,6 +107,8 @@ if( online ){
 				loader = null;
 				
 				clearInterval(interval);
+				
+				imageSync.checkAndDownload();
 			}
 			
 		}, 500);
@@ -131,6 +135,8 @@ if( online ){
 		
 		loader.close();
 		loader = null;
+		
+		imageSync.checkAndDownload();
 	}
 
 }else{
