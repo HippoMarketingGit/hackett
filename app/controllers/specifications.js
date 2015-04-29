@@ -545,7 +545,7 @@ function sendQuote(){
 		connection = new Connection(),
 		Database = require('databaseObj'),
 		database = new Database('SlingDB.sqlite'),
-		user = database.getCurrentUser(),
+		user = database.getCurrentUserDetails(),
 		online = connection.onlineCheck(function(data){
 			
 			// perform an ajax call within the connection object
@@ -561,20 +561,40 @@ function sendQuote(){
 			
 			return online;
 		});
-		
+	
+	Ti.API.info("user");
+	
+	var quoteData = {
+		type: Alloy.Globals.sling.type,
+		grade: Alloy.Globals.sling.grade,
+		legs: Alloy.Globals.sling.legs,
+		load: Alloy.Globals.sling.load,
+		length: Alloy.Globals.sling.nominalLength,
+		partCode: Alloy.Globals.sling.partCode,
+		price: Alloy.Globals.sling.quotedPrice,
+		description: Alloy.Globals.sling.slingDescription,
+		date: common.getDate(),
+		ref: common.generateQuoteRef(user),
+		user: user.email,
+		addtodb: 1
+	};
+	
+	database.insertQuoteOffline(quoteData);
+	
 	// perform a check to see if we are connected
 	if( online ){
-		
+		database.insertQuoteOnline(quoteData);
 		// If we are the quote must be stored locally as well as
 		// on the online database
-		database.insertQuoteOnline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user, 1);
-		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);		
+		//database.insertQuoteOnline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user, 1);
+		//database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);		
 	}else{
-		
 		// If there isn't a connection make sure that 
 		// the quote is stored offline for later
-		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);
+		//database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);
 	}
+	
+	
 
 	// Hide the close button and the request a quote button.
 	// This means a user can't make multiple requests for a quote

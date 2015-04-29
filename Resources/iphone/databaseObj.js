@@ -42,6 +42,22 @@ Database.prototype.getCurrentUser = function() {
     return result;
 };
 
+Database.prototype.getCurrentUserDetails = function() {
+    var result, db = this.openDb(), userRow = db.execute('SELECT UserProfile.*, count(Quotes.id) AS quotes FROM UserProfile LEFT JOIN Quotes ON email = user WHERE loggedIn = "1" ');
+    result = userRow.isValidRow() ? {
+        email: userRow.fieldByName("email"),
+        id: userRow.fieldByName("id"),
+        name: userRow.fieldByName("name"),
+        company: userRow.fieldByName("company"),
+        phone: userRow.fieldByName("phone"),
+        id: userRow.fieldByName("userId"),
+        quotes: userRow.fieldByName("quotes")
+    } : null;
+    this.closeDb(db);
+    Ti.API.info("Current User connection closed!");
+    return result;
+};
+
 Database.prototype.registerUser = function(name, companyName, phoneNumber, emailAddress, password, mailingList) {
     var xhr = Titanium.Network.createHTTPClient(), params = {
         name: name,
@@ -215,33 +231,33 @@ Database.prototype.pushQuotes = function(currentUser) {
     }
 };
 
-Database.prototype.insertQuoteOffline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user) {
+Database.prototype.insertQuoteOffline = function(data) {
     var db = this.openDb();
-    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", type, grade, legs, load, length, partCode, price, description, date, "0", ref, user);
+    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data.type, data.grade, data.legs, data.load, data.length, data.partCode, data.price, data.description, data.date, "0", data.ref, data.user);
     this.closeDb(db);
 };
 
-Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb) {
+Database.prototype.insertQuoteOnline = function(data) {
     var xhr = Ti.Network.createHTTPClient(), params = {
-        type: type,
-        grade: grade,
-        legs: legs,
-        load: load,
-        length: length,
-        partcode: partCode,
-        price: price,
-        description: description,
-        date: date,
-        ref: ref,
-        user: user,
-        addtodb: addtodb,
+        type: data.type,
+        grade: data.grade,
+        legs: data.legs,
+        load: data.load,
+        length: data.length,
+        partcode: data.partCode,
+        price: data.price,
+        description: data.description,
+        date: data.date,
+        ref: data.ref,
+        user: data.user,
+        addtodb: data.addtodb,
         sync: 1
     };
     xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=pushQuote");
     xhr.onload = function() {
         var response = JSON.parse(this.responseText);
         Ti.API.info(this.responseText);
-        1 !== addtodb && alert("Your quote was sent successfully.");
+        1 !== data.addtodb && alert("Your quote was sent successfully.");
         alert(1 !== response.reply ? "Your quote failed to send, please try again." : "Your quote was sent successfully.");
     };
     xhr.onerror = function() {

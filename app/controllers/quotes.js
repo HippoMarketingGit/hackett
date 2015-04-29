@@ -55,7 +55,16 @@ function getData(){
 			date = Ti.UI.createLabel({
 				left: '20dip',
 				top: '4dip',
-				text: row.fieldByName('date'),
+				text: "Created on " + row.fieldByName('date'),
+				font:{
+					fontSize: '14px'
+				},
+				color: '#FFF'
+			}),
+			ref = Ti.UI.createLabel({
+				left: '20dip',
+				top: '4dip',
+				text: row.fieldByName('ref'),
 				font:{
 					fontSize: '16px'
 				},
@@ -72,6 +81,7 @@ function getData(){
 				color: '#FFF'
 			});
 			
+		container.add(ref);
 		container.add(date);
 		container.add(description);
 		container.add(partCode);

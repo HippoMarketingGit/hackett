@@ -18,6 +18,10 @@
 					<Label>Your requirements:</Label>
 					
 					<View top="4dip" layout="horizontal">
+						<Label left="0">Ref: </Label><Label left="81dip" id="ref"></Label>
+					</View>
+					
+					<View top="4dip" layout="horizontal">
 						<Label left="0">Type: </Label><Label left="71dip" id="slingType"></Label>
 					</View>
 					

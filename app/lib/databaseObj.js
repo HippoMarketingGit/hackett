@@ -80,6 +80,35 @@ Database.prototype.getCurrentUser = function(){
 	return result;
 };
 
+
+// Returns the current user if there is one
+// If not, returns null
+Database.prototype.getCurrentUserDetails = function(){
+	
+	var db = this.openDb(),
+		result,
+		userRow = db.execute('SELECT UserProfile.*, count(Quotes.id) AS quotes FROM UserProfile LEFT JOIN Quotes ON email = user WHERE loggedIn = "1" ');
+
+	if( userRow.isValidRow() ){
+		result = {
+			email: userRow.fieldByName('email'),
+			id: userRow.fieldByName('id'),
+			name: userRow.fieldByName('name'),
+			company: userRow.fieldByName('company'),
+			phone: userRow.fieldByName('phone'),
+			id: userRow.fieldByName('userId'),
+			quotes: userRow.fieldByName('quotes'),
+		};
+	}else{
+		result = null;
+	}
+	
+	this.closeDb(db);
+	Ti.API.info('Current User connection closed!');
+	
+	return result;
+};
+
 // Register a user using the specified parameters
 // Return true if successful
 // return false if user has already been registered
@@ -375,33 +404,45 @@ Database.prototype.pushQuotes = function(currentUser){
 
 // Inserts quote to local and online database if it can connect
 // If not, will only insert to local database
-Database.prototype.insertQuoteOffline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user){
+Database.prototype.insertQuoteOffline = function(data) {		//type, grade, legs, load, length, partCode, price, description, date, ref, user){
 	
 	// If not connected
 	var db = this.openDb();
-		
-		db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', type, grade, legs, load, length, partCode, price, description, date, '0', ref, user);
+	db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+		data.type,
+		data.grade, 
+		data.legs,
+		data.load,
+		data.length,
+		data.partCode,
+		data.price,
+		data.description,
+		data.date,
+		'0',
+		data.ref,
+		data.user
+	);
 	
 	this.closeDb(db);
 };
 
-Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb){
-	
+
+Database.prototype.insertQuoteOnline = function(data) {		//type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb){
 	
 	var xhr = Ti.Network.createHTTPClient(),
 		params = {
-			type: type,
-			grade: grade, 
-			legs: legs,
-			load: load,
-			length: length,
-			partcode: partCode,
-			price: price,
-			description: description,
-			date: date,
-			ref: ref,
-			user: user,
-			addtodb: addtodb,
+			type: data.type,
+			grade: data.grade, 
+			legs: data.legs,
+			load: data.load,
+			length: data.length,
+			partcode: data.partCode,
+			price: data.price,
+			description: data.description,
+			date: data.date,
+			ref: data.ref,
+			user: data.user,
+			addtodb: data.addtodb,
 			sync: 1
 		};
 		
@@ -410,7 +451,7 @@ Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length,
 		var response = JSON.parse(this.responseText);
 		Ti.API.info(this.responseText);
 		
-		if( addtodb !== 1){
+		if( data.addtodb !== 1){
 			
 			alert('Your quote was sent successfully.');
 		
@@ -428,6 +469,7 @@ Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length,
 	//xhr.setRequestHeader("Content-Type","application/json");
 	xhr.send(params);
 };
+
 
 // Get a list of quotes for the current user and store them
 Database.prototype.downloadQuotes = function(){
@@ -461,7 +503,20 @@ Database.prototype.downloadQuotes = function(){
 				Ti.API.info(obj);
 	
 				//Ti.API.info('User :' + that.getCurrentUser() );
-				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', obj.type, obj.grade, obj.legs, obj.load, obj.length, obj.partcode, obj.price, obj.description, obj.date, '1', obj.ref, user);
+				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+					obj.type, 
+					obj.grade, 
+					obj.legs, 
+					obj.load, 
+					obj.length, 
+					obj.partcode, 
+					obj.price, 
+					obj.description, 
+					obj.date, 
+					'1', 
+					obj.ref, 
+					user
+				);
 			}
 		}
 		

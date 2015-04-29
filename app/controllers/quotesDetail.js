@@ -2,6 +2,7 @@ var args = arguments[0] || {};
 
 (function(){
 	
+	$.ref.text = args.ref;
 	$.slingType.text = args.type;
 	$.grade.text = args.grade;
 	$.legs.text = args.legs;

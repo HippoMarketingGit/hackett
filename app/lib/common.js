@@ -12,9 +12,29 @@ Common.prototype.getDate = function(){
 };
 
 
+// Generate a quote reference.
+Common.prototype.generateQuoteRef = function(user) {
+	
+	var company = null,
+		personal = null,
+		id = null,
+		ref = null;
+	
+	company = user["company"].substring(0, 1);
+	personal = user["name"].substring(0, 2);
+	id = user["id"];
+	count = parseInt(user['quotes'], 10) + 1;
+	
+	ref = [company + personal + id, count].join("-").toUpperCase();
+	
+	return ref;
+};
+
+
 Common.prototype.createUnix = function(){
 	return Math.round(new Date().getTime() / 1000);
 };
+
 
 Common.prototype.firstStart = function(database){
 	
