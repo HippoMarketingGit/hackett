@@ -1,7 +1,6 @@
 function Database(dbName) {
     this.dbName = dbName;
     this.ready = 0;
-    this.updated = [];
 }
 
 Database.prototype.databaseReady = function(count) {
@@ -281,7 +280,6 @@ Database.prototype.getWorkingLoadLimits = function() {
                 db.execute("INSERT INTO WorkingLoadLimits(size, grade, legs, limit45, limit60, type) VALUES (?, ?, ?, ?, ?, ?)", json.size, json.grade, json.legs, json.limit45, json.limit60, json.type);
             }
             that.ready++;
-            that.updated.push("working_load_limit");
             responseArray = null;
             i = null;
             that.closeDb(db);
@@ -304,7 +302,6 @@ Database.prototype.getSlings = function() {
                 db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.end_b, json.shortener, json.img, 0, json.bom);
             }
             that.ready++;
-            that.updated.push("slings");
             responseArray = null;
             i = null;
             that.closeDb(db);
@@ -327,7 +324,6 @@ Database.prototype.getShorteners = function() {
                 db.execute("INSERT INTO Shorteners(code, name, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
-            that.updated.push("shorteners");
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -351,7 +347,6 @@ Database.prototype.getEndFittings = function() {
                 db.execute("INSERT INTO EndFittings(code, name, type, grade10, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.type, json.grade10, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
-            that.updated.push("end_fittings");
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -374,7 +369,6 @@ Database.prototype.getChainTypes = function() {
                 db.execute("INSERT INTO ChainType(code, name) VALUES (?, ?)", json.code, json.name);
             }
             that.ready++;
-            that.updated.push("chain_type");
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -397,7 +391,6 @@ Database.prototype.getBoms = function() {
                 db.execute("INSERT INTO Boms(sling_code, comp_code, qty) VALUES (?, ?, ?)", json.sling_code, json.comp_code, json.qty);
             }
             that.ready++;
-            that.updated.push("boms");
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -420,7 +413,6 @@ Database.prototype.getComponents = function() {
                 db.execute("INSERT INTO Components(code, description, measure) VALUES (?, ?, ?)", json.code, json.description, json.measure);
             }
             that.ready++;
-            that.updated.push("components");
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -441,7 +433,6 @@ Database.prototype.getVersions = function() {
             Ti.API.info(json);
             for (key in json) json.hasOwnProperty(key) && db.execute("INSERT INTO VersionCheck (category, version) VALUES (?, ?)", key, json[key]);
             that.ready++;
-            that.updated.push("versions");
             that.closeDb(db);
             responseArray = null;
             i = null;
