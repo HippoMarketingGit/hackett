@@ -51,6 +51,10 @@
 						<Label left="0">Price (RRP): £</Label><Label left="0" id="quotedPrice"></Label>
 					</View>
 					
+					
+					<Button id="viewSlingAssembly" onClick="viewSlingAssembly" title="View Sling Assembly" class="button--primary" top="24dip"/>
+					<ImageView id="slingAssemblyImg" touchEnabled="False" width="auto"></ImageView>
+					
 					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="8dip"/>
 					
 					<Button id="deleteQuote" onClick="deleteQuote" title="Delete Quote" class="button--secondary" top="8dip"/>

@@ -99,6 +99,35 @@ function Controller() {
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
         }
     }
+    function checkImage(partCode) {
+        $.viewSlingAssembly.hide();
+        $.slingAssemblyImg.setHeight(0);
+        $.slingAssemblyImg.hide();
+        var database = new Database("SlingDB.sqlite"), db = database.openDb(), row = db.execute("SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1", partCode, 1), img = null, imgPath = null, f = null;
+        if (row.isValidRow()) {
+            img = row.fieldByName("img");
+            imgPath = Ti.Filesystem.applicationDataDirectory + "slings_temp/" + img + ".jpg";
+            f = Ti.Filesystem.getFile(imgPath);
+            Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
+            $.viewSlingAssembly.show();
+            $.slingAssemblyImg.image = f;
+        } else Ti.API.info("Sling assembly image " + img + " does not exist.");
+        row.close();
+        db.close();
+    }
+    function viewSlingAssembly() {
+        if ($.slingAssemblyImg.getVisible()) {
+            $.slingAssemblyImg.hide();
+            $.slingAssemblyImg.setTop(0);
+            $.slingAssemblyImg.setBottom(0);
+            $.slingAssemblyImg.setHeight(0);
+        } else {
+            $.slingAssemblyImg.show();
+            $.slingAssemblyImg.setTop("8dip");
+            $.slingAssemblyImg.setBottom("16dip");
+            $.slingAssemblyImg.setHeight("auto");
+        }
+    }
     function closeModal() {
         $.specifications.close({
             modal: true
@@ -208,7 +237,7 @@ function Controller() {
         });
         Alloy.isTablet && _.extend(o, {
             layout: "vertical",
-            width: "60%",
+            width: "80%",
             height: Ti.UI.SIZE
         });
         _.extend(o, {
@@ -388,6 +417,27 @@ function Controller() {
         id: "quotedPrice"
     });
     $.__views.__alloyId254.add($.__views.quotedPrice);
+    $.__views.viewSlingAssembly = Ti.UI.createButton({
+        width: "100%",
+        height: "26dip",
+        backgroundImage: "/images/WHC-button--primary.png",
+        title: "View Sling Assembly",
+        color: "#FFF",
+        textAlign: "left",
+        font: {
+            fontSize: 16
+        },
+        id: "viewSlingAssembly",
+        top: "10dip"
+    });
+    $.__views.slingSpec.add($.__views.viewSlingAssembly);
+    viewSlingAssembly ? $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
+    $.__views.slingAssemblyImg = Ti.UI.createImageView({
+        touchEnabled: false,
+        id: "slingAssemblyImg",
+        width: "auto"
+    });
+    $.__views.slingSpec.add($.__views.slingAssemblyImg);
     $.__views.requestQuote = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
@@ -399,12 +449,12 @@ function Controller() {
             fontSize: 16
         },
         id: "requestQuote",
-        top: "10dip"
+        top: "8dip"
     });
     $.__views.slingSpec.add($.__views.requestQuote);
     sendQuote ? $.__views.requestQuote.addEventListener("click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
     $.__views.backToDash = Ti.UI.createButton({
-        top: "4dip",
+        top: "8dip",
         width: "100%",
         height: "26dip",
         backgroundImage: "/images/WHC-button--secondary.png",
@@ -508,8 +558,10 @@ function Controller() {
         }
         outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
         database.closeDb(db);
+        checkImage(Alloy.Globals.sling.partCode);
     }();
     __defers["$.__views.close!click!closeModal"] && $.__views.close.addEventListener("click", closeModal);
+    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly);
     __defers["$.__views.requestQuote!click!sendQuote"] && $.__views.requestQuote.addEventListener("click", sendQuote);
     __defers["$.__views.backToDash!click!openDash"] && $.__views.backToDash.addEventListener("click", openDash);
     _.extend($, exports);

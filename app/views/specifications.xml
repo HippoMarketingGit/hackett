@@ -51,9 +51,12 @@
 						<Label left="0" id="quotedPrice"></Label>
 					</View>
 					
-					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="10dip"/>
+					<Button id="viewSlingAssembly" onClick="viewSlingAssembly" title="View Sling Assembly" class="button--primary" top="10dip"/>
+					<ImageView id="slingAssemblyImg" touchEnabled="False" width="auto"></ImageView>
 					
-					<Button id="backToDash" onClick="openDash" title="Back to Dashboard" class="button--secondary" top="4dip"/>
+					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="8dip"/>
+					
+					<Button id="backToDash" onClick="openDash" title="Back to Dashboard" class="button--secondary" top="8dip"/>
 					
 				</View>
 				

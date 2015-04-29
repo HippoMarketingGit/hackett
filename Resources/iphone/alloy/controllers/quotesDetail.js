@@ -8,6 +8,35 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function checkImage(partCode) {
+        $.viewSlingAssembly.hide();
+        $.slingAssemblyImg.setHeight(0);
+        $.slingAssemblyImg.hide();
+        var database = new Database("SlingDB.sqlite"), db = database.openDb(), row = db.execute("SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1", partCode, 1), img = null, imgPath = null, f = null;
+        if (row.isValidRow()) {
+            img = row.fieldByName("img");
+            imgPath = Ti.Filesystem.applicationDataDirectory + "slings_temp/" + img + ".jpg";
+            f = Ti.Filesystem.getFile(imgPath);
+            Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
+            $.viewSlingAssembly.show();
+            $.slingAssemblyImg.image = f;
+        } else Ti.API.info("Sling assembly image " + img + " does not exist.");
+        row.close();
+        db.close();
+    }
+    function viewSlingAssembly() {
+        if ($.slingAssemblyImg.getVisible()) {
+            $.slingAssemblyImg.hide();
+            $.slingAssemblyImg.setTop(0);
+            $.slingAssemblyImg.setBottom(0);
+            $.slingAssemblyImg.setHeight(0);
+        } else {
+            $.slingAssemblyImg.show();
+            $.slingAssemblyImg.setTop("8dip");
+            $.slingAssemblyImg.setBottom("16dip");
+            $.slingAssemblyImg.setHeight("auto");
+        }
+    }
     function sendQuote() {
         Ti.API.info("Clicked");
         var Common = require("common"), Connection = (new Common(), require("connections")), connection = new Connection(), Database = require("databaseObj"), database = new Database("SlingDB"), user = database.getCurrentUser();
@@ -291,6 +320,27 @@ function Controller() {
         id: "quotedPrice"
     });
     $.__views.priceContainer.add($.__views.quotedPrice);
+    $.__views.viewSlingAssembly = Ti.UI.createButton({
+        width: "100%",
+        height: "26dip",
+        backgroundImage: "/images/WHC-button--primary.png",
+        title: "View Sling Assembly",
+        color: "#FFF",
+        textAlign: "left",
+        font: {
+            fontSize: 16
+        },
+        id: "viewSlingAssembly",
+        top: "24dip"
+    });
+    $.__views.slingSpec.add($.__views.viewSlingAssembly);
+    viewSlingAssembly ? $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
+    $.__views.slingAssemblyImg = Ti.UI.createImageView({
+        touchEnabled: false,
+        id: "slingAssemblyImg",
+        width: "auto"
+    });
+    $.__views.slingSpec.add($.__views.slingAssemblyImg);
     $.__views.requestQuote = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
@@ -345,8 +395,10 @@ function Controller() {
             $.priceContainer.hide();
         }
         Ti.API.info("price: " + args.price);
+        checkImage(args.partCode);
     }();
     __defers["$.__views.close!click!closeModal"] && $.__views.close.addEventListener("click", closeModal);
+    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly);
     __defers["$.__views.requestQuote!click!sendQuote"] && $.__views.requestQuote.addEventListener("click", sendQuote);
     __defers["$.__views.deleteQuote!click!deleteQuote"] && $.__views.deleteQuote.addEventListener("click", deleteQuote);
     _.extend($, exports);

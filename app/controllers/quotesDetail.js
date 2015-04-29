@@ -20,7 +20,53 @@ var args = arguments[0] || {};
 	
 	Ti.API.info( 'price: ' + args.price );
 	
+	checkImage(args.partCode);
+	
 }());
+
+function checkImage(partCode) {
+	
+	// Hide the view button by default
+	$.viewSlingAssembly.hide();
+	$.slingAssemblyImg.setHeight(0);
+	$.slingAssemblyImg.hide();
+	
+	var database = new Database('SlingDB.sqlite'),
+		db = database.openDb(),
+		row = db.execute('SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1', partCode, 1),
+		img = null,
+		imgPath = null,
+		f = null;
+	
+	if (row.isValidRow()) {
+		img = row.fieldByName('img');
+		imgPath = Ti.Filesystem.applicationDataDirectory + "slings_temp/" + img + ".jpg";
+		f = Ti.Filesystem.getFile(imgPath);
+		Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
+		$.viewSlingAssembly.show();
+		$.slingAssemblyImg.image = f;
+	} else {
+		Ti.API.info("Sling assembly image " + img + " does not exist.");
+	}
+	
+	row.close();
+	db.close();
+	
+}
+
+function viewSlingAssembly() {
+	if ($.slingAssemblyImg.getVisible()) {
+		$.slingAssemblyImg.hide();
+		$.slingAssemblyImg.setTop(0);
+		$.slingAssemblyImg.setBottom(0);
+		$.slingAssemblyImg.setHeight(0);
+	} else {
+		$.slingAssemblyImg.show();
+		$.slingAssemblyImg.setTop("8dip");
+		$.slingAssemblyImg.setBottom("16dip");
+		$.slingAssemblyImg.setHeight("auto");	
+	}
+}
 
 function sendQuote(){
 	Ti.API.info('Clicked');
