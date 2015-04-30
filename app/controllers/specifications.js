@@ -505,7 +505,7 @@ function checkImage(partCode) {
 	
 	if (row.isValidRow()) {
 		img = row.fieldByName('img');
-		imgPath = Ti.Filesystem.applicationDataDirectory + "slings_temp/" + img + ".jpg";
+		imgPath = Ti.Filesystem.applicationDataDirectory + "slings/" + img + ".jpg";
 		f = Ti.Filesystem.getFile(imgPath);
 		Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
 		$.viewSlingAssembly.show();

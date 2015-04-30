@@ -87,7 +87,7 @@ ImageSync.prototype.downloadSlings = function() {
 	// Get all slings from DB where img_status = 0;
 	
 	var self = this,
-		dirName = 'slings_temp',
+		dirName = 'slings',
 		dirObj = null,
 		db = null,
 		rows = null,
