@@ -39,14 +39,30 @@ function Controller() {
     }
     function sendQuote() {
         Ti.API.info("Clicked");
-        var Common = require("common"), Connection = (new Common(), require("connections")), connection = new Connection(), Database = require("databaseObj"), database = new Database("SlingDB"), user = database.getCurrentUser();
+        var Common = require("common"), Connection = (new Common(), require("connections")), connection = new Connection(), Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), user = database.getCurrentUserDetails();
         online = connection.onlineCheck(function(data) {
             var online;
             online = 1 === data ? true : false;
             return online;
         });
         Ti.API.info(user);
-        online && database.insertQuoteOnline(args.type, args.grade, args.legs, args.load, args.length, args.partCode, args.quotedPrice, args.description, args.date, args.ref, args.user, 0);
+        if (online) {
+            var quoteData = {
+                type: args.type,
+                grade: args.grade,
+                legs: args.legs,
+                load: args.load,
+                length: args.length,
+                partCode: args.partCode,
+                price: args.price,
+                description: args.description,
+                date: args.date,
+                ref: args.ref,
+                user: args.user,
+                addtodb: 0
+            };
+            database.insertQuoteOnline(quoteData);
+        }
     }
     function deleteQuote() {
         var Connection = require("connections"), connection = new Connection(), Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), online = connection.onlineCheck(function(data) {

@@ -94,7 +94,23 @@ function sendQuote(){
 	Ti.API.info(user);
 		
 	if( online ){
-		database.insertQuoteOnline( args.type, args.grade, args.legs, args.load, args.length, args.partCode, args.quotedPrice, args.description, args.date, args.ref, args.user, 0);		
+		
+		var quoteData = {
+			type: args.type,
+			grade: args.grade,
+			legs: args.legs,
+			load: args.load,
+			length: args.length,
+			partCode: args.partCode,
+			price: args.price,
+			description: args.description,
+			date: args.date,
+			ref: args.ref,
+			user: args.user,
+			addtodb: 0
+		};
+		
+		database.insertQuoteOnline(quoteData);	// args.type, args.grade, args.legs, args.load, args.length, args.partCode, args.quotedPrice, args.description, args.date, args.ref, args.user, 0);		
 	}
 }
 
