@@ -77,8 +77,8 @@ function sendQuote(){
 		Connection = require('connections'),
 		connection = new Connection(),
 		Database = require('databaseObj'),
-		database = new Database('SlingDB'),
-		user = database.getCurrentUser();
+		database = new Database('SlingDB.sqlite'),
+		user = database.getCurrentUserDetails();
 		online = connection.onlineCheck(function(data){
 			var online;
 		
