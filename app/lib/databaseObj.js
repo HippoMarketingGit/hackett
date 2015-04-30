@@ -344,7 +344,7 @@ Database.prototype.deleteQuote = function(online, ref, cb){
 				
 				alert('There was a problem connecting to the database, please try again.');
 			}else{
-				db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '"');
+				db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '" LIMIT 1');
 				that.closeDb(db);
 				
 				if( cb ){
@@ -449,17 +449,15 @@ Database.prototype.insertQuoteOnline = function(data) {		//type, grade, legs, lo
 	xhr.open('POST', 'http://whackett.hippocreative.com/sync.php?task=pushQuote');
 	xhr.onload = function(e){
 		var response = JSON.parse(this.responseText);
-		Ti.API.info(this.responseText);
 		
-		if( data.addtodb !== 1){
-			
+		if (data.addtodb !== 1) {	
 			alert('Your quote was sent successfully.');
-		
+			return;
 		}
 		
-		if( response.reply !== 1 ){
+		if (response.reply !== 1) {
 			alert('Your quote failed to send, please try again.');
-		}else{
+		} else {
 			alert('Your quote was sent successfully.');
 		}
 	};

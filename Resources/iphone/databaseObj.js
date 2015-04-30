@@ -186,7 +186,7 @@ Database.prototype.deleteQuote = function(online, ref, cb) {
             var json = JSON.parse(this.responseText);
             Ti.API.info(json.reply);
             if (1 !== json.reply) alert("There was a problem connecting to the database, please try again."); else {
-                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '"');
+                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '" LIMIT 1');
                 that.closeDb(db);
                 cb && cb();
             }
@@ -256,8 +256,10 @@ Database.prototype.insertQuoteOnline = function(data) {
     xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=pushQuote");
     xhr.onload = function() {
         var response = JSON.parse(this.responseText);
-        Ti.API.info(this.responseText);
-        1 !== data.addtodb && alert("Your quote was sent successfully.");
+        if (1 !== data.addtodb) {
+            alert("Your quote was sent successfully.");
+            return;
+        }
         alert(1 !== response.reply ? "Your quote failed to send, please try again." : "Your quote was sent successfully.");
     };
     xhr.onerror = function() {
