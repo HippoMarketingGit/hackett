@@ -4,6 +4,7 @@
 
 function Common(){};
 
+
 Common.prototype.getDate = function(){
 	
 	var d = new Date();
@@ -13,19 +14,31 @@ Common.prototype.getDate = function(){
 
 
 // Generate a quote reference.
-Common.prototype.generateQuoteRef = function(user) {
+Common.prototype.generateQuoteRef = function(user, quote) {
 	
 	var company = null,
 		personal = null,
 		id = null,
+		alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789",
+		chars = '',
 		ref = null;
 	
 	company = user["company"].substring(0, 1);
 	personal = user["name"].substring(0, 2);
 	id = user["id"];
-	count = parseInt(user['quotes'], 10) + 1;
 	
-	ref = [company + personal + id, count].join("-").toUpperCase();
+	// Get 3 random characters from our own alphabet (no ambiguous chars)
+	for (var i = 0; i < 3; i++) {
+		chars += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+	}
+	
+	// Count the variable information
+	var count = parseInt(user["company"].length, 10) + 
+		parseInt(user["name"].length, 10) + 
+		parseInt(user["email"].length, 10) +
+		parseInt(quote["description"].length, 10);
+	
+	ref = [company + personal + id, chars + count.toString()].join("-").toUpperCase();
 	
 	return ref;
 };

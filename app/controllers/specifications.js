@@ -574,10 +574,11 @@ function sendQuote(){
 		price: Alloy.Globals.sling.quotedPrice,
 		description: Alloy.Globals.sling.slingDescription,
 		date: common.getDate(),
-		ref: common.generateQuoteRef(user),
 		user: user.email,
 		addtodb: 1
 	};
+	
+	quoteData.ref = common.generateQuoteRef(user, quoteData);
 	
 	database.insertQuoteOffline(quoteData);
 	
