@@ -15,7 +15,7 @@ function Controller() {
         var database = new Database("SlingDB.sqlite"), db = database.openDb(), row = db.execute("SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1", partCode, 1), img = null, imgPath = null, f = null;
         if (row.isValidRow()) {
             img = row.fieldByName("img");
-            imgPath = Ti.Filesystem.applicationDataDirectory + "slings_temp/" + img + ".jpg";
+            imgPath = Ti.Filesystem.applicationDataDirectory + "slings/" + img + ".jpg";
             f = Ti.Filesystem.getFile(imgPath);
             Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
             $.viewSlingAssembly.show();

@@ -47,7 +47,7 @@ ImageSync.prototype.downloadSling = function(item, cb) {
 };
 
 ImageSync.prototype.downloadSlings = function() {
-    var self = this, dirName = "slings_temp", dirObj = null, db = null, rows = null, query = "SELECT img FROM Slings WHERE (img IS NOT NULL OR img != '') AND img_status = 0 ", rows = null, imgs = [], process = null;
+    var self = this, dirName = "slings", dirObj = null, db = null, rows = null, query = "SELECT img FROM Slings WHERE (img IS NOT NULL OR img != '') AND img_status = 0 ", rows = null, imgs = [], process = null;
     dirObj = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, dirName);
     dirObj.exists() || dirObj.createDirectory();
     db = this.database.openDb();
