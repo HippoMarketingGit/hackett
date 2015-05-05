@@ -19,7 +19,7 @@
 '.ipadSideBorderLeft[platform=ios formFactor=tablet]': {
 	left: 0,
 	height: '100%',
-	width: '1dip',
+	width: '2dip',
 	backgroundColor: '#FFF'
 },
 '.ipadSideBorderRight[platform=ios formFactor=tablet]': {

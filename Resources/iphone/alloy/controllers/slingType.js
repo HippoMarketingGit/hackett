@@ -129,7 +129,7 @@ function Controller() {
         Alloy.isTablet && _.extend(o, {
             left: 0,
             height: "100%",
-            width: "1dip",
+            width: "2dip",
             backgroundColor: "#FFF"
         });
         _.extend(o, {
@@ -213,7 +213,7 @@ function Controller() {
         Alloy.isTablet && _.extend(o, {
             left: 0,
             height: "100%",
-            width: "1dip",
+            width: "2dip",
             backgroundColor: "#FFF"
         });
         _.extend(o, {
@@ -424,7 +424,7 @@ function Controller() {
         Alloy.isTablet && _.extend(o, {
             left: 0,
             height: "100%",
-            width: "1dip",
+            width: "2dip",
             backgroundColor: "#FFF"
         });
         _.extend(o, {
