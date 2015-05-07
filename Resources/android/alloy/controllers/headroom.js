@@ -8,6 +8,19 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function setHeadroomImg() {
+        var src = "";
+        switch (Alloy.Globals.sling.legs) {
+          case 2:
+            src = "/images/headroom/double.jpg";
+            break;
+
+          case 3:
+          case 4:
+            src = "/images/headroom/3-4-leg.jpg";
+        }
+        "" !== src && ($.headroomImg.image = src);
+    }
     function setAngle(e) {
         $.yes.backgroundColor = "#2b3b94";
         $.no.backgroundColor = "#2b3b94";
@@ -20,7 +33,6 @@ function Controller() {
                 modal: true
             });
             modal.addEventListener("close", function() {
-                Ti.API.info("Nominal Length: " + Alloy.Globals.sling.nominalLength);
                 if (0 === Alloy.Globals.sling.nominalLength || null === Alloy.Globals.sling.nominalLength) {
                     $.yes.backgroundColor = "#2b3b94";
                     $.no.backgroundColor = "#2b3b94";
@@ -29,6 +41,7 @@ function Controller() {
         } else {
             showAlert();
             Alloy.Globals.sling.angle = 45;
+            Ti.API.info(Alloy.Globals.sling.checkLimit());
         }
     }
     function showAlert() {
@@ -39,31 +52,24 @@ function Controller() {
             cancel: 1
         });
         lengthKnown.addEventListener("click", function(e) {
+            var modal;
             if (e.cancel === e.index || true === e.cancel) {
-                var modal = Alloy.createController("liftingPoints").getView();
+                modal = Alloy.createController("liftingPoints").getView();
                 modal.open({
                     modal: true
-                });
-                modal.addEventListener("close", function() {
-                    Ti.API.info("Nominal Length: " + Alloy.Globals.sling.nominalLength);
-                    if (0 === Alloy.Globals.sling.nominalLength || null === Alloy.Globals.sling.nominalLength) {
-                        $.yes.backgroundColor = "#2b3b94";
-                        $.no.backgroundColor = "#2b3b94";
-                    }
                 });
             } else if (0 === e.index) {
-                var modal = Alloy.createController("nominalLength").getView();
+                modal = Alloy.createController("nominalLength").getView();
                 modal.open({
                     modal: true
                 });
-                modal.addEventListener("close", function() {
-                    Ti.API.info("Nominal Length: " + Alloy.Globals.sling.nominalLength);
-                    if (0 === Alloy.Globals.sling.nominalLength || null === Alloy.Globals.sling.nominalLength) {
-                        $.yes.backgroundColor = "#2b3b94";
-                        $.no.backgroundColor = "#2b3b94";
-                    }
-                });
             }
+            modal.addEventListener("close", function() {
+                if (0 === Alloy.Globals.sling.nominalLength || null === Alloy.Globals.sling.nominalLength) {
+                    $.yes.backgroundColor = "#2b3b94";
+                    $.no.backgroundColor = "#2b3b94";
+                }
+            });
         });
         lengthKnown.show();
     }
@@ -117,6 +123,13 @@ function Controller() {
         id: "__alloyId40"
     });
     $.__views.__alloyId38.add($.__views.__alloyId40);
+    $.__views.headroomImg = Ti.UI.createImageView({
+        top: "10dip",
+        touchEnabled: false,
+        id: "headroomImg",
+        width: "auto"
+    });
+    $.__views.__alloyId38.add($.__views.headroomImg);
     $.__views.headroomView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -161,62 +174,70 @@ function Controller() {
     $.__views.liftingAngle.add($.__views.no);
     setAngle ? $.__views.no.addEventListener("click", setAngle) : __defers["$.__views.no!click!setAngle"] = true;
     $.__views.__alloyId43 = Ti.UI.createView({
-        height: "1dip",
-        width: "100%",
-        top: "0",
+        left: 0,
+        height: 0,
+        width: 0,
         backgroundColor: "#FFF",
         id: "__alloyId43"
     });
     $.__views.no.add($.__views.__alloyId43);
     $.__views.__alloyId44 = Ti.UI.createView({
-        layout: "vertical",
-        height: Titanium.UI.SIZE,
-        width: Titanium.UI.SIZE,
-        touchEnabled: false,
+        height: "1dip",
+        width: "100%",
+        top: "0",
+        backgroundColor: "#FFF",
         id: "__alloyId44"
     });
     $.__views.no.add($.__views.__alloyId44);
     $.__views.__alloyId45 = Ti.UI.createView({
+        layout: "vertical",
+        height: Titanium.UI.SIZE,
+        width: Titanium.UI.SIZE,
+        touchEnabled: false,
+        id: "__alloyId45"
+    });
+    $.__views.no.add($.__views.__alloyId45);
+    $.__views.__alloyId46 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId45"
+        id: "__alloyId46"
     });
-    $.__views.__alloyId44.add($.__views.__alloyId45);
-    $.__views.__alloyId46 = Ti.UI.createLabel({
+    $.__views.__alloyId45.add($.__views.__alloyId46);
+    $.__views.__alloyId47 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
         },
         textAlign: "center",
         text: "No",
-        id: "__alloyId46"
+        id: "__alloyId47"
     });
-    $.__views.__alloyId45.add($.__views.__alloyId46);
-    $.__views.__alloyId47 = Ti.UI.createView({
+    $.__views.__alloyId46.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId47"
+        id: "__alloyId48"
     });
-    $.__views.__alloyId44.add($.__views.__alloyId47);
-    $.__views.__alloyId48 = Ti.UI.createLabel({
+    $.__views.__alloyId45.add($.__views.__alloyId48);
+    $.__views.__alloyId49 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 12
         },
-        text: "45 degree Lifting Angle",
-        id: "__alloyId48"
+        text: "0 - 45° Angle",
+        id: "__alloyId49"
     });
-    $.__views.__alloyId47.add($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createView({
+    $.__views.__alloyId48.add($.__views.__alloyId49);
+    $.__views.__alloyId50 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId49"
+        id: "__alloyId50"
     });
-    $.__views.no.add($.__views.__alloyId49);
+    $.__views.no.add($.__views.__alloyId50);
     $.__views.yes = Ti.UI.createView({
         top: "10dip",
         width: "50%",
@@ -227,79 +248,89 @@ function Controller() {
     });
     $.__views.liftingAngle.add($.__views.yes);
     setAngle ? $.__views.yes.addEventListener("click", setAngle) : __defers["$.__views.yes!click!setAngle"] = true;
-    $.__views.__alloyId50 = Ti.UI.createView({
+    $.__views.__alloyId51 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
-        backgroundColor: "#FFF",
-        id: "__alloyId50"
-    });
-    $.__views.yes.add($.__views.__alloyId50);
-    $.__views.__alloyId51 = Ti.UI.createView({
-        height: "100%",
-        width: "1dip",
-        left: 0,
         backgroundColor: "#FFF",
         id: "__alloyId51"
     });
     $.__views.yes.add($.__views.__alloyId51);
     $.__views.__alloyId52 = Ti.UI.createView({
-        layout: "vertical",
-        height: Titanium.UI.SIZE,
-        width: Titanium.UI.SIZE,
-        touchEnabled: false,
+        height: "100%",
+        width: "1dip",
+        left: 0,
+        backgroundColor: "#FFF",
         id: "__alloyId52"
     });
     $.__views.yes.add($.__views.__alloyId52);
     $.__views.__alloyId53 = Ti.UI.createView({
+        layout: "vertical",
+        height: Titanium.UI.SIZE,
+        width: Titanium.UI.SIZE,
+        touchEnabled: false,
+        id: "__alloyId53"
+    });
+    $.__views.yes.add($.__views.__alloyId53);
+    $.__views.__alloyId54 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId53"
+        id: "__alloyId54"
     });
-    $.__views.__alloyId52.add($.__views.__alloyId53);
-    $.__views.__alloyId54 = Ti.UI.createLabel({
+    $.__views.__alloyId53.add($.__views.__alloyId54);
+    $.__views.__alloyId55 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
         },
         textAlign: "center",
         text: "Yes",
-        id: "__alloyId54"
+        id: "__alloyId55"
     });
-    $.__views.__alloyId53.add($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createView({
+    $.__views.__alloyId54.add($.__views.__alloyId55);
+    $.__views.__alloyId56 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId55"
+        id: "__alloyId56"
     });
-    $.__views.__alloyId52.add($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createLabel({
+    $.__views.__alloyId53.add($.__views.__alloyId56);
+    $.__views.__alloyId57 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 12
         },
-        text: "60 degree Lifting Angle",
-        id: "__alloyId56"
+        text: "45 - 60° Angle",
+        id: "__alloyId57"
     });
-    $.__views.__alloyId55.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.__alloyId56.add($.__views.__alloyId57);
+    $.__views.__alloyId58 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId57"
+        id: "__alloyId58"
     });
-    $.__views.yes.add($.__views.__alloyId57);
+    $.__views.yes.add($.__views.__alloyId58);
+    $.__views.__alloyId59 = Ti.UI.createView({
+        right: 0,
+        height: 0,
+        width: 0,
+        backgroundColor: "#FFF",
+        id: "__alloyId59"
+    });
+    $.__views.yes.add($.__views.__alloyId59);
     exports.destroy = function() {};
     _.extend($, $.__views);
     if (1 === Alloy.Globals.sling.legs) {
-        var modal = Alloy.createController("nominalLength").getView();
+        var modal = Alloy.createController("nominalLength", {
+            closeAction: "back"
+        }).getView();
         modal.open({
             modal: true
         });
-    }
+    } else setHeadroomImg();
     null !== Alloy.Globals.sling.angle && (60 === Alloy.Globals.sling.angle ? $.yes.backgroundColor = "#6b76d0" : $.no.backgroundColor = "#6b76d0");
     __defers["$.__views.no!click!setAngle"] && $.__views.no.addEventListener("click", setAngle);
     __defers["$.__views.yes!click!setAngle"] && $.__views.yes.addEventListener("click", setAngle);

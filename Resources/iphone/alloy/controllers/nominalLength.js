@@ -196,6 +196,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId150,
         id: "legMeter",
@@ -247,6 +248,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId156,
         id: "legFraction",
@@ -293,12 +295,12 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Common = require("common"), common = new Common(), args = arguments[0] || {};
-    $.legMeterDone.addEventListener("click", function() {
+    $.legMeterDone && $.legMeterDone.addEventListener("click", function() {
         $.legMeter.blur();
         ("" === $.legMeter.value || null === $.legMeter.value) && $.legMeter.setValue("00");
         Ti.API.info($.legMeter.value);
     });
-    $.legFractionDone.addEventListener("click", function() {
+    $.legFractionDone && $.legFractionDone.addEventListener("click", function() {
         $.legFraction.blur();
         ("" === $.legFraction.value || null === $.legFraction.value) && $.legFraction.setValue("00");
         Ti.API.info($.legFraction.value);

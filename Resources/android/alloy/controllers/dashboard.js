@@ -9,22 +9,22 @@ function __processArg(obj, key) {
 
 function Controller() {
     function openConfigurator() {
-        $.dashboard.close();
-        $.dashboard = null;
         var win = Alloy.createController("slingConfiguration").getView();
         win.open();
+        $.dashboard.close();
+        $.dashboard = null;
     }
     function openAccountSettings() {
-        $.dashboard.close();
-        $.dashboard = null;
         var win = Alloy.createController("accountSettings").getView();
         win.open();
-    }
-    function openQuotes() {
         $.dashboard.close();
         $.dashboard = null;
+    }
+    function openQuotes() {
         var win = Alloy.createController("quotes").getView();
         win.open();
+        $.dashboard.close();
+        $.dashboard = null;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dashboard";

@@ -239,6 +239,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId94,
         id: "liftingPointMeter",
@@ -290,6 +291,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId100,
         id: "liftingPointFraction",
@@ -335,11 +337,11 @@ function Controller() {
     $.__views.scrollView.add($.__views.__alloyId106);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.liftingPointDone.addEventListener("click", function() {
+    $.liftingPointDone && $.liftingPointDone.addEventListener("click", function() {
         ("" === $.liftingPointMeter.value || null == $.liftingPointMeter.value) && $.liftingPointMeter.setValue("00");
         $.liftingPointMeter.blur();
     });
-    $.liftingPointFractionDone.addEventListener("click", function() {
+    $.liftingPointFractionDone && $.liftingPointFractionDone.addEventListener("click", function() {
         ("" === $.liftingPointFraction.value || null == $.liftingPointFraction.value) && $.liftingPointFraction.setValue("00");
         $.liftingPointFraction.blur();
     });

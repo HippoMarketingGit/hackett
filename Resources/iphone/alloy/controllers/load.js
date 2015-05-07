@@ -130,6 +130,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId115,
         id: "tonne",
@@ -182,6 +183,7 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
         keyboardToolbar: $.__views.__alloyId121,
         id: "fraction",
@@ -203,11 +205,11 @@ function Controller() {
         $.tonne.value = str[0];
         $.fraction.value = str[1];
     }
-    $.fractionDone.addEventListener("click", function() {
+    $.fractionDone && $.fractionDone.addEventListener("click", function() {
         ("" == $.fraction.value || null === $.fraction.value) && $.fraction.setValue("00");
         $.fraction.blur();
     });
-    $.tonneDone.addEventListener("click", function() {
+    $.tonneDone && $.tonneDone.addEventListener("click", function() {
         ("" == $.tonne.value || null === $.tonne.value) && $.tonne.setValue("00");
         $.tonne.blur();
     });

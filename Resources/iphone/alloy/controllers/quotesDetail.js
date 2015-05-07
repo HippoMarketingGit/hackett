@@ -9,6 +9,7 @@ function __processArg(obj, key) {
 
 function Controller() {
     function checkImage(partCode) {
+        if (!partCode) return false;
         $.viewSlingAssembly.hide();
         $.slingAssemblyImg.setHeight(0);
         $.slingAssemblyImg.hide();

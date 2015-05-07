@@ -88,9 +88,10 @@ function Controller() {
         return array;
     }
     function openDash() {
-        $.quotes.close();
         var win = Alloy.createController("dashboard").getView();
         win.open();
+        $.quotes.close();
+        $.quotes = null;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "quotes";
@@ -217,8 +218,8 @@ function Controller() {
         table.setData(getData());
         $.container.add(table);
         table.addEventListener("click", function(e) {
-            if (e.rowData.hasChild) {
-                var data = e.rowData, details = Alloy.createController("quotesDetail", data.quote).getView();
+            if (e.row.hasChild) {
+                var data = e.row, details = Alloy.createController("quotesDetail", data.quote).getView();
                 details.open({
                     modal: true
                 });

@@ -16,10 +16,12 @@ function Controller() {
             closeModal();
         }
     }
-    function closeModal() {
+    function closeModal(e) {
+        var isManual = null !== e && e && e["type"];
         $.nominalLength.close({
             modal: true
         });
+        isManual && args && args["closeAction"] && "back" === args.closeAction && Alloy.Globals.goBack();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "nominalLength";
@@ -59,32 +61,32 @@ function Controller() {
         id: "nominalLength"
     });
     $.__views.nominalLength && $.addTopLevelView($.__views.nominalLength);
-    $.__views.__alloyId126 = Ti.UI.createView({
+    $.__views.__alloyId119 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId126"
+        id: "__alloyId119"
     });
-    $.__views.nominalLength.add($.__views.__alloyId126);
-    $.__views.__alloyId127 = Ti.UI.createImageView({
+    $.__views.nominalLength.add($.__views.__alloyId119);
+    $.__views.__alloyId120 = Ti.UI.createImageView({
         top: "30dip",
         left: "20dip",
         image: "/images/WHC-close.png",
         height: "24dip",
         width: "24dip",
-        id: "__alloyId127"
+        id: "__alloyId120"
     });
-    $.__views.__alloyId126.add($.__views.__alloyId127);
-    closeModal ? $.__views.__alloyId127.addEventListener("click", closeModal) : __defers["$.__views.__alloyId127!click!closeModal"] = true;
-    $.__views.__alloyId128 = Ti.UI.createView({
+    $.__views.__alloyId119.add($.__views.__alloyId120);
+    closeModal ? $.__views.__alloyId120.addEventListener("click", closeModal) : __defers["$.__views.__alloyId120!click!closeModal"] = true;
+    $.__views.__alloyId121 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId128"
+        id: "__alloyId121"
     });
-    $.__views.nominalLength.add($.__views.__alloyId128);
+    $.__views.nominalLength.add($.__views.__alloyId121);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "10dip",
@@ -102,43 +104,43 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.scrollView.add($.__views.content);
-    $.__views.__alloyId129 = Ti.UI.createView({
+    $.__views.__alloyId122 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId129"
+        id: "__alloyId122"
     });
-    $.__views.content.add($.__views.__alloyId129);
-    $.__views.__alloyId130 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId122);
+    $.__views.__alloyId123 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
             fontSize: 26
         },
         textAlign: "center",
-        text: "Product Selection",
-        id: "__alloyId130"
+        text: "Length of Sling",
+        id: "__alloyId123"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId130);
-    $.__views.__alloyId131 = Ti.UI.createLabel({
+    $.__views.__alloyId122.add($.__views.__alloyId123);
+    $.__views.__alloyId124 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
-        text: "Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.",
-        id: "__alloyId131"
+        text: "Please input the length of the sling, bearing to bearing.",
+        id: "__alloyId124"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId131);
-    $.__views.__alloyId132 = Ti.UI.createView({
+    $.__views.__alloyId122.add($.__views.__alloyId124);
+    $.__views.__alloyId125 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId132"
+        id: "__alloyId125"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId132);
-    $.__views.__alloyId133 = Ti.UI.createLabel({
+    $.__views.__alloyId122.add($.__views.__alloyId125);
+    $.__views.__alloyId126 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -146,39 +148,24 @@ function Controller() {
         },
         textAlign: "center",
         text: "Nominal Length (m)",
-        id: "__alloyId133"
+        id: "__alloyId126"
     });
-    $.__views.__alloyId132.add($.__views.__alloyId133);
-    $.__views.__alloyId134 = Ti.UI.createView({
+    $.__views.__alloyId125.add($.__views.__alloyId126);
+    $.__views.__alloyId127 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId134"
+        id: "__alloyId127"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId134);
-    $.__views.__alloyId135 = Ti.UI.createView({
+    $.__views.__alloyId122.add($.__views.__alloyId127);
+    $.__views.__alloyId128 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId135"
+        id: "__alloyId128"
     });
-    $.__views.__alloyId134.add($.__views.__alloyId135);
-    var __alloyId139 = [];
-    $.__views.__alloyId140 = Ti.UI.createButton({
-        systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-    });
-    __alloyId139.push($.__views.__alloyId140);
-    $.__views.legMeterDone = Ti.UI.createButton({
-        title: "Done",
-        id: "legMeterDone",
-        style: Ti.UI.iPhone.SystemButtonStyle.DONE
-    });
-    __alloyId139.push($.__views.legMeterDone);
-    $.__views.__alloyId137 = Ti.UI.iOS.createToolbar({
-        items: __alloyId139,
-        id: "__alloyId137"
-    });
+    $.__views.__alloyId127.add($.__views.__alloyId128);
     $.__views.legMeter = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -193,43 +180,22 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId137,
         id: "legMeter",
         value: "00"
     });
-    $.__views.__alloyId135.add($.__views.legMeter);
-    $.__views.__alloyId137 = Ti.UI.iOS.createToolbar({
-        clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId137,
-        id: "legMeter",
-        value: "00"
-    });
-    $.__views.__alloyId141 = Ti.UI.createLabel({
+    $.__views.__alloyId128.add($.__views.legMeter);
+    $.__views.__alloyId129 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId141"
+        id: "__alloyId129"
     });
-    $.__views.__alloyId135.add($.__views.__alloyId141);
-    var __alloyId145 = [];
-    $.__views.__alloyId146 = Ti.UI.createButton({
-        systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-    });
-    __alloyId145.push($.__views.__alloyId146);
-    $.__views.legFractionDone = Ti.UI.createButton({
-        title: "Done",
-        id: "legFractionDone",
-        style: Ti.UI.iPhone.SystemButtonStyle.DONE
-    });
-    __alloyId145.push($.__views.legFractionDone);
-    $.__views.__alloyId143 = Ti.UI.iOS.createToolbar({
-        items: __alloyId145,
-        id: "__alloyId143"
-    });
+    $.__views.__alloyId128.add($.__views.__alloyId129);
     $.__views.legFraction = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -244,28 +210,22 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId143,
         id: "legFraction",
         value: "00"
     });
-    $.__views.__alloyId135.add($.__views.legFraction);
-    $.__views.__alloyId143 = Ti.UI.iOS.createToolbar({
-        clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId143,
-        id: "legFraction",
-        value: "00"
-    });
-    $.__views.__alloyId147 = Ti.UI.createView({
+    $.__views.__alloyId128.add($.__views.legFraction);
+    $.__views.__alloyId130 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
         bottom: "20dip",
-        id: "__alloyId147"
+        id: "__alloyId130"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId147);
-    $.__views.__alloyId148 = Ti.UI.createButton({
+    $.__views.__alloyId122.add($.__views.__alloyId130);
+    $.__views.__alloyId131 = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
         backgroundImage: "/images/WHC-button--primary.png",
@@ -275,33 +235,33 @@ function Controller() {
         font: {
             fontSize: 16
         },
-        id: "__alloyId148"
+        id: "__alloyId131"
     });
-    $.__views.__alloyId147.add($.__views.__alloyId148);
-    setLength ? $.__views.__alloyId148.addEventListener("click", setLength) : __defers["$.__views.__alloyId148!click!setLength"] = true;
-    $.__views.__alloyId149 = Ti.UI.createView({
+    $.__views.__alloyId130.add($.__views.__alloyId131);
+    setLength ? $.__views.__alloyId131.addEventListener("click", setLength) : __defers["$.__views.__alloyId131!click!setLength"] = true;
+    $.__views.__alloyId132 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId149"
+        id: "__alloyId132"
     });
-    $.__views.scrollView.add($.__views.__alloyId149);
+    $.__views.scrollView.add($.__views.__alloyId132);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var Common = require("common"), common = new Common();
-    $.legMeterDone.addEventListener("click", function() {
+    var Common = require("common"), common = new Common(), args = arguments[0] || {};
+    $.legMeterDone && $.legMeterDone.addEventListener("click", function() {
         $.legMeter.blur();
         ("" === $.legMeter.value || null === $.legMeter.value) && $.legMeter.setValue("00");
         Ti.API.info($.legMeter.value);
     });
-    $.legFractionDone.addEventListener("click", function() {
+    $.legFractionDone && $.legFractionDone.addEventListener("click", function() {
         $.legFraction.blur();
         ("" === $.legFraction.value || null === $.legFraction.value) && $.legFraction.setValue("00");
         Ti.API.info($.legFraction.value);
     });
-    __defers["$.__views.__alloyId127!click!closeModal"] && $.__views.__alloyId127.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId148!click!setLength"] && $.__views.__alloyId148.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId120!click!closeModal"] && $.__views.__alloyId120.addEventListener("click", closeModal);
+    __defers["$.__views.__alloyId131!click!setLength"] && $.__views.__alloyId131.addEventListener("click", setLength);
     _.extend($, exports);
 }
 

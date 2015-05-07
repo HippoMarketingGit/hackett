@@ -42,6 +42,22 @@ Database.prototype.getCurrentUser = function() {
     return result;
 };
 
+Database.prototype.getCurrentUserDetails = function() {
+    var result, db = this.openDb(), userRow = db.execute('SELECT UserProfile.*, count(Quotes.id) AS quotes FROM UserProfile LEFT JOIN Quotes ON email = user WHERE loggedIn = "1" ');
+    result = userRow.isValidRow() ? {
+        email: userRow.fieldByName("email"),
+        id: userRow.fieldByName("id"),
+        name: userRow.fieldByName("name"),
+        company: userRow.fieldByName("company"),
+        phone: userRow.fieldByName("phone"),
+        id: userRow.fieldByName("userId"),
+        quotes: userRow.fieldByName("quotes")
+    } : null;
+    this.closeDb(db);
+    Ti.API.info("Current User connection closed!");
+    return result;
+};
+
 Database.prototype.registerUser = function(name, companyName, phoneNumber, emailAddress, password, mailingList) {
     var xhr = Titanium.Network.createHTTPClient(), params = {
         name: name,
@@ -148,9 +164,9 @@ Database.prototype.createTables = function() {
     var db = this.openDb();
     db.execute("CREATE TABLE IF NOT EXISTS VersionCheck(id INTEGER PRIMARY KEY, category TEXT, version INTEGER);");
     db.execute("CREATE TABLE IF NOT EXISTS ChainType(id INTEGER PRIMARY KEY, code TEXT, name TEXT);");
-    db.execute("CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT);");
-    db.execute("CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT);");
-    db.execute("CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, shortener TEXT);");
+    db.execute("CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);");
+    db.execute("CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);");
+    db.execute("CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, end_b INTEGER, shortener TEXT, img TEXT, img_status INTEGER, bom TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);");
     db.execute("CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);");
@@ -170,7 +186,7 @@ Database.prototype.deleteQuote = function(online, ref, cb) {
             var json = JSON.parse(this.responseText);
             Ti.API.info(json.reply);
             if (1 !== json.reply) alert("There was a problem connecting to the database, please try again."); else {
-                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '"');
+                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '" LIMIT 1');
                 that.closeDb(db);
                 cb && cb();
             }
@@ -215,33 +231,35 @@ Database.prototype.pushQuotes = function(currentUser) {
     }
 };
 
-Database.prototype.insertQuoteOffline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user) {
+Database.prototype.insertQuoteOffline = function(data) {
     var db = this.openDb();
-    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", type, grade, legs, load, length, partCode, price, description, date, "0", ref, user);
+    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data.type, data.grade, data.legs, data.load, data.length, data.partCode, data.price, data.description, data.date, "0", data.ref, data.user);
     this.closeDb(db);
 };
 
-Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb) {
+Database.prototype.insertQuoteOnline = function(data) {
     var xhr = Ti.Network.createHTTPClient(), params = {
-        type: type,
-        grade: grade,
-        legs: legs,
-        load: load,
-        length: length,
-        partcode: partCode,
-        price: price,
-        description: description,
-        date: date,
-        ref: ref,
-        user: user,
-        addtodb: addtodb,
+        type: data.type,
+        grade: data.grade,
+        legs: data.legs,
+        load: data.load,
+        length: data.length,
+        partcode: data.partCode,
+        price: data.price,
+        description: data.description,
+        date: data.date,
+        ref: data.ref,
+        user: data.user,
+        addtodb: data.addtodb,
         sync: 1
     };
     xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=pushQuote");
     xhr.onload = function() {
         var response = JSON.parse(this.responseText);
-        Ti.API.info(this.responseText);
-        1 !== addtodb && alert("Your quote was sent successfully.");
+        if (1 !== data.addtodb) {
+            alert("Your quote was sent successfully.");
+            return;
+        }
         alert(1 !== response.reply ? "Your quote failed to send, please try again." : "Your quote was sent successfully.");
     };
     xhr.onerror = function() {
@@ -299,7 +317,7 @@ Database.prototype.getSlings = function() {
             var i, responseArray = JSON.parse(this.responseText), db = that.openDb();
             for (i = 0; i < responseArray.reply.length; i++) {
                 var json = responseArray.reply[i];
-                db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, shortener) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.shortener);
+                db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.end_b, json.shortener, json.img, 0, json.bom);
             }
             that.ready++;
             responseArray = null;
@@ -321,7 +339,7 @@ Database.prototype.getShorteners = function() {
             var i, responseArray = JSON.parse(this.responseText), db = that.openDb();
             for (i = 0; i < responseArray.reply.length; i++) {
                 var json = responseArray.reply[i];
-                db.execute("INSERT INTO Shorteners(code, name) VALUES (?, ?)", json.code, json.name);
+                db.execute("INSERT INTO Shorteners(code, name, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
             that.closeDb(db);
@@ -344,7 +362,7 @@ Database.prototype.getEndFittings = function() {
             for (i = 0; i < responseArray.reply.length; i++) {
                 var json = responseArray.reply[i];
                 Ti.API.info(json.code);
-                db.execute("INSERT INTO EndFittings(code, name, type, grade10) VALUES (?, ?, ?, ?)", json.code, json.name, json.type, json.grade10);
+                db.execute("INSERT INTO EndFittings(code, name, type, grade10, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.type, json.grade10, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
             that.closeDb(db);
