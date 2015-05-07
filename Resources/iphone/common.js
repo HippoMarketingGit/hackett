@@ -6,12 +6,13 @@ Common.prototype.getDate = function() {
 };
 
 Common.prototype.generateQuoteRef = function(user, quote) {
-    var company = null, personal = null, id = null, alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", chars = "", ref = null;
+    var company = null, personal = null, id = null, alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", chars = "", ref = null, num = 0;
     company = user["company"].substring(0, 1);
     personal = user["name"].substring(0, 2);
     id = user["id"];
     for (var i = 0; 3 > i; i++) chars += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-    var count = parseInt(user["company"].length, 10) + parseInt(user["name"].length, 10) + parseInt(user["email"].length, 10) + parseInt(quote["description"].length, 10);
+    num = quote["description"] && quote["description"].length > 0 ? quote["description"].length : parseInt(quote["legs"], 10) + parseInt(quote["grade"], 10) + parseInt(quote["length"], 10) + parseInt(quote["load"], 10);
+    var count = parseInt(user["company"].length, 10) + parseInt(user["name"].length, 10) + parseInt(user["email"].length, 10) + parseInt(num, 10);
     ref = [ company + personal + id, chars + count.toString() ].join("-").toUpperCase();
     return ref;
 };

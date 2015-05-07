@@ -21,7 +21,8 @@ Common.prototype.generateQuoteRef = function(user, quote) {
 		id = null,
 		alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789",
 		chars = '',
-		ref = null;
+		ref = null,
+		num = 0;
 	
 	company = user["company"].substring(0, 1);
 	personal = user["name"].substring(0, 2);
@@ -32,11 +33,25 @@ Common.prototype.generateQuoteRef = function(user, quote) {
 		chars += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
 	}
 	
+	// Ti.API.info(quote);
+	
+	// Another number to add into the mix for more uniqueness
+	if (quote["description"] && quote["description"].length > 0) {
+		// If the quote description is available, we'll use it's description's length
+		num = quote["description"].length;
+	} else {
+		// If no quote description is available, we will add up the numeric values.
+		num = parseInt(quote["legs"], 10) 
+			+ parseInt(quote["grade"], 10)
+			+ parseInt(quote["length"], 10)
+			+ parseInt(quote["load"], 10);
+	}
+	
 	// Count the variable information
 	var count = parseInt(user["company"].length, 10) + 
 		parseInt(user["name"].length, 10) + 
 		parseInt(user["email"].length, 10) +
-		parseInt(quote["description"].length, 10);
+		parseInt(num, 10);
 	
 	ref = [company + personal + id, chars + count.toString()].join("-").toUpperCase();
 	
