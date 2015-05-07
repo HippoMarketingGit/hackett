@@ -120,9 +120,14 @@ function getData(){
 	$.container.add(table);
 	
 	table.addEventListener('click', function(e){
-		if( e.rowData.hasChild){
-			var data = e.rowData,
+		
+		if( e.row.hasChild){
+			
+			var data = e.row,
 				details = Alloy.createController('quotesDetail', data.quote).getView();
+			
+			// Ti.API.info("quote row click");
+			// Ti.API.info(JSON.stringify(data));
 			
 			details.open({modal:true});
 			
@@ -137,9 +142,11 @@ function getData(){
 }());
 
 function openDash(e){
-
-	$.quotes.close();
+	
 	var win = Alloy.createController('dashboard').getView();
 	win.open();
+	
+	$.quotes.close();
+	$.quotes = null;
 
 }

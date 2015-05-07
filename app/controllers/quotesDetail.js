@@ -2,6 +2,9 @@ var args = arguments[0] || {};
 
 (function(){
 	
+	// Ti.API.info("quoteDetail args");
+	// Ti.API.info(JSON.stringify(args));
+	
 	$.ref.text = args.ref;
 	$.slingType.text = args.type;
 	$.grade.text = args.grade;
@@ -26,6 +29,12 @@ var args = arguments[0] || {};
 }());
 
 function checkImage(partCode) {
+	
+	// Ti.API.info("checkImage: " + partCode);
+	
+	if ( ! partCode) {
+		return false;
+	}
 	
 	// Hide the view button by default
 	$.viewSlingAssembly.hide();
