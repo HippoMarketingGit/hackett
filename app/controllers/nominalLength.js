@@ -2,29 +2,25 @@ var Common = require('common'),
 	common = new Common(),
 	args = arguments[0] || {};
 
-$.legMeterDone.addEventListener('click', function(e){
+if ($.legMeterDone) {
+	$.legMeterDone.addEventListener('click', function(e){	
+		$.legMeter.blur();
+		if( $.legMeter.value === "" || $.legMeter.value === null ){
+			$.legMeter.setValue("00");
+		}		
+		Ti.API.info( $.legMeter.value );
+	});	
+}
 
-	$.legMeter.blur();
-	
-	if( $.legMeter.value === "" || $.legMeter.value === null ){
-		
-		$.legMeter.setValue("00");
-	}
-	
-	Ti.API.info( $.legMeter.value );
-});
-
-$.legFractionDone.addEventListener('click', function(e){
-
-	$.legFraction.blur();
-	
-	if( $.legFraction.value === "" || $.legFraction.value === null ){
-		
-		$.legFraction.setValue("00");
-	}
-	
-	Ti.API.info( $.legFraction.value );
-});
+if ($.legFractionDone) {
+	$.legFractionDone.addEventListener('click', function(e){	
+		$.legFraction.blur();		
+		if( $.legFraction.value === "" || $.legFraction.value === null ){		
+			$.legFraction.setValue("00");
+		}
+		Ti.API.info( $.legFraction.value );
+	});	
+}
 
 function setLength(){
 	

@@ -132,29 +132,25 @@ function closeModal(){
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.liftingPointDone.addEventListener('click', function(e){
-
-	if( $.liftingPointMeter.value === "" || $.liftingPointMeter.value == null ){
-		
-		$.liftingPointMeter.setValue("00");
-	}
-
-	$.liftingPointMeter.blur();
-
-});
+if ($.liftingPointDone) {
+	$.liftingPointDone.addEventListener('click', function(e){	
+		if( $.liftingPointMeter.value === "" || $.liftingPointMeter.value == null ){
+			$.liftingPointMeter.setValue("00");
+		}	
+		$.liftingPointMeter.blur();	
+	});	
+}
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.liftingPointFractionDone.addEventListener('click', function(e){
-	
-	if( $.liftingPointFraction.value === "" || $.liftingPointFraction.value == null ){
-		
-		$.liftingPointFraction.setValue("00");
-	}
-
-	$.liftingPointFraction.blur();
-
-});
+if ($.liftingPointFractionDone) {
+	$.liftingPointFractionDone.addEventListener('click', function(e){		
+		if( $.liftingPointFraction.value === "" || $.liftingPointFraction.value == null ){
+			$.liftingPointFraction.setValue("00");
+		}
+		$.liftingPointFraction.blur();
+	});
+}
 
 
 var liftingPointImg = Ti.UI.createImageView({

@@ -33,7 +33,7 @@
 						
 							<TextField id="legMeter" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>
@@ -47,7 +47,7 @@
 							
 							<TextField id="legFraction" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>

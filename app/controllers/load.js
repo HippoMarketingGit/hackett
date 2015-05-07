@@ -18,27 +18,25 @@ if( Alloy.Globals.sling.load !== null ){
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.fractionDone.addEventListener('click', function(e){
-
-	if( $.fraction.value == "" || $.fraction.value === null){
-		
-		$.fraction.setValue('00');
-	}
-
-	$.fraction.blur();
-});
+if ($.fractionDone) {
+	$.fractionDone.addEventListener('click', function(e){
+		if ($.fraction.value == "" || $.fraction.value === null) {
+			$.fraction.setValue('00');
+		}
+		$.fraction.blur();
+	});
+}
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.tonneDone.addEventListener('click', function(e){
-	
-	if( $.tonne.value == "" || $.tonne.value === null){
-		
-		$.tonne.setValue('00');
-	}
-
-	$.tonne.blur();
-});
+if ($.tonneDone) {
+	$.tonneDone.addEventListener('click', function(e){		
+		if ($.tonne.value == "" || $.tonne.value === null) {
+			$.tonne.setValue('00');
+		}
+		$.tonne.blur();
+	});
+}
 
 // When the text box value changes, set the global load variable
 $.tonne.addEventListener('change', function(e){

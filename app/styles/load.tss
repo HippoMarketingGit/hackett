@@ -76,7 +76,8 @@
 	paddingLeft: '4dip',
 	maxLength: 2,
 	textAlign: 'center',
-	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD
+	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+	color: '#000'
 },
 '.fullStop': {
 	left: '5dip',
