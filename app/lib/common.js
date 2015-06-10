@@ -37,14 +37,31 @@ Common.prototype.generateQuoteRef = function(user, quote) {
 	
 	// Another number to add into the mix for more uniqueness
 	if (quote["description"] && quote["description"].length > 0) {
+		
 		// If the quote description is available, we'll use it's description's length
-		num = quote["description"].length;
+		num = parseInt(quote["description"].length, 10);
+		
 	} else {
+		
 		// If no quote description is available, we will add up the numeric values.
-		num = parseInt(quote["legs"], 10) 
-			+ parseInt(quote["grade"], 10)
-			+ parseInt(quote["length"], 10)
-			+ parseInt(quote["load"], 10);
+		num = 0;
+		
+		if (quote["legs"]) {
+			num += parseInt(quote["legs"], 10);
+		}
+		
+		if (quote["grade"]) {
+			num += parseInt(quote["grade"], 10);
+		}
+		
+		if (quote["length"]) {
+			num += parseInt(grade["length"], 10);
+		}
+		
+		if (quote["load"]) {
+			num += parseInt(grade["load"], 10);
+		}
+		
 	}
 	
 	// Count the variable information
