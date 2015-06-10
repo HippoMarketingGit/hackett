@@ -150,8 +150,8 @@ function Controller() {
     });
     $.__views.chain.add($.__views.__alloyId217);
     $.__views.__alloyId218 = Ti.UI.createImageView({
-        right: "10%",
-        height: "60dip",
+        right: "0",
+        height: "85%",
         width: "auto",
         className: "icon",
         touchEnabled: false,
@@ -445,8 +445,8 @@ function Controller() {
     });
     $.__views.wireRope.add($.__views.__alloyId240);
     $.__views.__alloyId241 = Ti.UI.createImageView({
-        right: "10%",
-        height: "60dip",
+        right: "0",
+        height: "85%",
         width: "auto",
         className: "icon",
         touchEnabled: false,

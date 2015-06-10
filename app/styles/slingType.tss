@@ -138,8 +138,8 @@
 	width: '90%'
 },
 '.icon': {
-	right: '5dip',
-	height: '60dip',
+	right: '0dip',
+	height: '85%',
 	width: 'auto',
 	className: 'icon'
 },
