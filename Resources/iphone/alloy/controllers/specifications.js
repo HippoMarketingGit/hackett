@@ -9,6 +9,7 @@ function __processArg(obj, key) {
 
 function Controller() {
     function createPartcode() {
+        Ti.API.info("createPartcode call");
         var gradeCode, limit, type, slingSize, slingSizeAuto8, slingSizeAuto10, Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), db = database.openDb(), legLength = Math.ceil(parseFloat(Alloy.Globals.sling.nominalLength));
         limit = 45 === Alloy.Globals.sling.angle ? "limit45" : "limit60";
         if ("Chain" === Alloy.Globals.sling.type) {
@@ -65,6 +66,7 @@ function Controller() {
         }
         Alloy.Globals.sling.partCode = "Chain" === Alloy.Globals.sling.type ? "Auto" !== Alloy.Globals.sling.grade ? gradeCode + slingSize + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode : "A" + slingSizeAuto8 + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode + " or X" + slingSizeAuto10 + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.shorteningDeviceCode : 1 === Alloy.Globals.sling.legs ? "NONE" === Alloy.Globals.sling.upperTerminationCode ? "RS0" + slingSize + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode : "RS0" + slingSize + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode + Alloy.Globals.sling.upperTerminationCode : "RS0" + slingSize + "." + Alloy.Globals.sling.legs + legLength + "." + Alloy.Globals.sling.lowerTerminationCode;
         database.closeDb(db);
+        Ti.API.info("createPartcode generated code: " + Alloy.Globals.sling.partCode);
         return Alloy.Globals.sling.partCode;
     }
     function outputDetails(type, grade, legs, load, nominalLength, description, partCode) {
@@ -495,6 +497,7 @@ function Controller() {
         $.backToDash.hide();
         $.backToDash.height = 0;
         var angle, grade, shortener, end, upper, Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), db = database.openDb(), legLength = Math.ceil(Alloy.Globals.sling.nominalLength);
+        Ti.API.info(Alloy.Globals.sling);
         if ("Chain" === Alloy.Globals.sling.type) {
             var angle, grade, shortener, end, upper;
             angle = 45 === Alloy.Globals.sling.angle ? "wll.limit45" : "wll.limit60";
@@ -562,12 +565,25 @@ function Controller() {
                 }
             }
         } else if ("Wire Rope" === Alloy.Globals.sling.type) {
-            Alloy.Globals.sling.grade = null;
-            Alloy.Globals.sling.quotedPrice = null;
-            Alloy.Globals.sling.slingDescription = null;
-            Ti.API.info("Wire Rope create part code");
-            createPartcode();
-            outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+            var angle, grade, shortener, end, upper;
+            angle = 45 === Alloy.Globals.sling.angle ? "wll.limit45" : "wll.limit60";
+            end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
+            upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
+            var sql = "SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + " AND wll.type='r' AND wll.legs = " + Alloy.Globals.sling.legs + " AND s.grade = '' AND s.legs = wll.legs AND s.size = wll.size AND s.length = " + legLength + " " + end + "GROUP BY wll.id ORDER BY " + angle + " ASC LIMIT 1";
+            Ti.API.info(sql);
+            var row = db.execute(sql);
+            if (row.isValidRow()) {
+                Ti.API.info("DB part code: " + row.fieldByName("code"));
+                Alloy.Globals.sling.partCode = row.fieldByName("code");
+                Alloy.Globals.sling.quotedPrice = row.fieldByName("price");
+                Alloy.Globals.sling.slingDescription = row.fieldByName("description");
+            } else {
+                Ti.API.info("wire rope create part code");
+                createPartcode();
+                Alloy.Globals.sling.grade = null;
+                Alloy.Globals.sling.quotedPrice = null;
+                Alloy.Globals.sling.slingDescription = null;
+            }
         }
         outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
         database.closeDb(db);

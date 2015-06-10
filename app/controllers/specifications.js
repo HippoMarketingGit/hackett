@@ -41,6 +41,8 @@
 		shortener,
 		end,
 		upper;
+		
+	Ti.API.info(Alloy.Globals.sling);
 	
 	// Find a part code form the phone database
 	if( Alloy.Globals.sling.type === 'Chain' ){
@@ -226,14 +228,69 @@
 	// Rope slings.
 	}else if( Alloy.Globals.sling.type === 'Wire Rope' ){
 		
-		Alloy.Globals.sling.grade = null;
-		Alloy.Globals.sling.quotedPrice = null;
-		Alloy.Globals.sling.slingDescription = null;
+		var angle,
+			grade,
+			shortener,
+			end,
+			upper;
+			
+		// Perform all query string changes here
+		// Query changes to "IS NULL" if no termination is selected
+		// The checks below allow for this
+		if( Alloy.Globals.sling.angle === 45 ){
+			angle = 'wll.limit45';
+		}else{	
+			angle = 'wll.limit60';
+		}		
 		
-		Ti.API.info('Wire Rope create part code');
-		createPartcode();
+		if( Alloy.Globals.sling.lowerTerminationCode === 'NONE'){
+			end = ' AND end = "" ';
+		}else{
+			end = ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
+		}
 		
-		outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+		if( Alloy.Globals.sling.upperTerminationCode === 'NONE'){
+			upper = ' AND end = "" ';
+		}else{
+			upper = ' AND end = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
+		}
+		
+		var sql = "SELECT * " + 
+				"FROM WorkingLoadLimits AS wll, Slings AS s " +
+				"WHERE " + angle + " >= " + Alloy.Globals.sling.load + " " +
+				"AND wll.type='r' " + 
+				"AND wll.legs = " + Alloy.Globals.sling.legs + " " +
+				"AND s.grade = '' " +
+				"AND s.legs = wll.legs " +
+				"AND s.size = wll.size " + 
+				"AND s.length = " + legLength + " " +
+				end + 
+				"GROUP BY wll.id " +
+				"ORDER BY " + angle + " ASC " +
+				"LIMIT 1";
+				
+		Ti.API.info(sql);
+		
+		var row = db.execute(sql);
+		
+		if( row.isValidRow() ){
+			
+			Ti.API.info('DB part code: ' + row.fieldByName('code') );
+			
+			Alloy.Globals.sling.partCode = row.fieldByName('code');
+			Alloy.Globals.sling.quotedPrice = row.fieldByName('price');
+			Alloy.Globals.sling.slingDescription = row.fieldByName('description');
+			
+		}else{
+			
+			Ti.API.info('wire rope create part code');
+			createPartcode();
+			
+			Alloy.Globals.sling.grade = null;
+			Alloy.Globals.sling.quotedPrice = null;
+			Alloy.Globals.sling.slingDescription = null;
+		}
+		
 	}
 	
 	outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
@@ -245,6 +302,8 @@
 })();
 
 function createPartcode(){
+	
+	Ti.API.info("createPartcode call");
 	
 	var Database = require('databaseObj'),
 		database = new Database('SlingDB.sqlite'),
@@ -427,6 +486,8 @@ function createPartcode(){
 	}
 	
 	database.closeDb(db);
+	
+	Ti.API.info("createPartcode generated code: " + Alloy.Globals.sling.partCode);
 	
 	return Alloy.Globals.sling.partCode;
 }
