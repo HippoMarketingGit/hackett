@@ -86,13 +86,13 @@ function Controller() {
         } else $.description.text = "Description: " + description;
         if (Alloy.Globals.sling.limitExceeded) {
             alert("The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.");
-            $.quotedPrice.text = "We cannot quote you a price for your configured sling.";
+            $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
         } else if (null === Alloy.Globals.sling.quotedPrice && "Auto" === Alloy.Globals.sling.grade) {
             $.specPartcode.text = "Based on your requirements, we have identified two possible sling configurations: " + partCode;
-            $.quotedPrice.text = "We cannot quote you a price for your configured slings. Please contact William Hackett Chains and reference your part code.";
+            $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
         } else if (null === Alloy.Globals.sling.quotedPrice && "Auto" !== Alloy.Globals.sling.grade) {
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
-            $.quotedPrice.text = "We cannot quote you a price for your configured sling. Please contact William Hackett Chains and reference your part code.";
+            $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
         } else if (null !== Alloy.Globals.sling.quotedPrice && "Auto" !== Alloy.Globals.sling.grade) {
             $.quotedPrice.text = "Price (RRP): £" + Alloy.Globals.sling.quotedPrice;
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
@@ -570,7 +570,6 @@ function Controller() {
             end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
             upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
             var sql = "SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + " AND wll.type='r' AND wll.legs = " + Alloy.Globals.sling.legs + " AND s.grade = '' AND s.legs = wll.legs AND s.size = wll.size AND s.length = " + legLength + " " + end + "GROUP BY wll.id ORDER BY " + angle + " ASC LIMIT 1";
-            Ti.API.info(sql);
             var row = db.execute(sql);
             if (row.isValidRow()) {
                 Ti.API.info("DB part code: " + row.fieldByName("code"));

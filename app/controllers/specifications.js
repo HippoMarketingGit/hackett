@@ -269,7 +269,7 @@
 				"ORDER BY " + angle + " ASC " +
 				"LIMIT 1";
 				
-		Ti.API.info(sql);
+		// Ti.API.info(sql);
 		
 		var row = db.execute(sql);
 		
@@ -523,12 +523,12 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 		if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade === 'Auto'){
 			
 			$.specPartcode.text = 'Based on your requirements, we have identified two possible sling configurations: ' + partCode;
-			$.quotedPrice.text = "We cannot quote you a price for your configured slings. Please contact William Hackett Chains and reference your part code.";
+			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
 		
 		}else if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade !== 'Auto'){
 			
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
-			$.quotedPrice.text = "We cannot quote you a price for your configured sling. Please contact William Hackett Chains and reference your part code.";
+			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
 		
 		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade !== 'Auto' ){
 			
@@ -546,7 +546,7 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 		
 		alert('The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.');
 		
-		$.quotedPrice.text = "We cannot quote you a price for your configured sling.";
+		$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
 	}
 }
 
