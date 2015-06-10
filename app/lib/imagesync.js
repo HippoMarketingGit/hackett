@@ -112,7 +112,7 @@ ImageSync.prototype.downloadSlings = function() {
 		img = rows.fieldByName("img");
 		
 		// Check for valid image
-		if (img !== "" && img !== "n/a") {
+		if (img !== "" && img !== "n/a" && img !== "img") {
 			// Add to an array of images we need to get
 			imgs.push(rows.fieldByName("img"));	
 		}
