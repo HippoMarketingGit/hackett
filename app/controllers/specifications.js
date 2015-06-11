@@ -86,7 +86,10 @@
 			
 			grade = Alloy.Globals.sling.grade;
 			
-			var row = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = ' + grade + ') AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = "' + legLength + '") group by wll.id ORDER BY ' + angle +' LIMIT 1');
+			var sql = 'SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = ' + grade + ') AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = "' + legLength + '") group by wll.id ORDER BY ' + angle +' LIMIT 1';
+			var row = db.execute(sql);
+			
+			Ti.API.info(sql);
 			
 			if( row.isValidRow() ){
 				
