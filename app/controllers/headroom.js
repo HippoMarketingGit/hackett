@@ -28,11 +28,11 @@ function setHeadroomImg() {
 	
 	switch (Alloy.Globals.sling.legs) {
 		case 2:
-			src = '/images/headroom/double.jpg';
+			src = '/images/headroom/7mm-2-leg-set-up-headroom.png';
 		break;
 		case 3:
 		case 4:
-			src = '/images/headroom/3-4-leg.jpg';
+			src = '/images/headroom/7mm-4-leg-set-up.png';
 		break;
 	}
 	
@@ -54,21 +54,26 @@ function setAngle(e){
 	obj.backgroundColor = '#6b76d0';
 	
 	// If headroom is restricted, show the lifting points page
-	if(obj.id === 'yes'){
+	if (obj.id === 'yes') {
 		
 		// Headroom is restricted 
 		// angle is now 60
 		Alloy.Globals.sling.angle = 60;
-		
+			
 		// Open the lifting points modal to calculate the headroom and leg room
+		
 		var modal = Alloy.createController('liftingPoints').getView();
 			modal.open({modal: true});
+		
+		/* @TODO:
+		var modal = Alloy.createController("setHeadroom").getView();
+		modal.open({ modal: true });
+		*/
 			
 		// When the modal is closed and no values are entered reset the buttons to their default state
 		// This will prompt the user to enter a value before moving on
 		modal.addEventListener('close', function(e){
-				
-			if( Alloy.Globals.sling.nominalLength === 00.00 || Alloy.Globals.sling.nominalLength === null){
+			if (Alloy.Globals.sling.nominalLength === 00.00 || Alloy.Globals.sling.nominalLength === null) {
 				$.yes.backgroundColor = '#2b3b94';
 				$.no.backgroundColor = '#2b3b94';
 			}
@@ -76,7 +81,7 @@ function setAngle(e){
 		
 	// If headroom isn't restricted give the user the option to enter
 	// the nominal length manually
-	}else{
+	} else {
 		
 		showAlert();
 		Alloy.Globals.sling.angle = 45;
