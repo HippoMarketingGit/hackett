@@ -39,7 +39,7 @@ function Controller() {
         id: "header"
     });
     $.__views.slingConfiguration.add($.__views.header);
-    $.__views.__alloyId204 = Ti.UI.createImageView(function() {
+    $.__views.__alloyId200 = Ti.UI.createImageView(function() {
         var o = {};
         _.extend(o, {
             bottom: "8dip",
@@ -51,18 +51,18 @@ function Controller() {
         });
         _.extend(o, {
             image: "/images/WHC--logo.png",
-            id: "__alloyId204"
+            id: "__alloyId200"
         });
         return o;
     }());
-    $.__views.header.add($.__views.__alloyId204);
-    $.__views.__alloyId205 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId200);
+    $.__views.__alloyId201 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId205"
+        id: "__alloyId201"
     });
-    $.__views.slingConfiguration.add($.__views.__alloyId205);
+    $.__views.slingConfiguration.add($.__views.__alloyId201);
     $.__views.wrapper = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -98,14 +98,14 @@ function Controller() {
         id: "footer"
     });
     $.__views.wrapper.add($.__views.footer);
-    $.__views.__alloyId206 = Ti.UI.createView({
+    $.__views.__alloyId202 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId206"
+        id: "__alloyId202"
     });
-    $.__views.footer.add($.__views.__alloyId206);
+    $.__views.footer.add($.__views.__alloyId202);
     $.__views.back = Ti.UI.createView({
         left: "5%",
         layout: "horizontal",
@@ -116,16 +116,16 @@ function Controller() {
         id: "back"
     });
     $.__views.footer.add($.__views.back);
-    $.__views.__alloyId207 = Ti.UI.createLabel({
+    $.__views.__alloyId203 = Ti.UI.createLabel({
         text: "BACK",
         touchEnabled: false,
         top: "2dip",
         left: "42dip",
         width: Ti.UI.SIZE,
         color: "#FFF",
-        id: "__alloyId207"
+        id: "__alloyId203"
     });
-    $.__views.back.add($.__views.__alloyId207);
+    $.__views.back.add($.__views.__alloyId203);
     $.__views.next = Ti.UI.createButton({
         layout: "vertical",
         right: "5%",

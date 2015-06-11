@@ -123,14 +123,13 @@ function Controller() {
     }());
     $.__views.__alloyId74.add($.__views.one);
     chooseLegs ? $.__views.one.addEventListener("click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
-    $.__views.__alloyId75 = Ti.UI.createImageView({
+    $.__views.oneImg = Ti.UI.createImageView({
         touchEnabled: false,
-        image: "/images/slings/1-leg.png",
+        id: "oneImg",
         height: "100%",
-        width: "auto",
-        id: "__alloyId75"
+        width: "auto"
     });
-    $.__views.one.add($.__views.__alloyId75);
+    $.__views.one.add($.__views.oneImg);
     $.__views.two = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -151,21 +150,20 @@ function Controller() {
     }());
     $.__views.__alloyId74.add($.__views.two);
     chooseLegs ? $.__views.two.addEventListener("click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
-    $.__views.__alloyId76 = Ti.UI.createImageView({
+    $.__views.twoImg = Ti.UI.createImageView({
         touchEnabled: false,
-        image: "/images/slings/2-legs.png",
+        id: "twoImg",
         height: "100%",
-        width: "auto",
-        id: "__alloyId76"
+        width: "auto"
     });
-    $.__views.two.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.two.add($.__views.twoImg);
+    $.__views.__alloyId75 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId77"
+        id: "__alloyId75"
     });
-    $.__views.content.add($.__views.__alloyId77);
+    $.__views.content.add($.__views.__alloyId75);
     $.__views.three = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -184,17 +182,15 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId77.add($.__views.three);
+    $.__views.__alloyId75.add($.__views.three);
     chooseLegs ? $.__views.three.addEventListener("click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
-    $.__views.__alloyId78 = Ti.UI.createImageView({
+    $.__views.threeImg = Ti.UI.createImageView({
         touchEnabled: false,
-        image: "/images/slings/3-legs.png",
-        height: "90%",
-        top: "5%",
-        width: "auto",
-        id: "__alloyId78"
+        id: "threeImg",
+        height: "100%",
+        width: "auto"
     });
-    $.__views.three.add($.__views.__alloyId78);
+    $.__views.three.add($.__views.threeImg);
     $.__views.four = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -213,16 +209,15 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId77.add($.__views.four);
+    $.__views.__alloyId75.add($.__views.four);
     chooseLegs ? $.__views.four.addEventListener("click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
-    $.__views.__alloyId79 = Ti.UI.createImageView({
+    $.__views.fourImg = Ti.UI.createImageView({
         touchEnabled: false,
-        image: "/images/slings/4-legs.png",
+        id: "fourImg",
         height: "100%",
-        width: "auto",
-        id: "__alloyId79"
+        width: "auto"
     });
-    $.__views.four.add($.__views.__alloyId79);
+    $.__views.four.add($.__views.fourImg);
     exports.destroy = function() {};
     _.extend($, $.__views);
     if (null !== Alloy.Globals.sling.legs) if (1 === Alloy.Globals.sling.legs) {
@@ -238,6 +233,19 @@ function Controller() {
         $.four.borderColor = "#f7561e";
         $.four.borderWidth = "8px";
     }
+    var imgPath = "";
+    switch (Alloy.Globals.sling.type) {
+      case "Chain":
+        imgPath = "/images/slings/chain/";
+        break;
+
+      case "Wire Rope":
+        imgPath = "/images/slings/wire/";
+    }
+    $.oneImg.image = imgPath + "1-leg.png";
+    $.twoImg.image = imgPath + "2-legs.png";
+    $.threeImg.image = imgPath + "3-legs.png";
+    $.fourImg.image = imgPath + "4-legs.png";
     __defers["$.__views.one!click!chooseLegs"] && $.__views.one.addEventListener("click", chooseLegs);
     __defers["$.__views.two!click!chooseLegs"] && $.__views.two.addEventListener("click", chooseLegs);
     __defers["$.__views.three!click!chooseLegs"] && $.__views.three.addEventListener("click", chooseLegs);

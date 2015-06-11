@@ -64,14 +64,14 @@ function Controller() {
         return o;
     }());
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId208 = Ti.UI.createView({
+    $.__views.__alloyId204 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId208"
+        id: "__alloyId204"
     });
-    $.__views.content.add($.__views.__alloyId208);
-    $.__views.__alloyId209 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId204);
+    $.__views.__alloyId205 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -79,19 +79,19 @@ function Controller() {
         },
         textAlign: "center",
         text: "Product Selection",
-        id: "__alloyId209"
+        id: "__alloyId205"
     });
-    $.__views.__alloyId208.add($.__views.__alloyId209);
-    $.__views.__alloyId210 = Ti.UI.createLabel({
+    $.__views.__alloyId204.add($.__views.__alloyId205);
+    $.__views.__alloyId206 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please select whether you require your sling to be chain or wire rope.",
-        id: "__alloyId210"
+        id: "__alloyId206"
     });
-    $.__views.__alloyId208.add($.__views.__alloyId210);
+    $.__views.__alloyId204.add($.__views.__alloyId206);
     $.__views.slings = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -110,15 +110,15 @@ function Controller() {
     });
     $.__views.slings.add($.__views.chain);
     setSlingType ? $.__views.chain.addEventListener("click", setSlingType) : __defers["$.__views.chain!click!setSlingType"] = true;
-    $.__views.__alloyId211 = Ti.UI.createView({
+    $.__views.__alloyId207 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId211"
+        id: "__alloyId207"
     });
-    $.__views.chain.add($.__views.__alloyId211);
-    $.__views.__alloyId212 = Ti.UI.createView(function() {
+    $.__views.chain.add($.__views.__alloyId207);
+    $.__views.__alloyId208 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             left: 0,
@@ -133,12 +133,12 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId212"
+            id: "__alloyId208"
         });
         return o;
     }());
-    $.__views.chain.add($.__views.__alloyId212);
-    $.__views.__alloyId213 = Ti.UI.createLabel({
+    $.__views.chain.add($.__views.__alloyId208);
+    $.__views.__alloyId209 = Ti.UI.createLabel({
         left: "10%",
         color: "#FFF",
         font: {
@@ -146,20 +146,20 @@ function Controller() {
         },
         text: "Chain",
         touchEnabled: false,
-        id: "__alloyId213"
+        id: "__alloyId209"
     });
-    $.__views.chain.add($.__views.__alloyId213);
-    $.__views.__alloyId214 = Ti.UI.createImageView({
+    $.__views.chain.add($.__views.__alloyId209);
+    $.__views.__alloyId210 = Ti.UI.createImageView({
         right: "0",
         height: "85%",
         width: "auto",
         className: "icon",
         touchEnabled: false,
         image: "/images/sling-type/chain.jpg",
-        id: "__alloyId214"
+        id: "__alloyId210"
     });
-    $.__views.chain.add($.__views.__alloyId214);
-    $.__views.__alloyId215 = Ti.UI.createView(function() {
+    $.__views.chain.add($.__views.__alloyId210);
+    $.__views.__alloyId211 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             right: 0,
@@ -174,19 +174,19 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId215"
+            id: "__alloyId211"
         });
         return o;
     }());
-    $.__views.chain.add($.__views.__alloyId215);
-    $.__views.__alloyId216 = Ti.UI.createView({
+    $.__views.chain.add($.__views.__alloyId211);
+    $.__views.__alloyId212 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId216"
+        id: "__alloyId212"
     });
-    $.__views.chain.add($.__views.__alloyId216);
+    $.__views.chain.add($.__views.__alloyId212);
     $.__views.extra = Ti.UI.createView({
         layout: "horizontal",
         id: "extra",
@@ -202,7 +202,7 @@ function Controller() {
     });
     $.__views.extra.add($.__views.eight);
     setGrade ? $.__views.eight.addEventListener("click", setGrade) : __defers["$.__views.eight!click!setGrade"] = true;
-    $.__views.__alloyId217 = Ti.UI.createView(function() {
+    $.__views.__alloyId213 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             left: 0,
@@ -217,46 +217,46 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId217"
+            id: "__alloyId213"
         });
         return o;
     }());
-    $.__views.eight.add($.__views.__alloyId217);
-    $.__views.__alloyId218 = Ti.UI.createView({
+    $.__views.eight.add($.__views.__alloyId213);
+    $.__views.__alloyId214 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId218"
+        id: "__alloyId214"
     });
-    $.__views.eight.add($.__views.__alloyId218);
-    $.__views.__alloyId219 = Ti.UI.createView({
+    $.__views.eight.add($.__views.__alloyId214);
+    $.__views.__alloyId215 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "4dip",
-        id: "__alloyId219"
+        id: "__alloyId215"
     });
-    $.__views.__alloyId218.add($.__views.__alloyId219);
-    $.__views.__alloyId220 = Ti.UI.createLabel({
+    $.__views.__alloyId214.add($.__views.__alloyId215);
+    $.__views.__alloyId216 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 12
         },
         text: "Grade",
         touchEnabled: false,
-        id: "__alloyId220"
+        id: "__alloyId216"
     });
-    $.__views.__alloyId219.add($.__views.__alloyId220);
-    $.__views.__alloyId221 = Ti.UI.createView({
+    $.__views.__alloyId215.add($.__views.__alloyId216);
+    $.__views.__alloyId217 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "0",
-        id: "__alloyId221"
+        id: "__alloyId217"
     });
-    $.__views.__alloyId218.add($.__views.__alloyId221);
-    $.__views.__alloyId222 = Ti.UI.createLabel({
+    $.__views.__alloyId214.add($.__views.__alloyId217);
+    $.__views.__alloyId218 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
@@ -264,9 +264,9 @@ function Controller() {
         textAlign: "center",
         text: "8",
         touchEnabled: false,
-        id: "__alloyId222"
+        id: "__alloyId218"
     });
-    $.__views.__alloyId221.add($.__views.__alloyId222);
+    $.__views.__alloyId217.add($.__views.__alloyId218);
     $.__views.ten = Ti.UI.createView({
         width: "33.2%",
         className: "button--quartenary",
@@ -276,41 +276,41 @@ function Controller() {
     });
     $.__views.extra.add($.__views.ten);
     setGrade ? $.__views.ten.addEventListener("click", setGrade) : __defers["$.__views.ten!click!setGrade"] = true;
-    $.__views.__alloyId223 = Ti.UI.createView({
+    $.__views.__alloyId219 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId223"
+        id: "__alloyId219"
     });
-    $.__views.ten.add($.__views.__alloyId223);
-    $.__views.__alloyId224 = Ti.UI.createView({
+    $.__views.ten.add($.__views.__alloyId219);
+    $.__views.__alloyId220 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "4dip",
-        id: "__alloyId224"
+        id: "__alloyId220"
     });
-    $.__views.__alloyId223.add($.__views.__alloyId224);
-    $.__views.__alloyId225 = Ti.UI.createLabel({
+    $.__views.__alloyId219.add($.__views.__alloyId220);
+    $.__views.__alloyId221 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 12
         },
         text: "Grade",
         touchEnabled: false,
-        id: "__alloyId225"
+        id: "__alloyId221"
     });
-    $.__views.__alloyId224.add($.__views.__alloyId225);
-    $.__views.__alloyId226 = Ti.UI.createView({
+    $.__views.__alloyId220.add($.__views.__alloyId221);
+    $.__views.__alloyId222 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "0",
-        id: "__alloyId226"
+        id: "__alloyId222"
     });
-    $.__views.__alloyId223.add($.__views.__alloyId226);
-    $.__views.__alloyId227 = Ti.UI.createLabel({
+    $.__views.__alloyId219.add($.__views.__alloyId222);
+    $.__views.__alloyId223 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
@@ -318,9 +318,9 @@ function Controller() {
         textAlign: "center",
         text: "10",
         touchEnabled: false,
-        id: "__alloyId227"
+        id: "__alloyId223"
     });
-    $.__views.__alloyId226.add($.__views.__alloyId227);
+    $.__views.__alloyId222.add($.__views.__alloyId223);
     $.__views.auto = Ti.UI.createView({
         width: "33.2%",
         className: "button--quartenary",
@@ -330,41 +330,41 @@ function Controller() {
     });
     $.__views.extra.add($.__views.auto);
     setGrade ? $.__views.auto.addEventListener("click", setGrade) : __defers["$.__views.auto!click!setGrade"] = true;
-    $.__views.__alloyId228 = Ti.UI.createView({
+    $.__views.__alloyId224 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId228"
+        id: "__alloyId224"
     });
-    $.__views.auto.add($.__views.__alloyId228);
-    $.__views.__alloyId229 = Ti.UI.createView({
+    $.__views.auto.add($.__views.__alloyId224);
+    $.__views.__alloyId225 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "4dip",
-        id: "__alloyId229"
+        id: "__alloyId225"
     });
-    $.__views.__alloyId228.add($.__views.__alloyId229);
-    $.__views.__alloyId230 = Ti.UI.createLabel({
+    $.__views.__alloyId224.add($.__views.__alloyId225);
+    $.__views.__alloyId226 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 12
         },
         text: "Grade",
         touchEnabled: false,
-        id: "__alloyId230"
+        id: "__alloyId226"
     });
-    $.__views.__alloyId229.add($.__views.__alloyId230);
-    $.__views.__alloyId231 = Ti.UI.createView({
+    $.__views.__alloyId225.add($.__views.__alloyId226);
+    $.__views.__alloyId227 = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
         top: "0",
-        id: "__alloyId231"
+        id: "__alloyId227"
     });
-    $.__views.__alloyId228.add($.__views.__alloyId231);
-    $.__views.__alloyId232 = Ti.UI.createLabel({
+    $.__views.__alloyId224.add($.__views.__alloyId227);
+    $.__views.__alloyId228 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
@@ -372,10 +372,10 @@ function Controller() {
         textAlign: "center",
         text: "Auto",
         touchEnabled: false,
-        id: "__alloyId232"
+        id: "__alloyId228"
     });
-    $.__views.__alloyId231.add($.__views.__alloyId232);
-    $.__views.__alloyId233 = Ti.UI.createView(function() {
+    $.__views.__alloyId227.add($.__views.__alloyId228);
+    $.__views.__alloyId229 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             right: 0,
@@ -390,19 +390,19 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId233"
+            id: "__alloyId229"
         });
         return o;
     }());
-    $.__views.auto.add($.__views.__alloyId233);
-    $.__views.__alloyId234 = Ti.UI.createView({
+    $.__views.auto.add($.__views.__alloyId229);
+    $.__views.__alloyId230 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId234"
+        id: "__alloyId230"
     });
-    $.__views.extra.add($.__views.__alloyId234);
+    $.__views.extra.add($.__views.__alloyId230);
     $.__views.wireRope = Ti.UI.createView({
         top: 0,
         height: "120dip",
@@ -413,7 +413,7 @@ function Controller() {
     });
     $.__views.slings.add($.__views.wireRope);
     setSlingType ? $.__views.wireRope.addEventListener("click", setSlingType) : __defers["$.__views.wireRope!click!setSlingType"] = true;
-    $.__views.__alloyId235 = Ti.UI.createView(function() {
+    $.__views.__alloyId231 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             left: 0,
@@ -428,12 +428,12 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId235"
+            id: "__alloyId231"
         });
         return o;
     }());
-    $.__views.wireRope.add($.__views.__alloyId235);
-    $.__views.__alloyId236 = Ti.UI.createLabel({
+    $.__views.wireRope.add($.__views.__alloyId231);
+    $.__views.__alloyId232 = Ti.UI.createLabel({
         left: "10%",
         color: "#FFF",
         font: {
@@ -441,20 +441,20 @@ function Controller() {
         },
         text: "Wire Rope",
         touchEnabled: false,
-        id: "__alloyId236"
+        id: "__alloyId232"
     });
-    $.__views.wireRope.add($.__views.__alloyId236);
-    $.__views.__alloyId237 = Ti.UI.createImageView({
+    $.__views.wireRope.add($.__views.__alloyId232);
+    $.__views.__alloyId233 = Ti.UI.createImageView({
         right: "0",
         height: "85%",
         width: "auto",
         className: "icon",
         touchEnabled: false,
         image: "/images/sling-type/wire-rope.jpg",
-        id: "__alloyId237"
+        id: "__alloyId233"
     });
-    $.__views.wireRope.add($.__views.__alloyId237);
-    $.__views.__alloyId238 = Ti.UI.createView(function() {
+    $.__views.wireRope.add($.__views.__alloyId233);
+    $.__views.__alloyId234 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             right: 0,
@@ -469,19 +469,19 @@ function Controller() {
             backgroundColor: "#FFF"
         });
         _.extend(o, {
-            id: "__alloyId238"
+            id: "__alloyId234"
         });
         return o;
     }());
-    $.__views.wireRope.add($.__views.__alloyId238);
-    $.__views.__alloyId239 = Ti.UI.createView({
+    $.__views.wireRope.add($.__views.__alloyId234);
+    $.__views.__alloyId235 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId239"
+        id: "__alloyId235"
     });
-    $.__views.wireRope.add($.__views.__alloyId239);
+    $.__views.wireRope.add($.__views.__alloyId235);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.extra.hide();

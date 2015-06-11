@@ -24,6 +24,23 @@ if( Alloy.Globals.sling.legs !== null ){
 	}
 }
 
+// Determine which images to set based on the type
+var imgPath = "";
+switch (Alloy.Globals.sling.type) {
+	case "Chain":
+		imgPath = "/images/slings/chain/";
+	break;
+	
+	case 'Wire Rope':
+		imgPath = "/images/slings/wire/";
+	break;
+}
+
+$.oneImg.image = imgPath + "1-leg.png";
+$.twoImg.image = imgPath + "2-legs.png";
+$.threeImg.image = imgPath + "3-legs.png";
+$.fourImg.image = imgPath + "4-legs.png";
+
 function chooseLegs(e){
 	
 	var obj = e.source;
