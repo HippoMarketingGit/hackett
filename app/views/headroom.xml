@@ -33,10 +33,6 @@
 								<Label class="label--large">No</Label>
 							</View>
 							
-							<View class="multi-line__text">
-								<Label class="label--small">0 - 45&#176; Angle</Label>
-							</View>
-							
 						</View>
 						
 						<View class="border--bottom"></View>
@@ -52,10 +48,6 @@
 						
 							<View class="multi-line__text">
 								<Label class="label--large">Yes</Label>
-							</View>
-							
-							<View class="multi-line__text">
-								<Label class="label--small">45 - 60&#176; Angle</Label>
 							</View>
 							
 						</View>

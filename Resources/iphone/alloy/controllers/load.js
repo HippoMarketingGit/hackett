@@ -40,14 +40,14 @@ function Controller() {
         return o;
     }());
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId107 = Ti.UI.createView({
+    $.__views.__alloyId103 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId107"
+        id: "__alloyId103"
     });
-    $.__views.content.add($.__views.__alloyId107);
-    $.__views.__alloyId108 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId103);
+    $.__views.__alloyId104 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -55,28 +55,28 @@ function Controller() {
         },
         textAlign: "center",
         text: "Weight of load",
-        id: "__alloyId108"
+        id: "__alloyId104"
     });
-    $.__views.__alloyId107.add($.__views.__alloyId108);
-    $.__views.__alloyId109 = Ti.UI.createLabel({
+    $.__views.__alloyId103.add($.__views.__alloyId104);
+    $.__views.__alloyId105 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please input the weight of the load to be lifted with the sling, then press Next.",
-        id: "__alloyId109"
+        id: "__alloyId105"
     });
-    $.__views.__alloyId107.add($.__views.__alloyId109);
-    $.__views.__alloyId110 = Ti.UI.createView({
+    $.__views.__alloyId103.add($.__views.__alloyId105);
+    $.__views.__alloyId106 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId110"
+        id: "__alloyId106"
     });
-    $.__views.__alloyId107.add($.__views.__alloyId110);
-    $.__views.__alloyId111 = Ti.UI.createLabel({
+    $.__views.__alloyId103.add($.__views.__alloyId106);
+    $.__views.__alloyId107 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -84,37 +84,37 @@ function Controller() {
         },
         textAlign: "center",
         text: "Load in Tonnes (t)",
-        id: "__alloyId111"
+        id: "__alloyId107"
     });
-    $.__views.__alloyId110.add($.__views.__alloyId111);
-    $.__views.__alloyId112 = Ti.UI.createView({
+    $.__views.__alloyId106.add($.__views.__alloyId107);
+    $.__views.__alloyId108 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId112"
+        id: "__alloyId108"
     });
-    $.__views.__alloyId107.add($.__views.__alloyId112);
-    $.__views.__alloyId113 = Ti.UI.createView({
+    $.__views.__alloyId103.add($.__views.__alloyId108);
+    $.__views.__alloyId109 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId113"
+        id: "__alloyId109"
     });
-    $.__views.__alloyId112.add($.__views.__alloyId113);
-    var __alloyId117 = [];
-    $.__views.__alloyId118 = Ti.UI.createButton({
+    $.__views.__alloyId108.add($.__views.__alloyId109);
+    var __alloyId113 = [];
+    $.__views.__alloyId114 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId117.push($.__views.__alloyId118);
+    __alloyId113.push($.__views.__alloyId114);
     $.__views.tonneDone = Ti.UI.createButton({
         title: "Done",
         id: "tonneDone"
     });
-    __alloyId117.push($.__views.tonneDone);
-    $.__views.__alloyId115 = Ti.UI.iOS.createToolbar({
-        items: __alloyId117,
-        id: "__alloyId115"
+    __alloyId113.push($.__views.tonneDone);
+    $.__views.__alloyId111 = Ti.UI.iOS.createToolbar({
+        items: __alloyId113,
+        id: "__alloyId111"
     });
     $.__views.tonne = Ti.UI.createTextField({
         height: "50dip",
@@ -132,42 +132,42 @@ function Controller() {
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
         color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId115,
+        keyboardToolbar: $.__views.__alloyId111,
         id: "tonne",
         value: "00",
         returnKeyType: Titanium.UI.RETURNKEY_DONE
     });
-    $.__views.__alloyId113.add($.__views.tonne);
-    $.__views.__alloyId115 = Ti.UI.iOS.createToolbar({
+    $.__views.__alloyId109.add($.__views.tonne);
+    $.__views.__alloyId111 = Ti.UI.iOS.createToolbar({
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId115,
+        keyboardToolbar: $.__views.__alloyId111,
         id: "tonne",
         value: "00",
         returnKeyType: Titanium.UI.RETURNKEY_DONE
     });
-    $.__views.__alloyId119 = Ti.UI.createLabel({
+    $.__views.__alloyId115 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId119"
+        id: "__alloyId115"
     });
-    $.__views.__alloyId113.add($.__views.__alloyId119);
-    var __alloyId123 = [];
-    $.__views.__alloyId124 = Ti.UI.createButton({
+    $.__views.__alloyId109.add($.__views.__alloyId115);
+    var __alloyId119 = [];
+    $.__views.__alloyId120 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId123.push($.__views.__alloyId124);
+    __alloyId119.push($.__views.__alloyId120);
     $.__views.fractionDone = Ti.UI.createButton({
         title: "Done",
         id: "fractionDone"
     });
-    __alloyId123.push($.__views.fractionDone);
-    $.__views.__alloyId121 = Ti.UI.iOS.createToolbar({
-        items: __alloyId123,
-        id: "__alloyId121"
+    __alloyId119.push($.__views.fractionDone);
+    $.__views.__alloyId117 = Ti.UI.iOS.createToolbar({
+        items: __alloyId119,
+        id: "__alloyId117"
     });
     $.__views.fraction = Ti.UI.createTextField({
         height: "50dip",
@@ -185,14 +185,14 @@ function Controller() {
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
         color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId121,
+        keyboardToolbar: $.__views.__alloyId117,
         id: "fraction",
         value: "00"
     });
-    $.__views.__alloyId113.add($.__views.fraction);
-    $.__views.__alloyId121 = Ti.UI.iOS.createToolbar({
+    $.__views.__alloyId109.add($.__views.fraction);
+    $.__views.__alloyId117 = Ti.UI.iOS.createToolbar({
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId121,
+        keyboardToolbar: $.__views.__alloyId117,
         id: "fraction",
         value: "00"
     });

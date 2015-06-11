@@ -143,7 +143,7 @@ function Controller() {
         id: "header"
     });
     $.__views.quotes.add($.__views.header);
-    $.__views.__alloyId163 = Ti.UI.createImageView(function() {
+    $.__views.__alloyId159 = Ti.UI.createImageView(function() {
         var o = {};
         _.extend(o, {
             bottom: "8dip",
@@ -155,37 +155,37 @@ function Controller() {
         });
         _.extend(o, {
             image: "/images/WHC--logo.png",
-            id: "__alloyId163"
+            id: "__alloyId159"
         });
         return o;
     }());
-    $.__views.header.add($.__views.__alloyId163);
-    $.__views.__alloyId164 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId159);
+    $.__views.__alloyId160 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId164"
+        id: "__alloyId160"
     });
-    $.__views.quotes.add($.__views.__alloyId164);
-    $.__views.__alloyId165 = Ti.UI.createView({
+    $.__views.quotes.add($.__views.__alloyId160);
+    $.__views.__alloyId161 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "5%",
         top: "10dip",
-        id: "__alloyId165"
+        id: "__alloyId161"
     });
-    $.__views.quotes.add($.__views.__alloyId165);
-    $.__views.__alloyId166 = Ti.UI.createView({
+    $.__views.quotes.add($.__views.__alloyId161);
+    $.__views.__alloyId162 = Ti.UI.createView({
         height: "26dip",
         left: "0",
         layout: "horizontal",
         textAlign: "right",
         backgroundImage: "/images/WHC-button--back.png",
         width: "100dip",
-        id: "__alloyId166"
+        id: "__alloyId162"
     });
-    $.__views.__alloyId165.add($.__views.__alloyId166);
-    openDash ? $.__views.__alloyId166.addEventListener("click", openDash) : __defers["$.__views.__alloyId166!click!openDash"] = true;
-    $.__views.__alloyId167 = Ti.UI.createLabel({
+    $.__views.__alloyId161.add($.__views.__alloyId162);
+    openDash ? $.__views.__alloyId162.addEventListener("click", openDash) : __defers["$.__views.__alloyId162!click!openDash"] = true;
+    $.__views.__alloyId163 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         text: "BACK",
@@ -193,9 +193,9 @@ function Controller() {
         top: "2dip",
         left: "42dip",
         width: Ti.UI.SIZE,
-        id: "__alloyId167"
+        id: "__alloyId163"
     });
-    $.__views.__alloyId166.add($.__views.__alloyId167);
+    $.__views.__alloyId162.add($.__views.__alloyId163);
     $.__views.container = Ti.UI.createView({
         height: Ti.UI.SIZE,
         id: "container",
@@ -230,7 +230,7 @@ function Controller() {
             }
         });
     }();
-    __defers["$.__views.__alloyId166!click!openDash"] && $.__views.__alloyId166.addEventListener("click", openDash);
+    __defers["$.__views.__alloyId162!click!openDash"] && $.__views.__alloyId162.addEventListener("click", openDash);
     _.extend($, exports);
 }
 

@@ -67,14 +67,14 @@ function Controller() {
         return o;
     }());
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId71 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId75"
+        id: "__alloyId71"
     });
-    $.__views.content.add($.__views.__alloyId75);
-    $.__views.__alloyId76 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId71);
+    $.__views.__alloyId72 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -82,27 +82,27 @@ function Controller() {
         },
         textAlign: "center",
         text: "How many Legs?",
-        id: "__alloyId76"
+        id: "__alloyId72"
     });
-    $.__views.__alloyId75.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createLabel({
+    $.__views.__alloyId71.add($.__views.__alloyId72);
+    $.__views.__alloyId73 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please choose the number of legs you would like your sling to have by tapping a diagram below then pressing 'Next' to proceed.",
-        id: "__alloyId77"
+        id: "__alloyId73"
     });
-    $.__views.__alloyId75.add($.__views.__alloyId77);
-    $.__views.__alloyId78 = Ti.UI.createView({
+    $.__views.__alloyId71.add($.__views.__alloyId73);
+    $.__views.__alloyId74 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
         top: "20dip",
-        id: "__alloyId78"
+        id: "__alloyId74"
     });
-    $.__views.content.add($.__views.__alloyId78);
+    $.__views.content.add($.__views.__alloyId74);
     $.__views.one = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -121,16 +121,16 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId78.add($.__views.one);
+    $.__views.__alloyId74.add($.__views.one);
     chooseLegs ? $.__views.one.addEventListener("click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
-    $.__views.__alloyId79 = Ti.UI.createImageView({
+    $.__views.__alloyId75 = Ti.UI.createImageView({
         touchEnabled: false,
         image: "/images/slings/1-leg.png",
         height: "100%",
         width: "auto",
-        id: "__alloyId79"
+        id: "__alloyId75"
     });
-    $.__views.one.add($.__views.__alloyId79);
+    $.__views.one.add($.__views.__alloyId75);
     $.__views.two = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -149,23 +149,23 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId78.add($.__views.two);
+    $.__views.__alloyId74.add($.__views.two);
     chooseLegs ? $.__views.two.addEventListener("click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
-    $.__views.__alloyId80 = Ti.UI.createImageView({
+    $.__views.__alloyId76 = Ti.UI.createImageView({
         touchEnabled: false,
         image: "/images/slings/2-legs.png",
         height: "100%",
         width: "auto",
-        id: "__alloyId80"
+        id: "__alloyId76"
     });
-    $.__views.two.add($.__views.__alloyId80);
-    $.__views.__alloyId81 = Ti.UI.createView({
+    $.__views.two.add($.__views.__alloyId76);
+    $.__views.__alloyId77 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId81"
+        id: "__alloyId77"
     });
-    $.__views.content.add($.__views.__alloyId81);
+    $.__views.content.add($.__views.__alloyId77);
     $.__views.three = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -184,17 +184,17 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId81.add($.__views.three);
+    $.__views.__alloyId77.add($.__views.three);
     chooseLegs ? $.__views.three.addEventListener("click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
-    $.__views.__alloyId82 = Ti.UI.createImageView({
+    $.__views.__alloyId78 = Ti.UI.createImageView({
         touchEnabled: false,
         image: "/images/slings/3-legs.png",
         height: "90%",
         top: "5%",
         width: "auto",
-        id: "__alloyId82"
+        id: "__alloyId78"
     });
-    $.__views.three.add($.__views.__alloyId82);
+    $.__views.three.add($.__views.__alloyId78);
     $.__views.four = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -213,16 +213,16 @@ function Controller() {
         });
         return o;
     }());
-    $.__views.__alloyId81.add($.__views.four);
+    $.__views.__alloyId77.add($.__views.four);
     chooseLegs ? $.__views.four.addEventListener("click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
-    $.__views.__alloyId83 = Ti.UI.createImageView({
+    $.__views.__alloyId79 = Ti.UI.createImageView({
         touchEnabled: false,
         image: "/images/slings/4-legs.png",
         height: "100%",
         width: "auto",
-        id: "__alloyId83"
+        id: "__alloyId79"
     });
-    $.__views.four.add($.__views.__alloyId83);
+    $.__views.four.add($.__views.__alloyId79);
     exports.destroy = function() {};
     _.extend($, $.__views);
     if (null !== Alloy.Globals.sling.legs) if (1 === Alloy.Globals.sling.legs) {

@@ -122,13 +122,13 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.quotesDetail && $.addTopLevelView($.__views.quotesDetail);
-    $.__views.__alloyId168 = Ti.UI.createView({
+    $.__views.__alloyId164 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "5%",
         top: "30dip",
-        id: "__alloyId168"
+        id: "__alloyId164"
     });
-    $.__views.quotesDetail.add($.__views.__alloyId168);
+    $.__views.quotesDetail.add($.__views.__alloyId164);
     $.__views.close = Ti.UI.createImageView({
         id: "close",
         top: "0",
@@ -137,16 +137,16 @@ function Controller() {
         height: "24dip",
         width: "24dip"
     });
-    $.__views.__alloyId168.add($.__views.close);
+    $.__views.__alloyId164.add($.__views.close);
     closeModal ? $.__views.close.addEventListener("click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
-    $.__views.__alloyId169 = Ti.UI.createView({
+    $.__views.__alloyId165 = Ti.UI.createView({
         height: "1dip",
         top: "20dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId169"
+        id: "__alloyId165"
     });
-    $.__views.quotesDetail.add($.__views.__alloyId169);
+    $.__views.quotesDetail.add($.__views.__alloyId165);
     $.__views.scrollView = Ti.UI.createScrollView({
         id: "scrollView",
         top: "4dip",
@@ -170,13 +170,57 @@ function Controller() {
         left: "5%"
     });
     $.__views.content.add($.__views.slingSpec);
-    $.__views.__alloyId170 = Ti.UI.createLabel({
+    $.__views.__alloyId166 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         text: "Your requirements:",
+        id: "__alloyId166"
+    });
+    $.__views.slingSpec.add($.__views.__alloyId166);
+    $.__views.__alloyId167 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        top: "4dip",
+        layout: "horizontal",
+        id: "__alloyId167"
+    });
+    $.__views.slingSpec.add($.__views.__alloyId167);
+    $.__views.__alloyId168 = Ti.UI.createLabel({
+        color: "#FFF",
+        height: Ti.UI.SIZE,
+        text: "Ref:",
+        left: "0",
+        id: "__alloyId168"
+    });
+    $.__views.__alloyId167.add($.__views.__alloyId168);
+    $.__views.ref = Ti.UI.createLabel({
+        color: "#FFF",
+        height: Ti.UI.SIZE,
+        left: "81dip",
+        id: "ref"
+    });
+    $.__views.__alloyId167.add($.__views.ref);
+    $.__views.__alloyId169 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        top: "4dip",
+        layout: "horizontal",
+        id: "__alloyId169"
+    });
+    $.__views.slingSpec.add($.__views.__alloyId169);
+    $.__views.__alloyId170 = Ti.UI.createLabel({
+        color: "#FFF",
+        height: Ti.UI.SIZE,
+        text: "Type:",
+        left: "0",
         id: "__alloyId170"
     });
-    $.__views.slingSpec.add($.__views.__alloyId170);
+    $.__views.__alloyId169.add($.__views.__alloyId170);
+    $.__views.slingType = Ti.UI.createLabel({
+        color: "#FFF",
+        height: Ti.UI.SIZE,
+        left: "71dip",
+        id: "slingType"
+    });
+    $.__views.__alloyId169.add($.__views.slingType);
     $.__views.__alloyId171 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
@@ -187,18 +231,18 @@ function Controller() {
     $.__views.__alloyId172 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        text: "Ref:",
+        text: "Grade:",
         left: "0",
         id: "__alloyId172"
     });
     $.__views.__alloyId171.add($.__views.__alloyId172);
-    $.__views.ref = Ti.UI.createLabel({
+    $.__views.grade = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "81dip",
-        id: "ref"
+        left: "60dip",
+        id: "grade"
     });
-    $.__views.__alloyId171.add($.__views.ref);
+    $.__views.__alloyId171.add($.__views.grade);
     $.__views.__alloyId173 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
@@ -209,18 +253,18 @@ function Controller() {
     $.__views.__alloyId174 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        text: "Type:",
+        text: "Legs:",
         left: "0",
         id: "__alloyId174"
     });
     $.__views.__alloyId173.add($.__views.__alloyId174);
-    $.__views.slingType = Ti.UI.createLabel({
+    $.__views.legs = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "71dip",
-        id: "slingType"
+        left: "74dip",
+        id: "legs"
     });
-    $.__views.__alloyId173.add($.__views.slingType);
+    $.__views.__alloyId173.add($.__views.legs);
     $.__views.__alloyId175 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
@@ -231,18 +275,18 @@ function Controller() {
     $.__views.__alloyId176 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        text: "Grade:",
+        text: "Load (t):",
         left: "0",
         id: "__alloyId176"
     });
     $.__views.__alloyId175.add($.__views.__alloyId176);
-    $.__views.grade = Ti.UI.createLabel({
+    $.__views.load = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "60dip",
-        id: "grade"
+        left: "53dip",
+        id: "load"
     });
-    $.__views.__alloyId175.add($.__views.grade);
+    $.__views.__alloyId175.add($.__views.load);
     $.__views.__alloyId177 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
@@ -253,62 +297,18 @@ function Controller() {
     $.__views.__alloyId178 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        text: "Legs:",
+        text: "Length (m):",
         left: "0",
         id: "__alloyId178"
     });
     $.__views.__alloyId177.add($.__views.__alloyId178);
-    $.__views.legs = Ti.UI.createLabel({
-        color: "#FFF",
-        height: Ti.UI.SIZE,
-        left: "74dip",
-        id: "legs"
-    });
-    $.__views.__alloyId177.add($.__views.legs);
-    $.__views.__alloyId179 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        top: "4dip",
-        layout: "horizontal",
-        id: "__alloyId179"
-    });
-    $.__views.slingSpec.add($.__views.__alloyId179);
-    $.__views.__alloyId180 = Ti.UI.createLabel({
-        color: "#FFF",
-        height: Ti.UI.SIZE,
-        text: "Load (t):",
-        left: "0",
-        id: "__alloyId180"
-    });
-    $.__views.__alloyId179.add($.__views.__alloyId180);
-    $.__views.load = Ti.UI.createLabel({
-        color: "#FFF",
-        height: Ti.UI.SIZE,
-        left: "53dip",
-        id: "load"
-    });
-    $.__views.__alloyId179.add($.__views.load);
-    $.__views.__alloyId181 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        top: "4dip",
-        layout: "horizontal",
-        id: "__alloyId181"
-    });
-    $.__views.slingSpec.add($.__views.__alloyId181);
-    $.__views.__alloyId182 = Ti.UI.createLabel({
-        color: "#FFF",
-        height: Ti.UI.SIZE,
-        text: "Length (m):",
-        left: "0",
-        id: "__alloyId182"
-    });
-    $.__views.__alloyId181.add($.__views.__alloyId182);
     $.__views.length = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         left: "30dip",
         id: "length"
     });
-    $.__views.__alloyId181.add($.__views.length);
+    $.__views.__alloyId177.add($.__views.length);
     $.__views.descriptionContainer = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
@@ -344,14 +344,14 @@ function Controller() {
         id: "priceContainer"
     });
     $.__views.slingSpec.add($.__views.priceContainer);
-    $.__views.__alloyId183 = Ti.UI.createLabel({
+    $.__views.__alloyId179 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         text: "Price (RRP): £",
         left: "0",
-        id: "__alloyId183"
+        id: "__alloyId179"
     });
-    $.__views.priceContainer.add($.__views.__alloyId183);
+    $.__views.priceContainer.add($.__views.__alloyId179);
     $.__views.quotedPrice = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
@@ -410,14 +410,14 @@ function Controller() {
     });
     $.__views.slingSpec.add($.__views.deleteQuote);
     deleteQuote ? $.__views.deleteQuote.addEventListener("click", deleteQuote) : __defers["$.__views.deleteQuote!click!deleteQuote"] = true;
-    $.__views.__alloyId184 = Ti.UI.createView({
+    $.__views.__alloyId180 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "20dip",
         backgroundColor: "#FFF",
-        id: "__alloyId184"
+        id: "__alloyId180"
     });
-    $.__views.scrollView.add($.__views.__alloyId184);
+    $.__views.scrollView.add($.__views.__alloyId180);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
