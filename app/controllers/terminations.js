@@ -172,7 +172,7 @@ function createPicker(e) {
 
 			$.shorteningDeviceText.value = e.row.title;
 
-			$.shorteningImage.image = '/images/terminations/' + e.row.title + '.jpg';
+			$.shorteningImage.image = '/images/shorteners/' + e.row.title + '.jpg';
 
 			Alloy.Globals.sling.shorteningDevice = e.row.title;
 			Alloy.Globals.sling.shorteningDeviceCode = e.row.val;
@@ -214,6 +214,7 @@ function createPicker(e) {
 			$.lowerTermText.value = e.row.title;
 
 			$.lowerTermImage.image = '/images/terminations/' + e.row.title + '.jpg';
+			Ti.API.info("lower term image " + '/images/terminations/' + e.row.title + '.jpg');
 
 			Alloy.Globals.sling.lowerTermination = e.row.title;
 			Alloy.Globals.sling.lowerTerminationCode = e.row.val;
@@ -253,6 +254,7 @@ function createPicker(e) {
 			$.upperTermText.value = e.row.title;
 
 			$.upperTermImage.image = '/images/terminations/' + e.row.title + '.jpg';
+			Ti.API.info("upper term image " + '/images/terminations/' + e.row.title + '.jpg');
 
 			Alloy.Globals.sling.upperTermination = e.row.title;
 			Alloy.Globals.sling.upperTerminationCode = e.row.val;
