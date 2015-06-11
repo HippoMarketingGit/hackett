@@ -56,9 +56,13 @@ function createPicker(e) {
 				'code' : code,
 				'name' : name
 			};
+			
+			// Grab Hooks - not permitted for lower terminations
+			if (code != 4) {
+				lowerTerminations.push(obj);	
+			}
 
 			upperTerminations.push(obj);
-			lowerTerminations.push(obj);
 
 			row.next();
 		}

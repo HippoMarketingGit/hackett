@@ -20,8 +20,8 @@ function Controller() {
                     code: code,
                     name: name
                 };
+                4 != code && lowerTerminations.push(obj);
                 upperTerminations.push(obj);
-                lowerTerminations.push(obj);
                 row.next();
             }
         } else if ("Wire Rope" === Alloy.Globals.sling.type) {
