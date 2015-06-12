@@ -10,7 +10,10 @@
 },
 'Label': {
 	color: '#FFF',
-	height: Ti.UI.SIZE
+	height: Ti.UI.SIZE,
+},
+'.heading': {
+	font: { fontSize: 18 }
 },
 'View': {
 	height: Ti.UI.SIZE

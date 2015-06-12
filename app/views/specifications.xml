@@ -13,29 +13,44 @@
 			<!-- Lifting Points -->
 			<View class="page" id="content" top="10dip" height="Ti.UI.SIZE">
 				
-				<View id="slingSpec" class="wrapper" layout="vertical" height="Ti.UI.SIZE" width="90%" left="5%">
+				<View id="values" class="wrapper" layout="horizontal" height="Ti.UI.SIZE" width="90%" left="5%" bottom="8dip">
+					
+					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="20%" top="0">
+						<Label class="heading" left="0"></Label>
+						<Label top="4dip" left="0">Type: </Label>
+						<Label top="4dip" left="0" id="labelGrade">Grade: </Label>
+						<Label top="4dip" left="0">Legs: </Label>
+						<Label top="4dip" left="0">Load (t): </Label>
+						<Label top="4dip" left="0">Length (m): </Label>
+						<Label top="4dip" left="0">Size (mm): </Label>
+					</View>
+					
+					<View id="slingRequirements" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
+					
+						<Label class="heading" left="0">Your requirements:</Label>
+						
+						<Label top="4dip" left="0" id="slingType"></Label>						
+						<Label top="4dip" left="0" id="grade"></Label>
+						<Label top="4dip" left="0" id="legs"></Label>
+						<Label top="4dip" left="0" id="load"></Label>
+						<Label top="4dip" left="0" id="length"></Label>	
+					</View>
+					
+					<View id="slingSpecification" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
+						
+						<Label class="heading" left="0">Sling specification:</Label>
+						
+						<Label top="4dip" left="0" id="slingSpecType"></Label>
+						<Label top="4dip" left="0" id="slingSpecGrade"></Label>
+						<Label top="4dip" left="0" id="slingSpecLegs"></Label>
+						<Label top="4dip" left="0" id="slingSpecLoad"></Label>
+						<Label top="4dip" left="0" id="slingSpecLength"></Label>
+						<Label top="4dip" left="0" id="slingSpecSize"></Label>
+					</View>
 				
-					<Label>Your requirements:</Label>
-					
-					<View top="4dip" layout="horizontal">
-						<Label left="0">Type: </Label><Label left="71dip" id="slingType"></Label>
-					</View>
-					
-					<View top="4dip" layout="horizontal" id="gradeContainer">
-						<Label left="0">Grade: </Label><Label left="60dip" id="grade"></Label>
-					</View>
-					
-					<View top="4dip" layout="horizontal">
-						<Label left="0">Legs: </Label><Label left="74dip" id="legs"></Label>
-					</View>
-					
-					<View top="4dip" layout="horizontal">
-						<Label left="0">Load (t): </Label><Label left="53dip" id="load"></Label>
-					</View>
-					
-					<View top="4dip" layout="horizontal">
-						<Label left="0">Length (m): </Label><Label left="30dip" id="length"></Label>
-					</View>
+				</View>
+				
+				<View class="wrapper" layout="vertical" height="Ti.UI.SIZE" width="90%" left="5%">
 					
 					<View top="4dip" layout="horizontal" id="descriptionContainer">
 						<Label left="0" id="description"></Label>
