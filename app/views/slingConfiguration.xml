@@ -24,6 +24,8 @@
 				
 				<Require type="view" src="liftingPoints" id="liftingPointsRequire"/>
 				
+				<Require type="view" src="setHeadroom" id="setHeadroomRequire"/>
+				
 				<Require type="view" src="terminations" id="terminationsRequire"/>
 				
 				<Require type="view" src="specifications" id="specificationsRequire"/>-->
