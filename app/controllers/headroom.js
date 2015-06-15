@@ -46,7 +46,7 @@ function setHeadroomImg() {
 			break;
 		case 3:
 		case 4:
-			imgLegs = "4";			
+			imgLegs = "4";
 			break;
 		// No default
 	}
