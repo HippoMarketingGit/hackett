@@ -9,17 +9,30 @@ function __processArg(obj, key) {
 
 function Controller() {
     function setHeadroomImg() {
-        var src = "";
+        var src = "", imgType = Alloy.Globals.sling.type, imgLegs = "";
+        var images = {
+            "Wire Rope": {
+                "2": "2-leg-thimble-eyes-headroom.png",
+                "4": "4-leg-wire-rope-headroom.png"
+            },
+            Chain: {
+                "2": "7mm-2-leg-set-up-headroom.png",
+                "4": "7mm-4-leg-set-up.png"
+            }
+        };
         switch (Alloy.Globals.sling.legs) {
           case 2:
-            src = "/images/headroom/7mm-2-leg-set-up-headroom.png";
+            imgLegs = "2";
             break;
 
           case 3:
           case 4:
-            src = "/images/headroom/7mm-4-leg-set-up.png";
+            imgLegs = "4";
         }
-        "" !== src && ($.headroomImg.image = src);
+        if (imgType && imgLegs) {
+            src = "/images/headroom/" + images[imgType][imgLegs];
+            $.headroomImg.image = src;
+        }
     }
     function setAngle(e) {
         $.yes.backgroundColor = "#2b3b94";

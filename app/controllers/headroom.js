@@ -24,19 +24,35 @@ if( Alloy.Globals.sling.angle !== null){
 
 function setHeadroomImg() {
 	
-	var src ='';
+	var src = "",
+		imgType = Alloy.Globals.sling.type,
+		imgLegs = "";
+	
+	// Specify which images to use for different sling types and number of legs
+	var images = {
+		"Wire Rope": {
+			"2": "2-leg-thimble-eyes-headroom.png",
+			"4": "4-leg-wire-rope-headroom.png"
+		},
+		"Chain": {
+			"2": "7mm-2-leg-set-up-headroom.png",
+			"4": "7mm-4-leg-set-up.png"
+		}
+	};
 	
 	switch (Alloy.Globals.sling.legs) {
 		case 2:
-			src = '/images/headroom/7mm-2-leg-set-up-headroom.png';
-		break;
+			imgLegs = "2";
+			break;
 		case 3:
 		case 4:
-			src = '/images/headroom/7mm-4-leg-set-up.png';
-		break;
+			imgLegs = "4";			
+			break;
+		// No default
 	}
 	
-	if (src !== '') {
+	if (imgType && imgLegs) {
+		src = '/images/headroom/' + images[imgType][imgLegs];
 		$.headroomImg.image = src;
 	}
 }
