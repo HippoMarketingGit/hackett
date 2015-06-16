@@ -277,9 +277,7 @@ function installDatabase(config) {
         }
         rs.close();
     } else {
-        {
-            config.adapter.idAttribute ? config.adapter.idAttribute : ALLOY_ID_DEFAULT;
-        }
+        config.adapter.idAttribute ? config.adapter.idAttribute : ALLOY_ID_DEFAULT;
         for (var k in config.columns) {
             cName = k;
             cType = config.columns[k];

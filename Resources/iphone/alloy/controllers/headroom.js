@@ -41,7 +41,7 @@ function Controller() {
         obj.backgroundColor = "#6b76d0";
         if ("yes" === obj.id) {
             Alloy.Globals.sling.angle = 60;
-            var modal = Alloy.createController("setHeadroom").getView();
+            var modal = Alloy.createController("liftingPoints").getView();
             modal.open({
                 modal: true
             });

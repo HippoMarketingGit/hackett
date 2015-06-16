@@ -77,15 +77,15 @@ function setAngle(e){
 		Alloy.Globals.sling.angle = 60;
 			
 		// Open the lifting points modal to calculate the headroom and leg room
-		
-		/*
 		var modal = Alloy.createController('liftingPoints').getView();
-			modal.open({modal: true});
-		*/
+		modal.open({modal: true});
 		
 		
+		// Change: *don't* ask the user for the headroom now.
+		/* 
 		var modal = Alloy.createController("setHeadroom").getView();
 		modal.open({ modal: true });
+		*/
 		
 			
 		// When the modal is closed and no values are entered reset the buttons to their default state

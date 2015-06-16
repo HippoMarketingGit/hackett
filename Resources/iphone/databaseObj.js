@@ -465,10 +465,8 @@ Database.prototype.getVersions = function() {
 };
 
 Database.prototype.findBomDetails = function(partcode) {
-    {
-        var db = this.openDb();
-        db.execute('SELECT * FROM Components AS c, Boms AS b WHERE b.sling_code = "' + partcode + '" AND b.comp_code = c.code');
-    }
+    var db = this.openDb();
+    db.execute('SELECT * FROM Components AS c, Boms AS b WHERE b.sling_code = "' + partcode + '" AND b.comp_code = c.code');
 };
 
 Database.prototype.emptyTable = function(tableName) {
