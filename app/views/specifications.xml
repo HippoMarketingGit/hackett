@@ -11,9 +11,11 @@
 		<ScrollView id="scrollView" top="4dip" left="0" width="100%" layout="vertical">
 	
 			<!-- Lifting Points -->
-			<View class="page" id="content" top="10dip" height="Ti.UI.SIZE">
+			<View class="page" id="content" top="10dip" height="Ti.UI.SIZE" layout="vertical">
 				
-				<View id="values" class="wrapper" layout="horizontal" height="Ti.UI.SIZE" width="90%" left="5%" bottom="8dip">
+				
+				<!-- Start of tablet info -->
+				<View id="values" class="wrapper" layout="horizontal" height="Ti.UI.SIZE" width="90%" left="5%" bottom="8dip" formFactor="tablet">
 					
 					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="20%" top="0">
 						<Label class="heading" left="0"></Label>
@@ -49,6 +51,49 @@
 					</View>
 				
 				</View>
+				<!-- End of tablet info -->
+				
+				
+				<!-- Start of phone info -->
+				<View id="valuesReqs" class="wrapper" layout="horizontal" height="Ti.UI.SIZE" width="90%" left="5%" bottom="8dip" formFactor="handheld">
+					<Label class="heading" left="0" width="100%">Your requirements:</Label>
+					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
+						<Label top="4dip" left="0">Type: </Label>
+						<Label top="4dip" left="0" id="labelGrade">Grade: </Label>
+						<Label top="4dip" left="0">Legs: </Label>
+						<Label top="4dip" left="0">Load (t): </Label>
+						<Label top="4dip" left="0">Length (m): </Label>
+					</View>
+					<View id="slingRequirements" layout="vertical" height="Ti.UI.SIZE" width="60%" top="0">
+						<Label top="4dip" left="0" id="slingType"></Label>						
+						<Label top="4dip" left="0" id="grade"></Label>
+						<Label top="4dip" left="0" id="legs"></Label>
+						<Label top="4dip" left="0" id="load"></Label>
+						<Label top="4dip" left="0" id="length"></Label>	
+					</View>
+				</View>
+				
+				<View id="valuesSling" class="wrapper" layout="horizontal" height="Ti.UI.SIZE" width="90%" left="5%" top="8dip" bottom="16dip" formFactor="handheld">
+					<Label class="heading" left="0" width="100%">Sling specification:</Label>
+					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
+						<Label top="4dip" left="0">Type: </Label>
+						<Label top="4dip" left="0" id="labelGrade">Grade: </Label>
+						<Label top="4dip" left="0">Legs: </Label>
+						<Label top="4dip" left="0">Load (t): </Label>
+						<Label top="4dip" left="0">Length (m): </Label>
+						<Label top="4dip" left="0">Size (mm): </Label>
+					</View>
+					<View id="slingSpecification" layout="vertical" height="Ti.UI.SIZE" width="60%" top="0">
+						<Label top="4dip" left="0" id="slingSpecType"></Label>
+						<Label top="4dip" left="0" id="slingSpecGrade"></Label>
+						<Label top="4dip" left="0" id="slingSpecLegs"></Label>
+						<Label top="4dip" left="0" id="slingSpecLoad"></Label>
+						<Label top="4dip" left="0" id="slingSpecLength"></Label>
+						<Label top="4dip" left="0" id="slingSpecSize"></Label>	
+					</View>
+				</View>
+				<!-- End of phone info -->
+				
 				
 				<View class="wrapper" layout="vertical" height="Ti.UI.SIZE" width="90%" left="5%">
 					
