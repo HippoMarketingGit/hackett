@@ -664,7 +664,7 @@ function Controller() {
                 shortener = "NONE" === Alloy.Globals.sling.shorteningDeviceCode ? "AND s.shortener IS NULL" : 'AND s.shortener LIKE "' + Alloy.Globals.sling.shorteningDeviceCode + '"';
                 end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? "AND s.end IS NULL" : 'AND s.end = "' + Alloy.Globals.sling.lowerTerminationCode + '"';
                 upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? "AND s.end IS NULL" : 'AND s.end = "' + Alloy.Globals.sling.upperTerminationCode + '"';
-                var sql = "SELECT *, wll.id AS wllId, s.id AS slingIdFROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs = wll.legs AND (wll.grade = "8" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + " " + shortener + " AND s.length = " + legLength + ") GROUP BY wll.id ORDER BY " + angle + " ASC";
+                var sql = "SELECT *, wll.id AS wllId, s.id AS slingId FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs = wll.legs AND (wll.grade = "8" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + " " + shortener + " AND s.length = " + legLength + ") GROUP BY wll.id ORDER BY " + angle + " ASC";
                 var row8 = db.execute(sql);
                 if (row8.isValidRow()) {
                     price8 = row8.fieldByName("price");

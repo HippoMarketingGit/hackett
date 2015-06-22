@@ -182,7 +182,7 @@
 			}
 			
 			// Perform the query for a grade 8 sling
-			var sql = 'SELECT *, wll.id AS wllId, s.id AS slingId' + 
+			var sql = 'SELECT *, wll.id AS wllId, s.id AS slingId ' + 
 						'FROM WorkingLoadLimits AS wll, Slings AS s ' + 
 						'WHERE ' + angle + ' >= ' +  Alloy.Globals.sling.load + ' ' +
 						'AND wll.type="c" ' + 
