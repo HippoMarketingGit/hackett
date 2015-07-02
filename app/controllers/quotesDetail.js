@@ -23,6 +23,12 @@ var args = arguments[0] || {};
 	}
 	
 	Ti.API.info( 'price: ' + args.price );
+	Ti.API.info(JSON.stringify(args));
+	
+	if (args.type === "Wire Rope") {		
+		$.gradeContainer.hide();
+		$.gradeContainer.height = 0;
+	}
 	
 	checkImage(args.partCode);
 	

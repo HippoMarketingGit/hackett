@@ -25,7 +25,7 @@
 						<Label left="0">Type: </Label><Label left="71dip" id="slingType"></Label>
 					</View>
 					
-					<View top="4dip" layout="horizontal">
+					<View top="4dip" layout="horizontal" id="gradeContainer">
 						<Label left="0">Grade: </Label><Label left="60dip" id="grade"></Label>
 					</View>
 					
