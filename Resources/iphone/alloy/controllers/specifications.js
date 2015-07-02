@@ -1004,6 +1004,7 @@ function Controller() {
             end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
             upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? ' AND end = "" ' : ' AND end = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
             var sql = "SELECT *, wll.id AS wllId, s.id AS slingId FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + " AND wll.type='r' AND wll.legs = " + Alloy.Globals.sling.legs + " AND s.grade = '' AND s.legs = wll.legs AND s.size = wll.size AND s.length = " + legLength + " " + end + "GROUP BY wll.id ORDER BY " + angle + " ASC LIMIT 1";
+            Ti.API.info(sql);
             var row = db.execute(sql);
             if (row.isValidRow()) {
                 Ti.API.info("DB part code: " + row.fieldByName("code"));

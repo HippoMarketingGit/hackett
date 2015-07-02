@@ -340,7 +340,7 @@
 				"ORDER BY " + angle + " ASC " +
 				"LIMIT 1";
 				
-		// Ti.API.info(sql);
+		Ti.API.info(sql);
 		
 		var row = db.execute(sql);
 		

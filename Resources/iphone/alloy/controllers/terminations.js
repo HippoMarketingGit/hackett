@@ -96,6 +96,7 @@ function Controller() {
             picker.addEventListener("change", function(e) {
                 $.shorteningDeviceText.value = e.row.title;
                 $.shorteningImage.image = "/images/shorteners/" + e.row.title + ".jpg";
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.shorteningDevice = e.row.title;
                 Alloy.Globals.sling.shorteningDeviceCode = e.row.val;
             });
@@ -120,6 +121,7 @@ function Controller() {
                 $.lowerTermText.value = e.row.title;
                 $.lowerTermImage.image = "/images/terminations/" + e.row.title + ".jpg";
                 Ti.API.info("lower term image /images/terminations/" + e.row.title + ".jpg");
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.lowerTermination = e.row.title;
                 Alloy.Globals.sling.lowerTerminationCode = e.row.val;
             });
@@ -143,6 +145,7 @@ function Controller() {
                 $.upperTermText.value = e.row.title;
                 $.upperTermImage.image = "/images/terminations/" + e.row.title + ".jpg";
                 Ti.API.info("upper term image /images/terminations/" + e.row.title + ".jpg");
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.upperTermination = e.row.title;
                 Alloy.Globals.sling.upperTerminationCode = e.row.val;
             });
