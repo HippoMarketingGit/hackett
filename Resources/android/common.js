@@ -11,7 +11,13 @@ Common.prototype.generateQuoteRef = function(user, quote) {
     personal = user["name"].substring(0, 2);
     id = user["id"];
     for (var i = 0; 3 > i; i++) chars += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-    num = quote["description"] && quote["description"].length > 0 ? quote["description"].length : parseInt(quote["legs"], 10) + parseInt(quote["grade"], 10) + parseInt(quote["length"], 10) + parseInt(quote["load"], 10);
+    if (quote["description"] && quote["description"].length > 0) num = parseInt(quote["description"].length, 10); else {
+        num = 0;
+        quote["legs"] && (num += parseInt(quote["legs"], 10));
+        quote["grade"] && (num += parseInt(quote["grade"], 10));
+        quote["length"] && (num += parseInt(grade["length"], 10));
+        quote["load"] && (num += parseInt(grade["load"], 10));
+    }
     var count = parseInt(user["company"].length, 10) + parseInt(user["name"].length, 10) + parseInt(user["email"].length, 10) + parseInt(num, 10);
     ref = [ company + personal + id, chars + count.toString() ].join("-").toUpperCase();
     return ref;

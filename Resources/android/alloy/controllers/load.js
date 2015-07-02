@@ -29,14 +29,14 @@ function Controller() {
         id: "content"
     });
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId97 = Ti.UI.createView({
+    $.__views.__alloyId89 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId97"
+        id: "__alloyId89"
     });
-    $.__views.content.add($.__views.__alloyId97);
-    $.__views.__alloyId98 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId89);
+    $.__views.__alloyId90 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -44,28 +44,28 @@ function Controller() {
         },
         textAlign: "center",
         text: "Weight of load",
-        id: "__alloyId98"
+        id: "__alloyId90"
     });
-    $.__views.__alloyId97.add($.__views.__alloyId98);
-    $.__views.__alloyId99 = Ti.UI.createLabel({
+    $.__views.__alloyId89.add($.__views.__alloyId90);
+    $.__views.__alloyId91 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please input the weight of the load to be lifted with the sling, then press Next.",
-        id: "__alloyId99"
+        id: "__alloyId91"
     });
-    $.__views.__alloyId97.add($.__views.__alloyId99);
-    $.__views.__alloyId100 = Ti.UI.createView({
+    $.__views.__alloyId89.add($.__views.__alloyId91);
+    $.__views.__alloyId92 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId100"
+        id: "__alloyId92"
     });
-    $.__views.__alloyId97.add($.__views.__alloyId100);
-    $.__views.__alloyId101 = Ti.UI.createLabel({
+    $.__views.__alloyId89.add($.__views.__alloyId92);
+    $.__views.__alloyId93 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -73,24 +73,24 @@ function Controller() {
         },
         textAlign: "center",
         text: "Load in Tonnes (t)",
-        id: "__alloyId101"
+        id: "__alloyId93"
     });
-    $.__views.__alloyId100.add($.__views.__alloyId101);
-    $.__views.__alloyId102 = Ti.UI.createView({
+    $.__views.__alloyId92.add($.__views.__alloyId93);
+    $.__views.__alloyId94 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId102"
+        id: "__alloyId94"
     });
-    $.__views.__alloyId97.add($.__views.__alloyId102);
-    $.__views.__alloyId103 = Ti.UI.createView({
+    $.__views.__alloyId89.add($.__views.__alloyId94);
+    $.__views.__alloyId95 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId103"
+        id: "__alloyId95"
     });
-    $.__views.__alloyId102.add($.__views.__alloyId103);
+    $.__views.__alloyId94.add($.__views.__alloyId95);
     $.__views.tonne = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -111,17 +111,17 @@ function Controller() {
         value: "00",
         returnKeyType: Titanium.UI.RETURNKEY_DONE
     });
-    $.__views.__alloyId103.add($.__views.tonne);
-    $.__views.__alloyId104 = Ti.UI.createLabel({
+    $.__views.__alloyId95.add($.__views.tonne);
+    $.__views.__alloyId96 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId104"
+        id: "__alloyId96"
     });
-    $.__views.__alloyId103.add($.__views.__alloyId104);
+    $.__views.__alloyId95.add($.__views.__alloyId96);
     $.__views.fraction = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -141,7 +141,7 @@ function Controller() {
         id: "fraction",
         value: "00"
     });
-    $.__views.__alloyId103.add($.__views.fraction);
+    $.__views.__alloyId95.add($.__views.fraction);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var load, Common = require("common"), common = new Common(), tonne = $.tonne.value, fraction = $.fraction.value;

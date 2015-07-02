@@ -9,17 +9,30 @@ function __processArg(obj, key) {
 
 function Controller() {
     function setHeadroomImg() {
-        var src = "";
+        var src = "", imgType = Alloy.Globals.sling.type, imgLegs = "";
+        var images = {
+            "Wire Rope": {
+                "2": "2-leg-thimble-eyes-headroom.png",
+                "4": "4-leg-wire-rope-headroom.png"
+            },
+            Chain: {
+                "2": "7mm-2-leg-set-up-headroom.png",
+                "4": "7mm-4-leg-set-up.png"
+            }
+        };
         switch (Alloy.Globals.sling.legs) {
           case 2:
-            src = "/images/headroom/double.jpg";
+            imgLegs = "2";
             break;
 
           case 3:
           case 4:
-            src = "/images/headroom/3-4-leg.jpg";
+            imgLegs = "4";
         }
-        "" !== src && ($.headroomImg.image = src);
+        if (imgType && imgLegs) {
+            src = "/images/headroom/" + images[imgType][imgLegs];
+            $.headroomImg.image = src;
+        }
     }
     function setAngle(e) {
         $.yes.backgroundColor = "#2b3b94";
@@ -215,29 +228,13 @@ function Controller() {
     });
     $.__views.__alloyId46.add($.__views.__alloyId47);
     $.__views.__alloyId48 = Ti.UI.createView({
-        top: "4dip",
-        height: Titanium.UI.SIZE,
-        width: Titanium.UI.SIZE,
-        id: "__alloyId48"
-    });
-    $.__views.__alloyId45.add($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createLabel({
-        color: "#FFF",
-        font: {
-            fontSize: 12
-        },
-        text: "0 - 45° Angle",
-        id: "__alloyId49"
-    });
-    $.__views.__alloyId48.add($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId50"
+        id: "__alloyId48"
     });
-    $.__views.no.add($.__views.__alloyId50);
+    $.__views.no.add($.__views.__alloyId48);
     $.__views.yes = Ti.UI.createView({
         top: "10dip",
         width: "50%",
@@ -248,79 +245,63 @@ function Controller() {
     });
     $.__views.liftingAngle.add($.__views.yes);
     setAngle ? $.__views.yes.addEventListener("click", setAngle) : __defers["$.__views.yes!click!setAngle"] = true;
-    $.__views.__alloyId51 = Ti.UI.createView({
+    $.__views.__alloyId49 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId51"
+        id: "__alloyId49"
     });
-    $.__views.yes.add($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId49);
+    $.__views.__alloyId50 = Ti.UI.createView({
         height: "100%",
         width: "1dip",
         left: 0,
         backgroundColor: "#FFF",
-        id: "__alloyId52"
+        id: "__alloyId50"
     });
-    $.__views.yes.add($.__views.__alloyId52);
-    $.__views.__alloyId53 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId50);
+    $.__views.__alloyId51 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId53"
+        id: "__alloyId51"
     });
-    $.__views.yes.add($.__views.__alloyId53);
-    $.__views.__alloyId54 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId51);
+    $.__views.__alloyId52 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId54"
+        id: "__alloyId52"
     });
-    $.__views.__alloyId53.add($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createLabel({
+    $.__views.__alloyId51.add($.__views.__alloyId52);
+    $.__views.__alloyId53 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
         },
         textAlign: "center",
         text: "Yes",
-        id: "__alloyId55"
+        id: "__alloyId53"
     });
-    $.__views.__alloyId54.add($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createView({
-        top: "4dip",
-        height: Titanium.UI.SIZE,
-        width: Titanium.UI.SIZE,
-        id: "__alloyId56"
-    });
-    $.__views.__alloyId53.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createLabel({
-        color: "#FFF",
-        font: {
-            fontSize: 12
-        },
-        text: "45 - 60° Angle",
-        id: "__alloyId57"
-    });
-    $.__views.__alloyId56.add($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createView({
+    $.__views.__alloyId52.add($.__views.__alloyId53);
+    $.__views.__alloyId54 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId58"
+        id: "__alloyId54"
     });
-    $.__views.yes.add($.__views.__alloyId58);
-    $.__views.__alloyId59 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId54);
+    $.__views.__alloyId55 = Ti.UI.createView({
         right: 0,
         height: 0,
         width: 0,
         backgroundColor: "#FFF",
-        id: "__alloyId59"
+        id: "__alloyId55"
     });
-    $.__views.yes.add($.__views.__alloyId59);
+    $.__views.yes.add($.__views.__alloyId55);
     exports.destroy = function() {};
     _.extend($, $.__views);
     if (1 === Alloy.Globals.sling.legs) {

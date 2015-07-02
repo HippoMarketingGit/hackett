@@ -54,7 +54,7 @@ ImageSync.prototype.downloadSlings = function() {
     rows = db.execute(query);
     while (rows.isValidRow()) {
         img = rows.fieldByName("img");
-        "" !== img && "n/a" !== img && imgs.push(rows.fieldByName("img"));
+        "" !== img && "n/a" !== img && "img" !== img && imgs.push(rows.fieldByName("img"));
         rows.next();
     }
     rows.close();
