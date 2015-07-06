@@ -2,13 +2,22 @@
  * If the user has a 1 leg chain then we do not need to worry about a lifting angle
  * 
  * This means we can just open the nominal length page and
- * prompt the user to enter a nominal length
+ * prompt the user to enter a nominal length.
+ * 
+ * When done, go to the next page.
  */
+
+
 if( Alloy.Globals.sling.legs === 1 ){
-	var modal = Alloy.createController('nominalLength', { closeAction: 'back' }).getView();
+	
+	// var modal = Alloy.createController('nominalLength', { closeAction: 'back' }).getView();
+	var modal = Alloy.createController('nominalLength', { navigateOnClose: true }).getView();
 	modal.open({ modal: true });
+	
 } else {
+	
 	setHeadroomImg();
+	
 }
 
 // Check if anything has been set previously

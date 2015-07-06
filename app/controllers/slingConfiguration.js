@@ -16,6 +16,10 @@ Alloy.Globals.goBack = function() {
 	navigation.previousPage( $.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
 };
 
+Alloy.Globals.goNext = function() {
+	navigation.nextPage($.scrollView, pages, Alloy.Globals.sling);
+}
+
 // Open the first page
 navigation.openFirstPage($.scrollView, pages);
 

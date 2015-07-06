@@ -149,6 +149,9 @@ function Controller() {
     Alloy.Globals.goBack = function() {
         navigation.previousPage($.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
     };
+    Alloy.Globals.goNext = function() {
+        navigation.nextPage($.scrollView, pages, Alloy.Globals.sling);
+    };
     navigation.openFirstPage($.scrollView, pages);
     $.next.addEventListener("click", function() {
         navigation.nextPage($.scrollView, pages, Alloy.Globals.sling);

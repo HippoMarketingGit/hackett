@@ -368,7 +368,7 @@ function Controller() {
     _.extend($, $.__views);
     if (1 === Alloy.Globals.sling.legs) {
         var modal = Alloy.createController("nominalLength", {
-            closeAction: "back"
+            navigateOnClose: true
         }).getView();
         modal.open({
             modal: true
