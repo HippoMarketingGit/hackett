@@ -21,7 +21,8 @@ function Controller() {
         $.nominalLength.close({
             modal: true
         });
-        isManual && args && args["navigateOnClose"] && true === args.navigateOnClose ? Alloy.Globals.goBack() : !isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && Alloy.Globals.goNext();
+        isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["back"] && true === args.back && Alloy.Globals.goBack();
+        !isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["next"] && true === args.next && Alloy.Globals.goNext();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "nominalLength";

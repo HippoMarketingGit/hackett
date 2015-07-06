@@ -41,7 +41,11 @@ function Controller() {
         obj.backgroundColor = "#6b76d0";
         if ("yes" === obj.id) {
             Alloy.Globals.sling.angle = 60;
-            var modal = Alloy.createController("liftingPoints").getView();
+            var modal = Alloy.createController("liftingPoints", {
+                navigateOnClose: true,
+                back: false,
+                next: true
+            }).getView();
             modal.open({
                 modal: true
             });
@@ -67,12 +71,20 @@ function Controller() {
         lengthKnown.addEventListener("click", function(e) {
             var modal;
             if (e.cancel === e.index || true === e.cancel) {
-                modal = Alloy.createController("liftingPoints").getView();
+                modal = Alloy.createController("liftingPoints", {
+                    navigateOnClose: true,
+                    back: false,
+                    next: true
+                }).getView();
                 modal.open({
                     modal: true
                 });
             } else if (0 === e.index) {
-                modal = Alloy.createController("nominalLength").getView();
+                modal = Alloy.createController("nominalLength", {
+                    navigateOnClose: true,
+                    back: false,
+                    next: true
+                }).getView();
                 modal.open({
                     modal: true
                 });
@@ -368,7 +380,9 @@ function Controller() {
     _.extend($, $.__views);
     if (1 === Alloy.Globals.sling.legs) {
         var modal = Alloy.createController("nominalLength", {
-            navigateOnClose: true
+            navigateOnClose: true,
+            back: true,
+            next: true
         }).getView();
         modal.open({
             modal: true

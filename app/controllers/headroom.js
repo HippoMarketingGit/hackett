@@ -11,7 +11,7 @@
 if( Alloy.Globals.sling.legs === 1 ){
 	
 	// var modal = Alloy.createController('nominalLength', { closeAction: 'back' }).getView();
-	var modal = Alloy.createController('nominalLength', { navigateOnClose: true }).getView();
+	var modal = Alloy.createController('nominalLength', { navigateOnClose: true, back: true, next: true }).getView();
 	modal.open({ modal: true });
 	
 } else {
@@ -86,7 +86,7 @@ function setAngle(e){
 		Alloy.Globals.sling.angle = 60;
 			
 		// Open the lifting points modal to calculate the headroom and leg room
-		var modal = Alloy.createController('liftingPoints').getView();
+		var modal = Alloy.createController('liftingPoints', { navigateOnClose: true, back: false, next: true }).getView();
 		modal.open({modal: true});
 		
 		
@@ -134,13 +134,13 @@ function showAlert(){
         if (e.cancel === e.index || e.cancel === true) {
 			// Leg Length not known (No)
 			
-			modal = Alloy.createController('liftingPoints').getView();
+			modal = Alloy.createController('liftingPoints', { navigateOnClose: true, back: false, next: true }).getView();
 			modal.open({modal: true});
 
         }else if (e.index === 0){
 			// Leg Length known (Yes)
 			
-			modal = Alloy.createController('nominalLength').getView();
+			modal = Alloy.createController('nominalLength', { navigateOnClose: true, back: false, next: true }).getView();
 			modal.open({modal: true});
 		}
 		

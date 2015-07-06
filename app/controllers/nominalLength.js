@@ -49,9 +49,15 @@ function closeModal(e){
 	
 	// Was the modal dialog closed manually, and do we have the closeAction passed of going back?
 	// This is used to go back to the "Load" page on single leg configs.
-	if (isManual && args && args['navigateOnClose'] && args.navigateOnClose === true) {
-		Alloy.Globals.goBack();
-	} else if ( ! isManual && args && args['navigateOnClose'] && args.navigateOnClose === true) {
+	if (isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['back'] && args.back === true) {
+			Alloy.Globals.goBack();	
+	}
+	
+	if ( ! isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['next'] && args.next === true) {
 		Alloy.Globals.goNext();
 	}
 	

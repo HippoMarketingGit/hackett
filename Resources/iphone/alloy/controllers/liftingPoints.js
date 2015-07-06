@@ -54,10 +54,13 @@ function Controller() {
         });
         headroom.show();
     }
-    function closeModal() {
+    function closeModal(e) {
+        var isManual = null !== e && e && e["type"];
         $.liftingPoints.close({
             modal: true
         });
+        isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["back"] && true === args.back && Alloy.Globals.goBack();
+        !isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["next"] && true === args.next && Alloy.Globals.goNext();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "liftingPoints";
@@ -337,6 +340,7 @@ function Controller() {
     $.__views.scrollView.add($.__views.__alloyId98);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var args = arguments[0] || {};
     $.liftingPointDone && $.liftingPointDone.addEventListener("click", function() {
         ("" === $.liftingPointMeter.value || null == $.liftingPointMeter.value) && $.liftingPointMeter.setValue("00");
         $.liftingPointMeter.blur();

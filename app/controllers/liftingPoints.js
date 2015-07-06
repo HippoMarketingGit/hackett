@@ -1,3 +1,5 @@
+var args = arguments[0] || {};
+
 function setLegLength(e){
 	
 	var num = parseFloat( $.liftingPointMeter.value + '.' + $.liftingPointFraction.value ),
@@ -125,9 +127,25 @@ function showHeadroomAlert(){
 	headroom.show();
 }
 
-function closeModal(){
+function closeModal(e) {
 	
-	$.liftingPoints.close({modal: true});
+	var isManual = (e !== null && e && e['type']);
+	
+	$.liftingPoints.close({ modal: true });
+	
+	// Was the modal dialog closed manually, and do we have the navigateOnClose options passed?
+	if (isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['back'] && args.back === true) {
+			Alloy.Globals.goBack();	
+	}
+	
+	if ( ! isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['next'] && args.next === true) {
+		Alloy.Globals.goNext();
+	}
+	
 }
 
 // Check if any values have been entered when the 'Done' button is pressed,
