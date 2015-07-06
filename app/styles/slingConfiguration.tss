@@ -70,17 +70,45 @@
 	layout: 'vertical',
 	bottom: '51dip'
 },
+
 '.button--next': {
 	layout: 'vertical',
 	right: '5%',
 	width: '100dip',
-	height: '26dip',
+	height: '30dip',
 	backgroundImage: '/images/WHC-button--next.png',
 	title: 'NEXT',
 	color: '#FFF',
 	textAlign: 'left',
 	verticalAlign: 'bottom',
-	font: {fontSize: 16}
+},
+
+'.button--home': {
+	layout: 'vertical',
+	// left: '40%',
+	backgroundImage: '/images/WHC-button--blank.png',
+	title: 'HOME',
+	color: '#FFF',
+	textAlign: 'center',
+	verticalAlign: 'bottom',
+},
+
+'.button--size': {
+	width: '100dip',
+	height: '30dip',
+},
+
+'.button--nav': {
+	font: { fontSize: 16 }
+},
+
+'.button--size[formFactor=handheld]': {
+	width: '88dip',
+	height: '26dip',
+},
+
+'.button--nav[formFactor=handheld]': {
+	font: { fontSize: 14 }
 },
 
 // IMAGES

@@ -106,41 +106,109 @@ function Controller() {
         id: "__alloyId225"
     });
     $.__views.footer.add($.__views.__alloyId225);
-    $.__views.back = Ti.UI.createView({
-        left: "5%",
-        layout: "horizontal",
-        textAlign: "right",
-        backgroundImage: "/images/WHC-button--back.png",
-        width: "100dip",
-        height: "26dip",
-        id: "back"
-    });
+    $.__views.back = Ti.UI.createView(function() {
+        var o = {};
+        _.extend(o, {
+            width: "100dip",
+            height: "30dip"
+        });
+        Alloy.isHandheld && _.extend(o, {
+            width: "88dip",
+            height: "26dip"
+        });
+        _.extend(o, {
+            left: "5%",
+            layout: "vertical",
+            backgroundImage: "/images/WHC-button--back.png",
+            id: "back"
+        });
+        return o;
+    }());
     $.__views.footer.add($.__views.back);
-    $.__views.__alloyId226 = Ti.UI.createLabel({
-        text: "BACK",
-        touchEnabled: false,
-        top: "2dip",
-        left: "42dip",
-        width: Ti.UI.SIZE,
-        color: "#FFF",
-        id: "__alloyId226"
-    });
+    $.__views.__alloyId226 = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            font: {
+                fontSize: 16
+            }
+        });
+        Alloy.isHandheld && _.extend(o, {
+            font: {
+                fontSize: 14
+            }
+        });
+        _.extend(o, {
+            text: "BACK",
+            touchEnabled: false,
+            right: "5%",
+            height: "100%",
+            width: Ti.UI.SIZE,
+            color: "#FFF",
+            id: "__alloyId226"
+        });
+        return o;
+    }());
     $.__views.back.add($.__views.__alloyId226);
-    $.__views.next = Ti.UI.createButton({
-        layout: "vertical",
-        right: "5%",
-        width: "100dip",
-        height: "26dip",
-        backgroundImage: "/images/WHC-button--next.png",
-        title: "NEXT",
-        color: "#FFF",
-        textAlign: "left",
-        verticalAlign: "bottom",
-        font: {
-            fontSize: 16
-        },
-        id: "next"
-    });
+    $.__views.home = Ti.UI.createButton(function() {
+        var o = {};
+        _.extend(o, {
+            layout: "vertical",
+            backgroundImage: "/images/WHC-button--blank.png",
+            title: "HOME",
+            color: "#FFF",
+            textAlign: "center",
+            verticalAlign: "bottom",
+            width: "100dip",
+            height: "30dip",
+            font: {
+                fontSize: 16
+            }
+        });
+        Alloy.isHandheld && _.extend(o, {
+            width: "88dip",
+            height: "26dip"
+        });
+        Alloy.isHandheld && _.extend(o, {
+            font: {
+                fontSize: 14
+            }
+        });
+        _.extend(o, {
+            id: "home"
+        });
+        return o;
+    }());
+    $.__views.footer.add($.__views.home);
+    $.__views.next = Ti.UI.createButton(function() {
+        var o = {};
+        _.extend(o, {
+            layout: "vertical",
+            right: "5%",
+            width: "100dip",
+            height: "30dip",
+            backgroundImage: "/images/WHC-button--next.png",
+            title: "NEXT",
+            color: "#FFF",
+            textAlign: "left",
+            verticalAlign: "bottom",
+            font: {
+                fontSize: 16
+            }
+        });
+        Alloy.isHandheld && _.extend(o, {
+            width: "88dip",
+            height: "26dip"
+        });
+        Alloy.isHandheld && _.extend(o, {
+            font: {
+                fontSize: 14
+            }
+        });
+        _.extend(o, {
+            id: "next"
+        });
+        return o;
+    }());
     $.__views.footer.add($.__views.next);
     exports.destroy = function() {};
     _.extend($, $.__views);
@@ -158,6 +226,9 @@ function Controller() {
     });
     $.back.addEventListener("click", function() {
         navigation.previousPage($.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
+    });
+    $.home.addEventListener("click", function() {
+        navigation.slingCancel($.slingConfiguration);
     });
     _.extend($, exports);
 }

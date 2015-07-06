@@ -35,11 +35,13 @@
 			<View id="footer" class="footer">
 				<View class="border--top"></View>
 				
-				<View left="5%" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" id="back">
-					<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
+				<View left="5%" layout="vertical"  backgroundImage="/images/WHC-button--back.png" class="button--size" id="back">
+					<Label touchEnabled="False" right="5%" height="100%" width="Ti.UI.SIZE" color="#FFF" class="button--nav">BACK</Label>
 				</View>
 				
-				<Button id="next" class="button--next" />
+		 		<Button id="home" class="button--nav button--size button--home" />
+				
+				<Button id="next" class="button--nav button--size button--next" />
 			</View>
 			
 		</View>

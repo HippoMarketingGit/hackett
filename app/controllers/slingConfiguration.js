@@ -18,19 +18,19 @@ Alloy.Globals.goBack = function() {
 
 Alloy.Globals.goNext = function() {
 	navigation.nextPage($.scrollView, pages, Alloy.Globals.sling);
-}
+};
 
 // Open the first page
 navigation.openFirstPage($.scrollView, pages);
 
 $.next.addEventListener('click', function(e){
-	
 	navigation.nextPage( $.scrollView, pages, Alloy.Globals.sling);
-
 });
 
 $.back.addEventListener('click', function(e){
-	
 	navigation.previousPage( $.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
+});
 
+$.home.addEventListener('click', function(e) {
+	navigation.slingCancel($.slingConfiguration);
 });
