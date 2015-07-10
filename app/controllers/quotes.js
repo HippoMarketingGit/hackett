@@ -22,7 +22,8 @@ function getData(){
 				description: row.fieldByName('description'),
 				date: row.fieldByName('date'),
 				ref: row.fieldByName('ref'),
-				user: row.fieldByName('user')
+				user: row.fieldByName('user'),
+				specLoad: row.fieldByName('specLoad')
 			};
 			
 	

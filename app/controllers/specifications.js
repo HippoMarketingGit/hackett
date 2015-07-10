@@ -715,7 +715,11 @@ function checkSpec() {
 		
 		$.slingSpecification.show();
 		
+		Alloy.Globals.sling.specLoad = row.getFieldByName(wllAngle);
+		
 	} else {
+		
+		Alloy.Globals.sling.specLoad = null;
 		
 	}
 	
@@ -786,6 +790,7 @@ function sendQuote(){
 		description: Alloy.Globals.sling.slingDescription,
 		date: common.getDate(),
 		user: user.email,
+		specLoad: Alloy.Globals.sling.specLoad,
 		addtodb: 1
 	};
 	

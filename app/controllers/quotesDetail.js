@@ -122,6 +122,7 @@ function sendQuote(){
 			date: args.date,
 			ref: args.ref,
 			user: args.user,
+			specLoad: args.specLoad,
 			addtodb: 0
 		};
 		

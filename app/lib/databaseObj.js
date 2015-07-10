@@ -316,7 +316,7 @@ Database.prototype.createTables = function(){
 		db.execute('CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT, specLoad INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Boms(id INTEGER PRIMARY KEY, sling_code TEXT, comp_code TEXT, qty TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS Components(id INTEGER PRIMARY KEY, Code TEXT, description TEXT, measure TEXT);');
 	this.closeDb(db);
@@ -383,7 +383,8 @@ Database.prototype.pushQuotes = function(currentUser){
 			date: row.fieldByName('date'),
 			synced: row.fieldByName('synced'),
 			ref: row.fieldByName('ref'),
-			user: row.fieldByName('user')
+			user: row.fieldByName('user'),
+			specLoad: row.fieldByName('specLoad')
 		};
 		
 		var xhr = Ti.Network.createHTTPClient({
@@ -408,7 +409,7 @@ Database.prototype.insertQuoteOffline = function(data) {		//type, grade, legs, l
 	
 	// If not connected
 	var db = this.openDb();
-	db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+	db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
 		data.type,
 		data.grade, 
 		data.legs,
@@ -420,7 +421,8 @@ Database.prototype.insertQuoteOffline = function(data) {		//type, grade, legs, l
 		data.date,
 		'0',
 		data.ref,
-		data.user
+		data.user,
+		data.specLoad
 	);
 	
 	this.closeDb(db);
@@ -442,6 +444,7 @@ Database.prototype.insertQuoteOnline = function(data) {		//type, grade, legs, lo
 			date: data.date,
 			ref: data.ref,
 			user: data.user,
+			specload: data.specLoad,
 			addtodb: data.addtodb,
 			sync: 1
 		};
@@ -466,6 +469,8 @@ Database.prototype.insertQuoteOnline = function(data) {		//type, grade, legs, lo
 	};
 	//xhr.setRequestHeader("Content-Type","application/json");
 	xhr.send(params);
+	
+	Ti.API.info(JSON.stringify(params));
 };
 
 
@@ -501,7 +506,7 @@ Database.prototype.downloadQuotes = function(){
 				Ti.API.info(obj);
 	
 				//Ti.API.info('User :' + that.getCurrentUser() );
-				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
 					obj.type, 
 					obj.grade, 
 					obj.legs, 
@@ -513,7 +518,8 @@ Database.prototype.downloadQuotes = function(){
 					obj.date, 
 					'1', 
 					obj.ref, 
-					user
+					user,
+					obj.specLoad
 				);
 			}
 		}
@@ -893,8 +899,29 @@ Database.prototype.updateVersions = function(category, value){
 
 Database.prototype.updateTables = function(){
 	
+	// Schema update 1: Quotes: specLoad
+	var self = this,
+		db = self.openDb();
+	
+	Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
+	
+	var rs = db.execute('PRAGMA table_info(Quotes)'),
+		fieldExists = false;
+	
+	while (rs.isValidRow()) {
+		if (rs.field(1) == 'specLoad') {
+			fieldExists = true;
+		}
+		rs.next();
+	}
+	
+	if ( ! fieldExists) {
+		// field does not exist, so add it
+		Ti.API.info("Schema update: Updating table Quotes to add column specLoad.");
+		db.execute('ALTER TABLE Quotes ADD COLUMN specLoad INTEGER');
+	}
+	
 	var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck",
-		self = this,
 		update = Ti.Network.createHTTPClient({
 			onload: function(e){
 				
