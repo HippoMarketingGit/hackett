@@ -80,7 +80,7 @@
 	title: 'NEXT',
 	color: '#FFF',
 	textAlign: 'left',
-	verticalAlign: 'bottom',
+	verticalAlign: 'middle',
 },
 
 '.button--home': {
@@ -113,8 +113,9 @@
 
 // IMAGES
 '.logo': {
-	bottom: '8dip',
-	width: '90%'
+	height: Titanium.UI.SIZE,
+	layout: 'vertical',
+	verticalAlign: 'middle'
 },
 '.icon': {
 	right: '5dip',
