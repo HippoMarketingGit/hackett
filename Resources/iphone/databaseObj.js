@@ -170,7 +170,7 @@ Database.prototype.createTables = function() {
     db.execute("CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);");
     db.execute("CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);");
-    db.execute("CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT);");
+    db.execute("CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT, specLoad INTEGER);");
     db.execute("CREATE TABLE IF NOT EXISTS Boms(id INTEGER PRIMARY KEY, sling_code TEXT, comp_code TEXT, qty TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS Components(id INTEGER PRIMARY KEY, Code TEXT, description TEXT, measure TEXT);");
     this.closeDb(db);
@@ -214,7 +214,8 @@ Database.prototype.pushQuotes = function(currentUser) {
             date: row.fieldByName("date"),
             synced: row.fieldByName("synced"),
             ref: row.fieldByName("ref"),
-            user: row.fieldByName("user")
+            user: row.fieldByName("user"),
+            specLoad: row.fieldByName("specLoad")
         };
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
@@ -233,7 +234,7 @@ Database.prototype.pushQuotes = function(currentUser) {
 
 Database.prototype.insertQuoteOffline = function(data) {
     var db = this.openDb();
-    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data.type, data.grade, data.legs, data.load, data.length, data.partCode, data.price, data.description, data.date, "0", data.ref, data.user);
+    db.execute("INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data.type, data.grade, data.legs, data.load, data.length, data.partCode, data.price, data.description, data.date, "0", data.ref, data.user, data.specLoad);
     this.closeDb(db);
 };
 
@@ -250,6 +251,7 @@ Database.prototype.insertQuoteOnline = function(data) {
         date: data.date,
         ref: data.ref,
         user: data.user,
+        specload: data.specLoad,
         addtodb: data.addtodb,
         sync: 1
     };
@@ -266,6 +268,7 @@ Database.prototype.insertQuoteOnline = function(data) {
         alert("There was an error connecting to the database, please try again.");
     };
     xhr.send(params);
+    Ti.API.info(JSON.stringify(params));
 };
 
 Database.prototype.downloadQuotes = function() {
@@ -279,7 +282,7 @@ Database.prototype.downloadQuotes = function() {
         if (null !== response) for (i = 0; i < response.reply.length; i++) {
             var obj = response.reply[i];
             Ti.API.info(obj);
-            db.execute("INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", obj.type, obj.grade, obj.legs, obj.load, obj.length, obj.partcode, obj.price, obj.description, obj.date, "1", obj.ref, user);
+            db.execute("INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", obj.type, obj.grade, obj.legs, obj.load, obj.length, obj.partcode, obj.price, obj.description, obj.date, "1", obj.ref, user, obj.specLoad);
         }
         that.closeDb(db);
     };
@@ -484,7 +487,18 @@ Database.prototype.updateVersions = function(category, value) {
 };
 
 Database.prototype.updateTables = function() {
-    var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck", self = this, update = Ti.Network.createHTTPClient({
+    var self = this, db = self.openDb();
+    Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
+    var rs = db.execute("PRAGMA table_info(Quotes)"), fieldExists = false;
+    while (rs.isValidRow()) {
+        "specLoad" == rs.field(1) && (fieldExists = true);
+        rs.next();
+    }
+    if (!fieldExists) {
+        Ti.API.info("Schema update: Updating table Quotes to add column specLoad.");
+        db.execute("ALTER TABLE Quotes ADD COLUMN specLoad INTEGER");
+    }
+    var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck", update = Ti.Network.createHTTPClient({
         onload: function() {
             var response = JSON.parse(this.responseText), db = self.openDb(), row = db.execute("SELECT * FROM VersionCheck"), versionObj = {};
             while (row.isValidRow()) {

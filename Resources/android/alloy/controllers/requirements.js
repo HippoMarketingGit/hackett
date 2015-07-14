@@ -31,28 +31,28 @@ function Controller() {
     });
     $.__views.requirements && $.addTopLevelView($.__views.requirements);
     $.__views.header = Ti.UI.createView({
-        layout: "vertical",
-        top: "26dip",
+        top: 0,
         width: "100%",
-        height: "50dip",
+        height: "65dip",
+        backgroundColor: "#eb6209",
         id: "header"
     });
     $.__views.requirements.add($.__views.header);
-    $.__views.__alloyId166 = Ti.UI.createImageView({
-        bottom: "8dip",
-        width: "90%",
+    $.__views.__alloyId162 = Ti.UI.createImageView({
+        width: Ti.UI.SIZE,
+        height: "80%",
         image: "images/WHC--logo.png",
-        id: "__alloyId166"
+        id: "__alloyId162"
     });
-    $.__views.header.add($.__views.__alloyId166);
-    $.__views.__alloyId167 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId162);
+    $.__views.__alloyId163 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId167"
+        id: "__alloyId163"
     });
-    $.__views.requirements.add($.__views.__alloyId167);
-    $.__views.__alloyId168 = Ti.UI.createView({
+    $.__views.requirements.add($.__views.__alloyId163);
+    $.__views.__alloyId164 = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
             colors: [ "#021b4b", "#032d73" ],
@@ -66,15 +66,15 @@ function Controller() {
             },
             backFillStart: false
         },
-        id: "__alloyId168"
+        id: "__alloyId164"
     });
-    $.__views.requirements.add($.__views.__alloyId168);
+    $.__views.requirements.add($.__views.__alloyId164);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "51dip",
         id: "scrollView"
     });
-    $.__views.__alloyId168.add($.__views.scrollView);
+    $.__views.__alloyId164.add($.__views.scrollView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

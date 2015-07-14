@@ -56,14 +56,14 @@ function Controller() {
         id: "content"
     });
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId71 = Ti.UI.createView({
+    $.__views.__alloyId68 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId71"
+        id: "__alloyId68"
     });
-    $.__views.content.add($.__views.__alloyId71);
-    $.__views.__alloyId72 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -71,27 +71,27 @@ function Controller() {
         },
         textAlign: "center",
         text: "How many Legs?",
-        id: "__alloyId72"
+        id: "__alloyId69"
     });
-    $.__views.__alloyId71.add($.__views.__alloyId72);
-    $.__views.__alloyId73 = Ti.UI.createLabel({
+    $.__views.__alloyId68.add($.__views.__alloyId69);
+    $.__views.__alloyId70 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please choose the number of legs you would like your sling to have by tapping a diagram below then pressing 'Next' to proceed.",
-        id: "__alloyId73"
+        id: "__alloyId70"
     });
-    $.__views.__alloyId71.add($.__views.__alloyId73);
-    $.__views.__alloyId74 = Ti.UI.createView({
+    $.__views.__alloyId68.add($.__views.__alloyId70);
+    $.__views.__alloyId71 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
         top: "20dip",
-        id: "__alloyId74"
+        id: "__alloyId71"
     });
-    $.__views.content.add($.__views.__alloyId74);
+    $.__views.content.add($.__views.__alloyId71);
     $.__views.one = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -101,7 +101,7 @@ function Controller() {
         id: "one",
         backgroundColor: "#FFF"
     });
-    $.__views.__alloyId74.add($.__views.one);
+    $.__views.__alloyId71.add($.__views.one);
     chooseLegs ? $.__views.one.addEventListener("click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
     $.__views.oneImg = Ti.UI.createImageView({
         touchEnabled: false,
@@ -119,7 +119,7 @@ function Controller() {
         id: "two",
         backgroundColor: "#FFF"
     });
-    $.__views.__alloyId74.add($.__views.two);
+    $.__views.__alloyId71.add($.__views.two);
     chooseLegs ? $.__views.two.addEventListener("click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
     $.__views.twoImg = Ti.UI.createImageView({
         touchEnabled: false,
@@ -128,13 +128,13 @@ function Controller() {
         width: "auto"
     });
     $.__views.two.add($.__views.twoImg);
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId72 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId75"
+        id: "__alloyId72"
     });
-    $.__views.content.add($.__views.__alloyId75);
+    $.__views.content.add($.__views.__alloyId72);
     $.__views.three = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -144,7 +144,7 @@ function Controller() {
         id: "three",
         backgroundColor: "#FFF"
     });
-    $.__views.__alloyId75.add($.__views.three);
+    $.__views.__alloyId72.add($.__views.three);
     chooseLegs ? $.__views.three.addEventListener("click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
     $.__views.threeImg = Ti.UI.createImageView({
         touchEnabled: false,
@@ -162,7 +162,7 @@ function Controller() {
         id: "four",
         backgroundColor: "#FFF"
     });
-    $.__views.__alloyId75.add($.__views.four);
+    $.__views.__alloyId72.add($.__views.four);
     chooseLegs ? $.__views.four.addEventListener("click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
     $.__views.fourImg = Ti.UI.createImageView({
         touchEnabled: false,
