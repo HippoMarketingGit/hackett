@@ -3,10 +3,10 @@
 	<Window class="background">
 		
 		<View id="header" class="header">
-			<ImageView class="logo" image="/images/WHC--logo.png" />
+			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
 		</View>
 		
-		<View class="header__seperator"></View>
+		<!-- <View class="header__seperator"></View> -->
 		
 		<View id="loaderContainer" class="wrapper--background">
 			

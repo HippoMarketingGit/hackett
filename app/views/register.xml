@@ -1,11 +1,12 @@
 <Alloy id="register">
+	
 	<Window class="background">
 		
 		<View id="header" class="header">
-			<ImageView class="logo" image="/images/WHC--logo.png" />
+			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
 		</View>
 		
-		<View class="header__seperator"></View>
+		<!-- <View class="header__seperator"></View> -->
 		
 		<View class="wrapper--background">
 			
@@ -14,7 +15,10 @@
 				<View class="wrapper">
 					
 					<View class="content--container">
-						<Button id="back" class="button--back" />
+						<!-- <Button id="back" class="button--back" /> -->
+						<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" id="back">
+							<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
+						</View>
 					</View>
 				
 					<View class="content--container">
@@ -64,4 +68,5 @@
 		</View>
 		
 	</Window>
+	
 </Alloy>

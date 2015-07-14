@@ -1,10 +1,3 @@
-// iPad Styles
-'.logo[platform=ios formFactor=tablet]': {
-	height: '48dip',
-	width: 'auto'
-},
-
-
 // Fundamental Styles
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
@@ -16,10 +9,13 @@
 	backgroundColor: '#0d182f'
 },
 '.header': {
-	layout: 'vertical',
 	top: '26dip',
 	width: '100%',
-	height: '50dip'
+	height: '65dip',
+	backgroundColor: '#eb6209',
+},
+'.header[platform=android]': {
+	top: 0
 },
 '.header__seperator': {
 	height: '1dip',
@@ -27,8 +23,8 @@
 	backgroundColor: '#f7561e'
 },
 '.logo': {
-	bottom: '8dip',
-	width: '90%'
+	width: Ti.UI.SIZE,
+	height: '80%'
 },
 '.wrapper': {
 	layout: 'vertical',
@@ -91,13 +87,14 @@
 },
 'TextField': {
 	top: '4dip',
-	height: '26dip',
+	height: Titanium.UI.SIZE,
 	width: '100%',
 	borderWidth: '1dip',
 	borderColor: '#fba688',
 	backgroundColor: '#FFF',
-	font: {fontSize: 20},
-	paddingLeft: '4dip'
+	font: {fontSize: '20dip'},
+	paddingLeft: '4dip',
+	color: 'black'
 },
 '.checkBox': {
 	left: 0,

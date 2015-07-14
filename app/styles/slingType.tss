@@ -40,10 +40,13 @@
 	backgroundColor: '#0d182f'
 },
 '.header': {
-	layout: 'vertical',
 	top: '26dip',
 	width: '100%',
-	height: '50dip'
+	height: '65dip',
+	backgroundColor: '#eb6209',
+},
+'.header[platform=android]': {
+	top: 0
 },
 '.footer': {
 	bottom: '0',
@@ -134,8 +137,8 @@
 
 // IMAGES
 '.logo': {
-	bottom: '8dip',
-	width: '90%'
+	width: Ti.UI.SIZE,
+	height: '80%'
 },
 '.icon': {
 	right: '0dip',
