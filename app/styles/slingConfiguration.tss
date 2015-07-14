@@ -90,7 +90,7 @@
 	title: 'HOME',
 	color: '#FFF',
 	textAlign: 'center',
-	verticalAlign: 'bottom',
+	verticalAlign: 'middle',
 },
 
 '.button--size': {
