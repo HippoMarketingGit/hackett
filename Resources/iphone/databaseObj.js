@@ -315,20 +315,25 @@ Database.prototype.getWorkingLoadLimits = function() {
 };
 
 Database.prototype.getSlings = function() {
+    Ti.API.info("getSlings()");
     var slingsURL = "http://whackett.hippocreative.com/sync.php?task=getSlings", that = this, firstRunSlings = Ti.Network.createHTTPClient({
         onload: function() {
-            var i, responseArray = JSON.parse(this.responseText), db = that.openDb();
+            var i, responseArray = JSON.parse(this.responseText), db = that.openDb(), totalAdded = 0;
+            Ti.API.info("getSlings length: " + responseArray.reply.length);
             for (i = 0; i < responseArray.reply.length; i++) {
                 var json = responseArray.reply[i];
                 db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.end_b, json.shortener, json.img, 0, json.bom);
+                totalAdded++;
             }
+            Ti.API.info("getSlings(): added " + totalAdded);
             that.ready++;
             responseArray = null;
             i = null;
             that.closeDb(db);
         },
         onerror: function() {
-            alert("problem connecting to the Slings Database");
+            alert("problem connecting to the Slings Database (slings)");
+            Ti.API.info(JSON.stringify(json));
         },
         timeout: 6e4
     });
@@ -478,12 +483,14 @@ Database.prototype.emptyTable = function(tableName) {
     var db = this.openDb();
     db.execute("DELETE FROM " + tableName);
     this.closeDb(db);
+    Ti.API.info("emptyTable(): " + tableName);
 };
 
 Database.prototype.updateVersions = function(category, value) {
     var db = this.openDb();
     db.execute("UPDATE VersionCheck SET version = ? WHERE category = ?", value, category);
     this.closeDb(db);
+    Ti.API.info("updateVersion(): " + category + " to " + value);
 };
 
 Database.prototype.updateTables = function() {
@@ -508,49 +515,53 @@ Database.prototype.updateTables = function() {
             }
             for (versionKey in versionObj) {
                 var dbValue = versionObj[versionKey], dbCat = versionKey;
+                Ti.API.info("- Local DB table " + dbCat + " is " + dbValue);
                 for (key in response) {
                     var jsonVal = response[key], jsonCat = key;
-                    if (dbCat === jsonCat && dbValue != jsonVal) switch (dbCat) {
-                      case "chain_type":
-                        self.emptyTable("ChainType");
-                        self.getChainTypes();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                    if (dbCat === jsonCat) {
+                        Ti.API.info("- API table " + jsonCat + " is " + jsonVal);
+                        if (dbValue != jsonVal) switch (dbCat) {
+                          case "chain_type":
+                            self.emptyTable("ChainType");
+                            self.getChainTypes();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "end_fittings":
-                        self.emptyTable("EndFittings");
-                        self.getEndFittings();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                          case "end_fittings":
+                            self.emptyTable("EndFittings");
+                            self.getEndFittings();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "shorteners":
-                        self.emptyTable("Shorteners");
-                        self.getShorteners();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                          case "shorteners":
+                            self.emptyTable("Shorteners");
+                            self.getShorteners();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "slings":
-                        self.emptyTable("Slings");
-                        self.getSlings();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                          case "slings":
+                            self.emptyTable("Slings");
+                            self.getSlings();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "working_load_limit":
-                        self.emptyTable("WorkingLoadLimits");
-                        self.getWorkingLoadLimits();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                          case "working_load_limit":
+                            self.emptyTable("WorkingLoadLimits");
+                            self.getWorkingLoadLimits();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "boms":
-                        self.emptyTable("Boms");
-                        self.getBoms();
-                        self.updateVersions(dbCat, jsonVal);
-                        break;
+                          case "boms":
+                            self.emptyTable("Boms");
+                            self.getBoms();
+                            self.updateVersions(dbCat, jsonVal);
+                            break;
 
-                      case "components":
-                        self.emptyTable("Components");
-                        self.getComponents();
-                        self.updateVersions(dbCat, jsonVal);
+                          case "components":
+                            self.emptyTable("Components");
+                            self.getComponents();
+                            self.updateVersions(dbCat, jsonVal);
+                        }
                     }
                 }
             }

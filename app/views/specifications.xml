@@ -59,7 +59,7 @@
 					<Label class="heading" left="0" width="100%">Your requirements:</Label>
 					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
 						<Label top="4dip" left="0">Type: </Label>
-						<Label top="4dip" left="0" id="labelGrade">Grade: </Label>
+						<Label top="4dip" left="0" id="labelGradeReq">Grade: </Label>
 						<Label top="4dip" left="0">Legs: </Label>
 						<Label top="4dip" left="0">Load (t): </Label>
 						<Label top="4dip" left="0">Length (m): </Label>
@@ -77,7 +77,7 @@
 					<Label class="heading" left="0" width="100%">Sling specification:</Label>
 					<View id="labels" layout="vertical" height="Ti.UI.SIZE" width="40%" top="0">
 						<Label top="4dip" left="0">Type: </Label>
-						<Label top="4dip" left="0" id="labelGrade">Grade: </Label>
+						<Label top="4dip" left="0" id="labelGradeSling">Grade: </Label>
 						<Label top="4dip" left="0">Legs: </Label>
 						<Label top="4dip" left="0">Load (t): </Label>
 						<Label top="4dip" left="0">Length (m): </Label>

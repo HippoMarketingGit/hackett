@@ -578,8 +578,20 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 	
 	if( type === 'Wire Rope'){
 		
-		$.labelGrade.setHeight(0);
-		$.labelGrade.hide(0);
+		if ($.labelGrade) {
+			$.labelGrade.setHeight(0);
+			$.labelGrade.hide();
+		}
+		
+		if ($.labelGradeReq) {
+			$.labelGradeReq.setHeight(0);
+			$.labelGradeReq.hide();
+		}
+		
+		if ($.labelGradeSling) {
+			$.labelGradeSling.setHeight(0);
+			$.labelGradeSling.hide();
+		}
 		
 		$.grade.setHeight(0);
 		$.grade.hide();

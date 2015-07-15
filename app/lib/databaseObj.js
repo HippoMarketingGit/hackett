@@ -587,7 +587,7 @@ Database.prototype.getWorkingLoadLimits = function(){
 // Get the slings from the online Database and store them locally on to the handset
 Database.prototype.getSlings = function(){
 	
-	//Ti.API.info(db);
+	Ti.API.info("getSlings()");
 	
 	var slingsURL = "http://whackett.hippocreative.com/sync.php?task=getSlings",
 		that = this,
@@ -597,10 +597,13 @@ Database.prototype.getSlings = function(){
 	         
 			var responseArray = JSON.parse(this.responseText),
 				db = that.openDb(),
-				i;
+				i,
+				totalAdded = 0;
 				
 			//Ti.API.info(responseArray);
 			//Ti.API.info(db);
+			
+			Ti.API.info("getSlings length: " + responseArray.reply.length);
 			
 			for ( i = 0; i < responseArray.reply.length; i++){
 				
@@ -622,7 +625,11 @@ Database.prototype.getSlings = function(){
 					0,
 					json.bom
 				);
+				
+				totalAdded++;
 			}
+			
+			Ti.API.info("getSlings(): added " + totalAdded);
 
 			that.ready++;
 			responseArray = null;
@@ -632,7 +639,8 @@ Database.prototype.getSlings = function(){
 		// function called when an error occurs, including a timeout
 		onerror : function(e) {
 
-			alert('problem connecting to the Slings Database');
+			alert('problem connecting to the Slings Database (slings)');
+			Ti.API.info(JSON.stringify(json));
 		},
 		timeout : 60000  // in milliseconds
 	});
@@ -887,14 +895,16 @@ Database.prototype.findBomDetails = function(partcode){
 
 Database.prototype.emptyTable = function(tableName){
 	var db = this.openDb();
-		db.execute('DELETE FROM ' + tableName);
-		this.closeDb(db);
+	db.execute('DELETE FROM ' + tableName);
+	this.closeDb(db);
+	Ti.API.info("emptyTable(): " + tableName);
 };
 
 Database.prototype.updateVersions = function(category, value){
 	var db = this.openDb();
-		db.execute('UPDATE VersionCheck SET version = ? WHERE category = ?', value, category);
-		this.closeDb(db);
+	db.execute('UPDATE VersionCheck SET version = ? WHERE category = ?', value, category);
+	this.closeDb(db);
+	Ti.API.info("updateVersion(): " + category + " to " + value);
 };
 
 Database.prototype.updateTables = function(){
@@ -946,6 +956,8 @@ Database.prototype.updateTables = function(){
 					// Store values in var
 					var dbValue = versionObj[versionKey],
 						dbCat = versionKey;
+						
+					Ti.API.info("- Local DB table " + dbCat + " is " + dbValue);
 					
 					// Loop through JSON Response
 					for( key in response ){
@@ -956,6 +968,8 @@ Database.prototype.updateTables = function(){
 						
 						// Check if db cateogry is equal to JSON category
 						if( dbCat === jsonCat ){
+							
+							Ti.API.info("- API table " + jsonCat + " is " + jsonVal);
 							
 							// Check if the values are different
 							// If they are, update!
