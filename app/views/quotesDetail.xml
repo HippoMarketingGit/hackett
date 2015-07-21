@@ -18,27 +18,27 @@
 					<Label>Your requirements:</Label>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Ref: </Label><Label left="81dip" id="ref"></Label>
+						<Label left="0">Ref: </Label><Label left="104dip" id="ref"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Type: </Label><Label left="71dip" id="slingType"></Label>
+						<Label left="0">Type: </Label><Label left="94dip" id="slingType"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal" id="gradeContainer">
-						<Label left="0">Grade: </Label><Label left="60dip" id="grade"></Label>
+						<Label left="0">Grade: </Label><Label left="83dip" id="grade"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Legs: </Label><Label left="74dip" id="legs"></Label>
+						<Label left="0">Legs: </Label><Label left="95dip" id="legs"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Load / WLL (t): </Label><Label left="53dip" id="load"></Label>
+						<Label left="0">Load / WLL (t): </Label><Label left="23dip" id="load"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Length (m): </Label><Label left="30dip" id="length"></Label>
+						<Label left="0">Length (m): </Label><Label left="50dip" id="length"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal" id="descriptionContainer">
