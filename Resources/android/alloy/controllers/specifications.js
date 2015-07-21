@@ -77,8 +77,18 @@ function Controller() {
         $.length.text = nominalLength;
         $.description.text = description;
         if ("Wire Rope" === type) {
-            $.labelGrade.setHeight(0);
-            $.labelGrade.hide(0);
+            if ($.labelGrade) {
+                $.labelGrade.setHeight(0);
+                $.labelGrade.hide();
+            }
+            if ($.labelGradeReq) {
+                $.labelGradeReq.setHeight(0);
+                $.labelGradeReq.hide();
+            }
+            if ($.labelGradeSling) {
+                $.labelGradeSling.setHeight(0);
+                $.labelGradeSling.hide();
+            }
             $.grade.setHeight(0);
             $.grade.hide();
             $.slingSpecGrade.setHeight(0);
@@ -535,15 +545,15 @@ function Controller() {
             id: "__alloyId225"
         });
         $.__views.labels.add($.__views.__alloyId225);
-        $.__views.labelGrade = Ti.UI.createLabel({
+        $.__views.labelGradeReq = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Grade:",
             top: "4dip",
             left: "0",
-            id: "labelGrade"
+            id: "labelGradeReq"
         });
-        $.__views.labels.add($.__views.labelGrade);
+        $.__views.labels.add($.__views.labelGradeReq);
         $.__views.__alloyId226 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -660,15 +670,15 @@ function Controller() {
             id: "__alloyId230"
         });
         $.__views.labels.add($.__views.__alloyId230);
-        $.__views.labelGrade = Ti.UI.createLabel({
+        $.__views.labelGradeSling = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Grade:",
             top: "4dip",
             left: "0",
-            id: "labelGrade"
+            id: "labelGradeSling"
         });
-        $.__views.labels.add($.__views.labelGrade);
+        $.__views.labels.add($.__views.labelGradeSling);
         $.__views.__alloyId231 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,

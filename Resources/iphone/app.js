@@ -64,17 +64,23 @@ if (online) {
         }, 500);
     } else {
         database.updateTables();
-        if (database.userIsLogged()) {
-            Ti.API.info("A user is Logged In");
-            var dash = Alloy.createController("dashboard").getView();
-            dash.open();
-        } else {
-            var index = Alloy.createController("index").getView();
-            index.open();
-        }
-        loader.close();
-        loader = null;
-        imageSync.checkAndDownload();
+        var interval = setInterval(function() {
+            if (database.databaseUpdated()) {
+                Ti.API.info("Ready (finished updating)");
+                if (database.userIsLogged()) {
+                    Ti.API.info("A user is Logged In");
+                    var dash = Alloy.createController("dashboard").getView();
+                    dash.open();
+                } else {
+                    var index = Alloy.createController("index").getView();
+                    index.open();
+                }
+                loader.close();
+                loader = null;
+                clearInterval(interval);
+                imageSync.checkAndDownload();
+            }
+        }, 500);
     }
 } else {
     Ti.API.info("offline");

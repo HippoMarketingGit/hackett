@@ -324,7 +324,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "labels",
             layout: "vertical",
-            width: "20%",
+            width: "25%",
             top: "0"
         });
         $.__views.values.add($.__views.labels);
@@ -368,7 +368,7 @@ function Controller() {
         $.__views.__alloyId259 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
-            text: "Load (t):",
+            text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
             id: "__alloyId259"
@@ -396,7 +396,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "slingRequirements",
             layout: "vertical",
-            width: "40%",
+            width: "37.5%",
             top: "0"
         });
         $.__views.values.add($.__views.slingRequirements);
@@ -455,7 +455,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "slingSpecification",
             layout: "vertical",
-            width: "40%",
+            width: "37.5%",
             top: "0"
         });
         $.__views.values.add($.__views.slingSpecification);
@@ -545,7 +545,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "labels",
             layout: "vertical",
-            width: "40%",
+            width: "50%",
             top: "0"
         });
         $.__views.valuesReqs.add($.__views.labels);
@@ -579,7 +579,7 @@ function Controller() {
         $.__views.__alloyId267 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
-            text: "Load (t):",
+            text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
             id: "__alloyId267"
@@ -598,7 +598,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "slingRequirements",
             layout: "vertical",
-            width: "60%",
+            width: "50%",
             top: "0"
         });
         $.__views.valuesReqs.add($.__views.slingRequirements);
@@ -670,7 +670,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "labels",
             layout: "vertical",
-            width: "40%",
+            width: "50%",
             top: "0"
         });
         $.__views.valuesSling.add($.__views.labels);
@@ -704,7 +704,7 @@ function Controller() {
         $.__views.__alloyId272 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
-            text: "Load (t):",
+            text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
             id: "__alloyId272"
@@ -732,7 +732,7 @@ function Controller() {
             height: Ti.UI.SIZE,
             id: "slingSpecification",
             layout: "vertical",
-            width: "60%",
+            width: "50%",
             top: "0"
         });
         $.__views.valuesSling.add($.__views.slingSpecification);

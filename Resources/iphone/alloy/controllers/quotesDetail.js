@@ -196,7 +196,7 @@ function Controller() {
     $.__views.ref = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "81dip",
+        left: "104dip",
         id: "ref"
     });
     $.__views.__alloyId159.add($.__views.ref);
@@ -218,7 +218,7 @@ function Controller() {
     $.__views.slingType = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "71dip",
+        left: "94dip",
         id: "slingType"
     });
     $.__views.__alloyId161.add($.__views.slingType);
@@ -240,7 +240,7 @@ function Controller() {
     $.__views.grade = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "60dip",
+        left: "83dip",
         id: "grade"
     });
     $.__views.gradeContainer.add($.__views.grade);
@@ -262,7 +262,7 @@ function Controller() {
     $.__views.legs = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "74dip",
+        left: "95dip",
         id: "legs"
     });
     $.__views.__alloyId164.add($.__views.legs);
@@ -276,7 +276,7 @@ function Controller() {
     $.__views.__alloyId167 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        text: "Load (t):",
+        text: "Load / WLL (t):",
         left: "0",
         id: "__alloyId167"
     });
@@ -284,7 +284,7 @@ function Controller() {
     $.__views.load = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "53dip",
+        left: "23dip",
         id: "load"
     });
     $.__views.__alloyId166.add($.__views.load);
@@ -306,7 +306,7 @@ function Controller() {
     $.__views.length = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
-        left: "30dip",
+        left: "50dip",
         id: "length"
     });
     $.__views.__alloyId168.add($.__views.length);
