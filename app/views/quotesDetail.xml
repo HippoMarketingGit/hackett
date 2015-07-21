@@ -34,7 +34,7 @@
 					</View>
 					
 					<View top="4dip" layout="horizontal">
-						<Label left="0">Load (t): </Label><Label left="53dip" id="load"></Label>
+						<Label left="0">Load / WLL (t): </Label><Label left="53dip" id="load"></Label>
 					</View>
 					
 					<View top="4dip" layout="horizontal">
