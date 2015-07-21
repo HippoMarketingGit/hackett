@@ -5,6 +5,8 @@
 function Database(dbName){
 	this.dbName = dbName;
 	this.ready = 0;
+	this.updateRequired = 0;
+	this.updateComplete = 0;
 }
 
 Database.prototype.databaseReady = function(count){
@@ -12,10 +14,13 @@ Database.prototype.databaseReady = function(count){
 	//Ti.API.info(this.ready);
 	//Ti.API.info(count);
 	
-	if( this.ready === count){
-		
+	if (this.ready === count) {
 		return true;
 	}
+};
+
+Database.prototype.databaseUpdated = function() {
+	return (this.updateComplete === this.updateRequired);
 };
 
 // Open the Database
@@ -565,6 +570,7 @@ Database.prototype.getWorkingLoadLimits = function(){
 			}
 			
 			that.ready++;
+			that.updateComplete++;
 			responseArray = null;
 			i = null;
 			that.closeDb(db);
@@ -632,6 +638,7 @@ Database.prototype.getSlings = function(){
 			Ti.API.info("getSlings(): added " + totalAdded);
 
 			that.ready++;
+			that.updateComplete++;
 			responseArray = null;
 			i = null;
 			that.closeDb(db);
@@ -674,6 +681,7 @@ Database.prototype.getShorteners = function(){
 			}
 	         
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -714,6 +722,7 @@ Database.prototype.getEndFittings = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -756,6 +765,7 @@ Database.prototype.getChainTypes = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -793,6 +803,7 @@ Database.prototype.getBoms = function(){
 			}
 			
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -830,6 +841,7 @@ Database.prototype.getComponents = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -974,6 +986,8 @@ Database.prototype.updateTables = function(){
 							// Check if the values are different
 							// If they are, update!
 							if( dbValue != jsonVal ){
+								
+								self.updateRequired++;
 								
 								switch(dbCat){
 									case "chain_type":
