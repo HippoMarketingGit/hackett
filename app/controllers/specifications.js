@@ -321,9 +321,9 @@
 		}
 		
 		if( Alloy.Globals.sling.upperTerminationCode === 'NONE'){
-			upper = ' AND end = "" ';
+			upper = ' AND end_b = "" ';
 		}else{
-			upper = ' AND end = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
+			upper = ' AND end_b = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
 		}
 		
 		var sql = "SELECT *, wll.id AS wllId, s.id AS slingId " + 
@@ -336,6 +336,7 @@
 				"AND s.size = wll.size " + 
 				"AND s.length = " + legLength + " " +
 				end + 
+				upper + 
 				"GROUP BY wll.id " +
 				"ORDER BY " + angle + " ASC " +
 				"LIMIT 1";
