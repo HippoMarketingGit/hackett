@@ -32,28 +32,7 @@
 			</View>
 			
 		</View>
-		
-		<View class="content--container" id="lowerTermView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
-			
-			<View top="10dip" height="60dip" width="90%">
-				
-				<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Lower Termination</Label>
-				
-				<View height="60dip" width="60dip" right="5dip" backgroundColor="#FFF">
-					<ImageView image="/images/terminations/Eye Grab Hook.jpg" id="lowerTermImage" height="60dip" width="auto"/>
-				</View>
-				
-			</View>
-	
-			<View class="picker" top="10dip" bottom="10dip">
-					
-				<TextField className="lowerTerminations" onClick="createPicker" editable="false" value="Select..." id="lowerTermText" class="picker--textfield" paddingLeft="5dip" ></TextField>
-				
-				<ImageView className="lowerTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
-				
-			</View>
-			
-		</View>
+
 		
 		<View class="content--container" id="upperTermView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
 			
@@ -76,6 +55,30 @@
 			</View>
 			
 		</View>
+		
+				
+		<View class="content--container" id="lowerTermView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
+			
+			<View top="10dip" height="60dip" width="90%">
+				
+				<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Lower Termination</Label>
+				
+				<View height="60dip" width="60dip" right="5dip" backgroundColor="#FFF">
+					<ImageView image="/images/terminations/Eye Grab Hook.jpg" id="lowerTermImage" height="60dip" width="auto"/>
+				</View>
+				
+			</View>
+	
+			<View class="picker" top="10dip" bottom="10dip">
+					
+				<TextField className="lowerTerminations" onClick="createPicker" editable="false" value="Select..." id="lowerTermText" class="picker--textfield" paddingLeft="5dip" ></TextField>
+				
+				<ImageView className="lowerTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
+				
+			</View>
+			
+		</View>
+
 		
 	</View>
 	
