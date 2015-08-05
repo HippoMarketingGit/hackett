@@ -320,7 +320,7 @@
 			end = ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
 		}
 		
-		if( Alloy.Globals.sling.upperTerminationCode === 'NONE'){
+		if( Alloy.Globals.sling.upperTerminationCode === 'NONE' || Alloy.Globals.sling.upperTerminationCode === null){
 			upper = ' AND end_b = "" ';
 		}else{
 			upper = ' AND end_b = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
