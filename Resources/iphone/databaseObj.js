@@ -192,7 +192,8 @@ Database.prototype.deleteQuote = function(online, ref, cb) {
             var json = JSON.parse(this.responseText);
             Ti.API.info(json.reply);
             if (1 !== json.reply) alert("There was a problem connecting to the database, please try again."); else {
-                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '" LIMIT 1');
+                var sql = "DELETE FROM Quotes WHERE id = (SELECT id FROM Quotes WHERE ref = '" + ref + "' LIMIT 1)";
+                db.execute(sql);
                 that.closeDb(db);
                 cb && cb();
             }
