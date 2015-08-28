@@ -13,13 +13,27 @@ Common.prototype.generateQuoteRef = function(user, quote) {
     for (var i = 0; 3 > i; i++) chars += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
     if (quote["description"] && quote["description"].length > 0) num = parseInt(quote["description"].length, 10); else {
         num = 0;
-        quote["legs"] && (num += parseInt(quote["legs"], 10));
-        quote["grade"] && (num += parseInt(quote["grade"], 10));
-        quote["length"] && (num += parseInt(grade["length"], 10));
-        quote["load"] && (num += parseInt(grade["load"], 10));
+        var i = 0;
+        if (quote["legs"]) {
+            i = parseInt(quote["legs"], 10);
+            isNaN(i) || (num += i);
+        }
+        if (quote["grade"]) {
+            i = parseInt(quote["grade"], 10);
+            isNaN(i) || (num += i);
+        }
+        if (quote["length"]) {
+            i = parseInt(quote["length"], 10);
+            isNaN(i) || (num += i);
+        }
+        if (quote["load"]) {
+            i = parseInt(quote["load"], 10);
+            isNaN(i) || (num += i);
+        }
     }
     var count = parseInt(user["company"].length, 10) + parseInt(user["name"].length, 10) + parseInt(user["email"].length, 10) + parseInt(num, 10);
     ref = [ company + personal + id, chars + count.toString() ].join("-").toUpperCase();
+    Ti.API.info("Ref: " + ref);
     return ref;
 };
 

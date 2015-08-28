@@ -45,21 +45,34 @@ Common.prototype.generateQuoteRef = function(user, quote) {
 		
 		// If no quote description is available, we will add up the numeric values.
 		num = 0;
+		var i = 0;
 		
 		if (quote["legs"]) {
-			num += parseInt(quote["legs"], 10);
+			i = parseInt(quote["legs"], 10);
+			if ( ! isNaN(i)) {
+				num += i;	
+			}
 		}
 		
 		if (quote["grade"]) {
-			num += parseInt(quote["grade"], 10);
+			i = parseInt(quote["grade"], 10);
+			if ( ! isNaN(i)) {
+				num += i;	
+			} 
 		}
 		
 		if (quote["length"]) {
-			num += parseInt(grade["length"], 10);
+			i = parseInt(quote["length"], 10);
+			if ( ! isNaN(i)) {
+				num += i;	
+			}
 		}
 		
 		if (quote["load"]) {
-			num += parseInt(grade["load"], 10);
+			i = parseInt(quote["load"], 10);
+			if ( ! isNaN(i)) {
+				num += i;	
+			}
 		}
 		
 	}
@@ -71,6 +84,8 @@ Common.prototype.generateQuoteRef = function(user, quote) {
 		parseInt(num, 10);
 	
 	ref = [company + personal + id, chars + count.toString()].join("-").toUpperCase();
+	
+	Ti.API.info("Ref: " + ref);
 	
 	return ref;
 };
