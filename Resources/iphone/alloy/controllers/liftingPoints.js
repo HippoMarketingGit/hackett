@@ -101,32 +101,32 @@ function Controller() {
         id: "liftingPoints"
     });
     $.__views.liftingPoints && $.addTopLevelView($.__views.liftingPoints);
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId77 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId75"
+        id: "__alloyId77"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId75);
-    $.__views.__alloyId76 = Ti.UI.createImageView({
+    $.__views.liftingPoints.add($.__views.__alloyId77);
+    $.__views.__alloyId78 = Ti.UI.createImageView({
         top: "30dip",
         left: "20dip",
         image: "/images/WHC-close.png",
         height: "24dip",
         width: "24dip",
-        id: "__alloyId76"
+        id: "__alloyId78"
     });
-    $.__views.__alloyId75.add($.__views.__alloyId76);
-    closeModal ? $.__views.__alloyId76.addEventListener("click", closeModal) : __defers["$.__views.__alloyId76!click!closeModal"] = true;
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.__alloyId77.add($.__views.__alloyId78);
+    closeModal ? $.__views.__alloyId78.addEventListener("click", closeModal) : __defers["$.__views.__alloyId78!click!closeModal"] = true;
+    $.__views.__alloyId79 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId77"
+        id: "__alloyId79"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId77);
+    $.__views.liftingPoints.add($.__views.__alloyId79);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "10dip",
@@ -144,7 +144,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.scrollView.add($.__views.content);
-    $.__views.__alloyId78 = Ti.UI.createView(function() {
+    $.__views.__alloyId80 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             layout: "vertical",
@@ -157,39 +157,39 @@ function Controller() {
             height: Ti.UI.SIZE
         });
         _.extend(o, {
-            id: "__alloyId78"
+            id: "__alloyId80"
         });
         return o;
     }());
-    $.__views.content.add($.__views.__alloyId78);
-    $.__views.__alloyId79 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId80);
+    $.__views.__alloyId81 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId79"
+        id: "__alloyId81"
     });
-    $.__views.__alloyId78.add($.__views.__alloyId79);
-    $.__views.__alloyId80 = Ti.UI.createLabel({
+    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId82 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 26
         },
         textAlign: "center",
         text: "Distance between\nLifting Points (m)",
-        id: "__alloyId80"
+        id: "__alloyId82"
     });
-    $.__views.__alloyId79.add($.__views.__alloyId80);
-    $.__views.__alloyId81 = Ti.UI.createLabel({
+    $.__views.__alloyId81.add($.__views.__alloyId82);
+    $.__views.__alloyId83 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "If you are unsure of where the lifting points will be on your load, please see the diagram below for reference.",
-        id: "__alloyId81"
+        id: "__alloyId83"
     });
-    $.__views.__alloyId79.add($.__views.__alloyId81);
+    $.__views.__alloyId81.add($.__views.__alloyId83);
     $.__views.liftingPointsImage = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -197,36 +197,36 @@ function Controller() {
         height: Titanium.UI.SIZE,
         id: "liftingPointsImage"
     });
-    $.__views.__alloyId78.add($.__views.liftingPointsImage);
-    $.__views.__alloyId82 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.liftingPointsImage);
+    $.__views.__alloyId84 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId82"
+        id: "__alloyId84"
     });
-    $.__views.__alloyId78.add($.__views.__alloyId82);
-    $.__views.__alloyId83 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.__alloyId84);
+    $.__views.__alloyId85 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId83"
+        id: "__alloyId85"
     });
-    $.__views.__alloyId82.add($.__views.__alloyId83);
-    var __alloyId87 = [];
-    $.__views.__alloyId88 = Ti.UI.createButton({
+    $.__views.__alloyId84.add($.__views.__alloyId85);
+    var __alloyId89 = [];
+    $.__views.__alloyId90 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId87.push($.__views.__alloyId88);
+    __alloyId89.push($.__views.__alloyId90);
     $.__views.liftingPointDone = Ti.UI.createButton({
         title: "Done",
         id: "liftingPointDone",
         style: Ti.UI.iPhone.SystemButtonStyle.DONE
     });
-    __alloyId87.push($.__views.liftingPointDone);
-    $.__views.__alloyId85 = Ti.UI.iOS.createToolbar({
-        items: __alloyId87,
-        id: "__alloyId85"
+    __alloyId89.push($.__views.liftingPointDone);
+    $.__views.__alloyId87 = Ti.UI.iOS.createToolbar({
+        items: __alloyId89,
+        id: "__alloyId87"
     });
     $.__views.liftingPointMeter = Ti.UI.createTextField({
         height: "50dip",
@@ -244,41 +244,41 @@ function Controller() {
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
         color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId85,
+        keyboardToolbar: $.__views.__alloyId87,
         id: "liftingPointMeter",
         value: "00"
     });
-    $.__views.__alloyId83.add($.__views.liftingPointMeter);
-    $.__views.__alloyId85 = Ti.UI.iOS.createToolbar({
+    $.__views.__alloyId85.add($.__views.liftingPointMeter);
+    $.__views.__alloyId87 = Ti.UI.iOS.createToolbar({
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId85,
+        keyboardToolbar: $.__views.__alloyId87,
         id: "liftingPointMeter",
         value: "00"
     });
-    $.__views.__alloyId89 = Ti.UI.createLabel({
+    $.__views.__alloyId91 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId89"
+        id: "__alloyId91"
     });
-    $.__views.__alloyId83.add($.__views.__alloyId89);
-    var __alloyId93 = [];
-    $.__views.__alloyId94 = Ti.UI.createButton({
+    $.__views.__alloyId85.add($.__views.__alloyId91);
+    var __alloyId95 = [];
+    $.__views.__alloyId96 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId93.push($.__views.__alloyId94);
+    __alloyId95.push($.__views.__alloyId96);
     $.__views.liftingPointFractionDone = Ti.UI.createButton({
         title: "Done",
         id: "liftingPointFractionDone",
         style: Ti.UI.iPhone.SystemButtonStyle.DONE
     });
-    __alloyId93.push($.__views.liftingPointFractionDone);
-    $.__views.__alloyId91 = Ti.UI.iOS.createToolbar({
-        items: __alloyId93,
-        id: "__alloyId91"
+    __alloyId95.push($.__views.liftingPointFractionDone);
+    $.__views.__alloyId93 = Ti.UI.iOS.createToolbar({
+        items: __alloyId95,
+        id: "__alloyId93"
     });
     $.__views.liftingPointFraction = Ti.UI.createTextField({
         height: "50dip",
@@ -296,27 +296,27 @@ function Controller() {
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
         color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId91,
+        keyboardToolbar: $.__views.__alloyId93,
         id: "liftingPointFraction",
         value: "00"
     });
-    $.__views.__alloyId83.add($.__views.liftingPointFraction);
-    $.__views.__alloyId91 = Ti.UI.iOS.createToolbar({
+    $.__views.__alloyId85.add($.__views.liftingPointFraction);
+    $.__views.__alloyId93 = Ti.UI.iOS.createToolbar({
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId91,
+        keyboardToolbar: $.__views.__alloyId93,
         id: "liftingPointFraction",
         value: "00"
     });
-    $.__views.__alloyId95 = Ti.UI.createView({
+    $.__views.__alloyId97 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
         bottom: "20dip",
-        id: "__alloyId95"
+        id: "__alloyId97"
     });
-    $.__views.__alloyId78.add($.__views.__alloyId95);
-    $.__views.__alloyId96 = Ti.UI.createButton({
+    $.__views.__alloyId80.add($.__views.__alloyId97);
+    $.__views.__alloyId98 = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
         backgroundImage: "/images/WHC-button--primary.png",
@@ -326,18 +326,18 @@ function Controller() {
         font: {
             fontSize: 16
         },
-        id: "__alloyId96"
+        id: "__alloyId98"
     });
-    $.__views.__alloyId95.add($.__views.__alloyId96);
-    setLength ? $.__views.__alloyId96.addEventListener("click", setLength) : __defers["$.__views.__alloyId96!click!setLength"] = true;
-    $.__views.__alloyId97 = Ti.UI.createView({
+    $.__views.__alloyId97.add($.__views.__alloyId98);
+    setLength ? $.__views.__alloyId98.addEventListener("click", setLength) : __defers["$.__views.__alloyId98!click!setLength"] = true;
+    $.__views.__alloyId99 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId97"
+        id: "__alloyId99"
     });
-    $.__views.scrollView.add($.__views.__alloyId97);
+    $.__views.scrollView.add($.__views.__alloyId99);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -355,8 +355,8 @@ function Controller() {
     });
     liftingPointImg.height = 3 === Alloy.Globals.sling.legs ? "100dip" : "60dip";
     $.liftingPointsImage.add(liftingPointImg);
-    __defers["$.__views.__alloyId76!click!closeModal"] && $.__views.__alloyId76.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId96!click!setLength"] && $.__views.__alloyId96.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId78!click!closeModal"] && $.__views.__alloyId78.addEventListener("click", closeModal);
+    __defers["$.__views.__alloyId98!click!setLength"] && $.__views.__alloyId98.addEventListener("click", setLength);
     _.extend($, exports);
 }
 

@@ -16,7 +16,7 @@ function Controller() {
     }
     function update() {
         var currentUser = db.getCurrentUser(), valid = validateFields();
-        true === valid ? database.updateUserDetails(currentUser, $.name.value, $.companyName.value, $.phoneNumber.value, $.emailAddress.value, $.mailingList.value, $.password1.value) : alert(valid);
+        true === valid ? database.updateUserDetails(currentUser, $.name.value, $.companyName.value, $.phoneNumber.value, $.emailAddress.value, $.mailingList.value, $.password1.value, $.postcode.value) : alert(valid);
     }
     function logout() {
         database.logout(function() {
@@ -30,6 +30,7 @@ function Controller() {
         if ("" == $.name.value) return "Please enter a name.";
         if ("" == $.companyName.value) return "Please enter a company name.";
         if ("" == $.phoneNumber.value) return "Please enter a phone number.";
+        if ("" == $.postcode.value) return "Please enter a postcode.";
         var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         if ("" == $.emailAddress.value || false === emailReg.test($.emailAddress.value)) return "Please enter a valid email address.";
         if ($.password1.value != $.password2.value) return "Please make sure the new passwords match.";
@@ -149,7 +150,7 @@ function Controller() {
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
-        text: "Your name*",
+        text: "Your name *",
         id: "__alloyId8"
     });
     $.__views.__alloyId7.add($.__views.__alloyId8);
@@ -181,7 +182,7 @@ function Controller() {
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
-        text: "Company name*",
+        text: "Company name *",
         id: "__alloyId10"
     });
     $.__views.__alloyId9.add($.__views.__alloyId10);
@@ -213,7 +214,7 @@ function Controller() {
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
-        text: "Phone number*",
+        text: "Phone number *",
         id: "__alloyId12"
     });
     $.__views.__alloyId11.add($.__views.__alloyId12);
@@ -245,10 +246,42 @@ function Controller() {
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
-        text: "Email address*",
+        text: "Postcode *",
         id: "__alloyId14"
     });
     $.__views.__alloyId13.add($.__views.__alloyId14);
+    $.__views.postcode = Ti.UI.createTextField({
+        top: "4dip",
+        height: Titanium.UI.SIZE,
+        width: "100%",
+        borderWidth: "1dip",
+        borderColor: "#fba688",
+        backgroundColor: "#FFF",
+        font: {
+            fontSize: "20dip"
+        },
+        paddingLeft: "4dip",
+        color: "black",
+        id: "postcode"
+    });
+    $.__views.__alloyId13.add($.__views.postcode);
+    $.__views.__alloyId15 = Ti.UI.createView({
+        layout: "vertical",
+        top: "10dip",
+        width: "100%",
+        height: Titanium.UI.SIZE,
+        id: "__alloyId15"
+    });
+    $.__views.__alloyId3.add($.__views.__alloyId15);
+    $.__views.__alloyId16 = Ti.UI.createLabel({
+        left: "0",
+        width: Titanium.UI.SIZE,
+        height: Titanium.UI.SIZE,
+        color: "#FFF",
+        text: "Email address *",
+        id: "__alloyId16"
+    });
+    $.__views.__alloyId15.add($.__views.__alloyId16);
     $.__views.emailAddress = Ti.UI.createTextField({
         top: "4dip",
         height: Titanium.UI.SIZE,
@@ -263,24 +296,24 @@ function Controller() {
         color: "black",
         id: "emailAddress"
     });
-    $.__views.__alloyId13.add($.__views.emailAddress);
-    $.__views.__alloyId15 = Ti.UI.createView({
+    $.__views.__alloyId15.add($.__views.emailAddress);
+    $.__views.__alloyId17 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId15"
+        id: "__alloyId17"
     });
-    $.__views.__alloyId3.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createLabel({
+    $.__views.__alloyId3.add($.__views.__alloyId17);
+    $.__views.__alloyId18 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
         text: "Update password",
-        id: "__alloyId16"
+        id: "__alloyId18"
     });
-    $.__views.__alloyId15.add($.__views.__alloyId16);
+    $.__views.__alloyId17.add($.__views.__alloyId18);
     $.__views.password1 = Ti.UI.createTextField({
         top: "4dip",
         height: Titanium.UI.SIZE,
@@ -296,24 +329,24 @@ function Controller() {
         id: "password1",
         passwordMask: "true"
     });
-    $.__views.__alloyId15.add($.__views.password1);
-    $.__views.__alloyId17 = Ti.UI.createView({
+    $.__views.__alloyId17.add($.__views.password1);
+    $.__views.__alloyId19 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId17"
+        id: "__alloyId19"
     });
-    $.__views.__alloyId3.add($.__views.__alloyId17);
-    $.__views.__alloyId18 = Ti.UI.createLabel({
+    $.__views.__alloyId3.add($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
         text: "Update password (confirm)",
-        id: "__alloyId18"
+        id: "__alloyId20"
     });
-    $.__views.__alloyId17.add($.__views.__alloyId18);
+    $.__views.__alloyId19.add($.__views.__alloyId20);
     $.__views.password2 = Ti.UI.createTextField({
         top: "4dip",
         height: Titanium.UI.SIZE,
@@ -329,22 +362,22 @@ function Controller() {
         id: "password2",
         passwordMask: "true"
     });
-    $.__views.__alloyId17.add($.__views.password2);
-    $.__views.__alloyId19 = Ti.UI.createView({
+    $.__views.__alloyId19.add($.__views.password2);
+    $.__views.__alloyId21 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId19"
+        id: "__alloyId21"
     });
-    $.__views.__alloyId3.add($.__views.__alloyId19);
-    $.__views.__alloyId20 = Ti.UI.createView({
+    $.__views.__alloyId3.add($.__views.__alloyId21);
+    $.__views.__alloyId22 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId20"
+        id: "__alloyId22"
     });
-    $.__views.__alloyId19.add($.__views.__alloyId20);
+    $.__views.__alloyId21.add($.__views.__alloyId22);
     $.__views.mailingList = Ti.UI.createButton({
         left: 0,
         title: "",
@@ -363,8 +396,8 @@ function Controller() {
         value: false,
         id: "mailingList"
     });
-    $.__views.__alloyId20.add($.__views.mailingList);
-    $.__views.__alloyId21 = Ti.UI.createLabel({
+    $.__views.__alloyId22.add($.__views.mailingList);
+    $.__views.__alloyId23 = Ti.UI.createLabel({
         left: "5dip",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -373,31 +406,9 @@ function Controller() {
             fontSize: 14
         },
         text: "Yes please, add me to the mailing list*",
-        id: "__alloyId21"
-    });
-    $.__views.__alloyId20.add($.__views.__alloyId21);
-    $.__views.__alloyId22 = Ti.UI.createView({
-        layout: "vertical",
-        top: "10dip",
-        width: "100%",
-        height: Titanium.UI.SIZE,
-        id: "__alloyId22"
-    });
-    $.__views.__alloyId3.add($.__views.__alloyId22);
-    $.__views.__alloyId23 = Ti.UI.createButton({
-        width: "100%",
-        height: "26dip",
-        backgroundImage: "/images/WHC-button--primary.png",
-        color: "#FFF",
-        textAlign: "left",
-        font: {
-            fontSize: 16
-        },
-        title: "UPDATE",
         id: "__alloyId23"
     });
     $.__views.__alloyId22.add($.__views.__alloyId23);
-    update ? $.__views.__alloyId23.addEventListener("click", update) : __defers["$.__views.__alloyId23!click!update"] = true;
     $.__views.__alloyId24 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -409,6 +420,28 @@ function Controller() {
     $.__views.__alloyId25 = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
+        backgroundImage: "/images/WHC-button--primary.png",
+        color: "#FFF",
+        textAlign: "left",
+        font: {
+            fontSize: 16
+        },
+        title: "UPDATE",
+        id: "__alloyId25"
+    });
+    $.__views.__alloyId24.add($.__views.__alloyId25);
+    update ? $.__views.__alloyId25.addEventListener("click", update) : __defers["$.__views.__alloyId25!click!update"] = true;
+    $.__views.__alloyId26 = Ti.UI.createView({
+        layout: "vertical",
+        top: "10dip",
+        width: "100%",
+        height: Titanium.UI.SIZE,
+        id: "__alloyId26"
+    });
+    $.__views.__alloyId3.add($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createButton({
+        width: "100%",
+        height: "26dip",
         backgroundImage: "/images/WHC-button--secondary.png",
         color: "#FFF",
         textAlign: "left",
@@ -416,10 +449,10 @@ function Controller() {
             fontSize: 16
         },
         title: "LOGOUT",
-        id: "__alloyId25"
+        id: "__alloyId27"
     });
-    $.__views.__alloyId24.add($.__views.__alloyId25);
-    logout ? $.__views.__alloyId25.addEventListener("click", logout) : __defers["$.__views.__alloyId25!click!logout"] = true;
+    $.__views.__alloyId26.add($.__views.__alloyId27);
+    logout ? $.__views.__alloyId27.addEventListener("click", logout) : __defers["$.__views.__alloyId27!click!logout"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), db = database.openDb();
@@ -438,16 +471,18 @@ function Controller() {
     });
     var row = db.execute('SELECT * FROM UserProfile WHERE loggedIn = "1"'), userData = {};
     while (row.isValidRow()) {
-        var name = row.fieldByName("name"), company = row.fieldByName("company"), phone = row.fieldByName("phone"), email = row.fieldByName("email"), optIn = row.fieldByName("optIn");
+        var name = row.fieldByName("name"), company = row.fieldByName("company"), phone = row.fieldByName("phone"), email = row.fieldByName("email"), optIn = row.fieldByName("optIn"), postcode = row.fieldByName("postcode");
         $.name.value = name;
         $.companyName.value = company;
         $.phoneNumber.value = phone;
         $.emailAddress.value = email;
+        $.postcode.value = postcode;
         userData = {
             name: name,
             company: company,
             phone: phone,
-            email: email
+            email: email,
+            postcode: postcode
         };
         if (1 === optIn) {
             $.mailingList.backgroundColor = "#FFF";
@@ -464,8 +499,8 @@ function Controller() {
     }
     db.close();
     __defers["$.__views.__alloyId5!click!openDash"] && $.__views.__alloyId5.addEventListener("click", openDash);
-    __defers["$.__views.__alloyId23!click!update"] && $.__views.__alloyId23.addEventListener("click", update);
-    __defers["$.__views.__alloyId25!click!logout"] && $.__views.__alloyId25.addEventListener("click", logout);
+    __defers["$.__views.__alloyId25!click!update"] && $.__views.__alloyId25.addEventListener("click", update);
+    __defers["$.__views.__alloyId27!click!logout"] && $.__views.__alloyId27.addEventListener("click", logout);
     _.extend($, exports);
 }
 
