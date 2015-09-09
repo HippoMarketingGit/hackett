@@ -43,7 +43,8 @@ function registerUser(e){
 		    phone : $.phoneNumber.value,
 		    email: $.emailAddress.value,
 		    password: $.password1.value,
-		    optIn: $.mailingList.value
+		    optIn: $.mailingList.value,
+		    postcode: $.postcode.value
 		};
 		
 		xhr.onload = function(e){
@@ -89,6 +90,10 @@ function validateFields() {
 	
 	if ($.phoneNumber.value == '') {
 		return "Please enter a phone number.";
+	}
+	
+	if ($.postcode.value == '') {
+		return "Please enter a postcode.";
 	}
 	
 	var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

@@ -188,7 +188,7 @@ Database.prototype.logout = function(cb){
 	
 };
 
-Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password){
+Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password, postcode){
 	
 	var xhr = Ti.Network.createHTTPClient(),
 		currentEmail = this.getCurrentUser(),
@@ -198,7 +198,8 @@ Database.prototype.updateUserDetails = function(user, name, company, phone, emai
 			company: company,
 			phone: phone,
 			email: email,
-			optIn: optIn
+			optIn: optIn,
+			postcode: postcode
 		},
 		that = this;
 		
@@ -219,7 +220,7 @@ Database.prototype.updateUserDetails = function(user, name, company, phone, emai
 		}else{
 			
 			var db = that.openDb();
-				db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn);
+				db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ?, postcode = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn, postcode);
 			
 			that.closeDb(db);
 			
@@ -267,7 +268,7 @@ Database.prototype.logIn = function(email, password, cb){
 				if( exists ){
 					db.execute('UPDATE UserProfile SET loggedIn = "1" WHERE email = ?', email);
 				}else{
-					db.execute('INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn) VALUES (?, ?, ?, ?, ?, ?, ?)', email, response.name, response.company, response.phone, response.optIn, response.id, '1');
+					db.execute('INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', email, response.name, response.company, response.phone, response.optIn, response.id, '1', response.postcode);
 				}
 				
 				that.closeDb(db);
@@ -320,7 +321,7 @@ Database.prototype.createTables = function(){
 		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, end_b INTEGER, shortener TEXT, img TEXT, img_status INTEGER, bom TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);');
+		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER, postcode TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT, specLoad INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Boms(id INTEGER PRIMARY KEY, sling_code TEXT, comp_code TEXT, qty TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS Components(id INTEGER PRIMARY KEY, Code TEXT, description TEXT, measure TEXT);');
@@ -926,6 +927,7 @@ Database.prototype.updateTables = function(){
 	var self = this,
 		db = self.openDb();
 	
+	// NEW FIELD: specLoad
 	Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
 	
 	var rs = db.execute('PRAGMA table_info(Quotes)'),
@@ -942,6 +944,25 @@ Database.prototype.updateTables = function(){
 		// field does not exist, so add it
 		Ti.API.info("Schema update: Updating table Quotes to add column specLoad.");
 		db.execute('ALTER TABLE Quotes ADD COLUMN specLoad INTEGER');
+	}
+	
+	// NEW FIELD: Postcode
+	Ti.API.info("Schema update 2: Checking table UserProfile for column postcode.");
+	
+	var rs = db.execute('PRAGMA table_info(UserProfile)'),
+		fieldExists = false;
+	
+	while (rs.isValidRow()) {
+		if (rs.field(1) == 'postcode') {
+			fieldExists = true;
+		}
+		rs.next();
+	}
+	
+	if ( ! fieldExists) {
+		// field does not exist, so add it
+		Ti.API.info("Schema update: Updating table UserProfile to add column postcode.");
+		db.execute('ALTER TABLE UserProfile ADD COLUMN postcode TEXT');
 	}
 	
 	var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck",

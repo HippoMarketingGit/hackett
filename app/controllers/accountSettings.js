@@ -42,7 +42,8 @@ while( row.isValidRow() ){
 		company = row.fieldByName('company'),
 		phone = row.fieldByName('phone'),
 		email = row.fieldByName('email'),
-		optIn = row.fieldByName('optIn');
+		optIn = row.fieldByName('optIn'),
+		postcode = row.fieldByName('postcode');
 		
 	// Use the "value" property to set the information
 	// for the user
@@ -50,12 +51,14 @@ while( row.isValidRow() ){
 	$.companyName.value = company;
 	$.phoneNumber.value = phone;
 	$.emailAddress.value = email;
+	$.postcode.value = postcode;
 	
 	userData = {
 		name: name,
 		company: company,
 		phone: phone,
-		email: email
+		email: email,
+		postcode: postcode
 	};
 	
 	if(optIn === 1){
@@ -99,7 +102,7 @@ function update(e){
 	if (valid === true) {
 		// Use the database object updateUserDetails function to update
 		// the users account details
-		database.updateUserDetails( currentUser, $.name.value, $.companyName.value, $.phoneNumber.value, $.emailAddress.value, $.mailingList.value, $.password1.value);
+		database.updateUserDetails( currentUser, $.name.value, $.companyName.value, $.phoneNumber.value, $.emailAddress.value, $.mailingList.value, $.password1.value, $.postcode.value);
 	}else{
 		alert(valid);
 	}
@@ -129,6 +132,10 @@ function validateFields() {
 	
 	if ($.phoneNumber.value == '') {
 		return "Please enter a phone number.";
+	}
+	
+	if ($.postcode.value == '') {
+		return "Please enter a postcode.";
 	}
 	
 	var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
