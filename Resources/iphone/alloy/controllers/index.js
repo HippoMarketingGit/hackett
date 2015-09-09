@@ -50,13 +50,13 @@ function Controller() {
         id: "header"
     });
     $.__views.index.add($.__views.header);
-    $.__views.__alloyId54 = Ti.UI.createImageView({
+    $.__views.__alloyId56 = Ti.UI.createImageView({
         width: Ti.UI.SIZE,
         height: "80%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId54"
+        id: "__alloyId56"
     });
-    $.__views.header.add($.__views.__alloyId54);
+    $.__views.header.add($.__views.__alloyId56);
     $.__views.loaderContainer = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -74,16 +74,16 @@ function Controller() {
         id: "loaderContainer"
     });
     $.__views.index.add($.__views.loaderContainer);
-    $.__views.__alloyId55 = Ti.UI.createScrollView({
+    $.__views.__alloyId57 = Ti.UI.createScrollView({
         contentWidth: "auto",
         contentHeight: "auto",
         showVerticalScrollIndicator: true,
         width: "100%",
         height: "100%",
-        id: "__alloyId55"
+        id: "__alloyId57"
     });
-    $.__views.loaderContainer.add($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createView(function() {
+    $.__views.loaderContainer.add($.__views.__alloyId57);
+    $.__views.__alloyId58 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
             layout: "vertical",
@@ -93,28 +93,28 @@ function Controller() {
             width: "500px"
         });
         _.extend(o, {
-            id: "__alloyId56"
+            id: "__alloyId58"
         });
         return o;
     }());
-    $.__views.__alloyId55.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.__alloyId57.add($.__views.__alloyId58);
+    $.__views.__alloyId59 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId57"
+        id: "__alloyId59"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createLabel({
+    $.__views.__alloyId58.add($.__views.__alloyId59);
+    $.__views.__alloyId60 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
         text: "Email",
-        id: "__alloyId58"
+        id: "__alloyId60"
     });
-    $.__views.__alloyId57.add($.__views.__alloyId58);
+    $.__views.__alloyId59.add($.__views.__alloyId60);
     $.__views.username = Ti.UI.createTextField({
         top: "4dip",
         height: Titanium.UI.SIZE,
@@ -130,24 +130,24 @@ function Controller() {
         autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
         id: "username"
     });
-    $.__views.__alloyId57.add($.__views.username);
-    $.__views.__alloyId59 = Ti.UI.createView({
+    $.__views.__alloyId59.add($.__views.username);
+    $.__views.__alloyId61 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId59"
+        id: "__alloyId61"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId59);
-    $.__views.__alloyId60 = Ti.UI.createLabel({
+    $.__views.__alloyId58.add($.__views.__alloyId61);
+    $.__views.__alloyId62 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
         color: "#FFF",
         text: "Password",
-        id: "__alloyId60"
+        id: "__alloyId62"
     });
-    $.__views.__alloyId59.add($.__views.__alloyId60);
+    $.__views.__alloyId61.add($.__views.__alloyId62);
     $.__views.password = Ti.UI.createTextField({
         top: "4dip",
         height: Titanium.UI.SIZE,
@@ -163,15 +163,15 @@ function Controller() {
         color: "#000",
         id: "password"
     });
-    $.__views.__alloyId59.add($.__views.password);
-    $.__views.__alloyId61 = Ti.UI.createView({
+    $.__views.__alloyId61.add($.__views.password);
+    $.__views.__alloyId63 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId61"
+        id: "__alloyId63"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId61);
+    $.__views.__alloyId58.add($.__views.__alloyId63);
     $.__views.login = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
@@ -184,24 +184,24 @@ function Controller() {
         },
         id: "login"
     });
-    $.__views.__alloyId61.add($.__views.login);
+    $.__views.__alloyId63.add($.__views.login);
     openDashboard ? $.__views.login.addEventListener("click", openDashboard) : __defers["$.__views.login!click!openDashboard"] = true;
-    $.__views.__alloyId62 = Ti.UI.createView({
+    $.__views.__alloyId64 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId62"
+        id: "__alloyId64"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId62);
-    $.__views.__alloyId63 = Ti.UI.createView({
+    $.__views.__alloyId58.add($.__views.__alloyId64);
+    $.__views.__alloyId65 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId63"
+        id: "__alloyId65"
     });
-    $.__views.__alloyId62.add($.__views.__alloyId63);
-    $.__views.__alloyId64 = Ti.UI.createLabel({
+    $.__views.__alloyId64.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         left: "5dip",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -210,27 +210,27 @@ function Controller() {
             fontSize: 14
         },
         text: "Recover my password",
-        id: "__alloyId64"
+        id: "__alloyId66"
     });
-    $.__views.__alloyId63.add($.__views.__alloyId64);
-    $.__views.__alloyId65 = Ti.UI.createImageView({
+    $.__views.__alloyId65.add($.__views.__alloyId66);
+    $.__views.__alloyId67 = Ti.UI.createImageView({
         left: "10dip",
         height: "10dip",
         width: "15dip",
         image: "/images/WHC--arrow-right.png",
-        id: "__alloyId65"
+        id: "__alloyId67"
     });
-    $.__views.__alloyId63.add($.__views.__alloyId65);
-    $.__views.__alloyId66 = Ti.UI.createView({
+    $.__views.__alloyId65.add($.__views.__alloyId67);
+    $.__views.__alloyId68 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
         bottom: "20dip",
-        id: "__alloyId66"
+        id: "__alloyId68"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId66);
-    $.__views.__alloyId67 = Ti.UI.createLabel({
+    $.__views.__alloyId58.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -240,9 +240,9 @@ function Controller() {
             fontSize: 14
         },
         text: "Don't have an account?",
-        id: "__alloyId67"
+        id: "__alloyId69"
     });
-    $.__views.__alloyId66.add($.__views.__alloyId67);
+    $.__views.__alloyId68.add($.__views.__alloyId69);
     $.__views.register = Ti.UI.createButton({
         top: "4dip",
         width: "100%",
@@ -256,7 +256,7 @@ function Controller() {
         },
         id: "register"
     });
-    $.__views.__alloyId66.add($.__views.register);
+    $.__views.__alloyId68.add($.__views.register);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite");

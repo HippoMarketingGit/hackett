@@ -41,7 +41,12 @@
 					
 					<View class="content--container">
 						<Label>Update password</Label>
-						<TextField id="password" passwordMask="true" class="input--primary" />
+						<TextField id="password1" passwordMask="true" class="input--primary" />
+					</View>
+					
+					<View class="content--container">
+						<Label>Update password (confirm)</Label>
+						<TextField id="password2" passwordMask="true" class="input--primary" />
 					</View>
 					
 					<View class="content--container">
