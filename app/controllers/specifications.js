@@ -618,29 +618,34 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 			
 			$.specPartcode.text = 'Based on your requirements, we have identified two possible sling configurations: ' + partCode;
 			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+			$.requestQuote.hide();
 		
 		}else if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade !== 'Auto'){
 			
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
 			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+			$.requestQuote.hide();
 		
 		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade !== 'Auto' ){
 			
 			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			$.requestQuote.show();
 			
 		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade === 'Auto' ){
 			
 			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			$.requestQuote.show();
 			
 		}
 	
 	}else{
 		
 		alert('The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.');
-		
 		$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+		$.requestQuote.hide();
+		
 	}
 }
 

@@ -101,18 +101,23 @@ function Controller() {
         if (Alloy.Globals.sling.limitExceeded) {
             alert("The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.");
             $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+            $.requestQuote.hide();
         } else if (null === Alloy.Globals.sling.quotedPrice && "Auto" === Alloy.Globals.sling.grade) {
             $.specPartcode.text = "Based on your requirements, we have identified two possible sling configurations: " + partCode;
             $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+            $.requestQuote.hide();
         } else if (null === Alloy.Globals.sling.quotedPrice && "Auto" !== Alloy.Globals.sling.grade) {
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
             $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+            $.requestQuote.hide();
         } else if (null !== Alloy.Globals.sling.quotedPrice && "Auto" !== Alloy.Globals.sling.grade) {
             $.quotedPrice.text = "Price (RRP): £" + Alloy.Globals.sling.quotedPrice;
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
+            $.requestQuote.show();
         } else if (null !== Alloy.Globals.sling.quotedPrice && "Auto" === Alloy.Globals.sling.grade) {
             $.quotedPrice.text = "Price (RRP): £" + Alloy.Globals.sling.quotedPrice;
             $.specPartcode.text = "Based on your requirements, we recommend the following sling configuration: " + partCode;
+            $.requestQuote.show();
         }
     }
     function checkImage(partCode) {

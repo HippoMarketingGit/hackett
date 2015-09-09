@@ -431,9 +431,13 @@ function Controller() {
         $.length.text = args.length;
         $.description.text = args.description;
         $.specPartcode.text = "Part code: " + args.partCode;
-        if (null !== args.price) $.quotedPrice.text = args.price; else {
+        if (null !== args.price) {
+            $.quotedPrice.text = args.price;
+            $.requestQuote.show();
+        } else {
             $.priceContainer.height = 0;
             $.priceContainer.hide();
+            $.requestQuote.hide();
         }
         Ti.API.info("price: " + args.price);
         Ti.API.info(JSON.stringify(args));

@@ -16,10 +16,12 @@ var args = arguments[0] || {};
 	
 	if( args.price !== null ){
 		$.quotedPrice.text = args.price;
+		$.requestQuote.show();
 	}else{
 		
 		$.priceContainer.height = 0;
 		$.priceContainer.hide();
+		$.requestQuote.hide();
 	}
 	
 	Ti.API.info( 'price: ' + args.price );
