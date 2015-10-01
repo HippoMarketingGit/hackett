@@ -53,18 +53,31 @@ function Controller() {
     $.__views.header = Ti.UI.createView({
         top: "26dip",
         width: "100%",
-        height: "65dip",
+        height: "85dip",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.dashboard.add($.__views.header);
     $.__views.__alloyId28 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
         id: "__alloyId28"
     });
     $.__views.header.add($.__views.__alloyId28);
+    $.__views.tel = Ti.UI.createLabel({
+        left: "0",
+        width: "100%",
+        height: Ti.UI.SIZE,
+        color: "#FFF",
+        className: "label",
+        top: "-10dip",
+        textAlign: "center",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.__alloyId29 = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -198,6 +211,7 @@ function Controller() {
     $.__views.__alloyId37.add($.__views.__alloyId39);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Alloy.Globals.callHandler($.tel);
     __defers["$.__views.newQuote!click!openConfigurator"] && $.__views.newQuote.addEventListener("click", openConfigurator);
     __defers["$.__views.__alloyId33!click!openQuotes"] && $.__views.__alloyId33.addEventListener("click", openQuotes);
     __defers["$.__views.__alloyId37!click!openAccountSettings"] && $.__views.__alloyId37.addEventListener("click", openAccountSettings);

@@ -100,32 +100,32 @@ function Controller() {
         id: "liftingPoints"
     });
     $.__views.liftingPoints && $.addTopLevelView($.__views.liftingPoints);
-    $.__views.__alloyId73 = Ti.UI.createView({
+    $.__views.__alloyId77 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId73"
+        id: "__alloyId77"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId73);
-    $.__views.__alloyId74 = Ti.UI.createImageView({
+    $.__views.liftingPoints.add($.__views.__alloyId77);
+    $.__views.__alloyId78 = Ti.UI.createImageView({
         top: "30dip",
         left: "20dip",
         image: "/images/WHC-close.png",
         height: "24dip",
         width: "24dip",
-        id: "__alloyId74"
+        id: "__alloyId78"
     });
-    $.__views.__alloyId73.add($.__views.__alloyId74);
-    closeModal ? $.__views.__alloyId74.addEventListener("click", closeModal) : __defers["$.__views.__alloyId74!click!closeModal"] = true;
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId77.add($.__views.__alloyId78);
+    closeModal ? $.__views.__alloyId78.addEventListener("click", closeModal) : __defers["$.__views.__alloyId78!click!closeModal"] = true;
+    $.__views.__alloyId79 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId75"
+        id: "__alloyId79"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId75);
+    $.__views.liftingPoints.add($.__views.__alloyId79);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "10dip",
@@ -143,41 +143,41 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.scrollView.add($.__views.content);
-    $.__views.__alloyId76 = Ti.UI.createView({
+    $.__views.__alloyId80 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId76"
+        id: "__alloyId80"
     });
-    $.__views.content.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId80);
+    $.__views.__alloyId81 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId77"
+        id: "__alloyId81"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId77);
-    $.__views.__alloyId78 = Ti.UI.createLabel({
+    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId82 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 26
         },
         textAlign: "center",
         text: "Distance between\nLifting Points (m)",
-        id: "__alloyId78"
+        id: "__alloyId82"
     });
-    $.__views.__alloyId77.add($.__views.__alloyId78);
-    $.__views.__alloyId79 = Ti.UI.createLabel({
+    $.__views.__alloyId81.add($.__views.__alloyId82);
+    $.__views.__alloyId83 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "If you are unsure of where the lifting points will be on your load, please see the diagram below for reference.",
-        id: "__alloyId79"
+        id: "__alloyId83"
     });
-    $.__views.__alloyId77.add($.__views.__alloyId79);
+    $.__views.__alloyId81.add($.__views.__alloyId83);
     $.__views.liftingPointsImage = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -185,22 +185,22 @@ function Controller() {
         height: Titanium.UI.SIZE,
         id: "liftingPointsImage"
     });
-    $.__views.__alloyId76.add($.__views.liftingPointsImage);
-    $.__views.__alloyId80 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.liftingPointsImage);
+    $.__views.__alloyId84 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId80"
+        id: "__alloyId84"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId80);
-    $.__views.__alloyId81 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.__alloyId84);
+    $.__views.__alloyId85 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId81"
+        id: "__alloyId85"
     });
-    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId84.add($.__views.__alloyId85);
     $.__views.liftingPointMeter = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -220,17 +220,17 @@ function Controller() {
         id: "liftingPointMeter",
         value: "00"
     });
-    $.__views.__alloyId81.add($.__views.liftingPointMeter);
-    $.__views.__alloyId82 = Ti.UI.createLabel({
+    $.__views.__alloyId85.add($.__views.liftingPointMeter);
+    $.__views.__alloyId86 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId82"
+        id: "__alloyId86"
     });
-    $.__views.__alloyId81.add($.__views.__alloyId82);
+    $.__views.__alloyId85.add($.__views.__alloyId86);
     $.__views.liftingPointFraction = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -250,17 +250,17 @@ function Controller() {
         id: "liftingPointFraction",
         value: "00"
     });
-    $.__views.__alloyId81.add($.__views.liftingPointFraction);
-    $.__views.__alloyId83 = Ti.UI.createView({
+    $.__views.__alloyId85.add($.__views.liftingPointFraction);
+    $.__views.__alloyId87 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
         bottom: "20dip",
-        id: "__alloyId83"
+        id: "__alloyId87"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId83);
-    $.__views.__alloyId84 = Ti.UI.createButton({
+    $.__views.__alloyId80.add($.__views.__alloyId87);
+    $.__views.__alloyId88 = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
         backgroundImage: "/images/WHC-button--primary.png",
@@ -270,18 +270,18 @@ function Controller() {
         font: {
             fontSize: 16
         },
-        id: "__alloyId84"
+        id: "__alloyId88"
     });
-    $.__views.__alloyId83.add($.__views.__alloyId84);
-    setLength ? $.__views.__alloyId84.addEventListener("click", setLength) : __defers["$.__views.__alloyId84!click!setLength"] = true;
-    $.__views.__alloyId85 = Ti.UI.createView({
+    $.__views.__alloyId87.add($.__views.__alloyId88);
+    setLength ? $.__views.__alloyId88.addEventListener("click", setLength) : __defers["$.__views.__alloyId88!click!setLength"] = true;
+    $.__views.__alloyId89 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId85"
+        id: "__alloyId89"
     });
-    $.__views.scrollView.add($.__views.__alloyId85);
+    $.__views.scrollView.add($.__views.__alloyId89);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -299,8 +299,8 @@ function Controller() {
     });
     liftingPointImg.height = 3 === Alloy.Globals.sling.legs ? "100dip" : "60dip";
     $.liftingPointsImage.add(liftingPointImg);
-    __defers["$.__views.__alloyId74!click!closeModal"] && $.__views.__alloyId74.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId84!click!setLength"] && $.__views.__alloyId84.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId78!click!closeModal"] && $.__views.__alloyId78.addEventListener("click", closeModal);
+    __defers["$.__views.__alloyId88!click!setLength"] && $.__views.__alloyId88.addEventListener("click", setLength);
     _.extend($, exports);
 }
 

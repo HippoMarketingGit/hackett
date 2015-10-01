@@ -45,18 +45,30 @@ function Controller() {
     $.__views.header = Ti.UI.createView({
         top: "26dip",
         width: "100%",
-        height: "65dip",
+        height: "85dip",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.index.add($.__views.header);
     $.__views.__alloyId58 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
         id: "__alloyId58"
     });
     $.__views.header.add($.__views.__alloyId58);
+    $.__views.tel = Ti.UI.createLabel({
+        left: "0",
+        width: "100%",
+        height: Titanium.UI.SIZE,
+        color: "#FFF",
+        top: "-10dip",
+        textAlign: "center",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.loaderContainer = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -260,6 +272,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite");
+    Alloy.Globals.callHandler($.tel);
     $.register.addEventListener("click", function() {
         var win = Alloy.createController("register").getView();
         $.index.close();

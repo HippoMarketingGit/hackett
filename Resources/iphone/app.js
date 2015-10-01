@@ -4,6 +4,20 @@ var Common = require("common"), User = require("user"), Database = require("data
     database: database
 }), connection = new Connection();
 
+Alloy.Globals.callHandler = function(el) {
+    el.text = "01665 604200";
+    el.addEventListener("click", function() {
+        Ti.API.info("Clicking call");
+        if (Ti.Platform.Android) {
+            var intent = Ti.Android.createIntent({
+                action: Ti.Android.ACTION_DIAL,
+                data: "tel:+441665604200"
+            });
+            Ti.Android.currentActivity.startActivity(intent);
+        } else Ti.Platform.openURL("tel:+441665604200");
+    });
+};
+
 var loader = Ti.UI.createWindow({
     backgroundColor: "#021b4b"
 }), container = Ti.UI.createView({

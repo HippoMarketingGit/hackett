@@ -1,10 +1,16 @@
 function Database(dbName) {
     this.dbName = dbName;
     this.ready = 0;
+    this.updateRequired = 0;
+    this.updateComplete = 0;
 }
 
 Database.prototype.databaseReady = function(count) {
     if (this.ready === count) return true;
+};
+
+Database.prototype.databaseUpdated = function() {
+    return this.updateComplete === this.updateRequired;
 };
 
 Database.prototype.openDb = function() {
@@ -99,14 +105,15 @@ Database.prototype.logout = function(cb) {
     lengthKnown.show();
 };
 
-Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password) {
+Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password, postcode) {
     var xhr = Ti.Network.createHTTPClient(), currentEmail = this.getCurrentUser(), params = {
         user: currentEmail,
         name: name,
         company: company,
         phone: phone,
         email: email,
-        optIn: optIn
+        optIn: optIn,
+        postcode: postcode
     }, that = this;
     "" !== password && (params.password = password);
     xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=updateUser");
@@ -115,7 +122,7 @@ Database.prototype.updateUserDetails = function(user, name, company, phone, emai
         Ti.API.info(response);
         if (1 !== response.reply) alert("The email address you have entered is already in use. Please chose another and try again."); else {
             var db = that.openDb();
-            db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn);
+            db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ?, postcode = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn, postcode);
             that.closeDb(db);
             alert("Your details have been updated successfully");
         }
@@ -140,7 +147,7 @@ Database.prototype.logIn = function(email, password, cb) {
             if (1 === response.reply) {
                 var exists, db = that.openDb(), row = db.execute("SELECT * FROM UserProfile WHERE email = ?", email);
                 exists = row.isValidRow() ? true : false;
-                exists ? db.execute('UPDATE UserProfile SET loggedIn = "1" WHERE email = ?', email) : db.execute("INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn) VALUES (?, ?, ?, ?, ?, ?, ?)", email, response.name, response.company, response.phone, response.optIn, response.id, "1");
+                exists ? db.execute('UPDATE UserProfile SET loggedIn = "1" WHERE email = ?', email) : db.execute("INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", email, response.name, response.company, response.phone, response.optIn, response.id, "1", response.postcode);
                 that.closeDb(db);
                 that.downloadQuotes();
                 cb && cb("success");
@@ -169,7 +176,7 @@ Database.prototype.createTables = function() {
     db.execute("CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, end_b INTEGER, shortener TEXT, img TEXT, img_status INTEGER, bom TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);");
-    db.execute("CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);");
+    db.execute("CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER, postcode TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT, specLoad INTEGER);");
     db.execute("CREATE TABLE IF NOT EXISTS Boms(id INTEGER PRIMARY KEY, sling_code TEXT, comp_code TEXT, qty TEXT);");
     db.execute("CREATE TABLE IF NOT EXISTS Components(id INTEGER PRIMARY KEY, Code TEXT, description TEXT, measure TEXT);");
@@ -186,7 +193,8 @@ Database.prototype.deleteQuote = function(online, ref, cb) {
             var json = JSON.parse(this.responseText);
             Ti.API.info(json.reply);
             if (1 !== json.reply) alert("There was a problem connecting to the database, please try again."); else {
-                db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '" LIMIT 1');
+                var sql = "DELETE FROM Quotes WHERE id = (SELECT id FROM Quotes WHERE ref = '" + ref + "' LIMIT 1)";
+                db.execute(sql);
                 that.closeDb(db);
                 cb && cb();
             }
@@ -301,6 +309,7 @@ Database.prototype.getWorkingLoadLimits = function() {
                 db.execute("INSERT INTO WorkingLoadLimits(size, grade, legs, limit45, limit60, type) VALUES (?, ?, ?, ?, ?, ?)", json.size, json.grade, json.legs, json.limit45, json.limit60, json.type);
             }
             that.ready++;
+            that.updateComplete++;
             responseArray = null;
             i = null;
             that.closeDb(db);
@@ -327,6 +336,7 @@ Database.prototype.getSlings = function() {
             }
             Ti.API.info("getSlings(): added " + totalAdded);
             that.ready++;
+            that.updateComplete++;
             responseArray = null;
             i = null;
             that.closeDb(db);
@@ -350,6 +360,7 @@ Database.prototype.getShorteners = function() {
                 db.execute("INSERT INTO Shorteners(code, name, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
+            that.updateComplete++;
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -373,6 +384,7 @@ Database.prototype.getEndFittings = function() {
                 db.execute("INSERT INTO EndFittings(code, name, type, grade10, grade8_1, grade8_2, grade8_3, grade8_4, grade10_1, grade10_2, grade10_3, grade10_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.name, json.type, json.grade10, json.grade8_1, json.grade8_2, json.grade8_3, json.grade8_4, json.grade10_1, json.grade10_2, json.grade10_3, json.grade10_4);
             }
             that.ready++;
+            that.updateComplete++;
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -395,6 +407,7 @@ Database.prototype.getChainTypes = function() {
                 db.execute("INSERT INTO ChainType(code, name) VALUES (?, ?)", json.code, json.name);
             }
             that.ready++;
+            that.updateComplete++;
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -417,6 +430,7 @@ Database.prototype.getBoms = function() {
                 db.execute("INSERT INTO Boms(sling_code, comp_code, qty) VALUES (?, ?, ?)", json.sling_code, json.comp_code, json.qty);
             }
             that.ready++;
+            that.updateComplete++;
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -439,6 +453,7 @@ Database.prototype.getComponents = function() {
                 db.execute("INSERT INTO Components(code, description, measure) VALUES (?, ?, ?)", json.code, json.description, json.measure);
             }
             that.ready++;
+            that.updateComplete++;
             that.closeDb(db);
             responseArray = null;
             i = null;
@@ -505,6 +520,16 @@ Database.prototype.updateTables = function() {
         Ti.API.info("Schema update: Updating table Quotes to add column specLoad.");
         db.execute("ALTER TABLE Quotes ADD COLUMN specLoad INTEGER");
     }
+    Ti.API.info("Schema update 2: Checking table UserProfile for column postcode.");
+    var rs = db.execute("PRAGMA table_info(UserProfile)"), fieldExists = false;
+    while (rs.isValidRow()) {
+        "postcode" == rs.field(1) && (fieldExists = true);
+        rs.next();
+    }
+    if (!fieldExists) {
+        Ti.API.info("Schema update: Updating table UserProfile to add column postcode.");
+        db.execute("ALTER TABLE UserProfile ADD COLUMN postcode TEXT");
+    }
     var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck", update = Ti.Network.createHTTPClient({
         onload: function() {
             var response = JSON.parse(this.responseText), db = self.openDb(), row = db.execute("SELECT * FROM VersionCheck"), versionObj = {};
@@ -520,47 +545,50 @@ Database.prototype.updateTables = function() {
                     var jsonVal = response[key], jsonCat = key;
                     if (dbCat === jsonCat) {
                         Ti.API.info("- API table " + jsonCat + " is " + jsonVal);
-                        if (dbValue != jsonVal) switch (dbCat) {
-                          case "chain_type":
-                            self.emptyTable("ChainType");
-                            self.getChainTypes();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                        if (dbValue != jsonVal) {
+                            self.updateRequired++;
+                            switch (dbCat) {
+                              case "chain_type":
+                                self.emptyTable("ChainType");
+                                self.getChainTypes();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "end_fittings":
-                            self.emptyTable("EndFittings");
-                            self.getEndFittings();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                              case "end_fittings":
+                                self.emptyTable("EndFittings");
+                                self.getEndFittings();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "shorteners":
-                            self.emptyTable("Shorteners");
-                            self.getShorteners();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                              case "shorteners":
+                                self.emptyTable("Shorteners");
+                                self.getShorteners();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "slings":
-                            self.emptyTable("Slings");
-                            self.getSlings();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                              case "slings":
+                                self.emptyTable("Slings");
+                                self.getSlings();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "working_load_limit":
-                            self.emptyTable("WorkingLoadLimits");
-                            self.getWorkingLoadLimits();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                              case "working_load_limit":
+                                self.emptyTable("WorkingLoadLimits");
+                                self.getWorkingLoadLimits();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "boms":
-                            self.emptyTable("Boms");
-                            self.getBoms();
-                            self.updateVersions(dbCat, jsonVal);
-                            break;
+                              case "boms":
+                                self.emptyTable("Boms");
+                                self.getBoms();
+                                self.updateVersions(dbCat, jsonVal);
+                                break;
 
-                          case "components":
-                            self.emptyTable("Components");
-                            self.getComponents();
-                            self.updateVersions(dbCat, jsonVal);
+                              case "components":
+                                self.emptyTable("Components");
+                                self.getComponents();
+                                self.updateVersions(dbCat, jsonVal);
+                            }
                         }
                     }
                 }

@@ -33,18 +33,30 @@ function Controller() {
     $.__views.header = Ti.UI.createView({
         top: 0,
         width: "100%",
-        height: "65dip",
+        height: "85dip",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.slingConfiguration.add($.__views.header);
-    $.__views.__alloyId179 = Ti.UI.createImageView({
+    $.__views.__alloyId187 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId179"
+        id: "__alloyId187"
     });
-    $.__views.header.add($.__views.__alloyId179);
+    $.__views.header.add($.__views.__alloyId187);
+    $.__views.tel = Ti.UI.createLabel({
+        top: "-10dip",
+        left: "0",
+        height: Ti.UI.SIZE,
+        width: "100%",
+        textAlign: "center",
+        color: "#ffffff",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.wrapper = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -80,14 +92,14 @@ function Controller() {
         id: "footer"
     });
     $.__views.wrapper.add($.__views.footer);
-    $.__views.__alloyId180 = Ti.UI.createView({
+    $.__views.__alloyId188 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId180"
+        id: "__alloyId188"
     });
-    $.__views.footer.add($.__views.__alloyId180);
+    $.__views.footer.add($.__views.__alloyId188);
     $.__views.back = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -107,7 +119,7 @@ function Controller() {
         return o;
     }());
     $.__views.footer.add($.__views.back);
-    $.__views.__alloyId181 = Ti.UI.createLabel(function() {
+    $.__views.__alloyId189 = Ti.UI.createLabel(function() {
         var o = {};
         _.extend(o, {
             font: {
@@ -126,11 +138,11 @@ function Controller() {
             height: "100%",
             width: Ti.UI.SIZE,
             color: "#FFF",
-            id: "__alloyId181"
+            id: "__alloyId189"
         });
         return o;
     }());
-    $.__views.back.add($.__views.__alloyId181);
+    $.__views.back.add($.__views.__alloyId189);
     $.__views.home = Ti.UI.createButton(function() {
         var o = {};
         _.extend(o, {
@@ -196,6 +208,7 @@ function Controller() {
     _.extend($, $.__views);
     var Common = require("common"), Navigation = (new Common(), require("navigation")), navigation = new Navigation(), Sling = require("sling"), sling = new Sling(), pages = [ "slingType", "legs", "load", "headroom", "terminations" ];
     Alloy.Globals.sling = sling;
+    Alloy.Globals.callHandler($.tel);
     Alloy.Globals.goBack = function() {
         navigation.previousPage($.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
     };

@@ -4,6 +4,20 @@ var Common = require("common"), User = require("user"), Database = require("data
     database: database
 }), connection = new Connection();
 
+Alloy.Globals.callHandler = function(el) {
+    el.text = "01665 604200";
+    el.addEventListener("click", function() {
+        Ti.API.info("Clicking call");
+        if (Ti.Platform.Android) {
+            var intent = Ti.Android.createIntent({
+                action: Ti.Android.ACTION_DIAL,
+                data: "tel:+441665604200"
+            });
+            Ti.Android.currentActivity.startActivity(intent);
+        } else Ti.Platform.openURL("tel:+441665604200");
+    });
+};
+
 var loader = Ti.UI.createWindow({
     backgroundColor: "#021b4b"
 }), container = Ti.UI.createView({
@@ -64,17 +78,23 @@ if (online) {
         }, 500);
     } else {
         database.updateTables();
-        if (database.userIsLogged()) {
-            Ti.API.info("A user is Logged In");
-            var dash = Alloy.createController("dashboard").getView();
-            dash.open();
-        } else {
-            var index = Alloy.createController("index").getView();
-            index.open();
-        }
-        loader.close();
-        loader = null;
-        imageSync.checkAndDownload();
+        var interval = setInterval(function() {
+            if (database.databaseUpdated()) {
+                Ti.API.info("Ready (finished updating)");
+                if (database.userIsLogged()) {
+                    Ti.API.info("A user is Logged In");
+                    var dash = Alloy.createController("dashboard").getView();
+                    dash.open();
+                } else {
+                    var index = Alloy.createController("index").getView();
+                    index.open();
+                }
+                loader.close();
+                loader = null;
+                clearInterval(interval);
+                imageSync.checkAndDownload();
+            }
+        }, 500);
     }
 } else {
     Ti.API.info("offline");

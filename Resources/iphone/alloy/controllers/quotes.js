@@ -137,20 +137,32 @@ function Controller() {
     });
     $.__views.quotes && $.addTopLevelView($.__views.quotes);
     $.__views.header = Ti.UI.createView({
-        height: "65dip",
+        height: "85dip",
         top: "26dip",
         width: "100%",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.quotes.add($.__views.header);
     $.__views.__alloyId156 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
         id: "__alloyId156"
     });
     $.__views.header.add($.__views.__alloyId156);
+    $.__views.tel = Ti.UI.createLabel({
+        color: "#ffffff",
+        height: Ti.UI.SIZE,
+        top: "-10dip",
+        left: "0",
+        width: "100%",
+        textAlign: "center",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.__alloyId157 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "5%",
@@ -192,6 +204,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
+    Alloy.Globals.callHandler($.tel);
     !function() {
         var table = Ti.UI.createTableView({
             height: "100%",

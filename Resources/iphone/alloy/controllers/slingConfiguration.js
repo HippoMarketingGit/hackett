@@ -34,18 +34,30 @@ function Controller() {
     $.__views.header = Ti.UI.createView({
         top: "26dip",
         width: "100%",
-        height: "65dip",
+        height: "85dip",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.slingConfiguration.add($.__views.header);
     $.__views.__alloyId227 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
         id: "__alloyId227"
     });
     $.__views.header.add($.__views.__alloyId227);
+    $.__views.tel = Ti.UI.createLabel({
+        top: "-10dip",
+        left: "0",
+        height: Ti.UI.SIZE,
+        width: "100%",
+        textAlign: "center",
+        color: "#ffffff",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.wrapper = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -197,6 +209,7 @@ function Controller() {
     _.extend($, $.__views);
     var Common = require("common"), Navigation = (new Common(), require("navigation")), navigation = new Navigation(), Sling = require("sling"), sling = new Sling(), pages = [ "slingType", "legs", "load", "headroom", "terminations" ];
     Alloy.Globals.sling = sling;
+    Alloy.Globals.callHandler($.tel);
     Alloy.Globals.goBack = function() {
         navigation.previousPage($.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);
     };

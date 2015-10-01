@@ -70,18 +70,30 @@ function Controller() {
     $.__views.header = Ti.UI.createView({
         top: "26dip",
         width: "100%",
-        height: "65dip",
+        height: "85dip",
         backgroundColor: "#eb6209",
+        layout: "vertical",
         id: "header"
     });
     $.__views.register.add($.__views.header);
     $.__views.__alloyId176 = Ti.UI.createImageView({
+        top: "5dip",
         width: Ti.UI.SIZE,
-        height: "80%",
+        height: "70%",
         image: "/images/WHC--logo--transparent.png",
         id: "__alloyId176"
     });
     $.__views.header.add($.__views.__alloyId176);
+    $.__views.tel = Ti.UI.createLabel({
+        left: "0",
+        width: "100%",
+        height: Ti.UI.SIZE,
+        color: "#FFF",
+        top: "-10dip",
+        textAlign: "center",
+        id: "tel"
+    });
+    $.__views.header.add($.__views.tel);
     $.__views.__alloyId177 = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
@@ -433,6 +445,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
+    Alloy.Globals.callHandler($.tel);
     $.back.addEventListener("click", function() {
         var win = Alloy.createController("index").getView();
         $.register.close();
