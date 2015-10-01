@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Alloy.Globals.callHandler($.tel);
+
 function getData(){
 	
 	var Database = require('databaseObj'),

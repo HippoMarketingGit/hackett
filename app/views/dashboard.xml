@@ -4,6 +4,7 @@
 		
 		<View id="header" class="header">
 			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
+			<Label class="tel" id="tel"></Label>
 		</View>
 		
 		<!-- <View class="header__seperator"></View> -->

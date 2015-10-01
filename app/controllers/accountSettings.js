@@ -2,6 +2,8 @@ var Database = require('databaseObj'),
 	database = new Database('SlingDB.sqlite'),
 	db = database.openDb();
 
+Alloy.Globals.callHandler($.tel);
+
 /*
  * 
  * Mailing list is faked below

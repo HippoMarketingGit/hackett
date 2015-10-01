@@ -11,6 +11,8 @@ var Common = require('common'),
 // Create a Global Object called sling
 Alloy.Globals.sling = sling;
 
+Alloy.Globals.callHandler($.tel);
+
 // Events object to fire things on and listen to
 Alloy.Globals.goBack = function() {
 	navigation.previousPage( $.scrollView, pages, Alloy.Globals.sling, $.slingConfiguration);

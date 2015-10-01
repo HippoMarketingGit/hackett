@@ -1,3 +1,5 @@
+Alloy.Globals.callHandler($.tel);
+
 function openConfigurator(e){
 	
 	var win = Alloy.createController('slingConfiguration').getView();

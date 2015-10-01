@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Alloy.Globals.callHandler($.tel);
+
 $.back.addEventListener('click', function(e){
 	var win = Alloy.createController('index').getView();
 

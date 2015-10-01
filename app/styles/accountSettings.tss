@@ -11,8 +11,14 @@
 '.header': {
 	top: '26dip',
 	width: '100%',
-	height: '65dip',
+	height: '85dip',
 	backgroundColor: '#eb6209',
+	layout: 'vertical'
+},
+'.tel': {
+	top: '-10dip',
+	width: '100%',
+	textAlign: 'center',
 },
 '.header[platform=android]': {
 	top: 0
@@ -23,8 +29,9 @@
 	backgroundColor: '#f7561e'
 },
 '.logo': {
+	top: '5dip',
 	width: Ti.UI.SIZE,
-	height: '80%'
+	height: '70%'
 },
 '.wrapper': {
 	layout: 'vertical',
