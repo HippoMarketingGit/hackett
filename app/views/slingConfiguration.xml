@@ -11,34 +11,12 @@
 		
 		<View class="wrapper--background" id="wrapper">
 			
-			<ScrollView id="scrollView">
-				
-				<!--<Require type="view" src="slingType" id="slingTypeRequire"/>
-				
-				<Require type="view" src="legs" id="legsRequire"/>
-				
-				<Require type="view" src="load" id="loadRequire"/>
-				
-				<Require type="view" src="headroom" id="headroomRequire"/>
-				
-				<Require type="view" src="nominalLength" id="nominalLengthRequire"/>
-				
-				<Require type="view" src="liftingPoints" id="liftingPointsRequire"/>
-				
-				<Require type="view" src="setHeadroom" id="setHeadroomRequire"/>
-				
-				<Require type="view" src="terminations" id="terminationsRequire"/>
-				
-				<Require type="view" src="specifications" id="specificationsRequire"/>-->
-				
-			</ScrollView>
+			<ScrollView id="scrollView"/>
 			
 			<View id="footer" class="footer">
 				<View class="border--top"></View>
 				
-				<View left="5%" layout="vertical"  backgroundImage="/images/WHC-button--back.png" class="button--size" id="back">
-					<Label touchEnabled="False" right="5%" height="100%" width="Ti.UI.SIZE" color="#FFF" class="button--nav">BACK</Label>
-				</View>
+				<Button id="back" class="button--nav button--size button--back" />
 				
 		 		<Button id="home" class="button--nav button--size button--home" />
 				

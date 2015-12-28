@@ -18,9 +18,7 @@
 	layout: 'vertical'
 },
 '.tel': {
-	top: '-10dip',
-	left: '0',
-	height: Ti.UI.SIZE,
+	//top: '-10dip',
 	width: '100%',
 	textAlign: 'center',
 },
@@ -34,7 +32,7 @@
 }
 '.logo': {
 	top: '5dip',
-	width: Ti.UI.SIZE,
+	//width: Ti.UI.SIZE,
 	height: '70%'
 }
 '.wrapper': {
@@ -47,6 +45,7 @@
 	startPoint:{x:0,y:0},
 	endPoint:{x:0,y:960},
 	backFillStart:false},
+	width: '100%'
 },
 'ScrollView': {
 	contentWidth: 'auto',
@@ -61,9 +60,11 @@
 	className: 'button--tertiary'
 },
 '.icon': {
-	right: '10dip',
+	right: '5dip',
 	height: '60dip',
-	width: 'auto',
+	width: '60dip',
+	//width: '100%',
+	//width: 'auto',
 	className: 'icon'
 },
 '.border--bottom': {

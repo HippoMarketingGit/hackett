@@ -46,19 +46,25 @@ function chooseLegs(e){
 	var obj = e.source;
 	
 	// Reset the borders on all buttons to defaults
-	$.one.borderColor = '#2b3b94';
-	$.two.borderColor = '#2b3b94';
-	$.three.borderColor = '#2b3b94';
-	$.four.borderColor = '#2b3b94';
+	//$.one.borderColor = '#2b3b94';
+	//$.two.borderColor = '#2b3b94';
+	//$.three.borderColor = '#2b3b94';
+	//$.four.borderColor = '#2b3b94';
 	
-	$.one.borderWidth = '1px';
-	$.two.borderWidth = '1px';
-	$.three.borderWidth = '1px';
-	$.four.borderWidth = '1px';
+	$.one.backgroundColor = '#2b3b94';
+	$.two.backgroundColor = '#2b3b94';
+	$.three.backgroundColor = '#2b3b94';
+	$.four.backgroundColor = '#2b3b94';
+	
+	//$.one.borderWidth = '1px';
+	//$.two.borderWidth = '1px';
+	//$.three.borderWidth = '1px';
+	//$.four.borderWidth = '1px';
 	
 	// Change the border of the highlighted button
-	obj.borderColor = '#f7561e';
-	obj.borderWidth = '8px';
+	//obj.borderColor = '#f7561e';
+	//obj.borderWidth = '8px';
+	obj.backgroundColor = '#f7561e';
 	
 	// Set the amount of legs to a global object called slings
 	if(obj.id === 'one'){

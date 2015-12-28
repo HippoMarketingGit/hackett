@@ -83,7 +83,7 @@ loader.open();
 // ====================================================================
 // Include Connections file
 // ====================================================================
-Ti.include('js/globals/globals.js');
+//Ti.include('js/globals/globals.js');
 
 // Create all Tables
 database.createTables();

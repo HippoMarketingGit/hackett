@@ -114,7 +114,8 @@
 	layout: 'vertical',
 	left: '5%',
 	width: '100dip',
-	height: '26dip',
+	//height: '26dip',
+	height: '40dip',
 	backgroundImage: '/images/WHC-button--back.png',
 	title: 'BACK',
 	color: '#FFF',
@@ -126,7 +127,8 @@
 	layout: 'vertical',
 	right: '5%',
 	width: '100dip',
-	height: '26dip',
+	//height: '26dip',
+	height: '40dip',
 	backgroundImage: '/images/WHC-button--next.png',
 	title: 'NEXT',
 	color: '#FFF',
@@ -137,7 +139,7 @@
 
 // IMAGES
 '.logo': {
-	width: Ti.UI.SIZE,
+	//width: Ti.UI.SIZE,
 	height: '80%'
 },
 '.icon': {

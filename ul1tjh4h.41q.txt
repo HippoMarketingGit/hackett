@@ -1,0 +1,66 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Windows-Phone
+# Your branch is up-to-date with 'origin/Windows-Phone'.
+#
+# Changes to be committed:
+#	new file:   .metadata/.lock
+#	new file:   .metadata/.log
+#	new file:   .metadata/.plugins/com.appcelerator.titanium.core/windows
+#	new file:   .metadata/.plugins/com.appcelerator.titanium.ui.ide/dialog_settings.xml
+#
+# Changes not staged for commit:
+#	modified:   Resources/alloy/CFG.js
+#	modified:   app/alloy.js
+#	deleted:    app/assets/blackberry/Ti.Manifest
+#	deleted:    app/assets/blackberry/appicon.png
+#	deleted:    app/assets/blackberry/map/bubble.png
+#	deleted:    app/assets/blackberry/map/green_pin.png
+#	deleted:    app/assets/blackberry/map/purple_pin.png
+#	deleted:    app/assets/blackberry/map/red_pin.png
+#	deleted:    app/assets/blackberry/splash-600x1024.png
+#	modified:   app/lib/navigation.js
+#	modified:   app/styles/accountSettings.tss
+#	modified:   app/styles/dashboard.tss
+#	modified:   app/styles/index.tss
+#	modified:   app/styles/legs.tss
+#	modified:   app/styles/liftingPoints.tss
+#	modified:   app/styles/nominalLength.tss
+#	modified:   app/styles/quotes.tss
+#	modified:   app/styles/quotesDetail.tss
+#	modified:   app/styles/register.tss
+#	modified:   app/styles/requirements.tss
+#	modified:   app/styles/setHeadroom.tss
+#	modified:   app/styles/slingConfiguration.tss
+#	modified:   app/styles/slingType.tss
+#	modified:   app/styles/specifications.tss
+#	modified:   app/styles/terminations.tss
+#	modified:   app/views/accountSettings.xml
+#	modified:   app/views/slingConfiguration.xml
+#	modified:   manifest
+#	modified:   plugins/ti.alloy/hooks/alloy.js
+#	modified:   tiapp.xml
+#
+# Untracked files:
+#	.metadata/.plugins/com.appcelerator.titanium.ui/
+#	.metadata/.plugins/com.aptana.core.io/
+#	.metadata/.plugins/com.aptana.index.core/
+#	.metadata/.plugins/com.aptana.syncing.core/
+#	.metadata/.plugins/com.aptana.webserver.core/
+#	.metadata/.plugins/org.eclipse.core.resources/
+#	.metadata/.plugins/org.eclipse.core.runtime/
+#	.metadata/.plugins/org.eclipse.debug.core/
+#	.metadata/.plugins/org.eclipse.debug.ui/
+#	.metadata/.plugins/org.eclipse.e4.workbench/
+#	.metadata/.plugins/org.eclipse.ltk.core.refactoring/
+#	.metadata/.plugins/org.eclipse.ltk.ui.refactoring/
+#	.metadata/.plugins/org.eclipse.ui.ide/
+#	.metadata/.plugins/org.eclipse.ui.workbench/
+#	.metadata/version.ini
+#	DefaultIcon.png
+#	Resources/windows/
+#	WilliamHackettChains/
+#	plugins/ti.alloy/hooks/deepclean.js
+#
+

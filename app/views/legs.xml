@@ -13,24 +13,32 @@
 				
 		<View top="20dip" class="content--horizontal">
 	
-			<View onClick="chooseLegs" id="one" class="legs" backgroundColor="#FFF">
-				<ImageView id="oneImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+			<View onClick="chooseLegs" id="one" class="legs" backgroundColor="#2b3b94" >
+				<View height="90%" width="90%" backgroundColor="#FFF">
+					<ImageView id="oneImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+				</View>
 			</View>
 			
-			<View onClick="chooseLegs" id="two" class="legs" backgroundColor="#FFF">
-				<ImageView id="twoImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+			<View onClick="chooseLegs" id="two" class="legs" backgroundColor="#2b3b94">
+				<View height="90%" width="90%" backgroundColor="#FFF">
+					<ImageView id="twoImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+				</View>
 			</View>
 		
 		</View>
 	
 		<View class="content--horizontal">
 		
-			<View onClick="chooseLegs" id="three" class="legs" backgroundColor="#FFF">
-				<ImageView id="threeImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+			<View onClick="chooseLegs" id="three" class="legs" backgroundColor="#2b3b94">
+				<View height="90%" width="90%" backgroundColor="#FFF">
+					<ImageView id="threeImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+				</View>
 			</View>
 			
-			<View onClick="chooseLegs" id="four" class="legs" backgroundColor="#FFF">
-				<ImageView id="fourImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+			<View onClick="chooseLegs" id="four" class="legs" backgroundColor="#2b3b94">
+				<View height="90%" width="90%" backgroundColor="#FFF">
+					<ImageView id="fourImg" touchEnabled="False" height="100%" width="auto"></ImageView>
+				</View>
 			</View>
 		
 		</View>

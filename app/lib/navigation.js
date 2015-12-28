@@ -2,6 +2,17 @@
  * @author Ben Hall
  */
 
+function clearScroll(scrollview)
+{		
+	if (scrollview.children) {
+        for (var i = scrollview.children.length; i > 0; i--){
+            clearScroll(scrollview.children[i-1]);
+            scrollview.remove(scrollview.children[i-1]);
+            scrollview.children[i-1] = null;
+        }
+    }
+}
+
 function Navigation(){
 	this.count = 0;
 	this.currentWin;
@@ -32,7 +43,8 @@ Navigation.prototype.nextPage = function(scrollview, array, sling){
 			}*/
 			
 			var win = Alloy.createController(array[this.count]).getView('content');
-				scrollview.remove(scrollview.children[0]);
+				//scrollview.remove(scrollview.children[0]);
+			  	clearScroll(scrollview);								
 				scrollview.add(win);
 			
 		}else{
@@ -58,7 +70,8 @@ Navigation.prototype.previousPage = function(scrollview, array, sling, current){
 		}*/
 		
 		var win = Alloy.createController(array[this.count]).getView('content');
-			scrollview.remove(scrollview.children[0]);
+			//scrollview.remove(scrollview.children[0]);
+			clearScroll(scrollview);
 			scrollview.add(win);
 	}else{
 		

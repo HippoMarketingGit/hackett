@@ -15,6 +15,7 @@
 				<View class="wrapper">
 					
 					<View class="content--container">
+											
 						<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">
 							<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
 						</View>
