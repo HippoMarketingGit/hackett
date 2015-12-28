@@ -4,23 +4,27 @@ if( Alloy.Globals.sling.legs !== null ){
 	
 	if(Alloy.Globals.sling.legs === 1){
 		
-		$.one.borderColor = '#f7561e';
-		$.one.borderWidth = '8px';
+		//$.one.borderColor = '#f7561e';
+		//$.one.borderWidth = '8px';
+		$.one.backgroundColor = '#2b3b94';
 		
 	}else if(Alloy.Globals.sling.legs === 2){
 		
-		$.two.borderColor = '#f7561e';
-		$.two.borderWidth = '8px';
+		//$.two.borderColor = '#f7561e';
+		//$.two.borderWidth = '8px';
+		$.two.backgroundColor = '#2b3b94';
 		
 	}else if(Alloy.Globals.sling.legs === 3){
 		
-		$.three.borderColor = '#f7561e';
-		$.three.borderWidth = '8px';
+		//$.three.borderColor = '#f7561e';
+		//$.three.borderWidth = '8px';
+		$.three.backgroundColor = '#2b3b94';
 		
 	}else if(Alloy.Globals.sling.legs === 4){
 		
-		$.four.borderColor = '#f7561e';
-		$.four.borderWidth = '8px';
+		//$.four.borderColor = '#f7561e';
+		//$.four.borderWidth = '8px';
+		$.four.backgroundColor = '#2b3b94';
 	}
 }
 
