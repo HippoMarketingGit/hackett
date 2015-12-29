@@ -61,10 +61,9 @@ function Controller() {
     $.__views.header.add($.__views.__alloyId58);
     $.__views.tel = Ti.UI.createLabel({
         left: "0",
-        width: Titanium.UI.SIZE,
+        width: "100%",
         height: Titanium.UI.SIZE,
         color: "#FFF",
-        textAlign: "center",
         id: "tel"
     });
     $.__views.header.add($.__views.tel);

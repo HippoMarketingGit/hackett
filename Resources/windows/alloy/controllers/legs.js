@@ -197,19 +197,7 @@ function Controller() {
     $.__views.__alloyId80.add($.__views.fourImg);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    if (null !== Alloy.Globals.sling.legs) if (1 === Alloy.Globals.sling.legs) {
-        $.one.borderColor = "#f7561e";
-        $.one.borderWidth = "8px";
-    } else if (2 === Alloy.Globals.sling.legs) {
-        $.two.borderColor = "#f7561e";
-        $.two.borderWidth = "8px";
-    } else if (3 === Alloy.Globals.sling.legs) {
-        $.three.borderColor = "#f7561e";
-        $.three.borderWidth = "8px";
-    } else if (4 === Alloy.Globals.sling.legs) {
-        $.four.borderColor = "#f7561e";
-        $.four.borderWidth = "8px";
-    }
+    null !== Alloy.Globals.sling.legs && (1 === Alloy.Globals.sling.legs ? $.one.backgroundColor = "#2b3b94" : 2 === Alloy.Globals.sling.legs ? $.two.backgroundColor = "#2b3b94" : 3 === Alloy.Globals.sling.legs ? $.three.backgroundColor = "#2b3b94" : 4 === Alloy.Globals.sling.legs && ($.four.backgroundColor = "#2b3b94"));
     var imgPath = "";
     switch (Alloy.Globals.sling.type) {
       case "Chain":

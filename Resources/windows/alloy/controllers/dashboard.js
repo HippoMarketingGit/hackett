@@ -72,7 +72,6 @@ function Controller() {
         height: Titanium.UI.SIZE,
         color: "#FFF",
         className: "label",
-        textAlign: "center",
         id: "tel"
     });
     $.__views.header.add($.__views.tel);

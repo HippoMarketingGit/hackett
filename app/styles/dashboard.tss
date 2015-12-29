@@ -20,7 +20,8 @@
 '.tel': {
 	//top: '-10dip',
 	width: '100%',
-	textAlign: 'center',
+	//textAlign: 'center',
+	color: '#FFF',
 },
 '.header[platform=android]': {
 	top: 0

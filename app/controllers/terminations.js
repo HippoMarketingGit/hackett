@@ -142,6 +142,7 @@ function createPicker(e) {
 
 
 	wrapper = $.content.getParent().getParent();
+	//wrapper = $.terminations.getParent();
 
 	picker.add(row);
 	picker.add(noDevice);
