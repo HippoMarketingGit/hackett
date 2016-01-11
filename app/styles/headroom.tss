@@ -67,6 +67,14 @@
 	width: 'auto',
 	className: 'icon'
 },
+'#headroomImg': {
+	top: '10dip'
+},
+
+
+'#headroomImg[platform=ios formFactor=handheld]': {
+	height: '120dip'
+},
 
 // LABELS
 '.button__label': {

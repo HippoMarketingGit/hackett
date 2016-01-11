@@ -2,10 +2,11 @@
 	<Window class="background">
 		
 		<View id="header" class="header">
-			<ImageView class="logo" image="/images/WHC--logo.png" />
+			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
+			<Label class="tel" id="tel"></Label>
 		</View>
 		
-		<View class="header__seperator"></View>
+		<!-- <View class="header__seperator"></View> -->
 		
 		<View class="wrapper--background">
 			
@@ -20,28 +21,38 @@
 					</View>
 				
 					<View class="content--container">
-						<Label>Your name*</Label>
+						<Label>Your name *</Label>
 						<TextField id="name" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Company name*</Label>
+						<Label>Company name *</Label>
 						<TextField id="companyName" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Phone number*</Label>
+						<Label>Phone number *</Label>
 						<TextField id="phoneNumber" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Email address*</Label>
+						<Label>Postcode *</Label>
+						<TextField id="postcode" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Email address *</Label>
 						<TextField id="emailAddress" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
 						<Label>Update password</Label>
-						<TextField id="password" passwordMask="true" class="input--primary" />
+						<TextField id="password1" passwordMask="true" class="input--primary" />
+					</View>
+					
+					<View class="content--container">
+						<Label>Update password (confirm)</Label>
+						<TextField id="password2" passwordMask="true" class="input--primary" />
 					</View>
 					
 					<View class="content--container">

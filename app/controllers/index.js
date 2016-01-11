@@ -4,6 +4,8 @@
 var Database = require('databaseObj'),
 	database = new Database('SlingDB.sqlite');
 	
+Alloy.Globals.callHandler($.tel);
+	
 
 $.register.addEventListener('click', function(e){
 	

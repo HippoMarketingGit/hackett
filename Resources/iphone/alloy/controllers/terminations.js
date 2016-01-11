@@ -20,8 +20,8 @@ function Controller() {
                     code: code,
                     name: name
                 };
+                4 != code && lowerTerminations.push(obj);
                 upperTerminations.push(obj);
-                lowerTerminations.push(obj);
                 row.next();
             }
         } else if ("Wire Rope" === Alloy.Globals.sling.type) {
@@ -95,7 +95,8 @@ function Controller() {
             }
             picker.addEventListener("change", function(e) {
                 $.shorteningDeviceText.value = e.row.title;
-                $.shorteningImage.image = "/images/terminations/" + e.row.title + ".jpg";
+                $.shorteningImage.image = "/images/shorteners/" + e.row.title + ".jpg";
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.shorteningDevice = e.row.title;
                 Alloy.Globals.sling.shorteningDeviceCode = e.row.val;
             });
@@ -119,6 +120,8 @@ function Controller() {
             picker.addEventListener("change", function(e) {
                 $.lowerTermText.value = e.row.title;
                 $.lowerTermImage.image = "/images/terminations/" + e.row.title + ".jpg";
+                Ti.API.info("lower term image /images/terminations/" + e.row.title + ".jpg");
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.lowerTermination = e.row.title;
                 Alloy.Globals.sling.lowerTerminationCode = e.row.val;
             });
@@ -141,6 +144,8 @@ function Controller() {
             picker.addEventListener("change", function(e) {
                 $.upperTermText.value = e.row.title;
                 $.upperTermImage.image = "/images/terminations/" + e.row.title + ".jpg";
+                Ti.API.info("upper term image /images/terminations/" + e.row.title + ".jpg");
+                Ti.API.info(JSON.stringify(e.row));
                 Alloy.Globals.sling.upperTermination = e.row.title;
                 Alloy.Globals.sling.upperTerminationCode = e.row.val;
             });
@@ -183,34 +188,34 @@ function Controller() {
         return o;
     }());
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId256 = Ti.UI.createView({
+    $.__views.__alloyId286 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId256"
+        id: "__alloyId286"
     });
-    $.__views.content.add($.__views.__alloyId256);
-    $.__views.__alloyId257 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId286);
+    $.__views.__alloyId287 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 26
         },
-        text: "Select Fittings",
-        id: "__alloyId257"
+        text: "Terminations",
+        id: "__alloyId287"
     });
-    $.__views.__alloyId256.add($.__views.__alloyId257);
-    $.__views.__alloyId258 = Ti.UI.createLabel({
+    $.__views.__alloyId286.add($.__views.__alloyId287);
+    $.__views.__alloyId288 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
-        text: "Please select lower termination fittings and shortening device, if any.",
-        id: "__alloyId258"
+        text: "Please select one of the lower terminations available and a shortening device if required.",
+        id: "__alloyId288"
     });
-    $.__views.__alloyId256.add($.__views.__alloyId258);
+    $.__views.__alloyId286.add($.__views.__alloyId288);
     $.__views.shorteningDeviceView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -222,45 +227,45 @@ function Controller() {
         backgroundColor: "#6b76d0"
     });
     $.__views.content.add($.__views.shorteningDeviceView);
-    $.__views.__alloyId259 = Ti.UI.createView({
+    $.__views.__alloyId289 = Ti.UI.createView({
         top: "10dip",
         height: "60dip",
         width: "90%",
-        id: "__alloyId259"
+        id: "__alloyId289"
     });
-    $.__views.shorteningDeviceView.add($.__views.__alloyId259);
-    $.__views.__alloyId260 = Ti.UI.createLabel({
+    $.__views.shorteningDeviceView.add($.__views.__alloyId289);
+    $.__views.__alloyId290 = Ti.UI.createLabel({
         text: "Shortening Device",
         height: Ti.UI.FILL,
         left: "5dip",
         right: "70dip",
         color: "#FFF",
-        id: "__alloyId260"
+        id: "__alloyId290"
     });
-    $.__views.__alloyId259.add($.__views.__alloyId260);
-    $.__views.__alloyId261 = Ti.UI.createView({
+    $.__views.__alloyId289.add($.__views.__alloyId290);
+    $.__views.__alloyId291 = Ti.UI.createView({
         height: "60dip",
         width: "60dip",
         right: "5dip",
         backgroundColor: "#FFF",
-        id: "__alloyId261"
+        id: "__alloyId291"
     });
-    $.__views.__alloyId259.add($.__views.__alloyId261);
+    $.__views.__alloyId289.add($.__views.__alloyId291);
     $.__views.shorteningImage = Ti.UI.createImageView({
         image: "/images/terminations/Eye Grab Hook.jpg",
         id: "shorteningImage",
         height: "60dip",
         width: "auto"
     });
-    $.__views.__alloyId261.add($.__views.shorteningImage);
-    $.__views.__alloyId262 = Ti.UI.createView({
+    $.__views.__alloyId291.add($.__views.shorteningImage);
+    $.__views.__alloyId292 = Ti.UI.createView({
         width: "90%",
         height: Titanium.UI.SIZE,
         top: "10dip",
         bottom: "10dip",
-        id: "__alloyId262"
+        id: "__alloyId292"
     });
-    $.__views.shorteningDeviceView.add($.__views.__alloyId262);
+    $.__views.shorteningDeviceView.add($.__views.__alloyId292);
     $.__views.shorteningDeviceText = Ti.UI.createTextField({
         left: "0",
         right: "61px",
@@ -275,94 +280,18 @@ function Controller() {
         id: "shorteningDeviceText",
         paddingLeft: "5dip"
     });
-    $.__views.__alloyId262.add($.__views.shorteningDeviceText);
+    $.__views.__alloyId292.add($.__views.shorteningDeviceText);
     createPicker ? $.__views.shorteningDeviceText.addEventListener("click", createPicker) : __defers["$.__views.shorteningDeviceText!click!createPicker"] = true;
-    $.__views.__alloyId263 = Ti.UI.createImageView({
+    $.__views.__alloyId293 = Ti.UI.createImageView({
         right: "0",
         width: "61px",
         height: "52px",
         className: "shortening",
         image: "images/WHC-select.jpg",
-        id: "__alloyId263"
+        id: "__alloyId293"
     });
-    $.__views.__alloyId262.add($.__views.__alloyId263);
-    createPicker ? $.__views.__alloyId263.addEventListener("click", createPicker) : __defers["$.__views.__alloyId263!click!createPicker"] = true;
-    $.__views.lowerTermView = Ti.UI.createView({
-        layout: "vertical",
-        top: "10dip",
-        width: "90%",
-        height: Titanium.UI.SIZE,
-        id: "lowerTermView",
-        borderWidth: "1dip",
-        borderColor: "#fba688",
-        backgroundColor: "#6b76d0"
-    });
-    $.__views.content.add($.__views.lowerTermView);
-    $.__views.__alloyId264 = Ti.UI.createView({
-        top: "10dip",
-        height: "60dip",
-        width: "90%",
-        id: "__alloyId264"
-    });
-    $.__views.lowerTermView.add($.__views.__alloyId264);
-    $.__views.__alloyId265 = Ti.UI.createLabel({
-        text: "Lower Termination",
-        height: Ti.UI.FILL,
-        left: "5dip",
-        right: "70dip",
-        color: "#FFF",
-        id: "__alloyId265"
-    });
-    $.__views.__alloyId264.add($.__views.__alloyId265);
-    $.__views.__alloyId266 = Ti.UI.createView({
-        height: "60dip",
-        width: "60dip",
-        right: "5dip",
-        backgroundColor: "#FFF",
-        id: "__alloyId266"
-    });
-    $.__views.__alloyId264.add($.__views.__alloyId266);
-    $.__views.lowerTermImage = Ti.UI.createImageView({
-        image: "/images/terminations/Eye Grab Hook.jpg",
-        id: "lowerTermImage",
-        height: "60dip",
-        width: "auto"
-    });
-    $.__views.__alloyId266.add($.__views.lowerTermImage);
-    $.__views.__alloyId267 = Ti.UI.createView({
-        width: "90%",
-        height: Titanium.UI.SIZE,
-        top: "10dip",
-        bottom: "10dip",
-        id: "__alloyId267"
-    });
-    $.__views.lowerTermView.add($.__views.__alloyId267);
-    $.__views.lowerTermText = Ti.UI.createTextField({
-        left: "0",
-        right: "61px",
-        height: "52px",
-        backgroundColor: "#FFF",
-        borderWidth: "1dip",
-        borderColor: "#fba688",
-        color: "#000",
-        className: "lowerTerminations",
-        editable: "false",
-        value: "Select...",
-        id: "lowerTermText",
-        paddingLeft: "5dip"
-    });
-    $.__views.__alloyId267.add($.__views.lowerTermText);
-    createPicker ? $.__views.lowerTermText.addEventListener("click", createPicker) : __defers["$.__views.lowerTermText!click!createPicker"] = true;
-    $.__views.__alloyId268 = Ti.UI.createImageView({
-        right: "0",
-        width: "61px",
-        height: "52px",
-        className: "lowerTerminations",
-        image: "images/WHC-select.jpg",
-        id: "__alloyId268"
-    });
-    $.__views.__alloyId267.add($.__views.__alloyId268);
-    createPicker ? $.__views.__alloyId268.addEventListener("click", createPicker) : __defers["$.__views.__alloyId268!click!createPicker"] = true;
+    $.__views.__alloyId292.add($.__views.__alloyId293);
+    createPicker ? $.__views.__alloyId293.addEventListener("click", createPicker) : __defers["$.__views.__alloyId293!click!createPicker"] = true;
     $.__views.upperTermView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -374,45 +303,45 @@ function Controller() {
         backgroundColor: "#6b76d0"
     });
     $.__views.content.add($.__views.upperTermView);
-    $.__views.__alloyId269 = Ti.UI.createView({
+    $.__views.__alloyId294 = Ti.UI.createView({
         top: "10dip",
         height: "60dip",
         width: "90%",
-        id: "__alloyId269"
+        id: "__alloyId294"
     });
-    $.__views.upperTermView.add($.__views.__alloyId269);
-    $.__views.__alloyId270 = Ti.UI.createLabel({
+    $.__views.upperTermView.add($.__views.__alloyId294);
+    $.__views.__alloyId295 = Ti.UI.createLabel({
         text: "Upper Termination",
         height: Ti.UI.FILL,
         left: "5dip",
         right: "70dip",
         color: "#FFF",
-        id: "__alloyId270"
+        id: "__alloyId295"
     });
-    $.__views.__alloyId269.add($.__views.__alloyId270);
-    $.__views.__alloyId271 = Ti.UI.createView({
+    $.__views.__alloyId294.add($.__views.__alloyId295);
+    $.__views.__alloyId296 = Ti.UI.createView({
         height: "60dip",
         width: "60dip",
         right: "5dip",
         backgroundColor: "#FFF",
-        id: "__alloyId271"
+        id: "__alloyId296"
     });
-    $.__views.__alloyId269.add($.__views.__alloyId271);
+    $.__views.__alloyId294.add($.__views.__alloyId296);
     $.__views.upperTermImage = Ti.UI.createImageView({
         image: "/images/terminations/Eye Grab Hook.jpg",
         id: "upperTermImage",
         height: "60dip",
         width: "auto"
     });
-    $.__views.__alloyId271.add($.__views.upperTermImage);
-    $.__views.__alloyId272 = Ti.UI.createView({
+    $.__views.__alloyId296.add($.__views.upperTermImage);
+    $.__views.__alloyId297 = Ti.UI.createView({
         width: "90%",
         height: Titanium.UI.SIZE,
         top: "10dip",
         bottom: "10dip",
-        id: "__alloyId272"
+        id: "__alloyId297"
     });
-    $.__views.upperTermView.add($.__views.__alloyId272);
+    $.__views.upperTermView.add($.__views.__alloyId297);
     $.__views.upperTermText = Ti.UI.createTextField({
         left: "0",
         right: "61px",
@@ -427,18 +356,94 @@ function Controller() {
         id: "upperTermText",
         paddingLeft: "5dip"
     });
-    $.__views.__alloyId272.add($.__views.upperTermText);
+    $.__views.__alloyId297.add($.__views.upperTermText);
     createPicker ? $.__views.upperTermText.addEventListener("click", createPicker) : __defers["$.__views.upperTermText!click!createPicker"] = true;
-    $.__views.__alloyId273 = Ti.UI.createImageView({
+    $.__views.__alloyId298 = Ti.UI.createImageView({
         right: "0",
         width: "61px",
         height: "52px",
         className: "upperTerminations",
         image: "images/WHC-select.jpg",
-        id: "__alloyId273"
+        id: "__alloyId298"
     });
-    $.__views.__alloyId272.add($.__views.__alloyId273);
-    createPicker ? $.__views.__alloyId273.addEventListener("click", createPicker) : __defers["$.__views.__alloyId273!click!createPicker"] = true;
+    $.__views.__alloyId297.add($.__views.__alloyId298);
+    createPicker ? $.__views.__alloyId298.addEventListener("click", createPicker) : __defers["$.__views.__alloyId298!click!createPicker"] = true;
+    $.__views.lowerTermView = Ti.UI.createView({
+        layout: "vertical",
+        top: "10dip",
+        width: "90%",
+        height: Titanium.UI.SIZE,
+        id: "lowerTermView",
+        borderWidth: "1dip",
+        borderColor: "#fba688",
+        backgroundColor: "#6b76d0"
+    });
+    $.__views.content.add($.__views.lowerTermView);
+    $.__views.__alloyId299 = Ti.UI.createView({
+        top: "10dip",
+        height: "60dip",
+        width: "90%",
+        id: "__alloyId299"
+    });
+    $.__views.lowerTermView.add($.__views.__alloyId299);
+    $.__views.__alloyId300 = Ti.UI.createLabel({
+        text: "Lower Termination",
+        height: Ti.UI.FILL,
+        left: "5dip",
+        right: "70dip",
+        color: "#FFF",
+        id: "__alloyId300"
+    });
+    $.__views.__alloyId299.add($.__views.__alloyId300);
+    $.__views.__alloyId301 = Ti.UI.createView({
+        height: "60dip",
+        width: "60dip",
+        right: "5dip",
+        backgroundColor: "#FFF",
+        id: "__alloyId301"
+    });
+    $.__views.__alloyId299.add($.__views.__alloyId301);
+    $.__views.lowerTermImage = Ti.UI.createImageView({
+        image: "/images/terminations/Eye Grab Hook.jpg",
+        id: "lowerTermImage",
+        height: "60dip",
+        width: "auto"
+    });
+    $.__views.__alloyId301.add($.__views.lowerTermImage);
+    $.__views.__alloyId302 = Ti.UI.createView({
+        width: "90%",
+        height: Titanium.UI.SIZE,
+        top: "10dip",
+        bottom: "10dip",
+        id: "__alloyId302"
+    });
+    $.__views.lowerTermView.add($.__views.__alloyId302);
+    $.__views.lowerTermText = Ti.UI.createTextField({
+        left: "0",
+        right: "61px",
+        height: "52px",
+        backgroundColor: "#FFF",
+        borderWidth: "1dip",
+        borderColor: "#fba688",
+        color: "#000",
+        className: "lowerTerminations",
+        editable: "false",
+        value: "Select...",
+        id: "lowerTermText",
+        paddingLeft: "5dip"
+    });
+    $.__views.__alloyId302.add($.__views.lowerTermText);
+    createPicker ? $.__views.lowerTermText.addEventListener("click", createPicker) : __defers["$.__views.lowerTermText!click!createPicker"] = true;
+    $.__views.__alloyId303 = Ti.UI.createImageView({
+        right: "0",
+        width: "61px",
+        height: "52px",
+        className: "lowerTerminations",
+        image: "images/WHC-select.jpg",
+        id: "__alloyId303"
+    });
+    $.__views.__alloyId302.add($.__views.__alloyId303);
+    createPicker ? $.__views.__alloyId303.addEventListener("click", createPicker) : __defers["$.__views.__alloyId303!click!createPicker"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     if ("Chain" === Alloy.Globals.sling.type) {
@@ -457,11 +462,11 @@ function Controller() {
     Alloy.Globals.lowerTermCode = 0;
     Alloy.Globals.upperTermCode = 0;
     __defers["$.__views.shorteningDeviceText!click!createPicker"] && $.__views.shorteningDeviceText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId263!click!createPicker"] && $.__views.__alloyId263.addEventListener("click", createPicker);
-    __defers["$.__views.lowerTermText!click!createPicker"] && $.__views.lowerTermText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId268!click!createPicker"] && $.__views.__alloyId268.addEventListener("click", createPicker);
+    __defers["$.__views.__alloyId293!click!createPicker"] && $.__views.__alloyId293.addEventListener("click", createPicker);
     __defers["$.__views.upperTermText!click!createPicker"] && $.__views.upperTermText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId273!click!createPicker"] && $.__views.__alloyId273.addEventListener("click", createPicker);
+    __defers["$.__views.__alloyId298!click!createPicker"] && $.__views.__alloyId298.addEventListener("click", createPicker);
+    __defers["$.__views.lowerTermText!click!createPicker"] && $.__views.lowerTermText.addEventListener("click", createPicker);
+    __defers["$.__views.__alloyId303!click!createPicker"] && $.__views.__alloyId303.addEventListener("click", createPicker);
     _.extend($, exports);
 }
 

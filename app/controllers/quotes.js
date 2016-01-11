@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Alloy.Globals.callHandler($.tel);
+
 function getData(){
 	
 	var Database = require('databaseObj'),
@@ -22,7 +24,8 @@ function getData(){
 				description: row.fieldByName('description'),
 				date: row.fieldByName('date'),
 				ref: row.fieldByName('ref'),
-				user: row.fieldByName('user')
+				user: row.fieldByName('user'),
+				specLoad: row.fieldByName('specLoad')
 			};
 			
 	
@@ -55,7 +58,16 @@ function getData(){
 			date = Ti.UI.createLabel({
 				left: '20dip',
 				top: '4dip',
-				text: row.fieldByName('date'),
+				text: "Created on " + row.fieldByName('date'),
+				font:{
+					fontSize: '14px'
+				},
+				color: '#FFF'
+			}),
+			ref = Ti.UI.createLabel({
+				left: '20dip',
+				top: '4dip',
+				text: row.fieldByName('ref'),
 				font:{
 					fontSize: '16px'
 				},
@@ -72,6 +84,7 @@ function getData(){
 				color: '#FFF'
 			});
 			
+		container.add(ref);
 		container.add(date);
 		container.add(description);
 		container.add(partCode);
@@ -110,9 +123,14 @@ function getData(){
 	$.container.add(table);
 	
 	table.addEventListener('click', function(e){
-		if( e.rowData.hasChild){
-			var data = e.rowData,
+		
+		if( e.row.hasChild){
+			
+			var data = e.row,
 				details = Alloy.createController('quotesDetail', data.quote).getView();
+			
+			// Ti.API.info("quote row click");
+			// Ti.API.info(JSON.stringify(data));
 			
 			details.open({modal:true});
 			
@@ -127,9 +145,11 @@ function getData(){
 }());
 
 function openDash(e){
-
-	$.quotes.close();
+	
 	var win = Alloy.createController('dashboard').getView();
 	win.open();
+	
+	$.quotes.close();
+	$.quotes = null;
 
 }

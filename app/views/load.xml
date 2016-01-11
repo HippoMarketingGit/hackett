@@ -5,9 +5,9 @@
 		
 		<View class="wrapper">
 		
-			<Label class="page__title">Working Load</Label>
+			<Label class="page__title">Weight of load</Label>
 			
-			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+			<Label class="page__description">Please input the weight of the load to be lifted with the sling, then press Next.</Label>
 			
 			<View class="content--container">
 				
@@ -25,7 +25,7 @@
 			                <Toolbar>
 			                    <Items>
 			                        <FlexSpace/>
-			                        <Button id="tonneDone" >Done</Button>
+			                        <Button id="tonneDone">Done</Button>
 			                    </Items>
 			                </Toolbar>
 			         </KeyboardToolbar>
@@ -39,7 +39,7 @@
 			                <Toolbar>
 			                    <Items>
 			                        <FlexSpace/>
-			                        <Button id="fractionDone" >Done</Button>
+			                        <Button id="fractionDone">Done</Button>
 			                    </Items>
 			                </Toolbar>
 			         </KeyboardToolbar>

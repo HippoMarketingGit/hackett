@@ -17,9 +17,9 @@
 				
 				<View class="wrapper">
 				
-					<Label class="page__title">Product Selection</Label>
+					<Label class="page__title">Length of Sling</Label>
 					
-					<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+					<Label class="page__description">Please input the length of the sling, bearing to bearing.</Label>
 					
 					<View class="content--container">
 						
@@ -33,7 +33,7 @@
 						
 							<TextField id="legMeter" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>
@@ -47,7 +47,7 @@
 							
 							<TextField id="legFraction" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>

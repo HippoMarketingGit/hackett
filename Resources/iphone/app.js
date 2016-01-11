@@ -1,6 +1,21 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-var Common = require("common"), User = require("user"), Database = require("databaseObj"), Connection = require("connections"), common = new Common(), user = new User(), database = new Database("SlingDB.sqlite"), connection = new Connection();
+var Common = require("common"), User = require("user"), Database = require("databaseObj"), ImageSync = require("imagesync"), Connection = require("connections"), common = new Common(), user = new User(), database = new Database("SlingDB.sqlite"), imageSync = new ImageSync({
+    database: database
+}), connection = new Connection();
+
+Alloy.Globals.callHandler = function(el) {
+    el.text = "01665 604200";
+    el.addEventListener("click", function() {
+        if (Ti.Platform.Android) {
+            var intent = Ti.Android.createIntent({
+                action: Ti.Android.ACTION_DIAL,
+                data: "tel:+441665604200"
+            });
+            Ti.Android.currentActivity.startActivity(intent);
+        } else Ti.Platform.openURL("tel:+441665604200");
+    });
+};
 
 var loader = Ti.UI.createWindow({
     backgroundColor: "#021b4b"
@@ -57,20 +72,28 @@ if (online) {
                 loader.close();
                 loader = null;
                 clearInterval(interval);
+                imageSync.checkAndDownload();
             }
         }, 500);
     } else {
         database.updateTables();
-        if (database.userIsLogged()) {
-            Ti.API.info("A user is Logged In");
-            var dash = Alloy.createController("dashboard").getView();
-            dash.open();
-        } else {
-            var index = Alloy.createController("index").getView();
-            index.open();
-        }
-        loader.close();
-        loader = null;
+        var interval = setInterval(function() {
+            if (database.databaseUpdated()) {
+                Ti.API.info("Ready (finished updating)");
+                if (database.userIsLogged()) {
+                    Ti.API.info("A user is Logged In");
+                    var dash = Alloy.createController("dashboard").getView();
+                    dash.open();
+                } else {
+                    var index = Alloy.createController("index").getView();
+                    index.open();
+                }
+                loader.close();
+                loader = null;
+                clearInterval(interval);
+                imageSync.checkAndDownload();
+            }
+        }, 500);
     }
 } else {
     Ti.API.info("offline");

@@ -7,7 +7,7 @@
 	
 			<Label class="page__title">Product Selection</Label>
 			
-			<Label class="page__description">Short introduction. Morbi in placerat magna, a gravida tellus. Lorem ipsum dolor sit amet, consectetur adipiscing.</Label>
+			<Label class="page__description">Please select whether you require your sling to be chain or wire rope.</Label>
 			
 		</View>
 		
@@ -21,7 +21,7 @@
 				
 				<Label touchEnabled="False" class="button__label">Chain</Label>
 				
-				<ImageView touchEnabled="False" class="icon" image="/images/WHC-chain.png" right="10%"/>
+				<ImageView touchEnabled="False" class="icon" image="/images/sling-type/chain.jpg" right="0"/>
 				
 				<View class="ipadSideBorderRight"></View>
 				
@@ -90,7 +90,7 @@
 				
 				<Label touchEnabled="False" class="button__label">Wire Rope</Label>
 				
-				<ImageView touchEnabled="False" class="icon" image="/images/WHC-wire-rope.png" right="10%" />
+				<ImageView touchEnabled="False" class="icon" image="/images/sling-type/wire-rope.jpg" right="0" />
 				
 				<View class="ipadSideBorderRight"></View>
 				

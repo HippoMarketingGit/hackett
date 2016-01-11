@@ -30,7 +30,6 @@ if (Ti.Platform.name === 'iPhone OS'){
 	
 	style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
 }else{
-	
 	style = Ti.UI.ActivityIndicatorStyle.PLAIN;
 }
 
@@ -60,6 +59,10 @@ function padIntRight(num){
 
     var str = num.toString(),
         strArray = str.split(".");
+    
+    if (str === '' || strArray.length === 1) {
+    	return '';
+    }
     
     if( strArray[1].length < 2){
         

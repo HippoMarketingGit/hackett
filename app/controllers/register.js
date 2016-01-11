@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Alloy.Globals.callHandler($.tel);
+
 $.back.addEventListener('click', function(e){
 	var win = Alloy.createController('index').getView();
 
@@ -31,19 +33,20 @@ var xhr = Titanium.Network.createHTTPClient();
 
 function registerUser(e){
 	
-	if( $.name.value != '' && $.companyName.value != '' &&
-		$.phoneNumber.value != '' && $.emailAddress.value != '' &&
-		$.password.value != ''){
+	var valid = validateFields();
+	
+	if (valid === true) {
 	
 		xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=pushUser");
 		
 		var params = {
 		    name : $.name.value,
 		    company : $.companyName.value,
-		    phone : parseInt($.phoneNumber.value),
+		    phone : $.phoneNumber.value,
 		    email: $.emailAddress.value,
-		    password: $.password.value,
-		    optIn: $.mailingList.value
+		    password: $.password1.value,
+		    optIn: $.mailingList.value,
+		    postcode: $.postcode.value
 		};
 		
 		xhr.onload = function(e){
@@ -68,8 +71,42 @@ function registerUser(e){
 		
 		xhr.send(params);
 				
-	}else{
-		
-		alert('Please make sure all fields marked * have been completed');
+	} else {
+		alert(valid);
 	}
+	
+}
+
+
+
+
+function validateFields() {
+
+	if ($.name.value === '') {
+		return "Please enter a name.";
+	}
+	
+	if ($.companyName.value == '') {
+		return "Please enter a company name.";
+	}
+	
+	if ($.phoneNumber.value == '') {
+		return "Please enter a phone number.";
+	}
+	
+	if ($.postcode.value == '') {
+		return "Please enter a postcode.";
+	}
+	
+	var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if ($.emailAddress.value == '' || emailReg.test($.emailAddress.value) === false) {
+		return "Please enter a valid email address.";
+	}
+	
+	if ($.password1.value == '' || $.password1.value != $.password2.value) {
+		return "Please enter a password and make sure they match.";
+	}
+	
+	return true;
+
 }

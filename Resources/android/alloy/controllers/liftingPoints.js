@@ -10,7 +10,6 @@ function __processArg(obj, key) {
 function Controller() {
     function setLegLength() {
         var legLength, num = parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value);
-        Ti.API.info("num: " + num);
         if (60 === Alloy.Globals.sling.angle) {
             var distance;
             distance = 2 === Alloy.Globals.sling.legs || 4 === Alloy.Globals.sling.legs ? num / 2 : num;
@@ -23,17 +22,11 @@ function Controller() {
             legLength = n.toFixed(2);
         }
         Alloy.Globals.sling.nominalLength = legLength;
-        Ti.API.info("Leg Length: " + Alloy.Globals.sling.nominalLength);
     }
     function getHeadroom() {
         var distance;
         distance = 2 === Alloy.Globals.sling.legs || 4 === Alloy.Globals.sling.legs ? parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value) / 2 : parseFloat($.liftingPointMeter.value + "." + $.liftingPointFraction.value);
         var distanceSquared = distance * distance, nominalLengthSquared = Alloy.Globals.sling.nominalLength * Alloy.Globals.sling.nominalLength, minusNumber = nominalLengthSquared - distanceSquared, result = Math.sqrt(minusNumber);
-        Ti.API.info("distance: " + distance);
-        Ti.API.info("distance squared: " + distanceSquared);
-        Ti.API.info("Nominal Length squared: " + nominalLengthSquared);
-        Ti.API.info("minusNumber: " + minusNumber);
-        Ti.API.info("Result: " + result.toFixed(2));
         return result.toFixed(2);
     }
     function setLength() {
@@ -41,9 +34,17 @@ function Controller() {
         "00" === $.liftingPointMeter.value && "00" === $.liftingPointFraction.value ? alert("Please enter the distance between lifting points") : showHeadroomAlert();
     }
     function showHeadroomAlert() {
+        var title = null, message = null;
+        if (45 === Alloy.Globals.sling.angle) {
+            title = "Leg length";
+            message = "The calculated leg length is " + Alloy.Globals.sling.nominalLength + " (m). Do you wish to continue?";
+        } else {
+            title = "Headroom";
+            message = "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?";
+        }
         var headroom = Titanium.UI.createAlertDialog({
-            title: "Headroom",
-            message: "You will require a minimum headroom of " + getHeadroom() + " (m) to operate this sling. Do you wish to continue?",
+            title: title,
+            message: message,
             buttonNames: [ "Yes", "No" ],
             cancel: 1
         });
@@ -53,10 +54,13 @@ function Controller() {
         });
         headroom.show();
     }
-    function closeModal() {
+    function closeModal(e) {
+        var isManual = null !== e && e && e["type"];
         $.liftingPoints.close({
             modal: true
         });
+        isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["back"] && true === args.back && Alloy.Globals.goBack();
+        !isManual && args && args["navigateOnClose"] && true === args.navigateOnClose && args["next"] && true === args.next && Alloy.Globals.goNext();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "liftingPoints";
@@ -96,32 +100,32 @@ function Controller() {
         id: "liftingPoints"
     });
     $.__views.liftingPoints && $.addTopLevelView($.__views.liftingPoints);
-    $.__views.__alloyId82 = Ti.UI.createView({
+    $.__views.__alloyId77 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId82"
+        id: "__alloyId77"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId82);
-    $.__views.__alloyId83 = Ti.UI.createImageView({
+    $.__views.liftingPoints.add($.__views.__alloyId77);
+    $.__views.__alloyId78 = Ti.UI.createImageView({
         top: "30dip",
         left: "20dip",
         image: "/images/WHC-close.png",
         height: "24dip",
         width: "24dip",
-        id: "__alloyId83"
+        id: "__alloyId78"
     });
-    $.__views.__alloyId82.add($.__views.__alloyId83);
-    closeModal ? $.__views.__alloyId83.addEventListener("click", closeModal) : __defers["$.__views.__alloyId83!click!closeModal"] = true;
-    $.__views.__alloyId84 = Ti.UI.createView({
+    $.__views.__alloyId77.add($.__views.__alloyId78);
+    closeModal ? $.__views.__alloyId78.addEventListener("click", closeModal) : __defers["$.__views.__alloyId78!click!closeModal"] = true;
+    $.__views.__alloyId79 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId84"
+        id: "__alloyId79"
     });
-    $.__views.liftingPoints.add($.__views.__alloyId84);
+    $.__views.liftingPoints.add($.__views.__alloyId79);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "10dip",
@@ -139,41 +143,41 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.scrollView.add($.__views.content);
-    $.__views.__alloyId85 = Ti.UI.createView({
+    $.__views.__alloyId80 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId85"
+        id: "__alloyId80"
     });
-    $.__views.content.add($.__views.__alloyId85);
-    $.__views.__alloyId86 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId80);
+    $.__views.__alloyId81 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId86"
+        id: "__alloyId81"
     });
-    $.__views.__alloyId85.add($.__views.__alloyId86);
-    $.__views.__alloyId87 = Ti.UI.createLabel({
+    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId82 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 26
         },
         textAlign: "center",
-        text: "Distance between Lifting Points (m)",
-        id: "__alloyId87"
+        text: "Distance between\nLifting Points (m)",
+        id: "__alloyId82"
     });
-    $.__views.__alloyId86.add($.__views.__alloyId87);
-    $.__views.__alloyId88 = Ti.UI.createLabel({
+    $.__views.__alloyId81.add($.__views.__alloyId82);
+    $.__views.__alloyId83 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "If you are unsure of where the lifting points will be on your load, please see the diagram below for reference.",
-        id: "__alloyId88"
+        id: "__alloyId83"
     });
-    $.__views.__alloyId86.add($.__views.__alloyId88);
+    $.__views.__alloyId81.add($.__views.__alloyId83);
     $.__views.liftingPointsImage = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -181,37 +185,22 @@ function Controller() {
         height: Titanium.UI.SIZE,
         id: "liftingPointsImage"
     });
-    $.__views.__alloyId85.add($.__views.liftingPointsImage);
-    $.__views.__alloyId89 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.liftingPointsImage);
+    $.__views.__alloyId84 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId89"
+        id: "__alloyId84"
     });
-    $.__views.__alloyId85.add($.__views.__alloyId89);
-    $.__views.__alloyId90 = Ti.UI.createView({
+    $.__views.__alloyId80.add($.__views.__alloyId84);
+    $.__views.__alloyId85 = Ti.UI.createView({
         layout: "horizontal",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
-        id: "__alloyId90"
+        id: "__alloyId85"
     });
-    $.__views.__alloyId89.add($.__views.__alloyId90);
-    var __alloyId94 = [];
-    $.__views.__alloyId95 = Ti.UI.createButton({
-        systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-    });
-    __alloyId94.push($.__views.__alloyId95);
-    $.__views.liftingPointDone = Ti.UI.createButton({
-        title: "Done",
-        id: "liftingPointDone",
-        style: Ti.UI.iPhone.SystemButtonStyle.DONE
-    });
-    __alloyId94.push($.__views.liftingPointDone);
-    $.__views.__alloyId92 = Ti.UI.iOS.createToolbar({
-        items: __alloyId94,
-        id: "__alloyId92"
-    });
+    $.__views.__alloyId84.add($.__views.__alloyId85);
     $.__views.liftingPointMeter = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -226,43 +215,22 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId92,
         id: "liftingPointMeter",
         value: "00"
     });
-    $.__views.__alloyId90.add($.__views.liftingPointMeter);
-    $.__views.__alloyId92 = Ti.UI.iOS.createToolbar({
-        clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId92,
-        id: "liftingPointMeter",
-        value: "00"
-    });
-    $.__views.__alloyId96 = Ti.UI.createLabel({
+    $.__views.__alloyId85.add($.__views.liftingPointMeter);
+    $.__views.__alloyId86 = Ti.UI.createLabel({
         left: "5dip",
         color: "#FFF",
         font: {
             fontSize: 50
         },
         text: ".",
-        id: "__alloyId96"
+        id: "__alloyId86"
     });
-    $.__views.__alloyId90.add($.__views.__alloyId96);
-    var __alloyId100 = [];
-    $.__views.__alloyId101 = Ti.UI.createButton({
-        systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-    });
-    __alloyId100.push($.__views.__alloyId101);
-    $.__views.liftingPointFractionDone = Ti.UI.createButton({
-        title: "Done",
-        id: "liftingPointFractionDone",
-        style: Ti.UI.iPhone.SystemButtonStyle.DONE
-    });
-    __alloyId100.push($.__views.liftingPointFractionDone);
-    $.__views.__alloyId98 = Ti.UI.iOS.createToolbar({
-        items: __alloyId100,
-        id: "__alloyId98"
-    });
+    $.__views.__alloyId85.add($.__views.__alloyId86);
     $.__views.liftingPointFraction = Ti.UI.createTextField({
         height: "50dip",
         width: "60dip",
@@ -277,28 +245,22 @@ function Controller() {
         maxLength: 2,
         textAlign: "center",
         keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+        color: "#000",
         clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId98,
         id: "liftingPointFraction",
         value: "00"
     });
-    $.__views.__alloyId90.add($.__views.liftingPointFraction);
-    $.__views.__alloyId98 = Ti.UI.iOS.createToolbar({
-        clearOnEdit: true,
-        keyboardToolbar: $.__views.__alloyId98,
-        id: "liftingPointFraction",
-        value: "00"
-    });
-    $.__views.__alloyId102 = Ti.UI.createView({
+    $.__views.__alloyId85.add($.__views.liftingPointFraction);
+    $.__views.__alloyId87 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
         bottom: "20dip",
-        id: "__alloyId102"
+        id: "__alloyId87"
     });
-    $.__views.__alloyId85.add($.__views.__alloyId102);
-    $.__views.__alloyId103 = Ti.UI.createButton({
+    $.__views.__alloyId80.add($.__views.__alloyId87);
+    $.__views.__alloyId88 = Ti.UI.createButton({
         width: "100%",
         height: "26dip",
         backgroundImage: "/images/WHC-button--primary.png",
@@ -308,25 +270,26 @@ function Controller() {
         font: {
             fontSize: 16
         },
-        id: "__alloyId103"
+        id: "__alloyId88"
     });
-    $.__views.__alloyId102.add($.__views.__alloyId103);
-    setLength ? $.__views.__alloyId103.addEventListener("click", setLength) : __defers["$.__views.__alloyId103!click!setLength"] = true;
-    $.__views.__alloyId104 = Ti.UI.createView({
+    $.__views.__alloyId87.add($.__views.__alloyId88);
+    setLength ? $.__views.__alloyId88.addEventListener("click", setLength) : __defers["$.__views.__alloyId88!click!setLength"] = true;
+    $.__views.__alloyId89 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId104"
+        id: "__alloyId89"
     });
-    $.__views.scrollView.add($.__views.__alloyId104);
+    $.__views.scrollView.add($.__views.__alloyId89);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.liftingPointDone.addEventListener("click", function() {
+    var args = arguments[0] || {};
+    $.liftingPointDone && $.liftingPointDone.addEventListener("click", function() {
         ("" === $.liftingPointMeter.value || null == $.liftingPointMeter.value) && $.liftingPointMeter.setValue("00");
         $.liftingPointMeter.blur();
     });
-    $.liftingPointFractionDone.addEventListener("click", function() {
+    $.liftingPointFractionDone && $.liftingPointFractionDone.addEventListener("click", function() {
         ("" === $.liftingPointFraction.value || null == $.liftingPointFraction.value) && $.liftingPointFraction.setValue("00");
         $.liftingPointFraction.blur();
     });
@@ -336,8 +299,8 @@ function Controller() {
     });
     liftingPointImg.height = 3 === Alloy.Globals.sling.legs ? "100dip" : "60dip";
     $.liftingPointsImage.add(liftingPointImg);
-    __defers["$.__views.__alloyId83!click!closeModal"] && $.__views.__alloyId83.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId103!click!setLength"] && $.__views.__alloyId103.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId78!click!closeModal"] && $.__views.__alloyId78.addEventListener("click", closeModal);
+    __defers["$.__views.__alloyId88!click!setLength"] && $.__views.__alloyId88.addEventListener("click", setLength);
     _.extend($, exports);
 }
 

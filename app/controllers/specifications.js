@@ -41,6 +41,16 @@
 		shortener,
 		end,
 		upper;
+		
+	Ti.API.info(Alloy.Globals.sling);
+	
+	// Set the IDs of the items that make up the chosen sling spec.
+	// We will set these, based on what we we can find based on requirements, 
+	// and use them later for displaying sling specification along side requirements.
+	// We just store the IDs so we can retrieve them later and pass them to the quoteRequest API call.
+	Alloy.Globals.wllAngle = null;
+	Alloy.Globals.wllId = null;
+	Alloy.Globals.slingId = null;
 	
 	// Find a part code form the phone database
 	if( Alloy.Globals.sling.type === 'Chain' ){
@@ -56,8 +66,10 @@
 		// The checks below allow for this
 		if( Alloy.Globals.sling.angle === 45 ){
 			angle = 'wll.limit45';
+			Alloy.Globals.wllAngle = "limit45";
 		}else{	
 			angle = 'wll.limit60';
+			Alloy.Globals.wllAngle = "limit60";
 		}
 		
 		if( Alloy.Globals.sling.shorteningDeviceCode === "NONE"){
@@ -84,11 +96,28 @@
 			
 			grade = Alloy.Globals.sling.grade;
 			
-			var row = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = ' + grade + ') AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = "' + legLength + '") group by wll.id ORDER BY ' + angle +' LIMIT 1');
+			var sql = 'SELECT *, wll.id AS wllId, s.id AS slingId ' +
+						'FROM WorkingLoadLimits AS wll, Slings AS s ' +
+						'WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' ' + 
+						'AND wll.type="c" ' + 
+						'AND wll.legs = ' + Alloy.Globals.sling.legs + ' ' +
+						'AND s.legs=wll.legs ' + 
+						'AND (wll.grade = ' + grade + ') ' + 
+						'AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = "' + legLength + '") ' + 
+						'GROUP BY wll.id ' + 
+						'ORDER BY ' + angle + ' ' + 
+						'LIMIT 1';
+			
+			var row = db.execute(sql);
+			
+			Ti.API.info(sql);
 			
 			if( row.isValidRow() ){
 				
 				//Ti.API.info('part code: ' + row.fieldByName('code') );
+				
+				Alloy.Globals.wllId = row.fieldByName("wllId");
+				Alloy.Globals.slingId = row.fieldByName("slingId");
 				
 				Alloy.Globals.sling.partCode = row.fieldByName('code');
 				Alloy.Globals.sling.quotedPrice = row.fieldByName('price');
@@ -110,9 +139,13 @@
 			var price8,
 				code8,
 				description8,
+				wllId8,
+				slingId8,
 				price10,
 				code10,
 				description10,
+				wllId10,
+				slingId10,
 				angle,
 				grade,
 				shortener,
@@ -124,8 +157,10 @@
 			// The checks below allow for this
 			if( Alloy.Globals.sling.angle === 45 ){
 				angle = 'wll.limit45';
+				Alloy.Globals.wllAngle = "limit45";
 			}else{	
 				angle = 'wll.limit60';
+				Alloy.Globals.wllAngle = "limit60";
 			}
 			
 			if( Alloy.Globals.sling.shorteningDeviceCode === "NONE"){
@@ -147,7 +182,18 @@
 			}
 			
 			// Perform the query for a grade 8 sling
-			var row8 = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' +  Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs = wll.legs AND (wll.grade = "8" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') group by wll.id ORDER BY ' + angle +' ASC');
+			var sql = 'SELECT *, wll.id AS wllId, s.id AS slingId ' + 
+						'FROM WorkingLoadLimits AS wll, Slings AS s ' + 
+						'WHERE ' + angle + ' >= ' +  Alloy.Globals.sling.load + ' ' +
+						'AND wll.type="c" ' + 
+						'AND wll.legs = ' + Alloy.Globals.sling.legs + ' ' + 
+						'AND s.legs = wll.legs ' + 
+						'AND (wll.grade = "8" ) ' + 
+						'AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') ' + 
+						'GROUP BY wll.id ' + 
+						'ORDER BY ' + angle +' ASC';
+			
+			var row8 = db.execute(sql);
 			
 			// Check to see if a chain was found
 			if( row8.isValidRow() ){
@@ -155,6 +201,8 @@
 				price8 = row8.fieldByName('price');
 				code8 = row8.fieldByName('code');
 				description8 = row8.fieldByName('description');
+				wllId8 = row8.fieldByName("wllId");
+				slingId8 = row8.fieldByName("slingId");
 			
 			}else{
 				
@@ -163,13 +211,26 @@
 				Ti.API.info('Row 8 not valid');
 			}
 			
-			var row10 = db.execute('SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = "10" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') group by wll.id ORDER BY ' + angle +' ASC');
+			var sql = 'SELECT *, wll.id AS wllId, s.id AS slingId ' + 
+						'FROM WorkingLoadLimits AS wll, Slings AS s ' + 
+						'WHERE ' + angle + ' >= ' + Alloy.Globals.sling.load + ' ' + 
+						'AND wll.type="c" ' + 
+						'AND wll.legs = ' + Alloy.Globals.sling.legs + ' ' + 
+						'AND s.legs=wll.legs ' + 
+						'AND (wll.grade = "10" ) ' + 
+						'AND (s.size=wll.size AND s.grade=wll.grade ' + end + ' ' + shortener + ' AND s.length = ' + legLength + ') ' + 
+						'GROUP BY wll.id ' + 
+						'ORDER BY ' + angle +' ASC';
+			
+			var row10 = db.execute(sql);
 
 			if( row10.isValidRow() ){
 
 				price10 = row10.fieldByName('price');
 				code10 = row10.fieldByName('code');
 				description10 = row10.fieldByName('description');
+				wllId10 = row10.fieldByName("wllId");
+				slingId10 = row10.fieldByName("slingId");
 			
 			}else{
 				
@@ -181,9 +242,9 @@
 			// If price is undefined for both grade 8 and grade 10
 			// build a part code.
 			if( (price8 === undefined || price8 === null) && (price10 === undefined || price10 === null) ){
+				
 				Alloy.Globals.sling.quotedPrice = null;
 				Alloy.Globals.sling.slingDescription = null;
-				
 				
 				createPartcode();
 			
@@ -192,12 +253,16 @@
 				Alloy.Globals.sling.partCode = code8;
 				Alloy.Globals.sling.quotedPrice = price8;
 				Alloy.Globals.sling.slingDescription = description8;
+				Alloy.Globals.wllId = wllId8;
+				Alloy.Globals.slingId = slingId8;
 			
 			}else if( price8 === undefined || price8 === null ){
 				
 				Alloy.Globals.sling.partCode = code10;
 				Alloy.Globals.sling.quotedPrice = price10;
 				Alloy.Globals.sling.slingDescription = description10;
+				Alloy.Globals.wllId = wllId10;
+				Alloy.Globals.slingId = slingId10;
 			
 			}else if( parseInt(price8) < parseInt(price10) ){
 				
@@ -205,13 +270,17 @@
 				Alloy.Globals.sling.quotedPrice = price8;
 				Alloy.Globals.sling.slingDescription = description8;
 				Alloy.Globals.sling.gradeCode = 8;
+				Alloy.Globals.wllId = wllId8;
+				Alloy.Globals.slingId = slingId8;
 			
 			}else if( parseInt(price8) > parseInt(price10) ){
 				
 				Alloy.Globals.sling.partCode = code10;
 				Alloy.Globals.sling.quotedPrice = price10;
 				Alloy.Globals.sling.slingDescription = description10;
-				Alloy.Globals.sling.gradeCode = 10;	
+				Alloy.Globals.sling.gradeCode = 10;
+				Alloy.Globals.wllId = wllId10;
+				Alloy.Globals.slingId = slingId10;	
 			
 			}else if( parseInt(price8) === parseInt(price10) ){
 				
@@ -219,6 +288,8 @@
 				Alloy.Globals.sling.quotedPrice = price10;
 				Alloy.Globals.sling.slingDescription = description10;
 				Alloy.Globals.sling.gradeCode = 10;
+				Alloy.Globals.wllId = wllId10;
+				Alloy.Globals.slingId = slingId10;
 			}
 		}
 	
@@ -226,23 +297,89 @@
 	// Rope slings.
 	}else if( Alloy.Globals.sling.type === 'Wire Rope' ){
 		
-		Alloy.Globals.sling.grade = null;
-		Alloy.Globals.sling.quotedPrice = null;
-		Alloy.Globals.sling.slingDescription = null;
+		var angle,
+			grade,
+			shortener,
+			end,
+			upper;
+			
+		// Perform all query string changes here
+		// Query changes to "IS NULL" if no termination is selected
+		// The checks below allow for this
+		if( Alloy.Globals.sling.angle === 45 ){
+			angle = 'wll.limit45';
+			Alloy.Globals.wllAngle = "limit45";
+		}else{	
+			angle = 'wll.limit60';
+			Alloy.Globals.wllAngle = "limit60";
+		}		
 		
-		Ti.API.info('Wire Rope create part code');
-		createPartcode();
+		if( Alloy.Globals.sling.lowerTerminationCode === 'NONE'){
+			end = ' AND end = "" ';
+		}else{
+			end = ' AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '" ';
+		}
 		
-		outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+		if( Alloy.Globals.sling.upperTerminationCode === 'NONE' || Alloy.Globals.sling.upperTerminationCode === null){
+			upper = ' AND end_b = "" ';
+		}else{
+			upper = ' AND end_b = "' + Alloy.Globals.sling.upperTerminationCode + '" ';
+		}
+		
+		var sql = "SELECT *, wll.id AS wllId, s.id AS slingId " + 
+				"FROM WorkingLoadLimits AS wll, Slings AS s " +
+				"WHERE " + angle + " >= " + Alloy.Globals.sling.load + " " +
+				"AND wll.type='r' " + 
+				"AND wll.legs = " + Alloy.Globals.sling.legs + " " +
+				"AND s.grade = '' " +
+				"AND s.legs = wll.legs " +
+				"AND s.size = wll.size " + 
+				"AND s.length = " + legLength + " " +
+				end + 
+				upper + 
+				"GROUP BY wll.id " +
+				"ORDER BY " + angle + " ASC " +
+				"LIMIT 1";
+				
+		Ti.API.info(sql);
+		
+		var row = db.execute(sql);
+		
+		if( row.isValidRow() ){
+			
+			Ti.API.info('DB part code: ' + row.fieldByName('code') );
+			
+			Alloy.Globals.sling.partCode = row.fieldByName('code');
+			Alloy.Globals.sling.quotedPrice = row.fieldByName('price');
+			Alloy.Globals.sling.slingDescription = row.fieldByName('description');
+			Alloy.Globals.wllId = row.fieldByName("wllId");
+			Alloy.Globals.slingId = row.fieldByName("slingId");
+			
+		}else{
+			
+			Ti.API.info('wire rope create part code');
+			createPartcode();
+			
+			Alloy.Globals.sling.grade = null;
+			Alloy.Globals.sling.quotedPrice = null;
+			Alloy.Globals.sling.slingDescription = null;
+			
+		}
+		
 	}
 	
 	outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
 	
 	database.closeDb(db);
 	
+	checkImage(Alloy.Globals.sling.partCode);
+	checkSpec();
+	
 })();
 
 function createPartcode(){
+	
+	Ti.API.info("createPartcode call");
 	
 	var Database = require('databaseObj'),
 		database = new Database('SlingDB.sqlite'),
@@ -426,6 +563,8 @@ function createPartcode(){
 	
 	database.closeDb(db);
 	
+	Ti.API.info("createPartcode generated code: " + Alloy.Globals.sling.partCode);
+	
 	return Alloy.Globals.sling.partCode;
 }
 
@@ -440,8 +579,26 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 	
 	if( type === 'Wire Rope'){
 		
-		$.gradeContainer.height = 0;
-		$.gradeContainer.hide();
+		if ($.labelGrade) {
+			$.labelGrade.setHeight(0);
+			$.labelGrade.hide();
+		}
+		
+		if ($.labelGradeReq) {
+			$.labelGradeReq.setHeight(0);
+			$.labelGradeReq.hide();
+		}
+		
+		if ($.labelGradeSling) {
+			$.labelGradeSling.setHeight(0);
+			$.labelGradeSling.hide();
+		}
+		
+		$.grade.setHeight(0);
+		$.grade.hide();
+		
+		$.slingSpecGrade.setHeight(0);
+		$.slingSpecGrade.hide();
 	}
 	
 	if( description === null ){
@@ -460,36 +617,158 @@ function outputDetails( type, grade, legs, load, nominalLength, description, par
 		if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade === 'Auto'){
 			
 			$.specPartcode.text = 'Based on your requirements, we have identified two possible sling configurations: ' + partCode;
-			$.quotedPrice.text = "We cannot quote you a price for your configured slings. Please contact William Hackett Chains and reference your part code.";
+			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+			$.requestQuote.hide();
 		
 		}else if( Alloy.Globals.sling.quotedPrice === null && Alloy.Globals.sling.grade !== 'Auto'){
 			
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
-			$.quotedPrice.text = "We cannot quote you a price for your configured sling. Please contact William Hackett Chains and reference your part code.";
+			$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+			$.requestQuote.hide();
 		
 		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade !== 'Auto' ){
 			
 			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			$.requestQuote.show();
 			
 		}else if( Alloy.Globals.sling.quotedPrice !== null && Alloy.Globals.sling.grade === 'Auto' ){
 			
 			$.quotedPrice.text = 'Price (RRP): £' + Alloy.Globals.sling.quotedPrice;
 			$.specPartcode.text = 'Based on your requirements, we recommend the following sling configuration: ' + partCode;
+			$.requestQuote.show();
 			
 		}
 	
 	}else{
 		
 		alert('The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.');
+		$.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
+		$.requestQuote.hide();
 		
-		$.quotedPrice.text = "We cannot quote you a price for your configured sling.";
 	}
 }
+
+
+/**
+ * Check if we have an image to display
+ * 
+ */
+function checkImage(partCode) {
+	
+	// Hide the view button by default
+	$.viewSlingAssembly.hide();
+	$.slingAssemblyImg.setHeight(0);
+	$.slingAssemblyImg.hide();
+	
+	var database = new Database('SlingDB.sqlite'),
+		db = database.openDb(),
+		row = db.execute('SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1', partCode, 1),
+		img = null,
+		imgPath = null,
+		f = null;
+	
+	if (row.isValidRow()) {
+		img = row.fieldByName('img');
+		imgPath = Ti.Filesystem.applicationDataDirectory + "slings/" + img + ".jpg";
+		f = Ti.Filesystem.getFile(imgPath);
+		Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
+		$.viewSlingAssembly.show();
+		$.slingAssemblyImg.image = f;
+	} else {
+		Ti.API.info("Sling assembly image " + img + " does not exist.");
+	}
+	
+	row.close();
+	db.close();
+	
+}
+
+
+function checkSpec() {
+	
+	// Hide the view button by default
+	$.slingSpecification.hide();
+	
+	var wllAngle = Alloy.Globals.wllAngle,
+		wllId = Alloy.Globals.wllId,
+		slingId = Alloy.Globals.slingId,
+		database = new Database('SlingDB.sqlite'),
+		db = database.openDb(),
+		sql = null,
+		row = null;
+	
+	if (wllId === null && slingId === null) {
+		return;
+	}
+	
+	sql = "SELECT * " + 
+			"FROM WorkingLoadLimits AS wll, Slings AS s " +
+			"WHERE wll.id = ? " +
+			"AND s.id = ? " +					
+			"LIMIT 1";
+			
+	Ti.API.info(sql);
+	Ti.API.info("wllId: " + wllId);
+	Ti.API.info("slingId: " + slingId);
+	Ti.API.info("wllAngle: " + wllAngle);
+
+	row = db.execute(sql, wllId, slingId);
+	
+	if (row.isValidRow()) {
+		
+		Ti.API.info('Found Working Load Limit and Sling Specification by IDs!');
+		
+		switch (row.fieldByName("type")) {
+			case "c": $.slingSpecType.text = "Chain"; break;
+			case "r": $.slingSpecType.text = "Wire Rope"; break;
+			// No default
+		}
+		
+		$.slingSpecGrade.text = row.fieldByName("grade");
+		$.slingSpecLegs.text = row.fieldByName("legs");
+		$.slingSpecLoad.text = row.fieldByName(wllAngle);
+		$.slingSpecLength.text = row.fieldByName("length");
+		$.slingSpecSize.text = row.fieldByName("size");
+		
+		$.slingSpecification.show();
+		
+		Alloy.Globals.sling.specLoad = row.getFieldByName(wllAngle);
+		
+	} else {
+		
+		Alloy.Globals.sling.specLoad = null;
+		
+	}
+	
+	row.close();
+	db.close();
+		
+}
+
+
+/**
+ * View the assembly image (button toggle)
+ */
+function viewSlingAssembly() {
+	if ($.slingAssemblyImg.getVisible()) {
+		$.slingAssemblyImg.hide();
+		$.slingAssemblyImg.setTop(0);
+		$.slingAssemblyImg.setBottom(0);
+		$.slingAssemblyImg.setHeight(0);
+	} else {
+		$.slingAssemblyImg.show();
+		$.slingAssemblyImg.setTop("8dip");
+		$.slingAssemblyImg.setBottom("16dip");
+		$.slingAssemblyImg.setHeight("auto");
+	}
+}
+
 
 function closeModal(){
 	$.specifications.close({modal: true});
 }
+
 
 function sendQuote(){
 	
@@ -499,7 +778,7 @@ function sendQuote(){
 		connection = new Connection(),
 		Database = require('databaseObj'),
 		database = new Database('SlingDB.sqlite'),
-		user = database.getCurrentUser(),
+		user = database.getCurrentUserDetails(),
 		online = connection.onlineCheck(function(data){
 			
 			// perform an ajax call within the connection object
@@ -515,20 +794,42 @@ function sendQuote(){
 			
 			return online;
 		});
-		
+	
+	Ti.API.info("user");
+	
+	var quoteData = {
+		type: Alloy.Globals.sling.type,
+		grade: Alloy.Globals.sling.grade,
+		legs: Alloy.Globals.sling.legs,
+		load: Alloy.Globals.sling.load,
+		length: Alloy.Globals.sling.nominalLength,
+		partCode: Alloy.Globals.sling.partCode,
+		price: Alloy.Globals.sling.quotedPrice,
+		description: Alloy.Globals.sling.slingDescription,
+		date: common.getDate(),
+		user: user.email,
+		specLoad: Alloy.Globals.sling.specLoad,
+		addtodb: 1
+	};
+	
+	quoteData.ref = common.generateQuoteRef(user, quoteData);
+	
+	database.insertQuoteOffline(quoteData);
+	
 	// perform a check to see if we are connected
 	if( online ){
-		
+		database.insertQuoteOnline(quoteData);
 		// If we are the quote must be stored locally as well as
 		// on the online database
-		database.insertQuoteOnline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user, 1);
-		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);		
+		//database.insertQuoteOnline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user, 1);
+		//database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);		
 	}else{
-		
 		// If there isn't a connection make sure that 
 		// the quote is stored offline for later
-		database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);
+		//database.insertQuoteOffline( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice, Alloy.Globals.sling.slingDescription, common.getDate(), common.createUnix(), user);
 	}
+	
+	
 
 	// Hide the close button and the request a quote button.
 	// This means a user can't make multiple requests for a quote
@@ -550,7 +851,8 @@ function openDash(){
 	// we must get the slingConfiguration view again and close it.
 	var slingConfig = Alloy.createController('slingConfiguration').getView(),
 		dash = Alloy.createController('dashboard').getView();
-		slingConfig.close();
-		dash.open();
+	
+	slingConfig.close();
+	dash.open();
 }
 

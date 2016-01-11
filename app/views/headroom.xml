@@ -8,6 +8,8 @@
 			<Label class="page__title">Headroom</Label>
 			
 			<Label class="page__description">Is headroom restricted? Any slings that have 1 leg automatically default to "No" as the lifting angle is not taken in to consideration.</Label>
+			
+			<ImageView id="headroomImg" touchEnabled="False" width="auto"></ImageView>
 		
 		</View>
 		
@@ -31,10 +33,6 @@
 								<Label class="label--large">No</Label>
 							</View>
 							
-							<View class="multi-line__text">
-								<Label class="label--small">45 degree Lifting Angle</Label>
-							</View>
-							
 						</View>
 						
 						<View class="border--bottom"></View>
@@ -50,10 +48,6 @@
 						
 							<View class="multi-line__text">
 								<Label class="label--large">Yes</Label>
-							</View>
-							
-							<View class="multi-line__text">
-								<Label class="label--small">60 degree Lifting Angle</Label>
 							</View>
 							
 						</View>

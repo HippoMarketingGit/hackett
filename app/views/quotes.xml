@@ -3,10 +3,11 @@
 	<Window class="background" layout="vertical" width="100%" left="0">
 		
 		<View id="header" class="header">
-			<ImageView class="logo" image="/images/WHC--logo.png" />
+			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
+			<Label class="tel" id="tel"></Label>
 		</View>
 		
-		<View class="header__seperator"></View>
+		<!-- <View class="header__seperator"></View> -->
 		
 		<View left="5%" top="10dip" class="content--container">
 			<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">

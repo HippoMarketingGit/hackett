@@ -1,7 +1,7 @@
 // iPad Styles
 '.page[platform=ios formFactor=tablet]': {
 	layout: 'vertical',
-	width: '60%',
+	width: '80%',
 	height: Ti.UI.SIZE
 },
 
@@ -10,7 +10,10 @@
 },
 'Label': {
 	color: '#FFF',
-	height: Ti.UI.SIZE
+	height: Ti.UI.SIZE,
+},
+'.heading': {
+	font: { fontSize: 18 }
 },
 'View': {
 	height: Ti.UI.SIZE

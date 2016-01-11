@@ -1,11 +1,13 @@
 <Alloy id="register">
+	
 	<Window class="background">
 		
 		<View id="header" class="header">
-			<ImageView class="logo" image="/images/WHC--logo.png" />
+			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
+			<Label class="tel" id="tel"></Label>
 		</View>
 		
-		<View class="header__seperator"></View>
+		<!-- <View class="header__seperator"></View> -->
 		
 		<View class="wrapper--background">
 			
@@ -14,32 +16,45 @@
 				<View class="wrapper">
 					
 					<View class="content--container">
-						<Button id="back" class="button--back" />
+						<!-- <Button id="back" class="button--back" /> -->
+						<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" id="back">
+							<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
+						</View>
 					</View>
 				
 					<View class="content--container">
-						<Label>Your name*</Label>
+						<Label>Your name *</Label>
 						<TextField id="name" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Company name*</Label>
+						<Label>Company name *</Label>
 						<TextField id="companyName" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Phone number*</Label>
+						<Label>Phone number *</Label>
 						<TextField id="phoneNumber" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
-						<Label>Email address*</Label>
+						<Label>Postcode *</Label>
+						<TextField id="postcode" class="input--primary"/>
+					</View>
+					
+					<View class="content--container">
+						<Label>Email address *</Label>
 						<TextField id="emailAddress" class="input--primary"/>
 					</View>
 					
 					<View class="content--container">
 						<Label>Password *</Label>
-						<TextField id="password" passwordMask="true" class="input--primary" />
+						<TextField id="password1" passwordMask="true" class="input--primary" />
+					</View>
+
+					<View class="content--container">
+						<Label>Password (confirm) *</Label>
+						<TextField id="password2" passwordMask="true" class="input--primary" />
 					</View>
 					
 					<View class="content--container">
@@ -64,4 +79,5 @@
 		</View>
 		
 	</Window>
+	
 </Alloy>

@@ -9,20 +9,30 @@
 	backgroundColor: '#0d182f'
 },
 '.header': {
-	layout: 'vertical',
 	top: '26dip',
 	width: '100%',
-	height: '50dip',
-}
+	height: '85dip',
+	backgroundColor: '#eb6209',
+	layout: 'vertical'
+},
+'.tel': {
+	top: '-10dip',
+	width: '100%',
+	textAlign: 'center',
+},
+'.header[platform=android]': {
+	top: 0
+},
 '.header__seperator': {
 	height: '1dip',
 	width: '100%',
 	backgroundColor: '#f7561e'
-}
+},
 '.logo': {
-	bottom: '8dip',
-	width: '90%'
-}
+	top: '5dip',
+	width: Ti.UI.SIZE,
+	height: '70%'
+},
 '.wrapper': {
 	layout: 'vertical',
 	width: '90%'
@@ -84,13 +94,14 @@
 },
 'TextField': {
 	top: '4dip',
-	height: '26dip',
+	height: Titanium.UI.SIZE,
 	width: '100%',
 	borderWidth: '1dip',
 	borderColor: '#fba688',
 	backgroundColor: '#FFF',
-	font: {fontSize: 20},
-	paddingLeft: '4dip'
+	font: {fontSize: '20dip'},
+	paddingLeft: '4dip',
+	color: 'black'
 },
 '.checkBox': {
 	left: 0,

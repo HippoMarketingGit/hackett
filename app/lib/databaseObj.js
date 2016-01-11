@@ -5,6 +5,8 @@
 function Database(dbName){
 	this.dbName = dbName;
 	this.ready = 0;
+	this.updateRequired = 0;
+	this.updateComplete = 0;
 }
 
 Database.prototype.databaseReady = function(count){
@@ -12,10 +14,13 @@ Database.prototype.databaseReady = function(count){
 	//Ti.API.info(this.ready);
 	//Ti.API.info(count);
 	
-	if( this.ready === count){
-		
+	if (this.ready === count) {
 		return true;
 	}
+};
+
+Database.prototype.databaseUpdated = function() {
+	return (this.updateComplete === this.updateRequired);
 };
 
 // Open the Database
@@ -70,6 +75,35 @@ Database.prototype.getCurrentUser = function(){
 
 	if( userRow.isValidRow() ){
 		result = userRow.fieldByName('email');
+	}else{
+		result = null;
+	}
+	
+	this.closeDb(db);
+	Ti.API.info('Current User connection closed!');
+	
+	return result;
+};
+
+
+// Returns the current user if there is one
+// If not, returns null
+Database.prototype.getCurrentUserDetails = function(){
+	
+	var db = this.openDb(),
+		result,
+		userRow = db.execute('SELECT UserProfile.*, count(Quotes.id) AS quotes FROM UserProfile LEFT JOIN Quotes ON email = user WHERE loggedIn = "1" ');
+
+	if( userRow.isValidRow() ){
+		result = {
+			email: userRow.fieldByName('email'),
+			id: userRow.fieldByName('id'),
+			name: userRow.fieldByName('name'),
+			company: userRow.fieldByName('company'),
+			phone: userRow.fieldByName('phone'),
+			id: userRow.fieldByName('userId'),
+			quotes: userRow.fieldByName('quotes'),
+		};
 	}else{
 		result = null;
 	}
@@ -154,7 +188,7 @@ Database.prototype.logout = function(cb){
 	
 };
 
-Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password){
+Database.prototype.updateUserDetails = function(user, name, company, phone, email, optIn, password, postcode){
 	
 	var xhr = Ti.Network.createHTTPClient(),
 		currentEmail = this.getCurrentUser(),
@@ -164,7 +198,8 @@ Database.prototype.updateUserDetails = function(user, name, company, phone, emai
 			company: company,
 			phone: phone,
 			email: email,
-			optIn: optIn
+			optIn: optIn,
+			postcode: postcode
 		},
 		that = this;
 		
@@ -185,7 +220,7 @@ Database.prototype.updateUserDetails = function(user, name, company, phone, emai
 		}else{
 			
 			var db = that.openDb();
-				db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn);
+				db.execute('UPDATE UserProfile set email = ?, name = ?, company = ?, phone = ?, optIn = ?, postcode = ? WHERE email = "' + currentEmail + '"', email, name, company, phone, optIn, postcode);
 			
 			that.closeDb(db);
 			
@@ -233,7 +268,7 @@ Database.prototype.logIn = function(email, password, cb){
 				if( exists ){
 					db.execute('UPDATE UserProfile SET loggedIn = "1" WHERE email = ?', email);
 				}else{
-					db.execute('INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn) VALUES (?, ?, ?, ?, ?, ?, ?)', email, response.name, response.company, response.phone, response.optIn, response.id, '1');
+					db.execute('INSERT INTO UserProfile(email, name, company, phone, optIn, userId, loggedIn, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', email, response.name, response.company, response.phone, response.optIn, response.id, '1', response.postcode);
 				}
 				
 				that.closeDb(db);
@@ -283,11 +318,11 @@ Database.prototype.createTables = function(){
 		db.execute('CREATE TABLE IF NOT EXISTS ChainType(id INTEGER PRIMARY KEY, code TEXT, name TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS EndFittings(id INTEGER PRIMARY KEY, code TEXT, name TEXT, type TEXT, grade10 TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Shorteners(id INTEGER PRIMARY KEY, code TEXT, name TEXT, grade8_1 INTEGER, grade8_2 INTEGER, grade8_3 INTEGER, grade8_4 INTEGER, grade10_1 INTEGER, grade10_2 INTEGER, grade10_3 INTEGER, grade10_4 INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, shortener TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS Slings(id INTEGER PRIMARY KEY, code TEXT, description TEXT, price TEXT, grade INTEGER, size INTEGER, legs INTEGER, length INTEGER, end INTEGER, end_b INTEGER, shortener TEXT, img TEXT, img_status INTEGER, bom TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS WorkingLoadLimits(id INTEGER PRIMARY KEY, size INTEGER, grade INTEGER, legs INTEGER, limit45 INTEGER, limit60 INTEGER, type TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS LoggedIn(id INTEGER PRIMARY KEY, value INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER);');
-		db.execute('CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS UserProfile(id INTEGER PRIMARY KEY, email TEXT, name TEXT, company TEXT, phone TEXT, optIn INTEGER, userId INTEGER, loggedIn INTEGER, postcode TEXT);');
+		db.execute('CREATE TABLE IF NOT EXISTS Quotes(id INTEGER PRIMARY KEY, type TEXT, Grade INTEGER, legs INTEGER, load TEXT, length TEXT, partCode TEXT, price TEXT, description TEXT, date TEXT, synced INTEGER, ref TEXT, user TEXT, specLoad INTEGER);');
 		db.execute('CREATE TABLE IF NOT EXISTS Boms(id INTEGER PRIMARY KEY, sling_code TEXT, comp_code TEXT, qty TEXT);');
 		db.execute('CREATE TABLE IF NOT EXISTS Components(id INTEGER PRIMARY KEY, Code TEXT, description TEXT, measure TEXT);');
 	this.closeDb(db);
@@ -315,7 +350,8 @@ Database.prototype.deleteQuote = function(online, ref, cb){
 				
 				alert('There was a problem connecting to the database, please try again.');
 			}else{
-				db.execute('DELETE FROM Quotes WHERE ref = "' + ref + '"');
+				var sql = "DELETE FROM Quotes WHERE id = (SELECT id FROM Quotes WHERE ref = '" + ref + "' LIMIT 1)";
+				db.execute(sql);
 				that.closeDb(db);
 				
 				if( cb ){
@@ -354,7 +390,8 @@ Database.prototype.pushQuotes = function(currentUser){
 			date: row.fieldByName('date'),
 			synced: row.fieldByName('synced'),
 			ref: row.fieldByName('ref'),
-			user: row.fieldByName('user')
+			user: row.fieldByName('user'),
+			specLoad: row.fieldByName('specLoad')
 		};
 		
 		var xhr = Ti.Network.createHTTPClient({
@@ -375,50 +412,62 @@ Database.prototype.pushQuotes = function(currentUser){
 
 // Inserts quote to local and online database if it can connect
 // If not, will only insert to local database
-Database.prototype.insertQuoteOffline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user){
+Database.prototype.insertQuoteOffline = function(data) {		//type, grade, legs, load, length, partCode, price, description, date, ref, user){
 	
 	// If not connected
 	var db = this.openDb();
-		
-		db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', type, grade, legs, load, length, partCode, price, description, date, '0', ref, user);
+	db.execute('INSERT INTO Quotes (type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+		data.type,
+		data.grade, 
+		data.legs,
+		data.load,
+		data.length,
+		data.partCode,
+		data.price,
+		data.description,
+		data.date,
+		'0',
+		data.ref,
+		data.user,
+		data.specLoad
+	);
 	
 	this.closeDb(db);
 };
 
-Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb){
-	
+
+Database.prototype.insertQuoteOnline = function(data) {		//type, grade, legs, load, length, partCode, price, description, date, ref, user, addtodb){
 	
 	var xhr = Ti.Network.createHTTPClient(),
 		params = {
-			type: type,
-			grade: grade, 
-			legs: legs,
-			load: load,
-			length: length,
-			partcode: partCode,
-			price: price,
-			description: description,
-			date: date,
-			ref: ref,
-			user: user,
-			addtodb: addtodb,
+			type: data.type,
+			grade: data.grade, 
+			legs: data.legs,
+			load: data.load,
+			length: data.length,
+			partcode: data.partCode,
+			price: data.price,
+			description: data.description,
+			date: data.date,
+			ref: data.ref,
+			user: data.user,
+			specload: data.specLoad,
+			addtodb: data.addtodb,
 			sync: 1
 		};
 		
 	xhr.open('POST', 'http://whackett.hippocreative.com/sync.php?task=pushQuote');
 	xhr.onload = function(e){
 		var response = JSON.parse(this.responseText);
-		Ti.API.info(this.responseText);
 		
-		if( addtodb !== 1){
-			
+		if (data.addtodb !== 1) {	
 			alert('Your quote was sent successfully.');
-		
+			return;
 		}
 		
-		if( response.reply !== 1 ){
+		if (response.reply !== 1) {
 			alert('Your quote failed to send, please try again.');
-		}else{
+		} else {
 			alert('Your quote was sent successfully.');
 		}
 	};
@@ -427,7 +476,10 @@ Database.prototype.insertQuoteOnline = function(type, grade, legs, load, length,
 	};
 	//xhr.setRequestHeader("Content-Type","application/json");
 	xhr.send(params);
+	
+	Ti.API.info(JSON.stringify(params));
 };
+
 
 // Get a list of quotes for the current user and store them
 Database.prototype.downloadQuotes = function(){
@@ -461,7 +513,21 @@ Database.prototype.downloadQuotes = function(){
 				Ti.API.info(obj);
 	
 				//Ti.API.info('User :' + that.getCurrentUser() );
-				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', obj.type, obj.grade, obj.legs, obj.load, obj.length, obj.partcode, obj.price, obj.description, obj.date, '1', obj.ref, user);
+				db.execute('INSERT INTO Quotes(type, Grade, legs, load, length, partCode, price, description, date, synced, ref, user, specLoad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+					obj.type, 
+					obj.grade, 
+					obj.legs, 
+					obj.load, 
+					obj.length, 
+					obj.partcode, 
+					obj.price, 
+					obj.description, 
+					obj.date, 
+					'1', 
+					obj.ref, 
+					user,
+					obj.specLoad
+				);
 			}
 		}
 		
@@ -506,6 +572,7 @@ Database.prototype.getWorkingLoadLimits = function(){
 			}
 			
 			that.ready++;
+			that.updateComplete++;
 			responseArray = null;
 			i = null;
 			that.closeDb(db);
@@ -528,7 +595,7 @@ Database.prototype.getWorkingLoadLimits = function(){
 // Get the slings from the online Database and store them locally on to the handset
 Database.prototype.getSlings = function(){
 	
-	//Ti.API.info(db);
+	Ti.API.info("getSlings()");
 	
 	var slingsURL = "http://whackett.hippocreative.com/sync.php?task=getSlings",
 		that = this,
@@ -538,19 +605,42 @@ Database.prototype.getSlings = function(){
 	         
 			var responseArray = JSON.parse(this.responseText),
 				db = that.openDb(),
-				i;
+				i,
+				totalAdded = 0;
 				
 			//Ti.API.info(responseArray);
 			//Ti.API.info(db);
+			
+			Ti.API.info("getSlings length: " + responseArray.reply.length);
 			
 			for ( i = 0; i < responseArray.reply.length; i++){
 				
 				var json = responseArray.reply[i];
 				
-				db.execute('INSERT INTO Slings(code, description, price, grade, size, legs, length, end, shortener) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.shortener);
+				db.execute(
+					'INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+					json.code, 
+					json.description, 
+					padIntRight(json.price), 
+					json.grade,
+					json.size,
+					json.legs,
+					json.length,
+					json.end,
+					json.end_b,
+					json.shortener,
+					json.img,
+					0,
+					json.bom
+				);
+				
+				totalAdded++;
 			}
+			
+			Ti.API.info("getSlings(): added " + totalAdded);
 
 			that.ready++;
+			that.updateComplete++;
 			responseArray = null;
 			i = null;
 			that.closeDb(db);
@@ -558,7 +648,8 @@ Database.prototype.getSlings = function(){
 		// function called when an error occurs, including a timeout
 		onerror : function(e) {
 
-			alert('problem connecting to the Slings Database');
+			alert('problem connecting to the Slings Database (slings)');
+			Ti.API.info(JSON.stringify(json));
 		},
 		timeout : 60000  // in milliseconds
 	});
@@ -592,6 +683,7 @@ Database.prototype.getShorteners = function(){
 			}
 	         
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -632,6 +724,7 @@ Database.prototype.getEndFittings = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -674,6 +767,7 @@ Database.prototype.getChainTypes = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -711,6 +805,7 @@ Database.prototype.getBoms = function(){
 			}
 			
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -748,6 +843,7 @@ Database.prototype.getComponents = function(){
 			}
 
 			that.ready++;
+			that.updateComplete++;
 			that.closeDb(db);
 			responseArray = null;
 			i = null;
@@ -813,20 +909,63 @@ Database.prototype.findBomDetails = function(partcode){
 
 Database.prototype.emptyTable = function(tableName){
 	var db = this.openDb();
-		db.execute('DELETE FROM ' + tableName);
-		this.closeDb(db);
+	db.execute('DELETE FROM ' + tableName);
+	this.closeDb(db);
+	Ti.API.info("emptyTable(): " + tableName);
 };
 
 Database.prototype.updateVersions = function(category, value){
 	var db = this.openDb();
-		db.execute('UPDATE VersionCheck SET version = ? WHERE category = ?', value, category);
-		this.closeDb(db);
+	db.execute('UPDATE VersionCheck SET version = ? WHERE category = ?', value, category);
+	this.closeDb(db);
+	Ti.API.info("updateVersion(): " + category + " to " + value);
 };
 
 Database.prototype.updateTables = function(){
 	
+	// Schema update 1: Quotes: specLoad
+	var self = this,
+		db = self.openDb();
+	
+	// NEW FIELD: specLoad
+	Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
+	
+	var rs = db.execute('PRAGMA table_info(Quotes)'),
+		fieldExists = false;
+	
+	while (rs.isValidRow()) {
+		if (rs.field(1) == 'specLoad') {
+			fieldExists = true;
+		}
+		rs.next();
+	}
+	
+	if ( ! fieldExists) {
+		// field does not exist, so add it
+		Ti.API.info("Schema update: Updating table Quotes to add column specLoad.");
+		db.execute('ALTER TABLE Quotes ADD COLUMN specLoad INTEGER');
+	}
+	
+	// NEW FIELD: Postcode
+	Ti.API.info("Schema update 2: Checking table UserProfile for column postcode.");
+	
+	var rs = db.execute('PRAGMA table_info(UserProfile)'),
+		fieldExists = false;
+	
+	while (rs.isValidRow()) {
+		if (rs.field(1) == 'postcode') {
+			fieldExists = true;
+		}
+		rs.next();
+	}
+	
+	if ( ! fieldExists) {
+		// field does not exist, so add it
+		Ti.API.info("Schema update: Updating table UserProfile to add column postcode.");
+		db.execute('ALTER TABLE UserProfile ADD COLUMN postcode TEXT');
+	}
+	
 	var versionURL = "http://whackett.hippocreative.com/sync.php?task=versionCheck",
-		self = this,
 		update = Ti.Network.createHTTPClient({
 			onload: function(e){
 				
@@ -851,6 +990,8 @@ Database.prototype.updateTables = function(){
 					// Store values in var
 					var dbValue = versionObj[versionKey],
 						dbCat = versionKey;
+						
+					Ti.API.info("- Local DB table " + dbCat + " is " + dbValue);
 					
 					// Loop through JSON Response
 					for( key in response ){
@@ -862,9 +1003,13 @@ Database.prototype.updateTables = function(){
 						// Check if db cateogry is equal to JSON category
 						if( dbCat === jsonCat ){
 							
+							Ti.API.info("- API table " + jsonCat + " is " + jsonVal);
+							
 							// Check if the values are different
 							// If they are, update!
 							if( dbValue != jsonVal ){
+								
+								self.updateRequired++;
 								
 								switch(dbCat){
 									case "chain_type":

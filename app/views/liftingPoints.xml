@@ -18,7 +18,7 @@
 				<View class="wrapper">
 					
 					<View class="content--container">
-						<Label class="page__title">Distance between Lifting Points (m)</Label>
+						<Label class="page__title">Distance between\nLifting Points (m)</Label>
 						
 						<Label class="page__description">If you are unsure of where the lifting points will be on your load, please see the diagram below for reference.</Label>
 					</View>
@@ -31,7 +31,7 @@
 					
 							<TextField id="liftingPointMeter" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>
@@ -45,7 +45,7 @@
 							
 							<TextField id="liftingPointFraction" class="digit-input" value="00" clearOnEdit="true">
 								<!-- Sets the keyboardToolbar property -->
-					            <KeyboardToolbar>
+					            <KeyboardToolbar platform="ios">
 					                <Toolbar>
 					                    <Items>
 					                        <FlexSpace/>

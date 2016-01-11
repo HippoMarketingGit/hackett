@@ -1,3 +1,5 @@
+var args = arguments[0] || {};
+
 function setLegLength(e){
 	
 	var num = parseFloat( $.liftingPointMeter.value + '.' + $.liftingPointFraction.value ),
@@ -42,7 +44,7 @@ function setLegLength(e){
 	// Set the nomindal length
 	Alloy.Globals.sling.nominalLength = legLength;
 	
-	//Ti.API.info('Leg Length: ' + Alloy.Globals.sling.nominalLength );
+	// Ti.API.info('Leg Length: ' + Alloy.Globals.sling.nominalLength );
 }
 
 function getHeadroom(){
@@ -84,11 +86,24 @@ function setLength(){
 }
 
 function showHeadroomAlert(){
+	
+	var title = null,
+		message = null;
+	
+	if (Alloy.Globals.sling.angle === 45) {
+		// Unrestricted head room. Show the leg length message
+		title = 'Leg length';
+		message = 'The calculated leg length is ' + Alloy.Globals.sling.nominalLength + ' (m). Do you wish to continue?';
+	} else {
+		// Restricted headroom. Show the head room message
+		title = 'Headroom';
+		message = 'You will require a minimum headroom of ' + getHeadroom() + ' (m) to operate this sling. Do you wish to continue?';
+	}
 
 	// If Headroom isnt restricted check if user knows Leg Length
 	var headroom = Titanium.UI.createAlertDialog({
-	        title: 'Headroom',
-	        message: 'You will require a minimum headroom of ' + getHeadroom() + ' (m) to operate this sling. Do you wish to continue?',
+	        title: title,
+	        message: message,
 	        buttonNames: ['Yes', 'No'],
 	        cancel: 1
 		}),
@@ -112,36 +127,48 @@ function showHeadroomAlert(){
 	headroom.show();
 }
 
-function closeModal(){
+function closeModal(e) {
 	
-	$.liftingPoints.close({modal: true});
+	var isManual = (e !== null && e && e['type']);
+	
+	$.liftingPoints.close({ modal: true });
+	
+	// Was the modal dialog closed manually, and do we have the navigateOnClose options passed?
+	if (isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['back'] && args.back === true) {
+			Alloy.Globals.goBack();	
+	}
+	
+	if ( ! isManual && args 
+		&& args['navigateOnClose'] && args.navigateOnClose === true
+		&& args['next'] && args.next === true) {
+		Alloy.Globals.goNext();
+	}
+	
 }
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.liftingPointDone.addEventListener('click', function(e){
-
-	if( $.liftingPointMeter.value === "" || $.liftingPointMeter.value == null ){
-		
-		$.liftingPointMeter.setValue("00");
-	}
-
-	$.liftingPointMeter.blur();
-
-});
+if ($.liftingPointDone) {
+	$.liftingPointDone.addEventListener('click', function(e){	
+		if( $.liftingPointMeter.value === "" || $.liftingPointMeter.value == null ){
+			$.liftingPointMeter.setValue("00");
+		}	
+		$.liftingPointMeter.blur();	
+	});	
+}
 
 // Check if any values have been entered when the 'Done' button is pressed,
 // if not set the value to "00"
-$.liftingPointFractionDone.addEventListener('click', function(e){
-	
-	if( $.liftingPointFraction.value === "" || $.liftingPointFraction.value == null ){
-		
-		$.liftingPointFraction.setValue("00");
-	}
-
-	$.liftingPointFraction.blur();
-
-});
+if ($.liftingPointFractionDone) {
+	$.liftingPointFractionDone.addEventListener('click', function(e){		
+		if( $.liftingPointFraction.value === "" || $.liftingPointFraction.value == null ){
+			$.liftingPointFraction.setValue("00");
+		}
+		$.liftingPointFraction.blur();
+	});
+}
 
 
 var liftingPointImg = Ti.UI.createImageView({
