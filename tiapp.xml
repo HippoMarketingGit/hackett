@@ -8,7 +8,7 @@
     <property name="acs-api-key-development" type="string">LnBruXxWF8wC9eIg6VKTfBtxyyzPGBRk</property>
     <id>com.hippocreative.WDMSlingCalculatorApp</id>
     <name>WilliamHackettChains</name>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <publisher>Ben</publisher>
     <url>http://www.hippocreative.com</url>
     <description>not specified</description>

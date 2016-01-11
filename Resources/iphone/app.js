@@ -7,7 +7,6 @@ var Common = require("common"), User = require("user"), Database = require("data
 Alloy.Globals.callHandler = function(el) {
     el.text = "01665 604200";
     el.addEventListener("click", function() {
-        Ti.API.info("Clicking call");
         if (Ti.Platform.Android) {
             var intent = Ti.Android.createIntent({
                 action: Ti.Android.ACTION_DIAL,
