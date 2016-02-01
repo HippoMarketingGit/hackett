@@ -101,6 +101,7 @@ ImageSync.prototype.downloadSlings = function() {
 	
 	dirObj = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, dirName);
 	if ( ! dirObj.exists()) {
+		Ti.API.info("Created image directory " + Ti.Filesystem.applicationDataDirectory + dirName);
 		dirObj.createDirectory();
 	}
 	

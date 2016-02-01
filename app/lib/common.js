@@ -114,6 +114,7 @@ Common.prototype.firstStart = function(database){
 	return start;
 };
 
+
 Common.prototype.openApp = function(user){
 
 	var Database = require('databaseObj'),

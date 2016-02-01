@@ -1,12 +1,10 @@
 Alloy.Globals.callHandler($.tel);
 
 function openConfigurator(e){
-	
 	var win = Alloy.createController('slingConfiguration').getView();
-		win.open();
-		
+	win.open();
 	$.dashboard.close();
-	$.dashboard = null;	
+	$.dashboard = null;
 }
 
 function openAccountSettings(e){
