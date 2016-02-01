@@ -36,6 +36,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "legs";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -122,7 +123,7 @@ function Controller() {
         return o;
     }());
     $.__views.__alloyId75.add($.__views.one);
-    chooseLegs ? $.__views.one.addEventListener("click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
+    chooseLegs ? $.addListener($.__views.one, "click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
     $.__views.oneImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "oneImg",
@@ -149,7 +150,7 @@ function Controller() {
         return o;
     }());
     $.__views.__alloyId75.add($.__views.two);
-    chooseLegs ? $.__views.two.addEventListener("click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
+    chooseLegs ? $.addListener($.__views.two, "click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
     $.__views.twoImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "twoImg",
@@ -183,7 +184,7 @@ function Controller() {
         return o;
     }());
     $.__views.__alloyId76.add($.__views.three);
-    chooseLegs ? $.__views.three.addEventListener("click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
+    chooseLegs ? $.addListener($.__views.three, "click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
     $.__views.threeImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "threeImg",
@@ -210,7 +211,7 @@ function Controller() {
         return o;
     }());
     $.__views.__alloyId76.add($.__views.four);
-    chooseLegs ? $.__views.four.addEventListener("click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
+    chooseLegs ? $.addListener($.__views.four, "click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
     $.__views.fourImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "fourImg",
@@ -246,10 +247,10 @@ function Controller() {
     $.twoImg.image = imgPath + "2-legs.png";
     $.threeImg.image = imgPath + "3-legs.png";
     $.fourImg.image = imgPath + "4-legs.png";
-    __defers["$.__views.one!click!chooseLegs"] && $.__views.one.addEventListener("click", chooseLegs);
-    __defers["$.__views.two!click!chooseLegs"] && $.__views.two.addEventListener("click", chooseLegs);
-    __defers["$.__views.three!click!chooseLegs"] && $.__views.three.addEventListener("click", chooseLegs);
-    __defers["$.__views.four!click!chooseLegs"] && $.__views.four.addEventListener("click", chooseLegs);
+    __defers["$.__views.one!click!chooseLegs"] && $.addListener($.__views.one, "click", chooseLegs);
+    __defers["$.__views.two!click!chooseLegs"] && $.addListener($.__views.two, "click", chooseLegs);
+    __defers["$.__views.three!click!chooseLegs"] && $.addListener($.__views.three, "click", chooseLegs);
+    __defers["$.__views.four!click!chooseLegs"] && $.addListener($.__views.four, "click", chooseLegs);
     _.extend($, exports);
 }
 

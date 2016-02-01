@@ -96,6 +96,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "quotes";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -180,7 +181,7 @@ function Controller() {
         id: "__alloyId158"
     });
     $.__views.__alloyId157.add($.__views.__alloyId158);
-    openDash ? $.__views.__alloyId158.addEventListener("click", openDash) : __defers["$.__views.__alloyId158!click!openDash"] = true;
+    openDash ? $.addListener($.__views.__alloyId158, "click", openDash) : __defers["$.__views.__alloyId158!click!openDash"] = true;
     $.__views.__alloyId159 = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
@@ -227,7 +228,7 @@ function Controller() {
             }
         });
     }();
-    __defers["$.__views.__alloyId158!click!openDash"] && $.__views.__alloyId158.addEventListener("click", openDash);
+    __defers["$.__views.__alloyId158!click!openDash"] && $.addListener($.__views.__alloyId158, "click", openDash);
     _.extend($, exports);
 }
 

@@ -226,6 +226,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "specifications";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -279,7 +280,7 @@ function Controller() {
         width: "24dip"
     });
     $.__views.__alloyId262.add($.__views.close);
-    closeModal ? $.__views.close.addEventListener("click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
+    closeModal ? $.addListener($.__views.close, "click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
     $.__views.__alloyId263 = Ti.UI.createView({
         height: "1dip",
         top: "20dip",
@@ -856,7 +857,7 @@ function Controller() {
         top: "10dip"
     });
     $.__views.__alloyId283.add($.__views.viewSlingAssembly);
-    viewSlingAssembly ? $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
+    viewSlingAssembly ? $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
     $.__views.slingAssemblyImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "slingAssemblyImg",
@@ -877,7 +878,7 @@ function Controller() {
         top: "8dip"
     });
     $.__views.__alloyId283.add($.__views.requestQuote);
-    sendQuote ? $.__views.requestQuote.addEventListener("click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
+    sendQuote ? $.addListener($.__views.requestQuote, "click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
     $.__views.backToDash = Ti.UI.createButton({
         top: "8dip",
         width: "100%",
@@ -892,7 +893,7 @@ function Controller() {
         title: "Back to Dashboard"
     });
     $.__views.__alloyId283.add($.__views.backToDash);
-    openDash ? $.__views.backToDash.addEventListener("click", openDash) : __defers["$.__views.backToDash!click!openDash"] = true;
+    openDash ? $.addListener($.__views.backToDash, "click", openDash) : __defers["$.__views.backToDash!click!openDash"] = true;
     $.__views.__alloyId285 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -1043,10 +1044,10 @@ function Controller() {
         checkImage(Alloy.Globals.sling.partCode);
         checkSpec();
     }();
-    __defers["$.__views.close!click!closeModal"] && $.__views.close.addEventListener("click", closeModal);
-    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly);
-    __defers["$.__views.requestQuote!click!sendQuote"] && $.__views.requestQuote.addEventListener("click", sendQuote);
-    __defers["$.__views.backToDash!click!openDash"] && $.__views.backToDash.addEventListener("click", openDash);
+    __defers["$.__views.close!click!closeModal"] && $.addListener($.__views.close, "click", closeModal);
+    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly);
+    __defers["$.__views.requestQuote!click!sendQuote"] && $.addListener($.__views.requestQuote, "click", sendQuote);
+    __defers["$.__views.backToDash!click!openDash"] && $.addListener($.__views.backToDash, "click", openDash);
     _.extend($, exports);
 }
 

@@ -33,6 +33,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "slingType";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -109,7 +110,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.slings.add($.__views.chain);
-    setSlingType ? $.__views.chain.addEventListener("click", setSlingType) : __defers["$.__views.chain!click!setSlingType"] = true;
+    setSlingType ? $.addListener($.__views.chain, "click", setSlingType) : __defers["$.__views.chain!click!setSlingType"] = true;
     $.__views.__alloyId233 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -201,7 +202,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.extra.add($.__views.eight);
-    setGrade ? $.__views.eight.addEventListener("click", setGrade) : __defers["$.__views.eight!click!setGrade"] = true;
+    setGrade ? $.addListener($.__views.eight, "click", setGrade) : __defers["$.__views.eight!click!setGrade"] = true;
     $.__views.__alloyId239 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -275,7 +276,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.extra.add($.__views.ten);
-    setGrade ? $.__views.ten.addEventListener("click", setGrade) : __defers["$.__views.ten!click!setGrade"] = true;
+    setGrade ? $.addListener($.__views.ten, "click", setGrade) : __defers["$.__views.ten!click!setGrade"] = true;
     $.__views.__alloyId245 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
@@ -329,7 +330,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.extra.add($.__views.auto);
-    setGrade ? $.__views.auto.addEventListener("click", setGrade) : __defers["$.__views.auto!click!setGrade"] = true;
+    setGrade ? $.addListener($.__views.auto, "click", setGrade) : __defers["$.__views.auto!click!setGrade"] = true;
     $.__views.__alloyId250 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
@@ -412,7 +413,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.slings.add($.__views.wireRope);
-    setSlingType ? $.__views.wireRope.addEventListener("click", setSlingType) : __defers["$.__views.wireRope!click!setSlingType"] = true;
+    setSlingType ? $.addListener($.__views.wireRope, "click", setSlingType) : __defers["$.__views.wireRope!click!setSlingType"] = true;
     $.__views.__alloyId257 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -492,11 +493,11 @@ function Controller() {
         "Auto" === Alloy.Globals.sling.grade ? $.auto.backgroundColor = "#6b76d0" : 8 === Alloy.Globals.sling.grade ? $.eight.backgroundColor = "#6b76d0" : 10 === Alloy.Globals.sling.grade && ($.ten.backgroundColor = "#6b76d0");
         $.chain.backgroundColor = "#6b76d0";
     } else "Wire Rope" === Alloy.Globals.sling.type && ($.wireRope.backgroundColor = "#6b76d0");
-    __defers["$.__views.chain!click!setSlingType"] && $.__views.chain.addEventListener("click", setSlingType);
-    __defers["$.__views.eight!click!setGrade"] && $.__views.eight.addEventListener("click", setGrade);
-    __defers["$.__views.ten!click!setGrade"] && $.__views.ten.addEventListener("click", setGrade);
-    __defers["$.__views.auto!click!setGrade"] && $.__views.auto.addEventListener("click", setGrade);
-    __defers["$.__views.wireRope!click!setSlingType"] && $.__views.wireRope.addEventListener("click", setSlingType);
+    __defers["$.__views.chain!click!setSlingType"] && $.addListener($.__views.chain, "click", setSlingType);
+    __defers["$.__views.eight!click!setGrade"] && $.addListener($.__views.eight, "click", setGrade);
+    __defers["$.__views.ten!click!setGrade"] && $.addListener($.__views.ten, "click", setGrade);
+    __defers["$.__views.auto!click!setGrade"] && $.addListener($.__views.auto, "click", setGrade);
+    __defers["$.__views.wireRope!click!setSlingType"] && $.addListener($.__views.wireRope, "click", setSlingType);
     _.extend($, exports);
 }
 

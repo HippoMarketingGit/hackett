@@ -64,6 +64,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "liftingPoints";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -118,7 +119,7 @@ function Controller() {
         id: "__alloyId78"
     });
     $.__views.__alloyId77.add($.__views.__alloyId78);
-    closeModal ? $.__views.__alloyId78.addEventListener("click", closeModal) : __defers["$.__views.__alloyId78!click!closeModal"] = true;
+    closeModal ? $.addListener($.__views.__alloyId78, "click", closeModal) : __defers["$.__views.__alloyId78!click!closeModal"] = true;
     $.__views.__alloyId79 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
@@ -329,7 +330,7 @@ function Controller() {
         id: "__alloyId98"
     });
     $.__views.__alloyId97.add($.__views.__alloyId98);
-    setLength ? $.__views.__alloyId98.addEventListener("click", setLength) : __defers["$.__views.__alloyId98!click!setLength"] = true;
+    setLength ? $.addListener($.__views.__alloyId98, "click", setLength) : __defers["$.__views.__alloyId98!click!setLength"] = true;
     $.__views.__alloyId99 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -355,8 +356,8 @@ function Controller() {
     });
     liftingPointImg.height = 3 === Alloy.Globals.sling.legs ? "100dip" : "60dip";
     $.liftingPointsImage.add(liftingPointImg);
-    __defers["$.__views.__alloyId78!click!closeModal"] && $.__views.__alloyId78.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId98!click!setLength"] && $.__views.__alloyId98.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId78!click!closeModal"] && $.addListener($.__views.__alloyId78, "click", closeModal);
+    __defers["$.__views.__alloyId98!click!setLength"] && $.addListener($.__views.__alloyId98, "click", setLength);
     _.extend($, exports);
 }
 

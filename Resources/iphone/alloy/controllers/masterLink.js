@@ -17,6 +17,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "masterLink";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -115,7 +116,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.__alloyId124.add($.__views.standard);
-    setMasterlink ? $.__views.standard.addEventListener("click", setMasterlink) : __defers["$.__views.standard!click!setMasterlink"] = true;
+    setMasterlink ? $.addListener($.__views.standard, "click", setMasterlink) : __defers["$.__views.standard!click!setMasterlink"] = true;
     $.__views.__alloyId125 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -152,7 +153,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.__alloyId124.add($.__views.oversized);
-    setMasterlink ? $.__views.oversized.addEventListener("click", setMasterlink) : __defers["$.__views.oversized!click!setMasterlink"] = true;
+    setMasterlink ? $.addListener($.__views.oversized, "click", setMasterlink) : __defers["$.__views.oversized!click!setMasterlink"] = true;
     $.__views.__alloyId128 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -191,8 +192,8 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     null !== Alloy.Globals.sling.masterLink && ("Standard" === Alloy.Globals.sling.masterLink ? $.standard.backgroundColor = "#6b76d0" : "Oversized" === Alloy.Globals.sling.masterLink && ($.oversized.backgroundColor = "#6b76d0"));
-    __defers["$.__views.standard!click!setMasterlink"] && $.__views.standard.addEventListener("click", setMasterlink);
-    __defers["$.__views.oversized!click!setMasterlink"] && $.__views.oversized.addEventListener("click", setMasterlink);
+    __defers["$.__views.standard!click!setMasterlink"] && $.addListener($.__views.standard, "click", setMasterlink);
+    __defers["$.__views.oversized!click!setMasterlink"] && $.addListener($.__views.oversized, "click", setMasterlink);
     _.extend($, exports);
 }
 

@@ -38,6 +38,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "accountSettings";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -137,7 +138,7 @@ function Controller() {
         id: "__alloyId5"
     });
     $.__views.__alloyId4.add($.__views.__alloyId5);
-    openDash ? $.__views.__alloyId5.addEventListener("click", openDash) : __defers["$.__views.__alloyId5!click!openDash"] = true;
+    openDash ? $.addListener($.__views.__alloyId5, "click", openDash) : __defers["$.__views.__alloyId5!click!openDash"] = true;
     $.__views.__alloyId6 = Ti.UI.createLabel({
         left: "42dip",
         width: Ti.UI.SIZE,
@@ -442,7 +443,7 @@ function Controller() {
         id: "__alloyId25"
     });
     $.__views.__alloyId24.add($.__views.__alloyId25);
-    update ? $.__views.__alloyId25.addEventListener("click", update) : __defers["$.__views.__alloyId25!click!update"] = true;
+    update ? $.addListener($.__views.__alloyId25, "click", update) : __defers["$.__views.__alloyId25!click!update"] = true;
     $.__views.__alloyId26 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -464,7 +465,7 @@ function Controller() {
         id: "__alloyId27"
     });
     $.__views.__alloyId26.add($.__views.__alloyId27);
-    logout ? $.__views.__alloyId27.addEventListener("click", logout) : __defers["$.__views.__alloyId27!click!logout"] = true;
+    logout ? $.addListener($.__views.__alloyId27, "click", logout) : __defers["$.__views.__alloyId27!click!logout"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), db = database.openDb();
@@ -511,9 +512,9 @@ function Controller() {
         row.next();
     }
     db.close();
-    __defers["$.__views.__alloyId5!click!openDash"] && $.__views.__alloyId5.addEventListener("click", openDash);
-    __defers["$.__views.__alloyId25!click!update"] && $.__views.__alloyId25.addEventListener("click", update);
-    __defers["$.__views.__alloyId27!click!logout"] && $.__views.__alloyId27.addEventListener("click", logout);
+    __defers["$.__views.__alloyId5!click!openDash"] && $.addListener($.__views.__alloyId5, "click", openDash);
+    __defers["$.__views.__alloyId25!click!update"] && $.addListener($.__views.__alloyId25, "click", update);
+    __defers["$.__views.__alloyId27!click!logout"] && $.addListener($.__views.__alloyId27, "click", logout);
     _.extend($, exports);
 }
 

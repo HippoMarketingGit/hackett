@@ -45,6 +45,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "register";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -441,7 +442,7 @@ function Controller() {
         id: "submit"
     });
     $.__views.__alloyId199.add($.__views.submit);
-    registerUser ? $.__views.submit.addEventListener("click", registerUser) : __defers["$.__views.submit!click!registerUser"] = true;
+    registerUser ? $.addListener($.__views.submit, "click", registerUser) : __defers["$.__views.submit!click!registerUser"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -465,7 +466,7 @@ function Controller() {
         false == e.source.value ? e.source.on() : e.source.off();
     });
     var xhr = Titanium.Network.createHTTPClient();
-    __defers["$.__views.submit!click!registerUser"] && $.__views.submit.addEventListener("click", registerUser);
+    __defers["$.__views.submit!click!registerUser"] && $.addListener($.__views.submit, "click", registerUser);
     _.extend($, exports);
 }
 

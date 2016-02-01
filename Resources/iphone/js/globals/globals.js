@@ -40,7 +40,7 @@ function padIntRight(num) {
 
 var style;
 
-style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+style = Ti.UI.ActivityIndicatorStyle.BIG;
 
 var activityIndicator = Ti.UI.createActivityIndicator({
     width: "auto",

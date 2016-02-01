@@ -28,6 +28,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dashboard";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -109,7 +110,7 @@ function Controller() {
         backgroundColor: "#2b3b94"
     });
     $.__views.wrapper.add($.__views.newQuote);
-    openConfigurator ? $.__views.newQuote.addEventListener("click", openConfigurator) : __defers["$.__views.newQuote!click!openConfigurator"] = true;
+    openConfigurator ? $.addListener($.__views.newQuote, "click", openConfigurator) : __defers["$.__views.newQuote!click!openConfigurator"] = true;
     $.__views.__alloyId30 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
@@ -148,7 +149,7 @@ function Controller() {
         id: "__alloyId33"
     });
     $.__views.wrapper.add($.__views.__alloyId33);
-    openQuotes ? $.__views.__alloyId33.addEventListener("click", openQuotes) : __defers["$.__views.__alloyId33!click!openQuotes"] = true;
+    openQuotes ? $.addListener($.__views.__alloyId33, "click", openQuotes) : __defers["$.__views.__alloyId33!click!openQuotes"] = true;
     $.__views.__alloyId34 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
@@ -187,7 +188,7 @@ function Controller() {
         id: "__alloyId37"
     });
     $.__views.wrapper.add($.__views.__alloyId37);
-    openAccountSettings ? $.__views.__alloyId37.addEventListener("click", openAccountSettings) : __defers["$.__views.__alloyId37!click!openAccountSettings"] = true;
+    openAccountSettings ? $.addListener($.__views.__alloyId37, "click", openAccountSettings) : __defers["$.__views.__alloyId37!click!openAccountSettings"] = true;
     $.__views.__alloyId38 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
@@ -212,9 +213,9 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.callHandler($.tel);
-    __defers["$.__views.newQuote!click!openConfigurator"] && $.__views.newQuote.addEventListener("click", openConfigurator);
-    __defers["$.__views.__alloyId33!click!openQuotes"] && $.__views.__alloyId33.addEventListener("click", openQuotes);
-    __defers["$.__views.__alloyId37!click!openAccountSettings"] && $.__views.__alloyId37.addEventListener("click", openAccountSettings);
+    __defers["$.__views.newQuote!click!openConfigurator"] && $.addListener($.__views.newQuote, "click", openConfigurator);
+    __defers["$.__views.__alloyId33!click!openQuotes"] && $.addListener($.__views.__alloyId33, "click", openQuotes);
+    __defers["$.__views.__alloyId37!click!openAccountSettings"] && $.addListener($.__views.__alloyId37, "click", openAccountSettings);
     _.extend($, exports);
 }
 

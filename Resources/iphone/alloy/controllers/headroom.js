@@ -100,6 +100,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "headroom";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -226,7 +227,7 @@ function Controller() {
         return o;
     }());
     $.__views.liftingAngle.add($.__views.no);
-    setAngle ? $.__views.no.addEventListener("click", setAngle) : __defers["$.__views.no!click!setAngle"] = true;
+    setAngle ? $.addListener($.__views.no, "click", setAngle) : __defers["$.__views.no!click!setAngle"] = true;
     $.__views.__alloyId45 = Ti.UI.createView(function() {
         var o = {};
         _.extend(o, {
@@ -306,7 +307,7 @@ function Controller() {
         return o;
     }());
     $.__views.liftingAngle.add($.__views.yes);
-    setAngle ? $.__views.yes.addEventListener("click", setAngle) : __defers["$.__views.yes!click!setAngle"] = true;
+    setAngle ? $.addListener($.__views.yes, "click", setAngle) : __defers["$.__views.yes!click!setAngle"] = true;
     $.__views.__alloyId51 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -389,8 +390,8 @@ function Controller() {
         });
     } else setHeadroomImg();
     null !== Alloy.Globals.sling.angle && (60 === Alloy.Globals.sling.angle ? $.yes.backgroundColor = "#6b76d0" : $.no.backgroundColor = "#6b76d0");
-    __defers["$.__views.no!click!setAngle"] && $.__views.no.addEventListener("click", setAngle);
-    __defers["$.__views.yes!click!setAngle"] && $.__views.yes.addEventListener("click", setAngle);
+    __defers["$.__views.no!click!setAngle"] && $.addListener($.__views.no, "click", setAngle);
+    __defers["$.__views.yes!click!setAngle"] && $.addListener($.__views.yes, "click", setAngle);
     _.extend($, exports);
 }
 

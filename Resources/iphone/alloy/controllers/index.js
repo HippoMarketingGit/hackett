@@ -20,6 +20,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -197,7 +198,7 @@ function Controller() {
         id: "login"
     });
     $.__views.__alloyId65.add($.__views.login);
-    openDashboard ? $.__views.login.addEventListener("click", openDashboard) : __defers["$.__views.login!click!openDashboard"] = true;
+    openDashboard ? $.addListener($.__views.login, "click", openDashboard) : __defers["$.__views.login!click!openDashboard"] = true;
     $.__views.__alloyId66 = Ti.UI.createView({
         layout: "vertical",
         top: "20dip",
@@ -279,7 +280,7 @@ function Controller() {
         $.index = null;
         win.open();
     });
-    __defers["$.__views.login!click!openDashboard"] && $.__views.login.addEventListener("click", openDashboard);
+    __defers["$.__views.login!click!openDashboard"] && $.addListener($.__views.login, "click", openDashboard);
     _.extend($, exports);
 }
 

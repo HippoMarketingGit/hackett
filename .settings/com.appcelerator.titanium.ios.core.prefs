@@ -1,8 +1,11 @@
 eclipse.preferences.version=1
 iosLaunchConfigurationAttributes/ATTR_MINIFY=true
 iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=WilliamHackettChains
+iosLaunchConfigurationAttributes/ATTR_UPLOAD_DEBUG_SYMBOLS=false
 iosLaunchConfigurationAttributes/appid=com.hippocreative.WDMSlingCalculatorApp
-iosLaunchConfigurationAttributes/certificate=Brad Forster (ZPGNVXDRM8)
-iosLaunchConfigurationAttributes/keychain=/Users/Ben/Library/Keychains/login.keychain
-iosLaunchConfigurationAttributes/sdk_version=7.1
-iosLaunchConfigurationAttributes/uuid=ef40de6a-65fb-40ed-8562-7c95233c10aa
+iosLaunchConfigurationAttributes/certificate=Hippo Creative Solutions Limited (Z3YQZTT95A)
+iosLaunchConfigurationAttributes/distribute_path=/Users/craig/Desktop
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/output_format=ipa
+iosLaunchConfigurationAttributes/sdk_version=9.2
+iosLaunchConfigurationAttributes/uuid=e78136ed-eb23-4965-846d-b8fba77713d4

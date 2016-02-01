@@ -26,6 +26,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "nominalLength";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -80,7 +81,7 @@ function Controller() {
         id: "__alloyId133"
     });
     $.__views.__alloyId132.add($.__views.__alloyId133);
-    closeModal ? $.__views.__alloyId133.addEventListener("click", closeModal) : __defers["$.__views.__alloyId133!click!closeModal"] = true;
+    closeModal ? $.addListener($.__views.__alloyId133, "click", closeModal) : __defers["$.__views.__alloyId133!click!closeModal"] = true;
     $.__views.__alloyId134 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
@@ -284,7 +285,7 @@ function Controller() {
         id: "__alloyId154"
     });
     $.__views.__alloyId153.add($.__views.__alloyId154);
-    setLength ? $.__views.__alloyId154.addEventListener("click", setLength) : __defers["$.__views.__alloyId154!click!setLength"] = true;
+    setLength ? $.addListener($.__views.__alloyId154, "click", setLength) : __defers["$.__views.__alloyId154!click!setLength"] = true;
     $.__views.__alloyId155 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -306,8 +307,8 @@ function Controller() {
         ("" === $.legFraction.value || null === $.legFraction.value) && $.legFraction.setValue("00");
         Ti.API.info($.legFraction.value);
     });
-    __defers["$.__views.__alloyId133!click!closeModal"] && $.__views.__alloyId133.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId154!click!setLength"] && $.__views.__alloyId154.addEventListener("click", setLength);
+    __defers["$.__views.__alloyId133!click!closeModal"] && $.addListener($.__views.__alloyId133, "click", closeModal);
+    __defers["$.__views.__alloyId154!click!setLength"] && $.addListener($.__views.__alloyId154, "click", setLength);
     _.extend($, exports);
 }
 

@@ -157,6 +157,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "terminations";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -281,7 +282,7 @@ function Controller() {
         paddingLeft: "5dip"
     });
     $.__views.__alloyId292.add($.__views.shorteningDeviceText);
-    createPicker ? $.__views.shorteningDeviceText.addEventListener("click", createPicker) : __defers["$.__views.shorteningDeviceText!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.shorteningDeviceText, "click", createPicker) : __defers["$.__views.shorteningDeviceText!click!createPicker"] = true;
     $.__views.__alloyId293 = Ti.UI.createImageView({
         right: "0",
         width: "61px",
@@ -291,7 +292,7 @@ function Controller() {
         id: "__alloyId293"
     });
     $.__views.__alloyId292.add($.__views.__alloyId293);
-    createPicker ? $.__views.__alloyId293.addEventListener("click", createPicker) : __defers["$.__views.__alloyId293!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.__alloyId293, "click", createPicker) : __defers["$.__views.__alloyId293!click!createPicker"] = true;
     $.__views.upperTermView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -357,7 +358,7 @@ function Controller() {
         paddingLeft: "5dip"
     });
     $.__views.__alloyId297.add($.__views.upperTermText);
-    createPicker ? $.__views.upperTermText.addEventListener("click", createPicker) : __defers["$.__views.upperTermText!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.upperTermText, "click", createPicker) : __defers["$.__views.upperTermText!click!createPicker"] = true;
     $.__views.__alloyId298 = Ti.UI.createImageView({
         right: "0",
         width: "61px",
@@ -367,7 +368,7 @@ function Controller() {
         id: "__alloyId298"
     });
     $.__views.__alloyId297.add($.__views.__alloyId298);
-    createPicker ? $.__views.__alloyId298.addEventListener("click", createPicker) : __defers["$.__views.__alloyId298!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.__alloyId298, "click", createPicker) : __defers["$.__views.__alloyId298!click!createPicker"] = true;
     $.__views.lowerTermView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -433,7 +434,7 @@ function Controller() {
         paddingLeft: "5dip"
     });
     $.__views.__alloyId302.add($.__views.lowerTermText);
-    createPicker ? $.__views.lowerTermText.addEventListener("click", createPicker) : __defers["$.__views.lowerTermText!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.lowerTermText, "click", createPicker) : __defers["$.__views.lowerTermText!click!createPicker"] = true;
     $.__views.__alloyId303 = Ti.UI.createImageView({
         right: "0",
         width: "61px",
@@ -443,7 +444,7 @@ function Controller() {
         id: "__alloyId303"
     });
     $.__views.__alloyId302.add($.__views.__alloyId303);
-    createPicker ? $.__views.__alloyId303.addEventListener("click", createPicker) : __defers["$.__views.__alloyId303!click!createPicker"] = true;
+    createPicker ? $.addListener($.__views.__alloyId303, "click", createPicker) : __defers["$.__views.__alloyId303!click!createPicker"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     if ("Chain" === Alloy.Globals.sling.type) {
@@ -461,12 +462,12 @@ function Controller() {
     Alloy.Globals.shorteningCode = 0;
     Alloy.Globals.lowerTermCode = 0;
     Alloy.Globals.upperTermCode = 0;
-    __defers["$.__views.shorteningDeviceText!click!createPicker"] && $.__views.shorteningDeviceText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId293!click!createPicker"] && $.__views.__alloyId293.addEventListener("click", createPicker);
-    __defers["$.__views.upperTermText!click!createPicker"] && $.__views.upperTermText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId298!click!createPicker"] && $.__views.__alloyId298.addEventListener("click", createPicker);
-    __defers["$.__views.lowerTermText!click!createPicker"] && $.__views.lowerTermText.addEventListener("click", createPicker);
-    __defers["$.__views.__alloyId303!click!createPicker"] && $.__views.__alloyId303.addEventListener("click", createPicker);
+    __defers["$.__views.shorteningDeviceText!click!createPicker"] && $.addListener($.__views.shorteningDeviceText, "click", createPicker);
+    __defers["$.__views.__alloyId293!click!createPicker"] && $.addListener($.__views.__alloyId293, "click", createPicker);
+    __defers["$.__views.upperTermText!click!createPicker"] && $.addListener($.__views.upperTermText, "click", createPicker);
+    __defers["$.__views.__alloyId298!click!createPicker"] && $.addListener($.__views.__alloyId298, "click", createPicker);
+    __defers["$.__views.lowerTermText!click!createPicker"] && $.addListener($.__views.lowerTermText, "click", createPicker);
+    __defers["$.__views.__alloyId303!click!createPicker"] && $.addListener($.__views.__alloyId303, "click", createPicker);
     _.extend($, exports);
 }
 

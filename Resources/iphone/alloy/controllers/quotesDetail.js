@@ -85,6 +85,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "quotesDetail";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -139,7 +140,7 @@ function Controller() {
         width: "24dip"
     });
     $.__views.__alloyId160.add($.__views.close);
-    closeModal ? $.__views.close.addEventListener("click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
+    closeModal ? $.addListener($.__views.close, "click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
     $.__views.__alloyId161 = Ti.UI.createView({
         height: "1dip",
         top: "20dip",
@@ -374,7 +375,7 @@ function Controller() {
         top: "24dip"
     });
     $.__views.slingSpec.add($.__views.viewSlingAssembly);
-    viewSlingAssembly ? $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
+    viewSlingAssembly ? $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
     $.__views.slingAssemblyImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "slingAssemblyImg",
@@ -395,7 +396,7 @@ function Controller() {
         top: "8dip"
     });
     $.__views.slingSpec.add($.__views.requestQuote);
-    sendQuote ? $.__views.requestQuote.addEventListener("click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
+    sendQuote ? $.addListener($.__views.requestQuote, "click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
     $.__views.deleteQuote = Ti.UI.createButton({
         top: "8dip",
         width: "100%",
@@ -410,7 +411,7 @@ function Controller() {
         title: "Delete Quote"
     });
     $.__views.slingSpec.add($.__views.deleteQuote);
-    deleteQuote ? $.__views.deleteQuote.addEventListener("click", deleteQuote) : __defers["$.__views.deleteQuote!click!deleteQuote"] = true;
+    deleteQuote ? $.addListener($.__views.deleteQuote, "click", deleteQuote) : __defers["$.__views.deleteQuote!click!deleteQuote"] = true;
     $.__views.__alloyId175 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -447,10 +448,10 @@ function Controller() {
         }
         checkImage(args.partCode);
     }();
-    __defers["$.__views.close!click!closeModal"] && $.__views.close.addEventListener("click", closeModal);
-    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.__views.viewSlingAssembly.addEventListener("click", viewSlingAssembly);
-    __defers["$.__views.requestQuote!click!sendQuote"] && $.__views.requestQuote.addEventListener("click", sendQuote);
-    __defers["$.__views.deleteQuote!click!deleteQuote"] && $.__views.deleteQuote.addEventListener("click", deleteQuote);
+    __defers["$.__views.close!click!closeModal"] && $.addListener($.__views.close, "click", closeModal);
+    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly);
+    __defers["$.__views.requestQuote!click!sendQuote"] && $.addListener($.__views.requestQuote, "click", sendQuote);
+    __defers["$.__views.deleteQuote!click!deleteQuote"] && $.addListener($.__views.deleteQuote, "click", deleteQuote);
     _.extend($, exports);
 }
 

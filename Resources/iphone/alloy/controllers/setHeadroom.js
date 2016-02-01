@@ -44,6 +44,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "setHeadroom";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -98,7 +99,7 @@ function Controller() {
         id: "__alloyId204"
     });
     $.__views.__alloyId203.add($.__views.__alloyId204);
-    closeModal ? $.__views.__alloyId204.addEventListener("click", closeModal) : __defers["$.__views.__alloyId204!click!closeModal"] = true;
+    closeModal ? $.addListener($.__views.__alloyId204, "click", closeModal) : __defers["$.__views.__alloyId204!click!closeModal"] = true;
     $.__views.__alloyId205 = Ti.UI.createView({
         top: "20dip",
         height: "1dip",
@@ -302,7 +303,7 @@ function Controller() {
         id: "__alloyId225"
     });
     $.__views.__alloyId224.add($.__views.__alloyId225);
-    setHead ? $.__views.__alloyId225.addEventListener("click", setHead) : __defers["$.__views.__alloyId225!click!setHead"] = true;
+    setHead ? $.addListener($.__views.__alloyId225, "click", setHead) : __defers["$.__views.__alloyId225!click!setHead"] = true;
     $.__views.__alloyId226 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
@@ -323,8 +324,8 @@ function Controller() {
         ("" === $.headFraction.value || null === $.headFraction.value) && $.headFraction.setValue("00");
         Ti.API.info($.headFraction.value);
     });
-    __defers["$.__views.__alloyId204!click!closeModal"] && $.__views.__alloyId204.addEventListener("click", closeModal);
-    __defers["$.__views.__alloyId225!click!setHead"] && $.__views.__alloyId225.addEventListener("click", setHead);
+    __defers["$.__views.__alloyId204!click!closeModal"] && $.addListener($.__views.__alloyId204, "click", closeModal);
+    __defers["$.__views.__alloyId225!click!setHead"] && $.addListener($.__views.__alloyId225, "click", setHead);
     _.extend($, exports);
 }
 

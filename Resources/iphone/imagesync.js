@@ -49,7 +49,10 @@ ImageSync.prototype.downloadSling = function(item, cb) {
 ImageSync.prototype.downloadSlings = function() {
     var self = this, dirName = "slings", dirObj = null, db = null, rows = null, query = "SELECT img FROM Slings WHERE (img IS NOT NULL OR img != '') AND img_status = 0 ", rows = null, imgs = [], process = null;
     dirObj = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, dirName);
-    dirObj.exists() || dirObj.createDirectory();
+    if (!dirObj.exists()) {
+        Ti.API.info("Created image directory " + Ti.Filesystem.applicationDataDirectory + dirName);
+        dirObj.createDirectory();
+    }
     db = this.database.openDb();
     rows = db.execute(query);
     while (rows.isValidRow()) {
@@ -60,7 +63,11 @@ ImageSync.prototype.downloadSlings = function() {
     rows.close();
     db.close();
     imgs = _.uniq(imgs);
-    if (0 === imgs.length) return;
+    Ti.API.info(imgs);
+    if (0 === imgs.length) {
+        Ti.API.info("Image sync: No images to download.");
+        return;
+    }
     process = function(img, cb) {
         var item = {
             img: img,

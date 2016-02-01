@@ -14,7 +14,7 @@ Database.prototype.databaseUpdated = function() {
 };
 
 Database.prototype.openDb = function() {
-    return Ti.Database.open(this.dbName);
+    return Ti.Database.install("whcslings.sqlite.sql", this.dbName);
 };
 
 Database.prototype.closeDb = function(db) {
@@ -509,6 +509,7 @@ Database.prototype.updateVersions = function(category, value) {
 };
 
 Database.prototype.updateTables = function() {
+    Ti.API.info("running updateTables");
     var self = this, db = self.openDb();
     Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
     var rs = db.execute("PRAGMA table_info(Quotes)"), fieldExists = false;
