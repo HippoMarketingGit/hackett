@@ -1,3 +1,4 @@
+
 // Check if Sling legs has been set
 // If so, highlight the correct image
 if( Alloy.Globals.sling.legs !== null ){

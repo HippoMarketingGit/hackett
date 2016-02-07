@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="installedFeatures">
-		<item value="com.appcelerator.titanium.feature.360.rcp:4.4.0.201511241829-857jFNIFGrkQeU_TZXi3UHOGJ-O_"/>
-		<item value="com.appcelerator.titanium.studio:4.4.0.1448388378-7o7_7v9DBBz0fBBemD"/>
-		<item value="com.aptana.feature:4.4.0.1446606882-B37f83CK58vLz0dnU09833355984"/>
+		<item value="com.appcelerator.titanium.feature.360.rcp:4.3.3.201510212245-857hFNOFGrkQaSQOkYHUcHOEJ5OX"/>
+		<item value="com.appcelerator.titanium.studio:4.3.3.1445365011-7o7Z7y9A4wrOxuRGt"/>
+		<item value="com.aptana.feature:4.3.3.1445465020-B37e86CK13jtACSVk9833355984B"/>
 		<item value="org.eclipse.emf.common:2.10.1.v20150123-0348"/>
 		<item value="org.eclipse.emf.ecore:2.10.2.v20150123-0348"/>
 		<item value="org.eclipse.help:2.0.103.v20150204-1700"/>
 		<item value="org.eclipse.platform:4.4.2.v20150204-1700"/>
 		<item value="org.eclipse.rcp:4.4.2.v20150204-1700"/>
 	</list>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="341" key="DIALOG_Y_ORIGIN"/>
+		<item value="658" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>

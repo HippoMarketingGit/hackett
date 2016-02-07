@@ -14,7 +14,7 @@ Database.prototype.databaseUpdated = function() {
 };
 
 Database.prototype.openDb = function() {
-    return Ti.Database.open(this.dbName);
+    return Ti.Database.install("whcslings.sqlite.sql", this.dbName);
 };
 
 Database.prototype.closeDb = function(db) {
@@ -331,7 +331,7 @@ Database.prototype.getSlings = function() {
             Ti.API.info("getSlings length: " + responseArray.reply.length);
             for (i = 0; i < responseArray.reply.length; i++) {
                 var json = responseArray.reply[i];
-                db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, padIntRight(json.price), json.grade, json.size, json.legs, json.length, json.end, json.end_b, json.shortener, json.img, 0, json.bom);
+                db.execute("INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", json.code, json.description, json.price, json.grade, json.size, json.legs, json.length, json.end, json.end_b, json.shortener, json.img, 0, json.bom);
                 totalAdded++;
             }
             Ti.API.info("getSlings(): added " + totalAdded);
@@ -509,6 +509,7 @@ Database.prototype.updateVersions = function(category, value) {
 };
 
 Database.prototype.updateTables = function() {
+    Ti.API.info("running updateTables");
     var self = this, db = self.openDb();
     Ti.API.info("Schema update 1: Checking table Quotes for column specLoad.");
     var rs = db.execute("PRAGMA table_info(Quotes)"), fieldExists = false;

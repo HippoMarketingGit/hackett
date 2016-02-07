@@ -10,10 +10,6 @@ function Database(dbName){
 }
 
 Database.prototype.databaseReady = function(count){
-	
-	//Ti.API.info(this.ready);
-	//Ti.API.info(count);
-	
 	if (this.ready === count) {
 		return true;
 	}
@@ -25,7 +21,12 @@ Database.prototype.databaseUpdated = function() {
 
 // Open the Database
 Database.prototype.openDb = function(){
-	return Ti.Database.open(this.dbName);
+	
+	return Ti.Database.install("whcslings.sqlite.sql", this.dbName);
+	
+	// return Ti.Database.open(this.dbName);
+	// var db = this.installDb();
+	// return (typeof db === "object" ? db : null);
 };
 
 // Close the Database
@@ -47,7 +48,44 @@ Database.prototype.downloadData = function(){
 	this.getComponents();
 	this.getVersions();
 };
-
+/*
+Database.prototype.installDb = function() {
+	
+	var src = 'whcslings.sqlite.sql',
+		db = null,
+		row = null,
+		valid = false;
+	
+	try {
+		
+		Ti.API.info("installDb()");
+		// install " + src + " to " + this.dbName + "...");
+		db = Ti.Database.install(src, this.dbName);
+		// Ti.API.info(db);
+		// Ti.API.info(typeof db);
+		row = db.execute('SELECT * FROM VersionCheck LIMIT 1');
+		valid = row.isValidRow();
+			
+		if (typeof db === "object" && db && valid) {
+			return db;
+		} else {
+			return "The included product catalogue did not install correctly.";
+		}
+		
+	} catch (e) {
+		Ti.API.info("Error setting up initial DB.");
+		Ti.API.info(e.message);
+		return e.message;
+	}
+	
+	if (db) {
+		return db;
+	} else {
+		return "Database creation failure";
+	}
+	
+};
+*/
 Database.prototype.userIsLogged = function(){
 	
 	var db = this.openDb(),
@@ -615,13 +653,14 @@ Database.prototype.getSlings = function(){
 			
 			for ( i = 0; i < responseArray.reply.length; i++){
 				
+				//Ti.API.info("responseArray:" + i);
 				var json = responseArray.reply[i];
 				
 				db.execute(
 					'INSERT INTO Slings(code, description, price, grade, size, legs, length, end, end_b, shortener, img, img_status, bom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
 					json.code, 
 					json.description, 
-					padIntRight(json.price), 
+					json.price, 
 					json.grade,
 					json.size,
 					json.legs,
@@ -922,6 +961,8 @@ Database.prototype.updateVersions = function(category, value){
 };
 
 Database.prototype.updateTables = function(){
+	
+	Ti.API.info("running updateTables");
 	
 	// Schema update 1: Quotes: specLoad
 	var self = this,

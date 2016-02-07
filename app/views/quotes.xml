@@ -10,9 +10,10 @@
 		<!-- <View class="header__seperator"></View> -->
 		
 		<View left="5%" top="10dip" class="content--container">
-			<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">
+			<Button id="back" class="button--nav button--size button--back" onClick="openDash"/>
+			<!--<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">
 				<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
-			</View>
+		</View>-->
 		</View>
 		
 		<View id="container" width="100%" top="10dip" bottom="10dip" layout="vertical">

@@ -1,3 +1,4 @@
+
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },
@@ -8,15 +9,15 @@
 },
 '.header': {
 	top: '26dip',
-	width: '100%',
+	//width: '100%',
 	height: '85dip',
 	backgroundColor: '#eb6209',
 	layout: 'vertical'
 },
 '.tel': {
 	//top: '-10dip',
-	width: '100%',
-	//textAlign: 'center',
+	//width: '100%',
+	textAlign: 'center',
 	color: '#FFF',
 },
 '.header[platform=android]': {
@@ -72,7 +73,7 @@
 '.button--primary': {
 	width: '100%',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--primary.png',
 	title: 'LOG IN',
 	color: '#FFF',
@@ -83,7 +84,7 @@
 	top: '4dip',
 	width: '100%',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--secondary.png',
 	title: "CREATE ACCOUNT",
 	color: '#FFF',
@@ -131,4 +132,7 @@
 '.account-label': {
 	top: '20dip',
 	font:{fontSize: 14}
+},
+'.input--primary' : {
+	color: '#000'
 }

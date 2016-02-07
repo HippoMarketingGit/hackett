@@ -8,13 +8,13 @@
 		
 		<View top="20dip" height="1dip" width="100%" backgroundColor="#f7561e"></View>
 		
-		<ScrollView id="scrollView" top="4dip" left="0" width="100%" layout="vertical">
-	
-			<!-- Lifting Points -->
+			
+			<ScrollView id="scrollView" top="4dip" left="0" width="100%" layout="vertical">
+
 			<View class="page" id="content" top="10dip" height="Ti.UI.SIZE">
 				
 				<View id="slingSpec" class="wrapper" layout="vertical" top="4dip" width="90%" left="5%">
-				
+					
 					<Label>Your requirements:</Label>
 					
 					<View top="4dip" layout="horizontal">
@@ -40,15 +40,13 @@
 					<View top="4dip" layout="horizontal">
 						<Label left="0">Length (m): </Label><Label left="50dip" id="length"></Label>
 					</View>
-					
+															
 					<View top="4dip" layout="horizontal" id="descriptionContainer">
-						<Label left="0" id="description"></Label>
+						<Label left="0" id="description" width="95%"></Label>
 					</View>
 					
 					<View id="slingPartcode" layout="vertical" top="10dip">
-						
-						<Label left="0" id="specPartcode"></Label>
-						
+						<Label left="0" id="specPartcode"></Label>					
 					</View>
 								
 					<View top="10dip" layout="horizontal" id="priceContainer">
@@ -56,7 +54,7 @@
 					</View>
 					
 					
-					<Button id="viewSlingAssembly" onClick="viewSlingAssembly" title="View Sling Assembly" class="button--primary" top="24dip"/>
+					<!--<Button id="viewSlingAssembly" onClick="viewSlingAssembly" title="View Sling Assembly" class="button--primary" top="24dip"/>-->
 					<ImageView id="slingAssemblyImg" touchEnabled="False" width="auto"></ImageView>
 					
 					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="8dip"/>
@@ -69,7 +67,8 @@
 			
 			<View height="1dip" width="100%" top="20dip" backgroundColor="#FFF"></View>
 		
-		</ScrollView>
+	</ScrollView>
+	
 	
 	</Window>
 	

@@ -1,3 +1,4 @@
+
 // iPad Styles
 '.page[platform=ios formFactor=tablet]': {
 	layout: 'vertical',
@@ -115,7 +116,7 @@
 	left: '5%',
 	width: '100dip',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--back.png',
 	title: 'BACK',
 	color: '#FFF',
@@ -128,7 +129,7 @@
 	right: '5%',
 	width: '100dip',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--next.png',
 	title: 'NEXT',
 	color: '#FFF',

@@ -144,13 +144,13 @@ function Controller() {
         id: "header"
     });
     $.__views.quotes.add($.__views.header);
-    $.__views.__alloyId130 = Ti.UI.createImageView({
+    $.__views.__alloyId121 = Ti.UI.createImageView({
         top: "5dip",
         height: "70%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId130"
+        id: "__alloyId121"
     });
-    $.__views.header.add($.__views.__alloyId130);
+    $.__views.header.add($.__views.__alloyId121);
     $.__views.tel = Ti.UI.createLabel({
         color: "#ffffff",
         height: Ti.UI.SIZE,
@@ -159,35 +159,29 @@ function Controller() {
         id: "tel"
     });
     $.__views.header.add($.__views.tel);
-    $.__views.__alloyId131 = Ti.UI.createView({
+    $.__views.__alloyId122 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "5%",
         top: "10dip",
-        id: "__alloyId131"
+        id: "__alloyId122"
     });
-    $.__views.quotes.add($.__views.__alloyId131);
-    $.__views.__alloyId132 = Ti.UI.createView({
-        height: "26dip",
-        left: "0",
-        layout: "horizontal",
-        textAlign: "right",
-        backgroundImage: "/images/WHC-button--back.png",
+    $.__views.quotes.add($.__views.__alloyId122);
+    $.__views.back = Ti.UI.createButton({
+        layout: "vertical",
         width: "100dip",
-        id: "__alloyId132"
-    });
-    $.__views.__alloyId131.add($.__views.__alloyId132);
-    openDash ? $.addListener($.__views.__alloyId132, "click", openDash) : __defers["$.__views.__alloyId132!click!openDash"] = true;
-    $.__views.__alloyId133 = Ti.UI.createLabel({
+        height: "50dip",
+        backgroundImage: "/images/WHC-button--back.png",
+        title: "BACK",
         color: "#FFF",
-        height: Ti.UI.SIZE,
-        text: "BACK",
-        touchEnabled: false,
-        top: "2dip",
-        left: "42dip",
-        width: Ti.UI.SIZE,
-        id: "__alloyId133"
+        textAlign: "right",
+        verticalAlign: "bottom",
+        font: {
+            fontSize: 16
+        },
+        id: "back"
     });
-    $.__views.__alloyId132.add($.__views.__alloyId133);
+    $.__views.__alloyId122.add($.__views.back);
+    openDash ? $.addListener($.__views.back, "click", openDash) : __defers["$.__views.back!click!openDash"] = true;
     $.__views.container = Ti.UI.createView({
         height: Ti.UI.SIZE,
         id: "container",
@@ -212,17 +206,18 @@ function Controller() {
         table.addEventListener("click", function(e) {
             if (e.row.hasChild) {
                 var data = e.row, details = Alloy.createController("quotesDetail", data.quote).getView();
-                details.open({
-                    modal: true
-                });
+                Ti.API.info(JSON.stringify(data));
                 details.addEventListener("close", function() {
                     var data = getData();
                     table.setData(data);
                 });
+                details.open({
+                    modal: true
+                });
             }
         });
     }();
-    __defers["$.__views.__alloyId132!click!openDash"] && $.addListener($.__views.__alloyId132, "click", openDash);
+    __defers["$.__views.back!click!openDash"] && $.addListener($.__views.back, "click", openDash);
     _.extend($, exports);
 }
 

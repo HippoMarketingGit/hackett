@@ -1,4 +1,5 @@
 
+
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },

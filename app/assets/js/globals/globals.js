@@ -27,8 +27,7 @@ function hideView(ele){
 
 var style;
 if (Ti.Platform.name === 'iPhone OS'){
-	
-	style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	style = Ti.UI.ActivityIndicatorStyle.BIG;
 }else{
 	style = Ti.UI.ActivityIndicatorStyle.PLAIN;
 }
@@ -43,13 +42,11 @@ var activityIndicator = Ti.UI.createActivityIndicator({
 });
 
 function showActivityIndicator(win){
-	
 	activityIndicator.show();
 	win.add(activityIndicator);
 }
 
 function hideActivityIndicator(win){
-	
 	activityIndicator.hide();
 	win.remove(activityIndicator);
 	activityIndicator = null;

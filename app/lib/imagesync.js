@@ -136,7 +136,7 @@ ImageSync.prototype.downloadSlings = function() {
 	//  img: an image name from the Slings table
 	//  cb: the queue callback function (we don't actually use it meaningfully in WHC)
 	process = function(img, cb) {
-		
+				
 		// Create a simple object which we pass to the download function
 		var item = {
 			img: img,

@@ -1,3 +1,4 @@
+
 Alloy.Globals.callHandler($.tel);
 
 function openConfigurator(e){

@@ -1,3 +1,4 @@
+
 var Common = require('common'),
 	common = new Common(),
 	args = arguments[0] || {};

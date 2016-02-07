@@ -93,12 +93,11 @@
 					</View>
 				</View>
 				<!-- End of phone info -->
-				
-				
+								
 				<View class="wrapper" layout="vertical" height="Ti.UI.SIZE" width="90%" left="5%">
 					
 					<View top="4dip" layout="horizontal" id="descriptionContainer">
-						<Label left="0" id="description"></Label>
+						<Label left="0" id="description" width="95%"></Label>
 					</View>
 					
 					<View id="slingPartcode" layout="vertical" top="10dip">
@@ -111,7 +110,6 @@
 						<Label left="0" id="quotedPrice"></Label>
 					</View>
 					
-					<Button id="viewSlingAssembly" onClick="viewSlingAssembly" title="View Sling Assembly" class="button--primary" top="10dip"/>
 					<ImageView id="slingAssemblyImg" touchEnabled="False" width="auto"></ImageView>
 					
 					<Button id="requestQuote" onClick="sendQuote" title="Request Quote" class="button--primary" top="8dip"/>
@@ -125,6 +123,7 @@
 			<View height="1dip" width="100%" top="20dip" backgroundColor="#FFF"></View>
 		
 		</ScrollView>
+		
 	
 	</Window>
 	

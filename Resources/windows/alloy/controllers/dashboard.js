@@ -59,13 +59,13 @@ function Controller() {
         id: "header"
     });
     $.__views.dashboard.add($.__views.header);
-    $.__views.__alloyId28 = Ti.UI.createImageView({
+    $.__views.__alloyId23 = Ti.UI.createImageView({
         top: "5dip",
         height: "70%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId28"
+        id: "__alloyId23"
     });
-    $.__views.header.add($.__views.__alloyId28);
+    $.__views.header.add($.__views.__alloyId23);
     $.__views.tel = Ti.UI.createLabel({
         left: "10dip",
         width: "100%",
@@ -75,7 +75,7 @@ function Controller() {
         id: "tel"
     });
     $.__views.header.add($.__views.tel);
-    $.__views.__alloyId29 = Ti.UI.createView({
+    $.__views.__alloyId24 = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
             colors: [ "#021b4b", "#032d73" ],
@@ -90,15 +90,15 @@ function Controller() {
             backFillStart: false
         },
         width: "100%",
-        id: "__alloyId29"
+        id: "__alloyId24"
     });
-    $.__views.dashboard.add($.__views.__alloyId29);
+    $.__views.dashboard.add($.__views.__alloyId24);
     $.__views.wrapper = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         id: "wrapper"
     });
-    $.__views.__alloyId29.add($.__views.wrapper);
+    $.__views.__alloyId24.add($.__views.wrapper);
     $.__views.newQuote = Ti.UI.createView({
         height: "33.3%",
         width: "100%",
@@ -108,7 +108,7 @@ function Controller() {
     });
     $.__views.wrapper.add($.__views.newQuote);
     openConfigurator ? $.addListener($.__views.newQuote, "click", openConfigurator) : __defers["$.__views.newQuote!click!openConfigurator"] = true;
-    $.__views.__alloyId30 = Ti.UI.createLabel({
+    $.__views.__alloyId25 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -116,38 +116,38 @@ function Controller() {
         className: "label",
         text: "Start a New Quote",
         touchEnabled: false,
-        id: "__alloyId30"
+        id: "__alloyId25"
     });
-    $.__views.newQuote.add($.__views.__alloyId30);
-    $.__views.__alloyId31 = Ti.UI.createImageView({
+    $.__views.newQuote.add($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createImageView({
         right: "5dip",
         height: "60dip",
         width: "60dip",
         className: "icon",
         touchEnabled: false,
         image: "/images/WHC-magnifying-glass.png",
-        id: "__alloyId31"
+        id: "__alloyId26"
     });
-    $.__views.newQuote.add($.__views.__alloyId31);
-    $.__views.__alloyId32 = Ti.UI.createView({
+    $.__views.newQuote.add($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createView({
         bottom: "0",
         width: "100%",
         height: "1dip",
         backgroundColor: "#FFF",
         touchEnabled: false,
-        id: "__alloyId32"
+        id: "__alloyId27"
     });
-    $.__views.newQuote.add($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createView({
+    $.__views.newQuote.add($.__views.__alloyId27);
+    $.__views.__alloyId28 = Ti.UI.createView({
         height: "33.3%",
         width: "100%",
         className: "button--tertiary",
         backgroundColor: "#2b3b94",
-        id: "__alloyId33"
+        id: "__alloyId28"
     });
-    $.__views.wrapper.add($.__views.__alloyId33);
-    openQuotes ? $.addListener($.__views.__alloyId33, "click", openQuotes) : __defers["$.__views.__alloyId33!click!openQuotes"] = true;
-    $.__views.__alloyId34 = Ti.UI.createLabel({
+    $.__views.wrapper.add($.__views.__alloyId28);
+    openQuotes ? $.addListener($.__views.__alloyId28, "click", openQuotes) : __defers["$.__views.__alloyId28!click!openQuotes"] = true;
+    $.__views.__alloyId29 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -155,38 +155,38 @@ function Controller() {
         className: "label",
         text: "Retrieve Existing Quote",
         touchEnabled: false,
-        id: "__alloyId34"
+        id: "__alloyId29"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId34);
-    $.__views.__alloyId35 = Ti.UI.createImageView({
+    $.__views.__alloyId28.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createImageView({
         right: "5dip",
         height: "60dip",
         width: "60dip",
         className: "icon",
         touchEnabled: false,
         image: "/images/WHC-quote.png",
-        id: "__alloyId35"
+        id: "__alloyId30"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createView({
+    $.__views.__alloyId28.add($.__views.__alloyId30);
+    $.__views.__alloyId31 = Ti.UI.createView({
         bottom: "0",
         width: "100%",
         height: "1dip",
         backgroundColor: "#FFF",
         touchEnabled: false,
-        id: "__alloyId36"
+        id: "__alloyId31"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId36);
-    $.__views.__alloyId37 = Ti.UI.createView({
+    $.__views.__alloyId28.add($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createView({
         height: "33.3%",
         width: "100%",
         className: "button--tertiary",
         backgroundColor: "#2b3b94",
-        id: "__alloyId37"
+        id: "__alloyId32"
     });
-    $.__views.wrapper.add($.__views.__alloyId37);
-    openAccountSettings ? $.addListener($.__views.__alloyId37, "click", openAccountSettings) : __defers["$.__views.__alloyId37!click!openAccountSettings"] = true;
-    $.__views.__alloyId38 = Ti.UI.createLabel({
+    $.__views.wrapper.add($.__views.__alloyId32);
+    openAccountSettings ? $.addListener($.__views.__alloyId32, "click", openAccountSettings) : __defers["$.__views.__alloyId32!click!openAccountSettings"] = true;
+    $.__views.__alloyId33 = Ti.UI.createLabel({
         left: "10dip",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -194,25 +194,25 @@ function Controller() {
         className: "label",
         text: "Account Settings",
         touchEnabled: false,
-        id: "__alloyId38"
+        id: "__alloyId33"
     });
-    $.__views.__alloyId37.add($.__views.__alloyId38);
-    $.__views.__alloyId39 = Ti.UI.createImageView({
+    $.__views.__alloyId32.add($.__views.__alloyId33);
+    $.__views.__alloyId34 = Ti.UI.createImageView({
         right: "5dip",
         height: "60dip",
         width: "60dip",
         className: "icon",
         touchEnabled: false,
         image: "/images/WHC-cog.png",
-        id: "__alloyId39"
+        id: "__alloyId34"
     });
-    $.__views.__alloyId37.add($.__views.__alloyId39);
+    $.__views.__alloyId32.add($.__views.__alloyId34);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.callHandler($.tel);
     __defers["$.__views.newQuote!click!openConfigurator"] && $.addListener($.__views.newQuote, "click", openConfigurator);
-    __defers["$.__views.__alloyId33!click!openQuotes"] && $.addListener($.__views.__alloyId33, "click", openQuotes);
-    __defers["$.__views.__alloyId37!click!openAccountSettings"] && $.addListener($.__views.__alloyId37, "click", openAccountSettings);
+    __defers["$.__views.__alloyId28!click!openQuotes"] && $.addListener($.__views.__alloyId28, "click", openQuotes);
+    __defers["$.__views.__alloyId32!click!openAccountSettings"] && $.addListener($.__views.__alloyId32, "click", openAccountSettings);
     _.extend($, exports);
 }
 

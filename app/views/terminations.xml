@@ -11,23 +11,32 @@
 			
 		</View>
 		
+		
+		
 		<View class="content--container" id="shorteningDeviceView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
-			
-			<View top="10dip" height="60dip" width="90%">
+						
+			<View top="10dip" height="105dip" width="90%">
 				
-				<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Shortening Device</Label>
+				<!--<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Shortening Device</Label>-->
 				
 				<View height="60dip" width="60dip" right="5dip" backgroundColor="#FFF">
 					<ImageView image="/images/terminations/Eye Grab Hook.jpg" id="shorteningImage" height="60dip" width="auto"/>
 				</View>
 				
+				<View id="devices">
+				
+				</View>
+				
 			</View>
+			
+		
 	
 			<View class="picker" top="10dip" bottom="10dip">
-					
+				
+				
 				<TextField className="shortening" onClick="createPicker"  editable="false" value="Select..." id="shorteningDeviceText" class="picker--textfield" paddingLeft="5dip"></TextField>
 				
-				<ImageView className="shortening" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
+				<!--<ImageView className="shortening" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg" visible="false"></ImageView>-->
 				
 			</View>
 			
@@ -36,12 +45,16 @@
 		
 		<View class="content--container" id="upperTermView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
 			
-			<View top="10dip" height="60dip" width="90%">
+			<View top="10dip" height="105dip" width="90%">
 				
-				<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Upper Termination</Label>
+				<!--<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Upper Termination</Label>-->
 				
 				<View height="60dip" width="60dip" right="5dip" backgroundColor="#FFF">
 					<ImageView image="/images/terminations/Eye Grab Hook.jpg" id="upperTermImage" height="60dip" width="auto"/>
+				</View>
+				
+				<View id="upper">
+				
 				</View>
 				
 			</View>
@@ -50,7 +63,7 @@
 					
 				<TextField className="upperTerminations" onClick="createPicker" editable="false" value="Select..." id="upperTermText" class="picker--textfield" paddingLeft="5dip"></TextField>
 				
-				<ImageView className="upperTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
+				<!--<ImageView className="upperTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>-->
 				
 			</View>
 			
@@ -59,12 +72,16 @@
 				
 		<View class="content--container" id="lowerTermView" borderWidth="1dip" borderColor="#fba688" backgroundColor="#6b76d0" width="90%">
 			
-			<View top="10dip" height="60dip" width="90%">
+			<View top="10dip" height="105dip" width="90%">
 				
-				<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Lower Termination</Label>
+				<!--<Label height="Ti.UI.FILL" left="5dip" right="70dip" color="#FFF">Lower Termination</Label>-->
 				
 				<View height="60dip" width="60dip" right="5dip" backgroundColor="#FFF">
 					<ImageView image="/images/terminations/Eye Grab Hook.jpg" id="lowerTermImage" height="60dip" width="auto"/>
+				</View>
+				
+				<View id="lower">
+				
 				</View>
 				
 			</View>
@@ -73,7 +90,7 @@
 					
 				<TextField className="lowerTerminations" onClick="createPicker" editable="false" value="Select..." id="lowerTermText" class="picker--textfield" paddingLeft="5dip" ></TextField>
 				
-				<ImageView className="lowerTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
+				<!--<ImageView className="lowerTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>-->
 				
 			</View>
 			

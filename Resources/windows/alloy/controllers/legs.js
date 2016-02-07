@@ -52,14 +52,14 @@ function Controller() {
         id: "content"
     });
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId72 = Ti.UI.createView({
+    $.__views.__alloyId63 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId72"
+        id: "__alloyId63"
     });
-    $.__views.content.add($.__views.__alloyId72);
-    $.__views.__alloyId73 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId63);
+    $.__views.__alloyId64 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -67,27 +67,27 @@ function Controller() {
         },
         textAlign: "center",
         text: "How many Legs?",
-        id: "__alloyId73"
+        id: "__alloyId64"
     });
-    $.__views.__alloyId72.add($.__views.__alloyId73);
-    $.__views.__alloyId74 = Ti.UI.createLabel({
+    $.__views.__alloyId63.add($.__views.__alloyId64);
+    $.__views.__alloyId65 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: "Please choose the number of legs you would like your sling to have by tapping a diagram below then pressing 'Next' to proceed.",
-        id: "__alloyId74"
+        id: "__alloyId65"
     });
-    $.__views.__alloyId72.add($.__views.__alloyId74);
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId63.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
         top: "20dip",
-        id: "__alloyId75"
+        id: "__alloyId66"
     });
-    $.__views.content.add($.__views.__alloyId75);
+    $.__views.content.add($.__views.__alloyId66);
     $.__views.one = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -97,22 +97,22 @@ function Controller() {
         id: "one",
         backgroundColor: "#2b3b94"
     });
-    $.__views.__alloyId75.add($.__views.one);
+    $.__views.__alloyId66.add($.__views.one);
     chooseLegs ? $.addListener($.__views.one, "click", chooseLegs) : __defers["$.__views.one!click!chooseLegs"] = true;
-    $.__views.__alloyId76 = Ti.UI.createView({
+    $.__views.__alloyId67 = Ti.UI.createView({
         height: "90%",
         width: "90%",
         backgroundColor: "#FFF",
-        id: "__alloyId76"
+        id: "__alloyId67"
     });
-    $.__views.one.add($.__views.__alloyId76);
+    $.__views.one.add($.__views.__alloyId67);
     $.__views.oneImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "oneImg",
         height: "100%",
         width: "auto"
     });
-    $.__views.__alloyId76.add($.__views.oneImg);
+    $.__views.__alloyId67.add($.__views.oneImg);
     $.__views.two = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -122,29 +122,29 @@ function Controller() {
         id: "two",
         backgroundColor: "#2b3b94"
     });
-    $.__views.__alloyId75.add($.__views.two);
+    $.__views.__alloyId66.add($.__views.two);
     chooseLegs ? $.addListener($.__views.two, "click", chooseLegs) : __defers["$.__views.two!click!chooseLegs"] = true;
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.__alloyId68 = Ti.UI.createView({
         height: "90%",
         width: "90%",
         backgroundColor: "#FFF",
-        id: "__alloyId77"
+        id: "__alloyId68"
     });
-    $.__views.two.add($.__views.__alloyId77);
+    $.__views.two.add($.__views.__alloyId68);
     $.__views.twoImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "twoImg",
         height: "100%",
         width: "auto"
     });
-    $.__views.__alloyId77.add($.__views.twoImg);
-    $.__views.__alloyId78 = Ti.UI.createView({
+    $.__views.__alloyId68.add($.__views.twoImg);
+    $.__views.__alloyId69 = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId78"
+        id: "__alloyId69"
     });
-    $.__views.content.add($.__views.__alloyId78);
+    $.__views.content.add($.__views.__alloyId69);
     $.__views.three = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -154,22 +154,22 @@ function Controller() {
         id: "three",
         backgroundColor: "#2b3b94"
     });
-    $.__views.__alloyId78.add($.__views.three);
+    $.__views.__alloyId69.add($.__views.three);
     chooseLegs ? $.addListener($.__views.three, "click", chooseLegs) : __defers["$.__views.three!click!chooseLegs"] = true;
-    $.__views.__alloyId79 = Ti.UI.createView({
+    $.__views.__alloyId70 = Ti.UI.createView({
         height: "90%",
         width: "90%",
         backgroundColor: "#FFF",
-        id: "__alloyId79"
+        id: "__alloyId70"
     });
-    $.__views.three.add($.__views.__alloyId79);
+    $.__views.three.add($.__views.__alloyId70);
     $.__views.threeImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "threeImg",
         height: "100%",
         width: "auto"
     });
-    $.__views.__alloyId79.add($.__views.threeImg);
+    $.__views.__alloyId70.add($.__views.threeImg);
     $.__views.four = Ti.UI.createView({
         width: "50%",
         height: "120dip",
@@ -179,22 +179,22 @@ function Controller() {
         id: "four",
         backgroundColor: "#2b3b94"
     });
-    $.__views.__alloyId78.add($.__views.four);
+    $.__views.__alloyId69.add($.__views.four);
     chooseLegs ? $.addListener($.__views.four, "click", chooseLegs) : __defers["$.__views.four!click!chooseLegs"] = true;
-    $.__views.__alloyId80 = Ti.UI.createView({
+    $.__views.__alloyId71 = Ti.UI.createView({
         height: "90%",
         width: "90%",
         backgroundColor: "#FFF",
-        id: "__alloyId80"
+        id: "__alloyId71"
     });
-    $.__views.four.add($.__views.__alloyId80);
+    $.__views.four.add($.__views.__alloyId71);
     $.__views.fourImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "fourImg",
         height: "100%",
         width: "auto"
     });
-    $.__views.__alloyId80.add($.__views.fourImg);
+    $.__views.__alloyId71.add($.__views.fourImg);
     exports.destroy = function() {};
     _.extend($, $.__views);
     null !== Alloy.Globals.sling.legs && (1 === Alloy.Globals.sling.legs ? $.one.backgroundColor = "#2b3b94" : 2 === Alloy.Globals.sling.legs ? $.two.backgroundColor = "#2b3b94" : 3 === Alloy.Globals.sling.legs ? $.three.backgroundColor = "#2b3b94" : 4 === Alloy.Globals.sling.legs && ($.four.backgroundColor = "#2b3b94"));

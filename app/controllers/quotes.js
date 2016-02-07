@@ -128,11 +128,8 @@ function getData(){
 			
 			var data = e.row,
 				details = Alloy.createController('quotesDetail', data.quote).getView();
-			
-			// Ti.API.info("quote row click");
-			// Ti.API.info(JSON.stringify(data));
-			
-			details.open({modal:true});
+	
+			Ti.API.info(JSON.stringify(data));
 			
 			details.addEventListener('close', function(){
 				
@@ -140,6 +137,9 @@ function getData(){
 				
 				table.setData(data);
 			});
+			
+			details.open({modal:true});
+			
 		}
 	});
 }());

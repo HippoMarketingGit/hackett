@@ -1,6 +1,7 @@
+
 <Alloy id="index">
 	
-	<Window class="background">
+	<Window class="background" layout="vertical" width="100%" left="0">
 		
 		<View id="header" class="header">
 			<ImageView class="logo" image="/images/WHC--logo--transparent.png" />
@@ -22,14 +23,15 @@
 					
 					<View class="content--container">
 						<Label>Password</Label>
-						<TextField color="#000" id="password" class="input--primary" />
+						
+						<TextField color="#000" id="password" class="input--primary" passwordMask="true"/>
 					</View>
 					
 					<View class="content--container">
 						<Button onClick="openDashboard" id="login" class="button--primary" />
 					</View>
 					
-					<View class="content--container">
+					<!--<View class="content--container">
 						
 						<View class="content--horizontal">
 					
@@ -38,7 +40,7 @@
 						
 						</View>
 						
-					</View>
+					</View>-->
 					
 					<View class="content--container" bottom="20dip">
 						<Label class="account-label">Don't have an account?</Label>

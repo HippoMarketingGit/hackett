@@ -1,3 +1,4 @@
+
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },
@@ -19,7 +20,7 @@
 '.button--primary': {
 	width: '100%',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--primary.png',
 	title: 'LOG IN',
 	color: '#FFF',
@@ -30,7 +31,7 @@
 	top: '4dip',
 	width: '100%',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--secondary.png',
 	color: '#FFF',
 	textAlign: 'left',

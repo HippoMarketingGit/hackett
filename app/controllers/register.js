@@ -3,10 +3,12 @@ var args = arguments[0] || {};
 Alloy.Globals.callHandler($.tel);
 
 $.back.addEventListener('click', function(e){
+	
 	var win = Alloy.createController('index').getView();
-
-	$.register.close();
 	win.open();
+	
+	$.register.close();
+	$.register = null;
 });
 
 $.mailingList.on = function() {
@@ -29,14 +31,12 @@ $.mailingList.addEventListener('click', function(e) {
     }
 });
 
-var xhr = Titanium.Network.createHTTPClient();
-
 function registerUser(e){
-	
 	var valid = validateFields();
 	
 	if (valid === true) {
 	
+		var xhr = Ti.Network.createHTTPClient();
 		xhr.open("POST", "http://whackett.hippocreative.com/sync.php?task=pushUser");
 		
 		var params = {
@@ -74,11 +74,7 @@ function registerUser(e){
 	} else {
 		alert(valid);
 	}
-	
 }
-
-
-
 
 function validateFields() {
 

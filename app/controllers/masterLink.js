@@ -1,3 +1,4 @@
+
 //var args = arguments[0] || {};
 
 // Check if anything has been set previously

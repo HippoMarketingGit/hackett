@@ -1,4 +1,5 @@
 
+
 // Fundamental Styles
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
@@ -25,9 +26,9 @@
 	top: 0
 },
 '.footer': {
-	bottom: '0',
+	bottom: '0dip',
 	width: '100%',
-	height: '50dip'
+	height: '75dip'
 },
 
 // BORDERS AND SEPERATORS
@@ -80,7 +81,7 @@
 	right: '5%',
 	width: '100dip',
 	//height: '30dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--next.png',
 	title: 'NEXT',
 	color: '#FFF',
@@ -91,7 +92,7 @@
 '.button--home': {
 	layout: 'vertical',
 	//left: '40%',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--blank.png',
 	title: 'HOME',
 	color: '#FFF',
@@ -104,7 +105,7 @@
 	left: '5%',
 	width: '100dip',
 	//height: '30dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--back.png',
 	title: 'BACK',
 	color: '#FFF',

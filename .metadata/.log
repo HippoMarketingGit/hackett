@@ -294,3 +294,51 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY org.eclipse.core.jobs 2 2 2015-12-27 15:25:05.262
 !MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.aptana.usage.internal.DefaultAnalyticsEventHandler$1
+!SESSION 2016-01-09 13:17:19.461 -----------------------------------------------
+eclipse.buildId=4.3.3.201510212245
+java.version=1.7.0_80
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_GB
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data D:\WilliamHackett\hackett
+
+!ENTRY com.appcelerator.titanium.core 4 0 2016-01-09 13:17:44.070
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Location to be watched doesn't exist: C:\ProgramData\Application Data\Titanium\mobilesdk\win32
+
+!ENTRY com.appcelerator.titanium.core 4 0 2016-01-09 13:17:44.086
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Location to be watched doesn't exist: C:\ProgramData\Application Data\Titanium\modules
+
+!ENTRY com.appcelerator.titanium.core 4 0 2016-01-09 13:17:44.086
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Location to be watched doesn't exist: C:\Users\PETER\AppData\Roaming\Titanium\mobilesdk\win32
+
+!ENTRY com.appcelerator.titanium.core 4 0 2016-01-09 13:17:44.086
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Location to be watched doesn't exist: C:\Users\PETER\AppData\Roaming\Titanium\modules
+
+!ENTRY com.appcelerator.titanium.ui.ide 4 0 2016-01-09 13:17:49.503
+!MESSAGE (Build 4.3.3.201510212245) [ERROR] com.appcelerator.titanium.core/debug/dashboard Unknown SDK ios
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.519
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Apple WatchOS2
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.519
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample iOS 9 App Search
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.538
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Ti SDK 4.1 Example App
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.541
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Employee Directory
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.541
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Movies
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.541
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Geocoder
+
+!ENTRY com.aptana.samples 4 0 2016-01-09 13:17:49.557
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  Unable to retrieve the icon at null for sample Rss Reader
+
+!ENTRY com.appcelerator.titanium.core 4 0 2016-01-09 13:21:57.053
+!MESSAGE (Build 4.3.3.201510212245) [ERROR]  ERROR  | project not found at path D:\WilliamHackett\hackett\hackett
+
+!ENTRY org.eclipse.core.jobs 2 2 2016-01-09 13:28:06.400
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: com.aptana.usage.internal.DefaultAnalyticsEventHandler$1

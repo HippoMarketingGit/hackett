@@ -121,14 +121,14 @@ function Controller() {
         id: "content"
     });
     $.__views.content && $.addTopLevelView($.__views.content);
-    $.__views.__alloyId40 = Ti.UI.createView({
+    $.__views.__alloyId35 = Ti.UI.createView({
         layout: "vertical",
         width: "90%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId40"
+        id: "__alloyId35"
     });
-    $.__views.content.add($.__views.__alloyId40);
-    $.__views.__alloyId41 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createLabel({
         top: "20dip",
         color: "#FFF",
         font: {
@@ -136,26 +136,26 @@ function Controller() {
         },
         textAlign: "center",
         text: "Headroom",
-        id: "__alloyId41"
+        id: "__alloyId36"
     });
-    $.__views.__alloyId40.add($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createLabel({
+    $.__views.__alloyId35.add($.__views.__alloyId36);
+    $.__views.__alloyId37 = Ti.UI.createLabel({
         top: "10dip",
         color: "#FFF",
         font: {
             fontSize: 14
         },
         text: 'Is headroom restricted? Any slings that have 1 leg automatically default to "No" as the lifting angle is not taken in to consideration.',
-        id: "__alloyId42"
+        id: "__alloyId37"
     });
-    $.__views.__alloyId40.add($.__views.__alloyId42);
+    $.__views.__alloyId35.add($.__views.__alloyId37);
     $.__views.headroomImg = Ti.UI.createImageView({
         top: "10dip",
         touchEnabled: false,
         id: "headroomImg",
         width: "auto"
     });
-    $.__views.__alloyId40.add($.__views.headroomImg);
+    $.__views.__alloyId35.add($.__views.headroomImg);
     $.__views.headroomView = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
@@ -164,31 +164,31 @@ function Controller() {
         id: "headroomView"
     });
     $.__views.content.add($.__views.headroomView);
-    $.__views.__alloyId43 = Ti.UI.createLabel({
+    $.__views.__alloyId38 = Ti.UI.createLabel({
         font: {
             fontSize: "20px"
         },
         text: "Is headrooom restricted?",
         textAlign: "center",
         color: "#FFF",
-        id: "__alloyId43"
+        id: "__alloyId38"
     });
-    $.__views.headroomView.add($.__views.__alloyId43);
-    $.__views.__alloyId44 = Ti.UI.createView({
+    $.__views.headroomView.add($.__views.__alloyId38);
+    $.__views.__alloyId39 = Ti.UI.createView({
         layout: "vertical",
         top: "10dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        id: "__alloyId44"
+        id: "__alloyId39"
     });
-    $.__views.headroomView.add($.__views.__alloyId44);
+    $.__views.headroomView.add($.__views.__alloyId39);
     $.__views.liftingAngle = Ti.UI.createView({
         layout: "horizontal",
         width: "100%",
         height: Titanium.UI.SIZE,
         id: "liftingAngle"
     });
-    $.__views.__alloyId44.add($.__views.liftingAngle);
+    $.__views.__alloyId39.add($.__views.liftingAngle);
     $.__views.no = Ti.UI.createView({
         top: "10dip",
         width: "50%",
@@ -199,55 +199,55 @@ function Controller() {
     });
     $.__views.liftingAngle.add($.__views.no);
     setAngle ? $.addListener($.__views.no, "click", setAngle) : __defers["$.__views.no!click!setAngle"] = true;
-    $.__views.__alloyId45 = Ti.UI.createView({
+    $.__views.__alloyId40 = Ti.UI.createView({
         left: 0,
         height: 0,
         width: 0,
         backgroundColor: "#FFF",
-        id: "__alloyId45"
+        id: "__alloyId40"
     });
-    $.__views.no.add($.__views.__alloyId45);
-    $.__views.__alloyId46 = Ti.UI.createView({
+    $.__views.no.add($.__views.__alloyId40);
+    $.__views.__alloyId41 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId46"
+        id: "__alloyId41"
     });
-    $.__views.no.add($.__views.__alloyId46);
-    $.__views.__alloyId47 = Ti.UI.createView({
+    $.__views.no.add($.__views.__alloyId41);
+    $.__views.__alloyId42 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId47"
+        id: "__alloyId42"
     });
-    $.__views.no.add($.__views.__alloyId47);
-    $.__views.__alloyId48 = Ti.UI.createView({
+    $.__views.no.add($.__views.__alloyId42);
+    $.__views.__alloyId43 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId48"
+        id: "__alloyId43"
     });
-    $.__views.__alloyId47.add($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createLabel({
+    $.__views.__alloyId42.add($.__views.__alloyId43);
+    $.__views.__alloyId44 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
         },
         textAlign: "center",
         text: "No",
-        id: "__alloyId49"
+        id: "__alloyId44"
     });
-    $.__views.__alloyId48.add($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createView({
+    $.__views.__alloyId43.add($.__views.__alloyId44);
+    $.__views.__alloyId45 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId50"
+        id: "__alloyId45"
     });
-    $.__views.no.add($.__views.__alloyId50);
+    $.__views.no.add($.__views.__alloyId45);
     $.__views.yes = Ti.UI.createView({
         top: "10dip",
         width: "50%",
@@ -258,63 +258,63 @@ function Controller() {
     });
     $.__views.liftingAngle.add($.__views.yes);
     setAngle ? $.addListener($.__views.yes, "click", setAngle) : __defers["$.__views.yes!click!setAngle"] = true;
-    $.__views.__alloyId51 = Ti.UI.createView({
+    $.__views.__alloyId46 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId51"
+        id: "__alloyId46"
     });
-    $.__views.yes.add($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId46);
+    $.__views.__alloyId47 = Ti.UI.createView({
         height: "100%",
         width: "1dip",
         left: 0,
         backgroundColor: "#FFF",
-        id: "__alloyId52"
+        id: "__alloyId47"
     });
-    $.__views.yes.add($.__views.__alloyId52);
-    $.__views.__alloyId53 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createView({
         layout: "vertical",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
         touchEnabled: false,
-        id: "__alloyId53"
+        id: "__alloyId48"
     });
-    $.__views.yes.add($.__views.__alloyId53);
-    $.__views.__alloyId54 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId48);
+    $.__views.__alloyId49 = Ti.UI.createView({
         top: "4dip",
         height: Titanium.UI.SIZE,
         width: Titanium.UI.SIZE,
-        id: "__alloyId54"
+        id: "__alloyId49"
     });
-    $.__views.__alloyId53.add($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createLabel({
+    $.__views.__alloyId48.add($.__views.__alloyId49);
+    $.__views.__alloyId50 = Ti.UI.createLabel({
         color: "#FFF",
         font: {
             fontSize: 22
         },
         textAlign: "center",
         text: "Yes",
-        id: "__alloyId55"
+        id: "__alloyId50"
     });
-    $.__views.__alloyId54.add($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createView({
+    $.__views.__alloyId49.add($.__views.__alloyId50);
+    $.__views.__alloyId51 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         bottom: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId56"
+        id: "__alloyId51"
     });
-    $.__views.yes.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.yes.add($.__views.__alloyId51);
+    $.__views.__alloyId52 = Ti.UI.createView({
         right: 0,
         height: 0,
         width: 0,
         backgroundColor: "#FFF",
-        id: "__alloyId57"
+        id: "__alloyId52"
     });
-    $.__views.yes.add($.__views.__alloyId57);
+    $.__views.yes.add($.__views.__alloyId52);
     exports.destroy = function() {};
     _.extend($, $.__views);
     if (1 === Alloy.Globals.sling.legs) {

@@ -1,3 +1,4 @@
+
 if (Alloy.Globals.sling.type === "Chain") {
 
 	$.upperTermView.hide();
@@ -18,9 +19,261 @@ if (Alloy.Globals.sling.type === "Chain") {
 	}
 }
 
+var template = {
+    childTemplates : [{
+        type : 'Ti.UI.Label',
+        bindId : 'title'
+    }]
+};
+
 Alloy.Globals.shorteningCode = 0;
 Alloy.Globals.lowerTermCode = 0;
 Alloy.Globals.upperTermCode = 0;
+
+var upperTerminations = [],
+    lowerTerminations = [],
+    shorteningDevices = [];
+
+(function(){
+
+	data();
+	
+	devices();
+	
+	upper();
+	
+	lower();
+
+})();
+
+function data()
+{
+	var db = Ti.Database.open('SlingDB.sqlite');
+
+	if (Alloy.Globals.sling.type === 'Chain') {
+
+		var row;
+
+		if( Alloy.Globals.sling.grade === 10 ){
+			
+			row = db.execute('SELECT * FROM EndFittings WHERE type = "c" AND grade10_' + Alloy.Globals.sling.legs + ' ="1"');
+		
+		}else if( Alloy.Globals.sling.grade === 8 ){
+			
+			row = db.execute('SELECT * FROM EndFittings WHERE type = "c" AND grade8_' + Alloy.Globals.sling.legs + ' ="1"');
+			
+		}else{
+			
+			row = db.execute('SELECT * FROM EndFittings WHERE type = "c"');
+		}
+
+		while (row.isValidRow()) {
+
+			var code = row.fieldByName('code'),
+			    name = row.fieldByName('name');
+
+			var obj = {
+				'code' : code,
+				'name' : name
+			};
+			
+			// Grab Hooks - not permitted for lower terminations
+			if (code != 4) {
+				lowerTerminations.push(obj);	
+			}
+
+			upperTerminations.push(obj);
+
+			row.next();
+		}
+
+	} else if (Alloy.Globals.sling.type === 'Wire Rope') {
+
+		var row = db.execute('SELECT * FROM EndFittings WHERE type = "r"');
+
+		while (row.isValidRow()) {
+
+			var code = row.fieldByName('code'),
+			    name = row.fieldByName('name');
+
+			var obj = {
+				'code' : code,
+				'name' : name
+			};
+
+			upperTerminations.push(obj);
+			lowerTerminations.push(obj);
+
+			row.next();
+		}
+	}
+
+	var row = db.execute('SELECT * FROM Shorteners');
+
+	while (row.isValidRow()) {
+
+		var code = row.fieldByName('code'),
+		    name = row.fieldByName('name');
+
+		var obj = {
+			'code' : code,
+			'name' : name
+		};
+
+		shorteningDevices.push(obj);
+
+		row.next();
+	}
+
+	db.close();
+}
+
+function devices()
+{
+	var devicepicker = Ti.UI.createListView({
+		height : "150dp",
+    	width : "100%",
+    	top : '0dp',
+		templates : {
+	    	'plain' : template
+		},
+		defaultItemTemplate : 'plain'		
+	});
+	devicepicker.addEventListener('itemclick', function(e){
+		if(e.itemIndex >= 0)
+		{
+	  		var section = e.section;
+        	var item = section.getItemAt(e.itemIndex);
+        	
+			Ti.API.info(e.itemIndex);
+			$.shorteningDeviceText.value = item.properties.title;
+			
+			$.shorteningImage.image = '/images/shorteners/' + item.properties.title + '.jpg';
+				
+			Ti.API.info(JSON.stringify(item));
+	
+			Alloy.Globals.sling.shorteningDevice = item.properties.title;
+			Alloy.Globals.sling.shorteningDeviceCode = item.properties.val;
+      	}
+ 	});
+ 			
+	var devicedataSet = [
+		{properties: { title: 'No Device', val: ''}},
+	];
+	
+	var i;
+
+	for ( i = 0; i < shorteningDevices.length; i++) {
+		devicedataSet.push({
+	        properties : {
+	            title : shorteningDevices[i].name,
+	            val : shorteningDevices[i].code
+	        },
+	    });
+	}		
+	var devicesections = [];
+	var deviceSection = Ti.UI.createListSection({ headerTitle: 'Shortening Devices'});
+	deviceSection.setItems(devicedataSet);
+	devicesections.push(deviceSection);
+	devicepicker.sections = devicesections;	
+	$.devices.add(devicepicker);
+}
+
+function upper()
+{	
+	var upperpicker = Ti.UI.createListView({
+		height : "150dp",
+    	width : "100%",
+    	top : '0dp',
+		templates : {
+	    	'plain' : template
+		},
+		defaultItemTemplate : 'plain',
+	});
+	upperpicker.addEventListener('itemclick', function(e){
+		if(e.itemIndex >= 0)
+		{
+		  	var section = e.section;
+	        var item = section.getItemAt(e.itemIndex);
+	        
+			$.upperTermText.value = item.properties.title;
+	
+			$.upperTermImage.image = '/images/terminations/' + item.properties.title + '.jpg';
+			Ti.API.info("upper term image " + '/images/terminations/' + item.properties.title + '.jpg');
+			
+			Ti.API.info(JSON.stringify(item));
+	
+			Alloy.Globals.sling.upperTermination = item.properties.title;
+			Alloy.Globals.sling.upperTerminationCode = item.properties.val;
+		}
+ 	});		
+	var upperdataSet = [];
+	
+	var i;	
+	
+	for (i = 0; i < upperTerminations.length; i++) {
+		upperdataSet.push({
+	        properties : {
+				title : upperTerminations[i].name,
+				val : upperTerminations[i].code
+	        },
+	    });
+	}		
+	var upperSections = [];
+	var upperSection = Ti.UI.createListSection({ headerTitle: 'Upper Terminations'});
+	upperSection.setItems(upperdataSet);
+	upperSections.push(upperSection);
+	upperpicker.sections = upperSections;
+	$.upper.add(upperpicker);
+}
+
+function lower()
+{	
+	var lowerpicker = Ti.UI.createListView({
+		height : "150dp",
+    	width : "100%",
+    	top : '0dp',
+		templates : {
+	    	'plain' : template
+		},
+		defaultItemTemplate : 'plain',
+	});
+	lowerpicker.addEventListener('itemclick', function(e){
+		if(e.itemIndex >= 0)
+		{
+		  	var section = e.section;
+	        var item = section.getItemAt(e.itemIndex);
+	
+			$.lowerTermText.value = item.properties.title;
+			$.lowerTermImage.image = '/images/terminations/' + item.properties.title + '.jpg';
+			Ti.API.info("lower term image " + '/images/terminations/' + item.properties.title + '.jpg');
+			
+			Ti.API.info(JSON.stringify(item));
+	
+			Alloy.Globals.sling.lowerTermination = item.properties.title;
+			Alloy.Globals.sling.lowerTerminationCode = item.properties.val;
+		}
+		
+ 	});		
+	var lowerdataSet = [];
+	var i;	
+	for ( i = 0; i < lowerTerminations.length; i++) {
+		lowerdataSet.push({
+	        properties : {
+				title : lowerTerminations[i].name,
+				val : lowerTerminations[i].code
+	        },
+	    });
+	}		
+	var lowerSections = [];
+	var lowerSection = Ti.UI.createListSection({ headerTitle: 'Lower Terminations'});
+	lowerSection.setItems(lowerdataSet);
+	lowerSections.push(lowerSection);
+	lowerpicker.sections = lowerSections;
+	$.lower.add(lowerpicker);
+}
+
+// Create Picker
 
 function createPicker(e) {
 
@@ -106,8 +359,8 @@ function createPicker(e) {
 	}
 
 	db.close();
-
-	var picker = Ti.UI.createPicker(),
+	/*
+	var picker = Ti.UI.createListView(),
 	    row = Ti.UI.createPickerRow({
 		title : 'Select a device...',
 		val : false
@@ -116,7 +369,24 @@ function createPicker(e) {
 		title : 'No Device',
 		val : ''
 	}),
-	    pickerView = Ti.UI.createView({
+	*/
+	
+	var template = {
+	    childTemplates : [{
+	        type : 'Ti.UI.Label',
+	        bindId : 'title'
+	    }]
+	};
+	var picker = Ti.UI.createListView({
+		height : "50dp",
+    	width : "100%",
+    	top : '0dp',
+		templates : {
+	    	'plain' : template
+		},
+		defaultItemTemplate : 'plain',
+		}),
+	pickerView = Ti.UI.createView({
 		layout : 'vertical',
 		bottom : '0dip',
 		width : '100%',
@@ -138,17 +408,23 @@ function createPicker(e) {
 		font : {
 			fontSize : 14
 		}
-	}),
+	});
 
 
-	wrapper = $.content.getParent().getParent();
-	//wrapper = $.terminations.getParent();
-
-	picker.add(row);
-	picker.add(noDevice);
+	//wrapper = $.content.getParent();
+	
+	//var layout = $.content.getParent();
+	
+	//picker.add(row);
+	//picker.add(noDevice);
 	pickerMenu.add(doneButton);
 	pickerView.add(pickerMenu);
 	pickerView.add(picker);
+	
+	var dataSet = [
+    	{properties: { title: 'Select a device...', val: false}},
+    	{properties: { title: 'No Device', val: ''}},
+	];
 
 	if (e.source.className === 'shortening') {
 
@@ -156,23 +432,36 @@ function createPicker(e) {
 
 		for ( i = 0; i < shorteningDevices.length; i++) {
 
-			var obj = Ti.UI.createPickerRow({
-				title : shorteningDevices[i].name,
-				val : shorteningDevices[i].code
-			});
+			//var obj = Ti.UI.createPickerRow({
+				//title : shorteningDevices[i].name,
+				//val : shorteningDevices[i].code
+			//});
+			
+			dataSet.push({
+		        properties : {
+		            title : shorteningDevices[i].name,
+		            val : shorteningDevices[i].code
+		        },
+		    });
 
-			obj.addEventListener('click', function(e) {
+			/*obj.addEventListener('click', function(e) {
 
 				$.shorteningDeviceText.value = e.title;
 
-				wrapper.remove(pickerView);
+				//wrapper.remove(pickerView);
 
 			});
 
 			picker.add(obj);
+			*/
 
 		}
-
+		
+		var sections = [];
+		var deviceSection = Ti.UI.createListSection({ headerTitle: 'Devices'});
+		deviceSection.setItems(dataSet);
+		sections.push(deviceSection);
+		picker.sections = sections;
 		picker.addEventListener('change', function(e) {
 
 			$.shorteningDeviceText.value = e.row.title;
@@ -188,11 +477,11 @@ function createPicker(e) {
 
 		doneButton.addEventListener('click', function(e) {
 
-			wrapper.remove(pickerView);
+			//wrapper.remove(pickerView);
 
 		});
 
-		Ti.API.info(wrapper);
+		//Ti.API.info(wrapper);
 
 	} else if (e.source.className === 'lowerTerminations') {
 
@@ -209,7 +498,7 @@ function createPicker(e) {
 
 				$.lowerTermText.value = e.title;
 
-				wrapper.remove(pickerView);
+				//wrapper.remove(pickerView);
 			});
 
 			picker.add(obj);
@@ -232,7 +521,7 @@ function createPicker(e) {
 
 		doneButton.addEventListener('click', function(e) {
 
-			wrapper.remove(pickerView);
+			//wrapper.remove(pickerView);
 
 		});
 
@@ -251,7 +540,7 @@ function createPicker(e) {
 
 				$.upperTermText.value = e.title;
 
-				wrapper.remove(pickerView);
+				//wrapper.remove(pickerView);
 			});
 
 			picker.add(obj);
@@ -274,7 +563,7 @@ function createPicker(e) {
 
 		doneButton.addEventListener('click', function(e) {
 
-			wrapper.remove(pickerView);
+			//wrapper.remove(pickerView);
 
 		});
 

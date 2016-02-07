@@ -1,0 +1,75 @@
+30/11/2015 - 6pm - 8pm : 2 Hours
+01/12/2015 - 7pm - 9pm : 2 Hours
+
+03/12/2015 - 7pm - 9pm : 2 Hours
+04/12/2015 - 7pm - 9pm : 2 Hours
+
+05/12/2015 - 10am - 7pm : 9 Hours
+06/12/2015 - 10am - 7pm : 9 Hours
+
+07/12/2015 - 7pm - 9pm : 2 Hours
+08/12/2015 - 7pm - 9pm : 2 Hours
+
+10/12/2015 - 7pm - 9pm : 2 Hours
+11/12/2015 - 7pm - 9pm : 2 Hours
+
+12/12/2015 - 10am - 7pm : 9 Hours
+13/12/2015 - 10am - 7pm : 9 Hours
+
+14/12/2015 - 7pm - 9pm : 2 Hours
+15/12/2015 - 7pm - 9pm : 2 Hours
+
+17/12/2015 - 7pm - 9pm : 2 Hours
+18/12/2015 - 7pm - 9pm : 2 Hours
+
+19/12/2015 - 10am - 7pm : 9 Hours
+20/12/2015 - 10am - 7pm : 9 Hours
+
+21/12/2015 - 7pm - 9pm : 2 Hours
+22/12/2015 - 7pm - 9pm : 2 Hours
+
+27/12/2015 - 10am - 7pm : 9 Hours
+
+29/12/2015 - 10am - 5pm : 7 Hours
+30/12/2015 - 10am - 5pm : 7 Hours
+
+03/01/2016 - 10am - 7pm : 9 Hours
+
+04/01/2016 - 7pm - 9pm : 2 Hours
+05/01/2016 - 7pm - 9pm : 2 Hours
+
+07/01/2016 - 7pm - 9pm : 2 Hours
+08/01/2016 - 7pm - 9pm : 2 Hours
+
+09/01/2016 - 10am - 7pm : 9 Hours
+10/01/2016 - 10am - 7pm : 9 Hours
+
+11/01/2016 - 7pm - 9pm : 2 Hours
+12/01/2016 - 7pm - 9pm : 2 Hours
+
+14/01/2016 - 7pm - 9pm : 2 Hours
+
+16/01/2016 - 10am - 7pm : 9 Hours
+17/01/2016 - 10am - 7pm : 9 Hours
+
+18/01/2016 - 7pm - 9pm : 2 Hours
+19/01/2016 - 7pm - 9pm : 2 Hours
+
+21/01/2016 - 7pm - 9pm : 2 Hours
+22/01/2016 - 7pm - 9pm : 2 Hours
+
+23/01/2016 - 10am - 7pm : 9 Hours
+24/01/2016 - 10am - 7pm : 9 Hours
+
+25/01/2016 - 7pm - 11pm : 4 Hours
+26/01/2016 - 7pm - 11pm : 4 Hours
+27/01/2016 - 7pm - 11pm : 4 Hours
+28/01/2016 - 7pm - 11pm : 4 Hours
+29/01/2016 - 7pm - 11pm : 4 Hours
+
+30/01/2016 - 10am - 5pm : 7 Hours
+31/01/2016 - 10am - 5pm : 7 Hours
+
+
+totalling = 224 hours
+

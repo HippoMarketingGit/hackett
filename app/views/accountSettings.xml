@@ -8,82 +8,80 @@
 		
 		<!-- <View class="header__seperator"></View> -->
 		
-		<View class="wrapper--background">
+		<ScrollView id="scrollView" top="4dip" left="0" width="100%" layout="vertical">
+		
 			
-			<ScrollView>
-			
-				<View class="wrapper">
-					
-					<View class="content--container">
-											
-						<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">
-							<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
-						</View>
-					</View>
+			<View id="container" width="90%" top="10dip" bottom="10dip" height="Ti.UI.SIZE" layout="vertical">
 				
-					<View class="content--container">
-						<Label>Your name *</Label>
-						<TextField id="name" class="input--primary"/>
-					</View>
+				<View class="content--container">
+					<Button id="back" class="button--nav button--size button--back" onClick="openDash"/>
+					<!--<View left="0" layout="horizontal" textAlign="right" backgroundImage="/images/WHC-button--back.png" width="100dip" height="26dip" onClick="openDash">
+						<Label touchEnabled="False" top="2dip" left="42dip" width="Ti.UI.SIZE" color="#FFF">BACK</Label>
+				</View>-->
+				</View>
+				
+				<View class="content--container">
+					<Label>Your name *</Label>
+					<TextField id="name" class="input--primary"/>
+				</View>
+				
+				<View class="content--container">
+					<Label>Company name *</Label>
+					<TextField id="companyName" class="input--primary"/>
+				</View>
+				
+				<View class="content--container">
+					<Label>Phone number *</Label>
+					<TextField id="phoneNumber" class="input--primary"/>
+				</View>
+				
+				<View class="content--container">
+					<Label>Postcode *</Label>
+					<TextField id="postcode" class="input--primary"/>
+				</View>
+				
+				<View class="content--container">
+					<Label>Email address *</Label>
+					<TextField id="emailAddress" class="input--primary"/>
+				</View>
+				
+				<View class="content--container">
+					<Label>Update password</Label>
+					<TextField id="password1" passwordMask="true" class="input--primary" />
+				</View>
+				
+				<View class="content--container">
+					<Label>Update password (confirm)</Label>
+					<TextField id="password2" passwordMask="true" class="input--primary" />
+				</View>
+				
+				<View class="content--container">
 					
-					<View class="content--container">
-						<Label>Company name *</Label>
-						<TextField id="companyName" class="input--primary"/>
-					</View>
-					
-					<View class="content--container">
-						<Label>Phone number *</Label>
-						<TextField id="phoneNumber" class="input--primary"/>
-					</View>
-					
-					<View class="content--container">
-						<Label>Postcode *</Label>
-						<TextField id="postcode" class="input--primary"/>
-					</View>
-					
-					<View class="content--container">
-						<Label>Email address *</Label>
-						<TextField id="emailAddress" class="input--primary"/>
-					</View>
-					
-					<View class="content--container">
-						<Label>Update password</Label>
-						<TextField id="password1" passwordMask="true" class="input--primary" />
-					</View>
-					
-					<View class="content--container">
-						<Label>Update password (confirm)</Label>
-						<TextField id="password2" passwordMask="true" class="input--primary" />
-					</View>
-					
-					<View class="content--container">
+					<View class="content--horizontal">
 						
-						<View class="content--horizontal">
-							
-							<Button id="mailingList" class="checkBox" />
-							<Label class="content--horizontal__label">Yes please, add me to the mailing list*</Label>
-						
-						</View>
-						
-					</View>
+						<Button id="mailingList" class="checkBox" />
+						<Label class="content--horizontal__label">Yes please, add me to the mailing list*</Label>
 					
-					<View class="content--container">
-						<Button class="button--primary" title="UPDATE" onClick="update"/>
-					</View>
-					
-					<!--<View class="content--container">
-						<Button class="button--secondary" title="DELETE ACCOUNT" onClick="deleteAccount"/>
-					</View>-->
-					
-					<View class="content--container">
-						<Button class="button--secondary" title="LOGOUT" onClick="logout"/>
 					</View>
 					
 				</View>
+				
+				<View class="content--container">
+					<Button class="button--primary" title="UPDATE" onClick="update"/>
+				</View>
+				
+				<!--<View class="content--container">
+					<Button class="button--secondary" title="DELETE ACCOUNT" onClick="deleteAccount"/>
+				</View>-->
+				
+				<View class="content--container">
+					<Button class="button--secondary" title="LOGOUT" onClick="logout"/>
+				</View>
 			
-			</ScrollView>
+			</View>
 			
-		</View>
-		
+		</ScrollView>
+
+
 	</Window>
 </Alloy>

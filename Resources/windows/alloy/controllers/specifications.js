@@ -15,21 +15,26 @@ function Controller() {
         if ("Chain" === Alloy.Globals.sling.type) {
             if (8 === Alloy.Globals.sling.grade) {
                 gradeCode = "A";
-                var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
+                var sql = 'SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1";
+                Ti.API.info(sql);
+                var newRow = db.execute(sql);
                 if (newRow.isValidRow()) slingSize = newRow.fieldByName("size"); else {
                     Ti.API.info("Grade 8 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
             } else if (10 === Alloy.Globals.sling.grade) {
                 gradeCode = "X";
-                var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
+                var sql = 'SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1";
+                Ti.API.info(sql);
+                var newRow = db.execute(sql);
                 if (newRow.isValidRow()) slingSize = newRow.fieldByName("size"); else {
                     Ti.API.info("Grade 10 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
             } else if ("Auto" === Alloy.Globals.sling.grade) {
-                var row8 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
-                Ti.API.info('Query: SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
+                var sql = 'SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "8" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1";
+                Ti.API.info(sql);
+                var row8 = db.execute(sql);
                 if (row8.isValidRow()) {
                     slingSizeAuto8 = row8.fieldByName("size");
                     Ti.API.info("sling size 8: " + slingSizeAuto8);
@@ -37,8 +42,9 @@ function Controller() {
                     Ti.API.info("Auto 8 Limited Exceeded");
                     Alloy.Globals.sling.limitExceeded = true;
                 }
-                var row10 = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1");
-                Ti.API.info('Query: SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
+                var sql = 'SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND grade = "10" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "c" ORDER BY ' + limit + " ASC LIMIT 1";
+                Ti.API.info(sql);
+                var row10 = db.execute(sql);
                 if (row10.isValidRow()) {
                     slingSizeAuto10 = row10.fieldByName("size");
                     Ti.API.info("sling size 10: " + slingSizeAuto10);
@@ -49,7 +55,9 @@ function Controller() {
             }
         } else {
             type = "r";
-            var newRow = db.execute('SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1");
+            var sql = 'SELECT * FROM WorkingLoadLimits WHERE legs = "' + Alloy.Globals.sling.legs + '" AND ' + limit + " >= " + Alloy.Globals.sling.load + ' AND type = "' + type + '" ORDER BY ' + limit + " ASC LIMIT 1";
+            Ti.API.info(sql);
+            var newRow = db.execute(sql);
             if (newRow.isValidRow()) slingSize = newRow.fieldByName("size"); else {
                 Ti.API.info("Limited Exceeded");
                 Alloy.Globals.sling.limitExceeded = true;
@@ -70,6 +78,7 @@ function Controller() {
         return Alloy.Globals.sling.partCode;
     }
     function outputDetails(type, grade, legs, load, nominalLength, description, partCode) {
+        Ti.API.info("outputDetails()");
         $.slingType.text = type;
         $.grade.text = grade;
         $.legs.text = legs;
@@ -77,27 +86,17 @@ function Controller() {
         $.length.text = nominalLength;
         $.description.text = description;
         if ("Wire Rope" === type) {
-            if ($.labelGrade) {
-                $.labelGrade.setHeight(0);
-                $.labelGrade.hide();
-            }
-            if ($.labelGradeReq) {
-                $.labelGradeReq.setHeight(0);
-                $.labelGradeReq.hide();
-            }
-            if ($.labelGradeSling) {
-                $.labelGradeSling.setHeight(0);
-                $.labelGradeSling.hide();
-            }
-            $.grade.setHeight(0);
+            $.labelGrade && $.labelGrade.hide();
+            $.labelGradeReq && $.labelGradeReq.hide();
+            $.labelGradeSling && $.labelGradeSling.hide();
             $.grade.hide();
-            $.slingSpecGrade.setHeight(0);
             $.slingSpecGrade.hide();
         }
         if (null === description) {
             $.descriptionContainer.hide();
             $.descriptionContainer.height = 0;
         } else $.description.text = "Description: " + description;
+        Ti.API.info("price: " + Alloy.Globals.sling.quotedPrice + " grade: " + Alloy.Globals.sling.grade);
         if (Alloy.Globals.sling.limitExceeded) {
             alert("The Maximum Working Load Limit has been exceeded for your sling. Please go back and enter a new load.");
             $.quotedPrice.text = "We cannot quote you a price for your configured slings, this may be because we do not offer these terminations in this size or grade. Please contact William Hackett Chains and reference your part code.";
@@ -121,31 +120,27 @@ function Controller() {
         }
     }
     function checkImage(partCode) {
-        $.viewSlingAssembly.hide();
-        $.slingAssemblyImg.setHeight(0);
+        Ti.API.info("specifications: checkImage()");
         $.slingAssemblyImg.hide();
-        var database = new Database("SlingDB.sqlite"), db = database.openDb(), row = db.execute("SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1", partCode, 1), img = null, imgPath = null, f = null;
+        var db = (new Database("SlingDB.sqlite"), database.openDb()), row = db.execute("SELECT img FROM Slings WHERE code = ? LIMIT 1", partCode), img = null, imgPath = null;
         if (row.isValidRow()) {
             img = row.fieldByName("img");
+            var url = "http://whackett.hippocreative.com/img/slings/" + img + ".jpg";
             imgPath = Ti.Filesystem.applicationDataDirectory + "slings/" + img + ".jpg";
-            f = Ti.Filesystem.getFile(imgPath);
             Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
-            $.viewSlingAssembly.show();
-            $.slingAssemblyImg.image = f;
+            $.slingAssemblyImg.image = url;
+            Ti.API.info("image set " + url);
+            $.slingAssemblyImg.show();
         } else Ti.API.info("Sling assembly image " + img + " does not exist.");
         row.close();
         db.close();
     }
     function checkSpec() {
+        Ti.API.info("checkSpec");
         $.slingSpecification.hide();
-        var wllAngle = Alloy.Globals.wllAngle, wllId = Alloy.Globals.wllId, slingId = Alloy.Globals.slingId, database = new Database("SlingDB.sqlite"), db = database.openDb(), sql = null, row = null;
+        var wllAngle = Alloy.Globals.wllAngle, wllId = Alloy.Globals.wllId, slingId = Alloy.Globals.slingId, database = new Database("SlingDB.sqlite"), db = database.openDb(), row = null;
         if (null === wllId && null === slingId) return;
-        sql = "SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE wll.id = ? AND s.id = ? LIMIT 1";
-        Ti.API.info(sql);
-        Ti.API.info("wllId: " + wllId);
-        Ti.API.info("slingId: " + slingId);
-        Ti.API.info("wllAngle: " + wllAngle);
-        row = db.execute(sql, wllId, slingId);
+        row = db.execute("SELECT * FROM WorkingLoadLimits AS wll, Slings AS s WHERE wll.id = ? AND s.id = ? LIMIT 1", wllId, slingId);
         if (row.isValidRow()) {
             Ti.API.info("Found Working Load Limit and Sling Specification by IDs!");
             switch (row.fieldByName("type")) {
@@ -162,23 +157,10 @@ function Controller() {
             $.slingSpecLength.text = row.fieldByName("length");
             $.slingSpecSize.text = row.fieldByName("size");
             $.slingSpecification.show();
-            Alloy.Globals.sling.specLoad = row.getFieldByName(wllAngle);
+            Alloy.Globals.sling.specLoad = row.fieldByName(wllAngle);
         } else Alloy.Globals.sling.specLoad = null;
         row.close();
         db.close();
-    }
-    function viewSlingAssembly() {
-        if ($.slingAssemblyImg.getVisible()) {
-            $.slingAssemblyImg.hide();
-            $.slingAssemblyImg.setTop(0);
-            $.slingAssemblyImg.setBottom(0);
-            $.slingAssemblyImg.setHeight(0);
-        } else {
-            $.slingAssemblyImg.show();
-            $.slingAssemblyImg.setTop("8dip");
-            $.slingAssemblyImg.setBottom("16dip");
-            $.slingAssemblyImg.setHeight("auto");
-        }
     }
     function closeModal() {
         $.specifications.close({
@@ -210,18 +192,14 @@ function Controller() {
         database.insertQuoteOffline(quoteData);
         online && database.insertQuoteOnline(quoteData);
         $.close.hide();
-        $.close.height = 0;
         $.requestQuote.hide();
-        $.requestQuote.height = 0;
         $.backToDash.show();
-        $.backToDash.height = "26dip";
     }
     function openDash() {
         $.specifications.close({
             modal: true
         });
-        var slingConfig = Alloy.createController("slingConfiguration").getView(), dash = Alloy.createController("dashboard").getView();
-        slingConfig.close();
+        var dash = Alloy.createController("dashboard").getView();
         dash.open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -264,13 +242,13 @@ function Controller() {
         id: "specifications"
     });
     $.__views.specifications && $.addTopLevelView($.__views.specifications);
-    $.__views.__alloyId225 = Ti.UI.createView({
+    $.__views.__alloyId210 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "30dip",
         left: "5%",
-        id: "__alloyId225"
+        id: "__alloyId210"
     });
-    $.__views.specifications.add($.__views.__alloyId225);
+    $.__views.specifications.add($.__views.__alloyId210);
     $.__views.close = Ti.UI.createImageView({
         id: "close",
         left: "0",
@@ -278,16 +256,16 @@ function Controller() {
         height: "24dip",
         width: "24dip"
     });
-    $.__views.__alloyId225.add($.__views.close);
+    $.__views.__alloyId210.add($.__views.close);
     closeModal ? $.addListener($.__views.close, "click", closeModal) : __defers["$.__views.close!click!closeModal"] = true;
-    $.__views.__alloyId226 = Ti.UI.createView({
+    $.__views.__alloyId211 = Ti.UI.createView({
         height: "1dip",
         top: "20dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId226"
+        id: "__alloyId211"
     });
-    $.__views.specifications.add($.__views.__alloyId226);
+    $.__views.specifications.add($.__views.__alloyId211);
     $.__views.scrollView = Ti.UI.createScrollView({
         id: "scrollView",
         top: "4dip",
@@ -321,25 +299,25 @@ function Controller() {
             top: "0"
         });
         $.__views.values.add($.__views.labels);
-        $.__views.__alloyId227 = Ti.UI.createLabel({
+        $.__views.__alloyId212 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             font: {
                 fontSize: 18
             },
             left: "0",
-            id: "__alloyId227"
+            id: "__alloyId212"
         });
-        $.__views.labels.add($.__views.__alloyId227);
-        $.__views.__alloyId228 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId212);
+        $.__views.__alloyId213 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Type:",
             top: "4dip",
             left: "0",
-            id: "__alloyId228"
+            id: "__alloyId213"
         });
-        $.__views.labels.add($.__views.__alloyId228);
+        $.__views.labels.add($.__views.__alloyId213);
         $.__views.labelGrade = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -349,42 +327,42 @@ function Controller() {
             id: "labelGrade"
         });
         $.__views.labels.add($.__views.labelGrade);
-        $.__views.__alloyId229 = Ti.UI.createLabel({
+        $.__views.__alloyId214 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Legs:",
             top: "4dip",
             left: "0",
-            id: "__alloyId229"
+            id: "__alloyId214"
         });
-        $.__views.labels.add($.__views.__alloyId229);
-        $.__views.__alloyId230 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId214);
+        $.__views.__alloyId215 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
-            id: "__alloyId230"
+            id: "__alloyId215"
         });
-        $.__views.labels.add($.__views.__alloyId230);
-        $.__views.__alloyId231 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId215);
+        $.__views.__alloyId216 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Length (m):",
             top: "4dip",
             left: "0",
-            id: "__alloyId231"
+            id: "__alloyId216"
         });
-        $.__views.labels.add($.__views.__alloyId231);
-        $.__views.__alloyId232 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId216);
+        $.__views.__alloyId217 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Size (mm):",
             top: "4dip",
             left: "0",
-            id: "__alloyId232"
+            id: "__alloyId217"
         });
-        $.__views.labels.add($.__views.__alloyId232);
+        $.__views.labels.add($.__views.__alloyId217);
         $.__views.slingRequirements = Ti.UI.createView({
             height: Ti.UI.SIZE,
             id: "slingRequirements",
@@ -393,7 +371,7 @@ function Controller() {
             top: "0"
         });
         $.__views.values.add($.__views.slingRequirements);
-        $.__views.__alloyId233 = Ti.UI.createLabel({
+        $.__views.__alloyId218 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             font: {
@@ -401,9 +379,9 @@ function Controller() {
             },
             text: "Your requirements:",
             left: "0",
-            id: "__alloyId233"
+            id: "__alloyId218"
         });
-        $.__views.slingRequirements.add($.__views.__alloyId233);
+        $.__views.slingRequirements.add($.__views.__alloyId218);
         $.__views.slingType = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -452,7 +430,7 @@ function Controller() {
             top: "0"
         });
         $.__views.values.add($.__views.slingSpecification);
-        $.__views.__alloyId234 = Ti.UI.createLabel({
+        $.__views.__alloyId219 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             font: {
@@ -460,9 +438,9 @@ function Controller() {
             },
             text: "Sling specification:",
             left: "0",
-            id: "__alloyId234"
+            id: "__alloyId219"
         });
-        $.__views.slingSpecification.add($.__views.__alloyId234);
+        $.__views.slingSpecification.add($.__views.__alloyId219);
         $.__views.slingSpecType = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -522,7 +500,7 @@ function Controller() {
             bottom: "8dip"
         });
         $.__views.content.add($.__views.valuesReqs);
-        $.__views.__alloyId235 = Ti.UI.createLabel({
+        $.__views.__alloyId220 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             font: {
@@ -531,9 +509,9 @@ function Controller() {
             text: "Your requirements:",
             left: "0",
             width: "100%",
-            id: "__alloyId235"
+            id: "__alloyId220"
         });
-        $.__views.valuesReqs.add($.__views.__alloyId235);
+        $.__views.valuesReqs.add($.__views.__alloyId220);
         $.__views.labels = Ti.UI.createView({
             height: Ti.UI.SIZE,
             id: "labels",
@@ -542,15 +520,15 @@ function Controller() {
             top: "0"
         });
         $.__views.valuesReqs.add($.__views.labels);
-        $.__views.__alloyId236 = Ti.UI.createLabel({
+        $.__views.__alloyId221 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Type:",
             top: "4dip",
             left: "0",
-            id: "__alloyId236"
+            id: "__alloyId221"
         });
-        $.__views.labels.add($.__views.__alloyId236);
+        $.__views.labels.add($.__views.__alloyId221);
         $.__views.labelGradeReq = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -560,33 +538,33 @@ function Controller() {
             id: "labelGradeReq"
         });
         $.__views.labels.add($.__views.labelGradeReq);
-        $.__views.__alloyId237 = Ti.UI.createLabel({
+        $.__views.__alloyId222 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Legs:",
             top: "4dip",
             left: "0",
-            id: "__alloyId237"
+            id: "__alloyId222"
         });
-        $.__views.labels.add($.__views.__alloyId237);
-        $.__views.__alloyId238 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId222);
+        $.__views.__alloyId223 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
-            id: "__alloyId238"
+            id: "__alloyId223"
         });
-        $.__views.labels.add($.__views.__alloyId238);
-        $.__views.__alloyId239 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId223);
+        $.__views.__alloyId224 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Length (m):",
             top: "4dip",
             left: "0",
-            id: "__alloyId239"
+            id: "__alloyId224"
         });
-        $.__views.labels.add($.__views.__alloyId239);
+        $.__views.labels.add($.__views.__alloyId224);
         $.__views.slingRequirements = Ti.UI.createView({
             height: Ti.UI.SIZE,
             id: "slingRequirements",
@@ -647,7 +625,7 @@ function Controller() {
             bottom: "16dip"
         });
         $.__views.content.add($.__views.valuesSling);
-        $.__views.__alloyId240 = Ti.UI.createLabel({
+        $.__views.__alloyId225 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             font: {
@@ -656,9 +634,9 @@ function Controller() {
             text: "Sling specification:",
             left: "0",
             width: "100%",
-            id: "__alloyId240"
+            id: "__alloyId225"
         });
-        $.__views.valuesSling.add($.__views.__alloyId240);
+        $.__views.valuesSling.add($.__views.__alloyId225);
         $.__views.labels = Ti.UI.createView({
             height: Ti.UI.SIZE,
             id: "labels",
@@ -667,15 +645,15 @@ function Controller() {
             top: "0"
         });
         $.__views.valuesSling.add($.__views.labels);
-        $.__views.__alloyId241 = Ti.UI.createLabel({
+        $.__views.__alloyId226 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Type:",
             top: "4dip",
             left: "0",
-            id: "__alloyId241"
+            id: "__alloyId226"
         });
-        $.__views.labels.add($.__views.__alloyId241);
+        $.__views.labels.add($.__views.__alloyId226);
         $.__views.labelGradeSling = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
@@ -685,42 +663,42 @@ function Controller() {
             id: "labelGradeSling"
         });
         $.__views.labels.add($.__views.labelGradeSling);
-        $.__views.__alloyId242 = Ti.UI.createLabel({
+        $.__views.__alloyId227 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Legs:",
             top: "4dip",
             left: "0",
-            id: "__alloyId242"
+            id: "__alloyId227"
         });
-        $.__views.labels.add($.__views.__alloyId242);
-        $.__views.__alloyId243 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId227);
+        $.__views.__alloyId228 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Load / WLL (t):",
             top: "4dip",
             left: "0",
-            id: "__alloyId243"
+            id: "__alloyId228"
         });
-        $.__views.labels.add($.__views.__alloyId243);
-        $.__views.__alloyId244 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId228);
+        $.__views.__alloyId229 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Length (m):",
             top: "4dip",
             left: "0",
-            id: "__alloyId244"
+            id: "__alloyId229"
         });
-        $.__views.labels.add($.__views.__alloyId244);
-        $.__views.__alloyId245 = Ti.UI.createLabel({
+        $.__views.labels.add($.__views.__alloyId229);
+        $.__views.__alloyId230 = Ti.UI.createLabel({
             color: "#FFF",
             height: Ti.UI.SIZE,
             text: "Size (mm):",
             top: "4dip",
             left: "0",
-            id: "__alloyId245"
+            id: "__alloyId230"
         });
-        $.__views.labels.add($.__views.__alloyId245);
+        $.__views.labels.add($.__views.__alloyId230);
         $.__views.slingSpecification = Ti.UI.createView({
             height: Ti.UI.SIZE,
             id: "slingSpecification",
@@ -778,26 +756,27 @@ function Controller() {
         });
         $.__views.slingSpecification.add($.__views.slingSpecSize);
     }
-    $.__views.__alloyId246 = Ti.UI.createView({
+    $.__views.__alloyId231 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         layout: "vertical",
         width: "90%",
         left: "5%",
-        id: "__alloyId246"
+        id: "__alloyId231"
     });
-    $.__views.content.add($.__views.__alloyId246);
+    $.__views.content.add($.__views.__alloyId231);
     $.__views.descriptionContainer = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "4dip",
         layout: "horizontal",
         id: "descriptionContainer"
     });
-    $.__views.__alloyId246.add($.__views.descriptionContainer);
+    $.__views.__alloyId231.add($.__views.descriptionContainer);
     $.__views.description = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         left: "0",
-        id: "description"
+        id: "description",
+        width: "95%"
     });
     $.__views.descriptionContainer.add($.__views.description);
     $.__views.slingPartcode = Ti.UI.createView({
@@ -806,7 +785,7 @@ function Controller() {
         layout: "vertical",
         top: "10dip"
     });
-    $.__views.__alloyId246.add($.__views.slingPartcode);
+    $.__views.__alloyId231.add($.__views.slingPartcode);
     $.__views.specPartcode = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
@@ -816,44 +795,29 @@ function Controller() {
         id: "specPartcode"
     });
     $.__views.slingPartcode.add($.__views.specPartcode);
-    $.__views.__alloyId247 = Ti.UI.createView({
+    $.__views.__alloyId232 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "10dip",
         layout: "horizontal",
-        id: "__alloyId247"
+        id: "__alloyId232"
     });
-    $.__views.__alloyId246.add($.__views.__alloyId247);
+    $.__views.__alloyId231.add($.__views.__alloyId232);
     $.__views.quotedPrice = Ti.UI.createLabel({
         color: "#FFF",
         height: Ti.UI.SIZE,
         left: "0",
         id: "quotedPrice"
     });
-    $.__views.__alloyId247.add($.__views.quotedPrice);
-    $.__views.viewSlingAssembly = Ti.UI.createButton({
-        width: "100%",
-        height: "40dip",
-        backgroundImage: "/images/WHC-button--primary.png",
-        title: "View Sling Assembly",
-        color: "#FFF",
-        textAlign: "left",
-        font: {
-            fontSize: 16
-        },
-        id: "viewSlingAssembly",
-        top: "10dip"
-    });
-    $.__views.__alloyId246.add($.__views.viewSlingAssembly);
-    viewSlingAssembly ? $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly) : __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] = true;
+    $.__views.__alloyId232.add($.__views.quotedPrice);
     $.__views.slingAssemblyImg = Ti.UI.createImageView({
         touchEnabled: false,
         id: "slingAssemblyImg",
         width: "auto"
     });
-    $.__views.__alloyId246.add($.__views.slingAssemblyImg);
+    $.__views.__alloyId231.add($.__views.slingAssemblyImg);
     $.__views.requestQuote = Ti.UI.createButton({
         width: "100%",
-        height: "40dip",
+        height: "50dip",
         backgroundImage: "/images/WHC-button--primary.png",
         title: "Request Quote",
         color: "#FFF",
@@ -864,12 +828,12 @@ function Controller() {
         id: "requestQuote",
         top: "8dip"
     });
-    $.__views.__alloyId246.add($.__views.requestQuote);
+    $.__views.__alloyId231.add($.__views.requestQuote);
     sendQuote ? $.addListener($.__views.requestQuote, "click", sendQuote) : __defers["$.__views.requestQuote!click!sendQuote"] = true;
     $.__views.backToDash = Ti.UI.createButton({
         top: "8dip",
         width: "100%",
-        height: "40dip",
+        height: "50dip",
         backgroundImage: "/images/WHC-button--secondary.png",
         color: "#FFF",
         textAlign: "left",
@@ -879,23 +843,23 @@ function Controller() {
         id: "backToDash",
         title: "Back to Dashboard"
     });
-    $.__views.__alloyId246.add($.__views.backToDash);
+    $.__views.__alloyId231.add($.__views.backToDash);
     openDash ? $.addListener($.__views.backToDash, "click", openDash) : __defers["$.__views.backToDash!click!openDash"] = true;
-    $.__views.__alloyId248 = Ti.UI.createView({
+    $.__views.__alloyId233 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "20dip",
         backgroundColor: "#FFF",
-        id: "__alloyId248"
+        id: "__alloyId233"
     });
-    $.__views.scrollView.add($.__views.__alloyId248);
+    $.__views.scrollView.add($.__views.__alloyId233);
     exports.destroy = function() {};
     _.extend($, $.__views);
     !function() {
         $.backToDash.hide();
-        $.backToDash.height = 0;
+        Ti.API.info("nominalLength " + Alloy.Globals.sling.nominalLength);
         var angle, grade, shortener, end, upper, Database = require("databaseObj"), database = new Database("SlingDB.sqlite"), db = database.openDb(), legLength = Math.ceil(Alloy.Globals.sling.nominalLength);
-        Ti.API.info(Alloy.Globals.sling);
+        Ti.API.info("Sling " + JSON.stringify(Alloy.Globals.sling));
         Alloy.Globals.wllAngle = null;
         Alloy.Globals.wllId = null;
         Alloy.Globals.slingId = null;
@@ -912,13 +876,18 @@ function Controller() {
             end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? 'AND end = ""' : 'AND end = "' + Alloy.Globals.sling.lowerTerminationCode + '"';
             upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? 'AND end = ""' : 'AND end = "' + Alloy.Globals.sling.upperTerminationCode + '"';
             if (8 === Alloy.Globals.sling.grade || 10 === Alloy.Globals.sling.grade) {
+                Ti.API.info("Grade " + Alloy.Globals.sling.grade);
+                Ti.API.info("wllAngle " + Alloy.Globals.wllAngle);
                 grade = Alloy.Globals.sling.grade;
                 var sql = "SELECT *, wll.id AS wllId, s.id AS slingId FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + " AND s.legs=wll.legs AND (wll.grade = " + grade + ") AND (s.size=wll.size AND s.grade=wll.grade " + end + " " + shortener + ' AND s.length = "' + legLength + '") GROUP BY wll.id ORDER BY ' + angle + " LIMIT 1";
-                var row = db.execute(sql);
                 Ti.API.info(sql);
+                var row = db.execute(sql);
                 if (row.isValidRow()) {
+                    Ti.API.info("part code: " + row.fieldByName("code"));
                     Alloy.Globals.wllId = row.fieldByName("wllId");
                     Alloy.Globals.slingId = row.fieldByName("slingId");
+                    Ti.API.info("wllId " + Alloy.Globals.wllId);
+                    Ti.API.info("slingId " + Alloy.Globals.slingId);
                     Alloy.Globals.sling.partCode = row.fieldByName("code");
                     Alloy.Globals.sling.quotedPrice = row.fieldByName("price");
                     Alloy.Globals.sling.slingDescription = row.fieldByName("description");
@@ -927,6 +896,7 @@ function Controller() {
                     createPartcode();
                 }
             } else if ("Auto" === Alloy.Globals.sling.grade) {
+                Ti.API.info("Grade " + Alloy.Globals.sling.grade);
                 var price8, code8, description8, wllId8, slingId8, price10, code10, description10, wllId10, slingId10, angle, grade, shortener, end, upper;
                 if (45 === Alloy.Globals.sling.angle) {
                     angle = "wll.limit45";
@@ -938,9 +908,12 @@ function Controller() {
                 shortener = "NONE" === Alloy.Globals.sling.shorteningDeviceCode ? "AND s.shortener IS NULL" : 'AND s.shortener LIKE "' + Alloy.Globals.sling.shorteningDeviceCode + '"';
                 end = "NONE" === Alloy.Globals.sling.lowerTerminationCode ? "AND s.end IS NULL" : 'AND s.end = "' + Alloy.Globals.sling.lowerTerminationCode + '"';
                 upper = "NONE" === Alloy.Globals.sling.upperTerminationCode ? "AND s.end IS NULL" : 'AND s.end = "' + Alloy.Globals.sling.upperTerminationCode + '"';
+                Ti.API.info("wllAngle " + Alloy.Globals.wllAngle);
                 var sql = "SELECT *, wll.id AS wllId, s.id AS slingId FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs = wll.legs AND (wll.grade = "8" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + " " + shortener + " AND s.length = " + legLength + ") GROUP BY wll.id ORDER BY " + angle + " ASC";
+                Ti.API.info(sql);
                 var row8 = db.execute(sql);
                 if (row8.isValidRow()) {
+                    Ti.API.info("Row 8 valid Row");
                     price8 = row8.fieldByName("price");
                     code8 = row8.fieldByName("code");
                     description8 = row8.fieldByName("description");
@@ -948,8 +921,10 @@ function Controller() {
                     slingId8 = row8.fieldByName("slingId");
                 } else Ti.API.info("Row 8 not valid");
                 var sql = "SELECT *, wll.id AS wllId, s.id AS slingId FROM WorkingLoadLimits AS wll, Slings AS s WHERE " + angle + " >= " + Alloy.Globals.sling.load + ' AND wll.type="c" AND wll.legs = ' + Alloy.Globals.sling.legs + ' AND s.legs=wll.legs AND (wll.grade = "10" ) AND (s.size=wll.size AND s.grade=wll.grade ' + end + " " + shortener + " AND s.length = " + legLength + ") GROUP BY wll.id ORDER BY " + angle + " ASC";
+                Ti.API.info(sql);
                 var row10 = db.execute(sql);
                 if (row10.isValidRow()) {
+                    Ti.API.info("Row 10 valid row");
                     price10 = row10.fieldByName("price");
                     code10 = row10.fieldByName("code");
                     description10 = row10.fieldByName("description");
@@ -996,6 +971,12 @@ function Controller() {
                     Alloy.Globals.sling.slingDescription = null;
                     createPartcode();
                 }
+                Ti.API.info("Alloy.Globals.sling.partCode" + Alloy.Globals.sling.partCode);
+                Ti.API.info("Alloy.Globals.sling.quotedPrice" + Alloy.Globals.sling.quotedPrice);
+                Ti.API.info("Alloy.Globals.sling.slingDescription" + Alloy.Globals.sling.slingDescription);
+                Ti.API.info("Alloy.Globals.sling.gradeCode" + Alloy.Globals.sling.gradeCode);
+                Ti.API.info("Alloy.Globals.wllId" + Alloy.Globals.wllId);
+                Ti.API.info("Alloy.Globals.slingId" + Alloy.Globals.slingId);
             }
         } else if ("Wire Rope" === Alloy.Globals.sling.type) {
             var angle, grade, shortener, end, upper;
@@ -1026,13 +1007,14 @@ function Controller() {
                 Alloy.Globals.sling.slingDescription = null;
             }
         }
+        Ti.API.info("Alloy.Globals.wllId " + Alloy.Globals.wllId);
+        Ti.API.info("Alloy.Globals.slingId " + Alloy.Globals.slingId);
         outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
-        database.closeDb(db);
         checkImage(Alloy.Globals.sling.partCode);
         checkSpec();
+        database.closeDb(db);
     }();
     __defers["$.__views.close!click!closeModal"] && $.addListener($.__views.close, "click", closeModal);
-    __defers["$.__views.viewSlingAssembly!click!viewSlingAssembly"] && $.addListener($.__views.viewSlingAssembly, "click", viewSlingAssembly);
     __defers["$.__views.requestQuote!click!sendQuote"] && $.addListener($.__views.requestQuote, "click", sendQuote);
     __defers["$.__views.backToDash!click!openDash"] && $.addListener($.__views.backToDash, "click", openDash);
     _.extend($, exports);

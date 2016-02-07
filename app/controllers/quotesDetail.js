@@ -2,8 +2,8 @@ var args = arguments[0] || {};
 
 (function(){
 	
-	// Ti.API.info("quoteDetail args");
-	// Ti.API.info(JSON.stringify(args));
+	 Ti.API.info("quoteDetail args");
+	 Ti.API.info(JSON.stringify(args));
 	
 	$.ref.text = args.ref;
 	$.slingType.text = args.type;
@@ -37,32 +37,41 @@ var args = arguments[0] || {};
 }());
 
 function checkImage(partCode) {
+	// Display Image
 	
-	// Ti.API.info("checkImage: " + partCode);
+	Ti.API.info("quotesDetails checkImage: " + partCode);
 	
 	if ( ! partCode) {
 		return false;
 	}
 	
 	// Hide the view button by default
-	$.viewSlingAssembly.hide();
-	$.slingAssemblyImg.setHeight(0);
+	//$.viewSlingAssembly.hide();
+	//$.slingAssemblyImg.setHeight(0);
 	$.slingAssemblyImg.hide();
-	
+		
 	var database = new Database('SlingDB.sqlite'),
 		db = database.openDb(),
-		row = db.execute('SELECT img FROM Slings WHERE code = ? AND img_status = ? LIMIT 1', partCode, 1),
+		row = db.execute('SELECT img FROM Slings WHERE code = ? LIMIT 1', partCode),
 		img = null,
 		imgPath = null,
 		f = null;
 	
 	if (row.isValidRow()) {
 		img = row.fieldByName('img');
+				
+		var url = 'http://whackett.hippocreative.com/img/' + "slings/" + img + ".jpg";
+		
 		imgPath = Ti.Filesystem.applicationDataDirectory + "slings/" + img + ".jpg";
-		f = Ti.Filesystem.getFile(imgPath);
+			
+		//f = Ti.Filesystem.getFile(imgPath);
 		Ti.API.info("Valid! Partcode " + partCode + " has img " + img + ": " + imgPath);
-		$.viewSlingAssembly.show();
-		$.slingAssemblyImg.image = f;
+		//$.viewSlingAssembly.hide();
+		//Ti.API.info('image set ' + f.nativePath);
+		//$.slingAssemblyImg.image = f;
+		$.slingAssemblyImg.image = url;
+		Ti.API.info('image set ' + url);
+		$.slingAssemblyImg.show();
 	} else {
 		Ti.API.info("Sling assembly image " + img + " does not exist.");
 	}
@@ -71,9 +80,9 @@ function checkImage(partCode) {
 	db.close();
 	
 }
-
+/*
 function viewSlingAssembly() {
-	if ($.slingAssemblyImg.getVisible()) {
+	if ($.slingAssemblyImg.visible) {
 		$.slingAssemblyImg.hide();
 		$.slingAssemblyImg.setTop(0);
 		$.slingAssemblyImg.setBottom(0);
@@ -82,9 +91,10 @@ function viewSlingAssembly() {
 		$.slingAssemblyImg.show();
 		$.slingAssemblyImg.setTop("8dip");
 		$.slingAssemblyImg.setBottom("16dip");
-		$.slingAssemblyImg.setHeight("auto");	
+		//$.slingAssemblyImg.setHeight("auto");	
 	}
 }
+*/
 
 function sendQuote(){
 	Ti.API.info('Clicked');

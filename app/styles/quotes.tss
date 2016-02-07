@@ -1,4 +1,3 @@
-
 "Window[platform=ios]": {
 	statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },
@@ -31,7 +30,7 @@
 	layout: 'vertical',
 	width: '100dip',
 	//height: '26dip',
-	height: '40dip',
+	height: '50dip',
 	backgroundImage: '/images/WHC-button--back.png',
 	title: 'BACK',
 	color: '#FFF',
