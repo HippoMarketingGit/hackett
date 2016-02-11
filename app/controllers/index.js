@@ -10,11 +10,10 @@ Alloy.Globals.callHandler($.tel);
 $.register.addEventListener('click', function(e){
 	
 	var win = Alloy.createController('register').getView();
+	win.open();
 	
 	$.index.close();
 	$.index = null;
-	
-	win.open();
 	
 });
 

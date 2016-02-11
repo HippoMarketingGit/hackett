@@ -88,7 +88,7 @@ db.close();
 
 function openDash(e){
 	var win = Alloy.createController('dashboard').getView();
-		win.open();
+	win.open();
 	$.accountSettings.close();
 	$.accountSettings = null;
 }
@@ -97,7 +97,7 @@ function openDash(e){
 function update(e){
 	
 	var changed = false,
-		currentUser = db.getCurrentUser(),
+		currentUser = database.getCurrentUser(),
 		valid = validateFields();
 	
 	// Perform a check to see if any fields have been missed

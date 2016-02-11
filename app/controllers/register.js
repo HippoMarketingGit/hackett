@@ -4,9 +4,9 @@ Alloy.Globals.callHandler($.tel);
 
 $.back.addEventListener('click', function(e){
 	var win = Alloy.createController('index').getView();
-
-	$.register.close();
 	win.open();
+	$.register.close();
+	$.register = null;
 });
 
 $.mailingList.on = function() {

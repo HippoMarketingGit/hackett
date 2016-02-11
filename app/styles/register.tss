@@ -110,13 +110,14 @@
 },
 'TextField': {
 	top: '4dip',
-	height: '26dip',
+	height: Titanium.UI.SIZE,
 	width: '100%',
 	borderWidth: '1dip',
 	borderColor: '#fba688',
 	backgroundColor: '#FFF',
 	font: {fontSize: 20},
-	paddingLeft: '4dip'
+	paddingLeft: '4dip',
+	color: 'black'
 },
 '.checkBox': {
 	left: 0,

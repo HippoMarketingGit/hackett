@@ -28,7 +28,7 @@
 					<View class="content--container">
 						<Button onClick="openDashboard" id="login" class="button--primary" />
 					</View>
-					
+					<!--
 					<View class="content--container">
 						
 						<View class="content--horizontal">
@@ -39,6 +39,7 @@
 						</View>
 						
 					</View>
+					-->
 					
 					<View class="content--container" bottom="20dip">
 						<Label class="account-label">Don't have an account?</Label>
