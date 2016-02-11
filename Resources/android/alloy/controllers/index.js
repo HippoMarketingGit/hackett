@@ -194,46 +194,11 @@ function Controller() {
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
+        bottom: "20dip",
         id: "__alloyId66"
     });
     $.__views.__alloyId60.add($.__views.__alloyId66);
-    $.__views.__alloyId67 = Ti.UI.createView({
-        layout: "horizontal",
-        width: "100%",
-        height: Titanium.UI.SIZE,
-        id: "__alloyId67"
-    });
-    $.__views.__alloyId66.add($.__views.__alloyId67);
-    $.__views.__alloyId68 = Ti.UI.createLabel({
-        left: "5dip",
-        width: Titanium.UI.SIZE,
-        height: Titanium.UI.SIZE,
-        color: "#FFF",
-        font: {
-            fontSize: 14
-        },
-        text: "Recover my password",
-        id: "__alloyId68"
-    });
-    $.__views.__alloyId67.add($.__views.__alloyId68);
-    $.__views.__alloyId69 = Ti.UI.createImageView({
-        left: "10dip",
-        height: "10dip",
-        width: "15dip",
-        image: "/images/WHC--arrow-right.png",
-        id: "__alloyId69"
-    });
-    $.__views.__alloyId67.add($.__views.__alloyId69);
-    $.__views.__alloyId70 = Ti.UI.createView({
-        layout: "vertical",
-        top: "20dip",
-        width: "100%",
-        height: Titanium.UI.SIZE,
-        bottom: "20dip",
-        id: "__alloyId70"
-    });
-    $.__views.__alloyId60.add($.__views.__alloyId70);
-    $.__views.__alloyId71 = Ti.UI.createLabel({
+    $.__views.__alloyId67 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -243,9 +208,9 @@ function Controller() {
             fontSize: 14
         },
         text: "Don't have an account?",
-        id: "__alloyId71"
+        id: "__alloyId67"
     });
-    $.__views.__alloyId70.add($.__views.__alloyId71);
+    $.__views.__alloyId66.add($.__views.__alloyId67);
     $.__views.register = Ti.UI.createButton({
         top: "4dip",
         width: "100%",
@@ -259,16 +224,16 @@ function Controller() {
         },
         id: "register"
     });
-    $.__views.__alloyId70.add($.__views.register);
+    $.__views.__alloyId66.add($.__views.register);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite");
     Alloy.Globals.callHandler($.tel);
     $.register.addEventListener("click", function() {
         var win = Alloy.createController("register").getView();
+        win.open();
         $.index.close();
         $.index = null;
-        win.open();
     });
     __defers["$.__views.login!click!openDashboard"] && $.addListener($.__views.login, "click", openDashboard);
     _.extend($, exports);

@@ -39,21 +39,21 @@ function Controller() {
         id: "header"
     });
     $.__views.requirements.add($.__views.header);
-    $.__views.__alloyId170 = Ti.UI.createImageView({
+    $.__views.__alloyId166 = Ti.UI.createImageView({
         width: Ti.UI.SIZE,
         height: "80%",
         image: "images/WHC--logo.png",
-        id: "__alloyId170"
+        id: "__alloyId166"
     });
-    $.__views.header.add($.__views.__alloyId170);
-    $.__views.__alloyId171 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId166);
+    $.__views.__alloyId167 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         backgroundColor: "#f7561e",
-        id: "__alloyId171"
+        id: "__alloyId167"
     });
-    $.__views.requirements.add($.__views.__alloyId171);
-    $.__views.__alloyId172 = Ti.UI.createView({
+    $.__views.requirements.add($.__views.__alloyId167);
+    $.__views.__alloyId168 = Ti.UI.createView({
         backgroundGradient: {
             type: "linear",
             colors: [ "#021b4b", "#032d73" ],
@@ -67,15 +67,15 @@ function Controller() {
             },
             backFillStart: false
         },
-        id: "__alloyId172"
+        id: "__alloyId168"
     });
-    $.__views.requirements.add($.__views.__alloyId172);
+    $.__views.requirements.add($.__views.__alloyId168);
     $.__views.scrollView = Ti.UI.createScrollView({
         layout: "vertical",
         bottom: "51dip",
         id: "scrollView"
     });
-    $.__views.__alloyId172.add($.__views.scrollView);
+    $.__views.__alloyId168.add($.__views.scrollView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

@@ -15,7 +15,7 @@ function Controller() {
         $.accountSettings = null;
     }
     function update() {
-        var currentUser = db.getCurrentUser(), valid = validateFields();
+        var currentUser = database.getCurrentUser(), valid = validateFields();
         true === valid ? database.updateUserDetails(currentUser, $.name.value, $.companyName.value, $.phoneNumber.value, $.emailAddress.value, $.mailingList.value, $.password1.value, $.postcode.value) : alert(valid);
     }
     function logout() {
