@@ -120,7 +120,7 @@ function Controller() {
     $.__views.__alloyId56.add($.__views.__alloyId57);
     $.__views.username = Ti.UI.createTextField({
         top: "4dip",
-        height: Titanium.UI.SIZE,
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -153,7 +153,7 @@ function Controller() {
     $.__views.__alloyId58.add($.__views.__alloyId59);
     $.__views.password = Ti.UI.createTextField({
         top: "4dip",
-        height: Titanium.UI.SIZE,
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -178,9 +178,7 @@ function Controller() {
     $.__views.login = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "LOG IN",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16
@@ -215,9 +213,7 @@ function Controller() {
         top: "4dip",
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--secondary.png",
         title: "CREATE ACCOUNT",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16

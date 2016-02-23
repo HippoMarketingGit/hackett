@@ -21,9 +21,9 @@
 	width: '100%',
 	//height: '26dip',
 	height: '50dip',
-	backgroundImage: '/images/WHC-button--primary.png',
+	//backgroundImage: '/images/WHC-button--primary.png',
 	title: 'LOG IN',
-	color: '#FFF',
+	//color: '#FFF',
 	textAlign: 'left',
 	font: {fontSize: 16}
 },
@@ -32,8 +32,8 @@
 	width: '100%',
 	//height: '26dip',
 	height: '50dip',
-	backgroundImage: '/images/WHC-button--secondary.png',
-	color: '#FFF',
+	//backgroundImage: '/images/WHC-button--secondary.png',
+	//color: '#FFF',
 	textAlign: 'left',
 	font: {fontSize: 16}
 }

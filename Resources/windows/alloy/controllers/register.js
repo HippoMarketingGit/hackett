@@ -122,9 +122,7 @@ function Controller() {
         left: "0",
         width: "100dip",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--back.png",
         title: "BACK",
-        color: "#FFF",
         textAlign: "right",
         verticalAlign: "bottom",
         font: {
@@ -152,7 +150,7 @@ function Controller() {
     $.__views.__alloyId141.add($.__views.__alloyId142);
     $.__views.name = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -183,7 +181,7 @@ function Controller() {
     $.__views.__alloyId143.add($.__views.__alloyId144);
     $.__views.companyName = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -214,7 +212,7 @@ function Controller() {
     $.__views.__alloyId145.add($.__views.__alloyId146);
     $.__views.phoneNumber = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -245,7 +243,7 @@ function Controller() {
     $.__views.__alloyId147.add($.__views.__alloyId148);
     $.__views.postcode = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -276,7 +274,7 @@ function Controller() {
     $.__views.__alloyId149.add($.__views.__alloyId150);
     $.__views.emailAddress = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -307,7 +305,7 @@ function Controller() {
     $.__views.__alloyId151.add($.__views.__alloyId152);
     $.__views.password1 = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -339,7 +337,7 @@ function Controller() {
     $.__views.__alloyId153.add($.__views.__alloyId154);
     $.__views.password2 = Ti.UI.createTextField({
         top: "4dip",
-        height: "26dip",
+        height: "45dip",
         width: "100%",
         borderWidth: "1dip",
         borderColor: "#fba688",
@@ -409,9 +407,7 @@ function Controller() {
     $.__views.submit = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "REGISTER",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16

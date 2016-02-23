@@ -818,9 +818,7 @@ function Controller() {
     $.__views.requestQuote = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "Request Quote",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16
@@ -834,8 +832,6 @@ function Controller() {
         top: "8dip",
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--secondary.png",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16
@@ -1009,9 +1005,11 @@ function Controller() {
         }
         Ti.API.info("Alloy.Globals.wllId " + Alloy.Globals.wllId);
         Ti.API.info("Alloy.Globals.slingId " + Alloy.Globals.slingId);
-        outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
-        checkImage(Alloy.Globals.sling.partCode);
-        checkSpec();
+        if (null !== Alloy.Globals.wllId && null !== Alloy.Globals.slingId) {
+            outputDetails(Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+            checkImage(Alloy.Globals.sling.partCode);
+            checkSpec();
+        } else $.slingType.text = "No Matches";
         database.closeDb(db);
     }();
     __defers["$.__views.close!click!closeModal"] && $.addListener($.__views.close, "click", closeModal);

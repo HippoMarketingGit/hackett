@@ -170,9 +170,7 @@ function Controller() {
         layout: "vertical",
         width: "100dip",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--back.png",
         title: "BACK",
-        color: "#FFF",
         textAlign: "right",
         verticalAlign: "bottom",
         font: {

@@ -102,9 +102,7 @@ function Controller() {
             left: "5%",
             width: "100dip",
             height: "30dip",
-            backgroundImage: "/images/WHC-button--back.png",
             title: "BACK",
-            color: "#FFF",
             textAlign: "left",
             verticalAlign: "middle",
             font: {
@@ -131,9 +129,7 @@ function Controller() {
         _.extend(o, {
             layout: "vertical",
             height: "30dip",
-            backgroundImage: "/images/WHC-button--blank.png",
             title: "HOME",
-            color: "#FFF",
             textAlign: "center",
             verticalAlign: "middle",
             width: "100dip",
@@ -163,9 +159,7 @@ function Controller() {
             right: "5%",
             width: "100dip",
             height: "30dip",
-            backgroundImage: "/images/WHC-button--next.png",
             title: "NEXT",
-            color: "#FFF",
             textAlign: "left",
             verticalAlign: "middle",
             font: {

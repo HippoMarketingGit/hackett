@@ -389,10 +389,17 @@
 	
 	Ti.API.info('Alloy.Globals.wllId ' + Alloy.Globals.wllId);
 	Ti.API.info('Alloy.Globals.slingId ' + Alloy.Globals.slingId);
-		
-	outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
-	checkImage(Alloy.Globals.sling.partCode);
-	checkSpec();
+	if (Alloy.Globals.wllId !== null && Alloy.Globals.slingId !== null) {		
+		outputDetails( Alloy.Globals.sling.type, Alloy.Globals.sling.grade, Alloy.Globals.sling.legs, Alloy.Globals.sling.load, Alloy.Globals.sling.nominalLength, Alloy.Globals.sling.slingDescription, Alloy.Globals.sling.partCode, Alloy.Globals.sling.quotedPrice);
+		checkImage(Alloy.Globals.sling.partCode);
+		checkSpec();
+	}
+	else
+	{
+		//openDash();
+		//$.specifications.close({modal: true});
+		$.slingType.text = 'No Matches';
+	}
 	database.closeDb(db);
 	
 })();

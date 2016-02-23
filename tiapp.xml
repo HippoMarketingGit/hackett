@@ -6,10 +6,10 @@
     <property name="acs-oauth-secret-development" type="string">Fak367RIRKJDx1zqWJYEqixko0c6EqTV</property>
     <property name="acs-oauth-key-development" type="string">bCSFeIoCIqWwFeCbWrjKpHIhauALeCFm</property>
     <property name="acs-api-key-development" type="string">vBg3wObmPcCbSQS0FNg2atgEDqAiD3Ne</property>
-    <name>William Hackett Chains</name>
-    <id>com.hippocreative.WDMSlingCalculatorApp</id>
+    <name>WHC Sling Calculator</name>
+    <id>CloudDataServiceLtd.WHCSlingCalculator</id>
     <version>1.0</version>
-    <publisher>Ben</publisher>
+    <publisher>Cloud Data Service Ltd</publisher>
     <url>http://www.hippocreative.com</url>
     <description>not specified</description>
     <copyright>2014 by Ben</copyright>
@@ -18,7 +18,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>31132406-a886-4858-9333-07beccc64889</guid>
+    <guid>124ea914-475f-4251-9555-48b7d9ef039f</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
         <plist>
@@ -75,10 +75,10 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
- 	<windows>
-    	<id>CloudDataServiceLtd.WHCSlingCalculator</id>
-		<name>William Hackett Chains</name>
-  	</windows>
+    <windows>
+        <id>CloudDataServiceLtd.WHCSlingCalculator</id>
+        <name>William Hackett Chains</name>
+    </windows>
     <modules>
         <module platform="commonjs">ti.cloud</module>
     </modules>
@@ -91,7 +91,7 @@
         <target device="mobileweb">true</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>5.0.2.GA</sdk-version>
+    <sdk-version>5.2.0.v20160220080449</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

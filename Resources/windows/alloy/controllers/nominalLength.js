@@ -230,9 +230,7 @@ function Controller() {
     $.__views.__alloyId119 = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "Set Nominal Length",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16

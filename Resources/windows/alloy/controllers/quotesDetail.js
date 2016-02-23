@@ -357,9 +357,7 @@ function Controller() {
     $.__views.requestQuote = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "Request Quote",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16
@@ -373,8 +371,6 @@ function Controller() {
         top: "8dip",
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--secondary.png",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16

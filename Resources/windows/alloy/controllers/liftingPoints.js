@@ -264,9 +264,7 @@ function Controller() {
     $.__views.__alloyId83 = Ti.UI.createButton({
         width: "100%",
         height: "50dip",
-        backgroundImage: "/images/WHC-button--primary.png",
         title: "Calculate",
-        color: "#FFF",
         textAlign: "left",
         font: {
             fontSize: 16
