@@ -40,14 +40,14 @@ function Controller() {
         id: "header"
     });
     $.__views.slingConfiguration.add($.__views.header);
-    $.__views.__alloyId183 = Ti.UI.createImageView({
+    $.__views.__alloyId187 = Ti.UI.createImageView({
         top: "5dip",
         width: Ti.UI.SIZE,
         height: "70%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId183"
+        id: "__alloyId187"
     });
-    $.__views.header.add($.__views.__alloyId183);
+    $.__views.header.add($.__views.__alloyId187);
     $.__views.tel = Ti.UI.createLabel({
         top: "-10dip",
         left: "0",
@@ -93,25 +93,25 @@ function Controller() {
         id: "footer"
     });
     $.__views.wrapper.add($.__views.footer);
-    $.__views.__alloyId184 = Ti.UI.createView({
+    $.__views.__alloyId188 = Ti.UI.createView({
         height: "1dip",
         width: "100%",
         top: "0",
         backgroundColor: "#FFF",
-        id: "__alloyId184"
+        id: "__alloyId188"
     });
-    $.__views.footer.add($.__views.__alloyId184);
+    $.__views.footer.add($.__views.__alloyId188);
     $.__views.back = Ti.UI.createView(function() {
         var o = {};
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             width: "100dip",
             height: "30dip"
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             width: "88dip",
             height: "26dip"
         });
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             left: "5%",
             layout: "vertical",
             backgroundImage: "/images/WHC-button--back.png",
@@ -120,33 +120,33 @@ function Controller() {
         return o;
     }());
     $.__views.footer.add($.__views.back);
-    $.__views.__alloyId185 = Ti.UI.createLabel(function() {
+    $.__views.__alloyId189 = Ti.UI.createLabel(function() {
         var o = {};
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             font: {
                 fontSize: 16
             }
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             font: {
                 fontSize: 14
             }
         });
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             text: "BACK",
             touchEnabled: false,
             right: "5%",
             height: "100%",
             width: Ti.UI.SIZE,
             color: "#FFF",
-            id: "__alloyId185"
+            id: "__alloyId189"
         });
         return o;
     }());
-    $.__views.back.add($.__views.__alloyId185);
+    $.__views.back.add($.__views.__alloyId189);
     $.__views.home = Ti.UI.createButton(function() {
         var o = {};
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             layout: "vertical",
             backgroundImage: "/images/WHC-button--blank.png",
             title: "HOME",
@@ -159,16 +159,16 @@ function Controller() {
                 fontSize: 16
             }
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             width: "88dip",
             height: "26dip"
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             font: {
                 fontSize: 14
             }
         });
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             id: "home"
         });
         return o;
@@ -176,7 +176,7 @@ function Controller() {
     $.__views.footer.add($.__views.home);
     $.__views.next = Ti.UI.createButton(function() {
         var o = {};
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             layout: "vertical",
             right: "5%",
             width: "100dip",
@@ -190,16 +190,16 @@ function Controller() {
                 fontSize: 16
             }
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             width: "88dip",
             height: "26dip"
         });
-        Alloy.isHandheld && _.extend(o, {
+        Alloy.isHandheld && Alloy.deepExtend(true, o, {
             font: {
                 fontSize: 14
             }
         });
-        _.extend(o, {
+        Alloy.deepExtend(true, o, {
             id: "next"
         });
         return o;
