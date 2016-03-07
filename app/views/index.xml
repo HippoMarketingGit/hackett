@@ -28,10 +28,10 @@
 					<View class="content--container">
 						<Button onClick="openDashboard" id="login" class="button--primary" />
 					</View>
-					<!--
+					
 					<View class="content--container">
 						
-						<View class="content--horizontal">
+						<View class="content--horizontal" onClick="recoverPassword">
 					
 							<Label class="content--horizontal__label">Recover my password</Label>
 							<ImageView class="arrow-right" image="/images/WHC--arrow-right.png" />
@@ -39,7 +39,7 @@
 						</View>
 						
 					</View>
-					-->
+					
 					
 					<View class="content--container" bottom="20dip">
 						<Label class="account-label">Don't have an account?</Label>
