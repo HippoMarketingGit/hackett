@@ -23,12 +23,9 @@
 				
 			</View>
 	
-			<View class="picker" top="10dip" bottom="10dip">
-					
-				<TextField className="shortening" onClick="createPicker"  editable="false" value="Select..." id="shorteningDeviceText" class="picker--textfield" paddingLeft="5dip"></TextField>
-				
-				<ImageView className="shortening" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
-				
+			<View class="picker" top="10dip" bottom="10dip" id="pickerWrapperShortening">
+				<TextField className="shortening" editable="false" value="Select..." id="shorteningDeviceText" class="picker--textfield" paddingLeft="5dip"></TextField>
+				<ImageView className="shortening" id="buttonPickShortener" class="picker--button" image="images/WHC-select.jpg"></ImageView>
 			</View>
 			
 		</View>
@@ -46,12 +43,9 @@
 				
 			</View>
 	
-			<View class="picker" top="10dip" bottom="10dip">
-					
-				<TextField className="upperTerminations" onClick="createPicker" editable="false" value="Select..." id="upperTermText" class="picker--textfield" paddingLeft="5dip"></TextField>
-				
-				<ImageView className="upperTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
-				
+			<View class="picker" top="10dip" bottom="10dip" id="pickerWrapperUpper">
+				<TextField className="upperTerminations" editable="false" value="Select..." id="upperTermText" class="picker--textfield" paddingLeft="5dip"></TextField>
+				<ImageView className="upperTerminations" id="buttonPickUpper" class="picker--button" image="images/WHC-select.jpg"></ImageView>
 			</View>
 			
 		</View>
@@ -69,12 +63,9 @@
 				
 			</View>
 	
-			<View class="picker" top="10dip" bottom="10dip">
-					
-				<TextField className="lowerTerminations" onClick="createPicker" editable="false" value="Select..." id="lowerTermText" class="picker--textfield" paddingLeft="5dip" ></TextField>
-				
-				<ImageView className="lowerTerminations" onClick="createPicker" class="picker--button" image="images/WHC-select.jpg"></ImageView>
-				
+			<View class="picker" top="10dip" bottom="10dip" id="pickerWrapperLower">
+				<TextField className="lowerTerminations" editable="false" value="Select..." id="lowerTermText" class="picker--textfield" paddingLeft="5dip" ></TextField>
+				<ImageView className="lowerTerminations" id="buttonPickLower" class="picker--button" image="images/WHC-select.jpg"></ImageView>
 			</View>
 			
 		</View>
