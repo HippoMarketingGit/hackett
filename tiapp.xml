@@ -8,7 +8,7 @@
     <property name="acs-api-key-development" type="string">b3WLjGXZiK73tfwhMCV0rtPNV3kvWhrm</property>
     <id>com.hippocreative.WDMSlingCalculatorApp</id>
     <name>WHC Sling Calculator</name>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <publisher>Hippo Marketing</publisher>
     <url>http://www.hippocreative.com</url>
     <description>Configure your Chain / Wire rope sling and receive an instant quotation.</description>
@@ -46,7 +46,7 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="4" android:versionName="1.0.5">
+        <manifest android:versionCode="5" android:versionName="1.0.6">
             <application>
                 <activity
                     android:configChanges="keyboardHidden|orientation"
