@@ -34,6 +34,11 @@ function Controller() {
         } else alert(valid);
     }
     function validateFields() {
+        $.name.value = $.name.value.trim();
+        $.companyName.value = $.companyName.value.trim();
+        $.phoneNumber.value = $.phoneNumber.value.trim();
+        $.postcode.value = $.postcode.value.trim();
+        $.emailAddress.value = $.emailAddress.value.trim();
         if ("" === $.name.value) return "Please enter a name.";
         if ("" == $.companyName.value) return "Please enter a company name.";
         if ("" == $.phoneNumber.value) return "Please enter a phone number.";

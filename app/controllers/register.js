@@ -81,6 +81,12 @@ function registerUser(e){
 
 
 function validateFields() {
+	
+	$.name.value = $.name.value.trim();
+	$.companyName.value = $.companyName.value.trim();
+	$.phoneNumber.value = $.phoneNumber.value.trim();
+	$.postcode.value = $.postcode.value.trim();
+	$.emailAddress.value = $.emailAddress.value.trim();
 
 	if ($.name.value === '') {
 		return "Please enter a name.";
