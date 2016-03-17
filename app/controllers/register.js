@@ -76,33 +76,18 @@ function registerUser(e){
 	}
 }
 
-function validateFields() {
-
-	if ($.name.value === '') {
-		return "Please enter a name.";
-	}
-	
-	if ($.companyName.value == '') {
-		return "Please enter a company name.";
-	}
-	
-	if ($.phoneNumber.value == '') {
-		return "Please enter a phone number.";
-	}
-	
-	if ($.postcode.value == '') {
-		return "Please enter a postcode.";
-	}
-	
-	var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-	if ($.emailAddress.value == '' || emailReg.test($.emailAddress.value) === false) {
-		return "Please enter a valid email address.";
-	}
-	
-	if ($.password1.value == '' || $.password1.value != $.password2.value) {
-		return "Please enter a password and make sure they match.";
-	}
-	
-	return true;
-
-}
+    function validateFields() {
+        $.name.value = $.name.value.trim();
+        $.companyName.value = $.companyName.value.trim();
+        $.phoneNumber.value = $.phoneNumber.value.trim();
+        $.postcode.value = $.postcode.value.trim();
+        $.emailAddress.value = $.emailAddress.value.trim();
+        if ("" === $.name.value) return "Please enter a name.";
+        if ("" == $.companyName.value) return "Please enter a company name.";
+        if ("" == $.phoneNumber.value) return "Please enter a phone number.";
+        if ("" == $.postcode.value) return "Please enter a postcode.";
+        var emailReg = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if ("" == $.emailAddress.value || false === emailReg.test($.emailAddress.value)) return "Please enter a valid email address.";
+        if ("" == $.password1.value || $.password1.value != $.password2.value) return "Please enter a password and make sure they match.";
+        return true;
+    }

@@ -35,6 +35,11 @@ function Controller() {
         } else alert(valid);
     }
     function validateFields() {
+        $.name.value = $.name.value.trim();
+        $.companyName.value = $.companyName.value.trim();
+        $.phoneNumber.value = $.phoneNumber.value.trim();
+        $.postcode.value = $.postcode.value.trim();
+        $.emailAddress.value = $.emailAddress.value.trim();
         if ("" === $.name.value) return "Please enter a name.";
         if ("" == $.companyName.value) return "Please enter a company name.";
         if ("" == $.phoneNumber.value) return "Please enter a phone number.";
@@ -368,8 +373,8 @@ function Controller() {
     $.__views.mailingList = Ti.UI.createButton({
         left: 0,
         title: "",
-        width: "18dip",
-        height: "18dip",
+        width: "35dip",
+        height: "40dip",
         borderColor: "#666",
         borderWidth: "1dip",
         borderRadius: "2dip",

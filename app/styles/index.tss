@@ -100,7 +100,7 @@
 'TextField': {
 	top: '4dip',
 	//height: Titanium.UI.SIZE,
-	height: '45dip',
+	height: '50dip',
 	width: '100%',
 	borderWidth: '1dip',
 	borderColor: '#fba688',
@@ -115,8 +115,8 @@
 '.checkBox': {
 	left: 0,
 	title: '',
-    width: '25dip',
-    height: '26dip',
+    width: '35dip',
+    height: '40dip',
     borderColor: '#666',
     borderWidth: '1dip',
     borderRadius: '2dip',

@@ -125,8 +125,8 @@
 '.checkBox': {
 	left: 0,
 	title: '',
-    width: '18dip',
-    height: '18dip',
+    width: '35dip',
+    height: '40dip',
     borderColor: '#666',
     borderWidth: '1dip',
     borderRadius: '2dip',
