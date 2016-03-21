@@ -144,13 +144,13 @@ function Controller() {
         id: "header"
     });
     $.__views.quotes.add($.__views.header);
-    $.__views.__alloyId121 = Ti.UI.createImageView({
+    $.__views.__alloyId125 = Ti.UI.createImageView({
         top: "5dip",
         height: "70%",
         image: "/images/WHC--logo--transparent.png",
-        id: "__alloyId121"
+        id: "__alloyId125"
     });
-    $.__views.header.add($.__views.__alloyId121);
+    $.__views.header.add($.__views.__alloyId125);
     $.__views.tel = Ti.UI.createLabel({
         color: "#ffffff",
         height: Ti.UI.SIZE,
@@ -159,13 +159,13 @@ function Controller() {
         id: "tel"
     });
     $.__views.header.add($.__views.tel);
-    $.__views.__alloyId122 = Ti.UI.createView({
+    $.__views.__alloyId126 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "5%",
         top: "10dip",
-        id: "__alloyId122"
+        id: "__alloyId126"
     });
-    $.__views.quotes.add($.__views.__alloyId122);
+    $.__views.quotes.add($.__views.__alloyId126);
     $.__views.back = Ti.UI.createButton({
         layout: "vertical",
         width: "100dip",
@@ -178,7 +178,7 @@ function Controller() {
         },
         id: "back"
     });
-    $.__views.__alloyId122.add($.__views.back);
+    $.__views.__alloyId126.add($.__views.back);
     openDash ? $.addListener($.__views.back, "click", openDash) : __defers["$.__views.back!click!openDash"] = true;
     $.__views.container = Ti.UI.createView({
         height: Ti.UI.SIZE,

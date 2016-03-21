@@ -18,6 +18,26 @@ function Controller() {
             }
         });
     }
+    function recoverPassword() {
+        var resetUrl = "http://slingcalc.co.uk/reset.php", offlineMsg = "Please connect to the internet before recovering your password.", errorMsg = "Sorry, there was an error connecting to the password reset service.";
+        var xhr = Ti.Network.createHTTPClient({
+            onload: function() {
+                if (200 === this.status) if (Ti.Platform.Android) {
+                    var intent = Ti.Android.createIntent({
+                        action: Ti.Android.ACTION_VIEW,
+                        data: resetUrl
+                    });
+                    Ti.Android.currentActivity.startActivity(intent);
+                } else Ti.Platform.openURL(resetUrl); else alert(errorMsg);
+            },
+            onerror: function() {
+                alert(offlineMsg);
+            },
+            timeout: 1500
+        });
+        xhr.open("GET", resetUrl);
+        xhr.send();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
     this.args = arguments[0] || {};
@@ -192,11 +212,47 @@ function Controller() {
         top: "20dip",
         width: "100%",
         height: Titanium.UI.SIZE,
-        bottom: "20dip",
         id: "__alloyId61"
     });
     $.__views.__alloyId55.add($.__views.__alloyId61);
-    $.__views.__alloyId62 = Ti.UI.createLabel({
+    $.__views.__alloyId62 = Ti.UI.createView({
+        layout: "horizontal",
+        width: "100%",
+        height: Titanium.UI.SIZE,
+        id: "__alloyId62"
+    });
+    $.__views.__alloyId61.add($.__views.__alloyId62);
+    recoverPassword ? $.addListener($.__views.__alloyId62, "click", recoverPassword) : __defers["$.__views.__alloyId62!click!recoverPassword"] = true;
+    $.__views.__alloyId63 = Ti.UI.createLabel({
+        left: "5dip",
+        width: Titanium.UI.SIZE,
+        height: Titanium.UI.SIZE,
+        color: "#FFF",
+        font: {
+            fontSize: 14
+        },
+        text: "Recover my password",
+        id: "__alloyId63"
+    });
+    $.__views.__alloyId62.add($.__views.__alloyId63);
+    $.__views.__alloyId64 = Ti.UI.createImageView({
+        left: "10dip",
+        height: "10dip",
+        width: "15dip",
+        image: "/images/WHC--arrow-right.png",
+        id: "__alloyId64"
+    });
+    $.__views.__alloyId62.add($.__views.__alloyId64);
+    $.__views.__alloyId65 = Ti.UI.createView({
+        layout: "vertical",
+        top: "20dip",
+        width: "100%",
+        height: Titanium.UI.SIZE,
+        bottom: "20dip",
+        id: "__alloyId65"
+    });
+    $.__views.__alloyId55.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         left: "0",
         width: Titanium.UI.SIZE,
         height: Titanium.UI.SIZE,
@@ -206,9 +262,9 @@ function Controller() {
             fontSize: 14
         },
         text: "Don't have an account?",
-        id: "__alloyId62"
+        id: "__alloyId66"
     });
-    $.__views.__alloyId61.add($.__views.__alloyId62);
+    $.__views.__alloyId65.add($.__views.__alloyId66);
     $.__views.register = Ti.UI.createButton({
         top: "4dip",
         width: "100%",
@@ -220,7 +276,7 @@ function Controller() {
         },
         id: "register"
     });
-    $.__views.__alloyId61.add($.__views.register);
+    $.__views.__alloyId65.add($.__views.register);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var Database = require("databaseObj"), database = new Database("SlingDB.sqlite");
@@ -232,6 +288,7 @@ function Controller() {
         $.index = null;
     });
     __defers["$.__views.login!click!openDashboard"] && $.addListener($.__views.login, "click", openDashboard);
+    __defers["$.__views.__alloyId62!click!recoverPassword"] && $.addListener($.__views.__alloyId62, "click", recoverPassword);
     _.extend($, exports);
 }
 
